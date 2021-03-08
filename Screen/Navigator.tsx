@@ -14,64 +14,62 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MaterialTopTab = createMaterialTopTabNavigator();
 
-const LoginNavi = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-    </Stack.Navigator>
-  );
-};
+const LoginNavigation = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="로그인" component={SignIn} />
+    <Stack.Screen name="회원가입" component={SignUp} />
+  </Stack.Navigator>
+);
 
-const HomeNavi = () => {
+const HomeNavigation = () => {
   return (
     <MaterialTopTab.Navigator>
-      <MaterialTopTab.Screen name="Offline" component={Home} />
-      <MaterialTopTab.Screen name="Online" component={Home} />
+      <MaterialTopTab.Screen name="오프라인" component={Home} />
+      <MaterialTopTab.Screen name="온라인" component={Home} />
     </MaterialTopTab.Navigator>
   );
 };
 
-const TabNavi = () => {
+const TabNavigation = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="HomeNavi"
-        component={HomeNavi}
-        options={{ tabBarLabel: 'First' }}
+        component={HomeNavigation}
+        options={{ tabBarLabel: '홈' }}
       />
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ tabBarLabel: 'Second' }}
+        options={{ tabBarLabel: '검색' }}
       />
       <Tab.Screen
         name="Management"
         component={Management}
-        options={{ tabBarLabel: 'Third' }}
+        options={{ tabBarLabel: '스터디 관리' }}
       />
       <Tab.Screen
         name="MyPage"
         component={MyPage}
-        options={{ tabBarLabel: 'Fourth' }}
+        options={{ tabBarLabel: '마이페이지' }}
       />
     </Tab.Navigator>
   );
 };
 
-const MainNavi = () => {
+const MainNavigation = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="TabNavi" component={TabNavi} />
+      <Stack.Screen name="Switi" component={TabNavigation} />
     </Stack.Navigator>
   );
 };
 
 const RootNavigator = () => {
-  const user: Boolean = false;
+  const user = false;
   return (
     <NavigationContainer>
-      {user ? <MainNavi /> : <LoginNavi />}
+      {user ? <MainNavigation /> : <LoginNavigation />}
     </NavigationContainer>
   );
 };

@@ -11,6 +11,7 @@ const SignIn = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text>This is SignIn Screen</Text>
+      {/*<Button onPress={() => navigation.navigate('SignUp')} />*/}
     </View>
   );
 };

@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Text>MyPage Screen</Text>
+      <Text>Home Screen</Text>
     </View>
   );
 };
