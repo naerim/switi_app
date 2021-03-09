@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { useGoFirstProfile, useGoSignIn } from '../../util/navigationHooks';
+import { useGoSignIn } from '../../util/navigationHooks';
 
-const SignUp = () => {
+const SecondProfile = () => {
   const goLogin = useGoSignIn();
-  const goFirstProfile = useGoFirstProfile();
-
   return (
     <View style={styles.container}>
-      <Text>SignUp Screen</Text>
-      <Text onPress={goLogin}>로그인하기</Text>
-      <Button title="가입하기" onPress={goFirstProfile} />
+      <Text>second Profile Screen</Text>
+      <Button title="프로필 설정 완료" onPress={goLogin} />
     </View>
   );
 };
@@ -24,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default SecondProfile;

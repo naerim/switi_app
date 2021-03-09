@@ -1,17 +1,13 @@
 import React from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { useGoSignUp } from '../../util/navigationHooks';
 
-type NavigationProp = StackNavigationProp<LoginStackNaviParamList, 'SignIn'>;
-interface Props {
-  navigation: NavigationProp;
-}
-
-const SignIn = ({ navigation }: Props) => {
+const SignIn = () => {
+  const goSignUp = useGoSignUp();
   return (
     <View style={styles.container}>
       <Text>This is SignIn Screen</Text>
-      {/*<Button onPress={() => navigation.navigate('SignUp')} />*/}
+      <Text onPress={goSignUp}>회원가입</Text>
     </View>
   );
 };
