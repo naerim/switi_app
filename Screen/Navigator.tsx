@@ -84,7 +84,7 @@ const MainNavigation = () => {
 };
 
 const RootNavigator = () => {
-  const user = true;
+  const user = false;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}
