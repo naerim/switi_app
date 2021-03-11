@@ -1,7 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-const BasicHeader = (title: string) => {
+interface Props {
+  title: string;
+}
+
+const BasicHeader: React.FC<Props> = ({ title }) => {
   return (
     <View style={styles.wrap}>
       <Text style={styles.title}>{title}</Text>
