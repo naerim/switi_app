@@ -22,7 +22,7 @@ const GenderRadioButton = () => {
             buttonInnerColor={'#D1D1D1'}
             buttonOuterColor={'#D1D1D1'}
             buttonSize={14}
-            buttonWrapStyle={{ marginRight: 5, marginBottom: 20 }}
+            buttonWrapStyle={{ marginRight: 5 }}
             onPress={(v) => {
               setRadio(v);
             }}
@@ -31,7 +31,7 @@ const GenderRadioButton = () => {
             obj={obj}
             index={i}
             labelStyle={{ fontSize: 12, color: '#2B2B2B' }}
-            labelWrapStyle={{ marginRight: 20, marginBottom: 20 }}
+            labelWrapStyle={{ marginRight: 20 }}
             onPress={(v) => {
               setRadio(v);
             }}
