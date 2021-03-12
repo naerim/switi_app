@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-//import { useGoSignUp} from '../../util/navigationHooks';
+import { useGoSignUp } from '../../NavigationHooks(copy)';
 import AuthButton from './AuthButton';
 import AuthInput from './AuthInput';
 import useInput from './useInput';
@@ -28,7 +28,7 @@ export default () => {
       return Alert.alert('That email is invalid');
     }
   };
-  //const goSignUp = useGoSignUp();
+  const goSignUp = useGoSignUp();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
@@ -47,7 +47,7 @@ export default () => {
         <Text>비밀번호 찾기</Text>
         <AuthButton onPress={handleLogin} text="Log In" />
         <Text>아직 스위티 회원이 아니신가요?</Text>
-        <Text>회원가입</Text>
+        <Text onPress={goSignUp}>회원가입</Text>
       </View>
     </TouchableWithoutFeedback>
   );
