@@ -1,16 +1,17 @@
 import React from 'react';
-import { Text, Button, View } from 'react-native';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
-import { useGoFirstProfile, useGoSignIn } from '../../util/navigationHooks';
+import { useGoSignIn } from '../../util/navigationHooks';
 import BasicHeader from '../../Component/BasicHeader';
 import {
   NickNameInput,
   EmailInput,
   PasswordInput,
 } from '../../Component/AuthInput';
-import EmailButton from '../../Component/EmailButton';
+import EmailButton from '../../Component/button/EmailButton';
 import GenderRadioButton from '../../Component/GenderRadioButton';
 import AgreeCheckBox from '../../Component/AgreeCheckBox';
+import SignupButton from '../../Component/button/SignupButton';
 
 interface ContentProps {
   flex: number;
@@ -18,7 +19,6 @@ interface ContentProps {
 
 const SignUp = () => {
   const goLogin = useGoSignIn();
-  const goFirstProfile = useGoFirstProfile();
   return (
     <Wrap>
       <BasicHeader title="회원가입" />
@@ -60,8 +60,16 @@ const SignUp = () => {
         </Content>
 
         <Content flex={2}>
-          <Button title="가입하기" onPress={goFirstProfile}/>
-          <Text onPress={goLogin}>로그인하기</Text>
+          <SignupButton />
+          <GoLoginView>
+            <TextStyle>이미 회원이세요? </TextStyle>
+            <TextStyle
+              style={{ textDecorationLine: 'underline' }}
+              onPress={goLogin}
+            >
+              로그인하기
+            </TextStyle>
+          </GoLoginView>
         </Content>
       </Container>
     </Wrap>
@@ -95,6 +103,17 @@ const NickNameView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+const GoLoginView = styled.View`
+  flex-direction: row;
+  padding-top: 15px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TextStyle = styled.Text`
+  font-size: 12px;
 `;
 
 export default SignUp;
