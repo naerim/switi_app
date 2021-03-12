@@ -6,7 +6,14 @@ const Container = styled.View`
   margin-bottom: 10px;
 `;
 
-const TextInput = styled.TextInput``;
+const TextInput = styled.TextInput`
+  width: 70%;
+  border-width: 1px;
+  color: #2b2b2b;
+  border-color: #e3e3e3;
+  border-radius: 4px;
+  padding: 10px;
+`;
 
 const AuthInput = ({
   placeholder,

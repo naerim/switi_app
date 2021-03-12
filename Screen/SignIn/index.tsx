@@ -7,6 +7,7 @@ import AuthButton from './AuthButton';
 import AuthInput from './AuthInput';
 import useInput from './useInput';
 import { Alert } from 'react-native';
+import CheckBox from 'react-native-check-box';
 
 const View = styled.View`
   background-color: #fff;
@@ -32,18 +33,31 @@ export default () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
+        <Line></Line>
         <Text>또는</Text>
-        <Text>이메일</Text>
+        <Title>이메일</Title>
         <AuthInput
           {...emailInput}
-          placeholder="Email"
+          placeholder="이메일"
           keyboardType="email-address"
           returnKeyType="send"
           onEndEditing={handleLogin}
           autoCorrect={false}
         />
-        <Text>비밀번호</Text>
-        <AuthInput placeholder="password" keyboardType="default" />
+        <Title>비밀번호</Title>
+        <PasswordInput placeholder="비밀번호" />
+        <Container>
+          <CheckBox
+            rightText="아래 약관에 모두 동의합니다"
+            rightTextStyle={{ fontSize: 12 }}
+            checkBoxColor="#E3E3E3"
+            isChecked={false}
+            onClick={() => {
+              console.log('check');
+            }}
+          />
+        </Container>
+
         <Text>비밀번호 찾기</Text>
         <AuthButton onPress={handleLogin} text="Log In" />
         <Text>아직 스위티 회원이 아니신가요?</Text>
@@ -52,6 +66,32 @@ export default () => {
     </TouchableWithoutFeedback>
   );
 };
+
+const Title = styled.Text`
+  font-size: 12px;
+  color: #b4b4b4;
+  margin-bottom: 2%;
+`;
+
+const LoginBox = styled.div`
+
+`
+
+const PasswordInput = styled.TextInput`
+  border-width: 1px;
+  color: #2b2b2b;
+  border-color: #e3e3e3;
+  border-radius: 4px;
+  padding: 10px;
+`;
+
+const Container = styled.View``;
+
+const Line = styled.Text`
+  height: 1px;
+  background-color: #e3e3e3;
+  margin: 5px 0;
+`;
 
 // const SignIn = () => {
 //   const goSignUp = useGoSignUp();
