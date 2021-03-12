@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { StyleSheet, Text} from 'react-native';
+import { Text } from 'react-native';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
+//import { useGoSignUp} from '../../util/navigationHooks';
 import AuthButton from './AuthButton';
 import AuthInput from './AuthInput';
 import useInput from './useInput';
