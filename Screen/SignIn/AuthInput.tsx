@@ -7,7 +7,7 @@ const Container = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  width: 70%;
+  width: 100%;
   border-width: 1px;
   color: #2b2b2b;
   border-color: #e3e3e3;

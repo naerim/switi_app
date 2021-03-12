@@ -6,11 +6,19 @@ import { ActivityIndicator } from 'react-native';
 
 const Touchable = styled.TouchableOpacity``;
 
+const LoginButtonText = styled.Text`
+  color: white;
+  font-size: 12px;
+`;
+
 const Container = styled.View`
+  width: 100%;
+  background-color: #b4b4b4;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   margin: 0px 50px;
-  border-radius: 4px;
-  //width: {constants.width / 2};
 `;
 
 const Text = styled.Text`
