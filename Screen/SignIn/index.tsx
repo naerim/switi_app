@@ -8,68 +8,42 @@ import AuthInput from './AuthInput';
 import useInput from './useInput';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
-
-// const View = styled.View`
-//   background-color: #fff;
-//   flex: 1;
-// `;
+import SocialLogin from './SocialLogin';
 
 export default () => {
   const emailInput = useInput('');
+
+  const goSignUp = useGoSignUp();
+
   const handleLogin = () => {
     const { value } = emailInput;
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // 추후에 if 결과 변경, 비밀번호 체
     if (value === '') {
-      return Alert.alert("Email can't be empty");
+      Alert.alert("Email can't be empty");
     } else if (!value.includes('@') || !value.includes('.')) {
-      return Alert.alert('Please write an email');
+      Alert.alert('Please write an email');
     } else if (!emailRegex.test(value)) {
-      return Alert.alert('That email is invalid');
+      Alert.alert('That email is invalid');
     }
   };
-  const goSignUp = useGoSignUp();
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <SpecialLoginButton>
-          <SpecialLoginText
-            onPress={() => {
-              console.log('btn');
-            }}
-          >
-            네이버로 로그인
-          </SpecialLoginText>
-        </SpecialLoginButton>
-        <SpecialLoginButton>
-          <SpecialLoginText
-            onPress={() => {
-              console.log('btn');
-            }}
-          >
-            카카오 로그인
-          </SpecialLoginText>
-        </SpecialLoginButton>
-        <SpecialLoginButton>
-          <SpecialLoginText
-            onPress={() => {
-              console.log('btn');
-            }}
-          >
-            구글로 로그인
-          </SpecialLoginText>
-        </SpecialLoginButton>
-        <View style={styles.item0}>
-          <View style={styles.item1}>
+      <Container>
+        <SocialLogin />
+        <DivisionContainer>
+          <LineContainer>
             <Line></Line>
-          </View>
-          <View style={styles.item2}>
+          </LineContainer>
+          <OrContainer>
             <Or>또는</Or>
-          </View>
-          <View style={styles.item1}>
+          </OrContainer>
+          <LineContainer>
             <Line></Line>
-          </View>
-        </View>
-        <View style={styles.TileAndInput}>
+          </LineContainer>
+        </DivisionContainer>
+        <TitleAndInput>
           <Title>이메일</Title>
           <AuthInput
             {...emailInput}
@@ -79,14 +53,14 @@ export default () => {
             onEndEditing={handleLogin}
             autoCorrect={false}
           />
-        </View>
-        <View style={styles.TileAndInput}>
+        </TitleAndInput>
+        <TitleAndInput>
           <Title>비밀번호</Title>
           <PasswordInput placeholder="비밀번호" />
-        </View>
+        </TitleAndInput>
 
-        <View style={styles.OtherSide}>
-          <View style={styles.leftText}>
+        <OtherSide>
+          <LeftSideContainer>
             <CheckBox
               rightText="로그인 기억하기"
               rightTextStyle={{ fontSize: 12 }}
@@ -96,89 +70,32 @@ export default () => {
                 console.log('check');
               }}
             />
-          </View>
-          <View style={styles.rightText}>
+          </LeftSideContainer>
+          <RightSideContainer>
             <Text>비밀번호 찾기</Text>
-          </View>
-        </View>
-        <View style={styles.loginButtonView}>
+          </RightSideContainer>
+        </OtherSide>
+        <LoginButtonView>
           <AuthButton onPress={handleLogin} text="로그인" />
-        </View>
-        <View style={styles.OtherSide}>
-          <View style={styles.leftText}>
+        </LoginButtonView>
+        <OtherSide>
+          <LeftSideContainer>
             <Text>아직 스위티 회원이 아니신가요?</Text>
-          </View>
-          <View style={styles.rightText}>
+          </LeftSideContainer>
+          <RightSideContainer>
             <Text onPress={goSignUp}>회원가입</Text>
-          </View>
-        </View>
-      </View>
+          </RightSideContainer>
+        </OtherSide>
+      </Container>
     </TouchableWithoutFeedback>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  item0: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '90%',
-  },
-  item1: {
-    width: '40%',
-    backgroundColor: 'white',
-  },
-  leftText: {
-    width: '60%',
-    backgroundColor: 'white',
-  },
-  rightText: {
-    backgroundColor: 'white',
-  },
-  item2: {
-    width: '20%',
-    backgroundColor: 'white',
-  },
-  OtherSide: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '90%',
-  },
-  TileAndInput: {
-    width: '90%',
-  },
-  loginButtonView: {
-    justifyContent: 'center',
-    width: '70%',
-  },
-});
-
-const Or = styled.Text`
-  font-size: 12px;
-  color: #b4b4b4;
-  margin-bottom: 2%;
-  text-align: center;
-`;
-
-const Title = styled.Text`
-  font-size: 12px;
-  color: #b4b4b4;
-  margin-bottom: 2%;
-`;
-
-const PasswordInput = styled.TextInput`
-  border-width: 1px;
-  color: #2b2b2b;
-  border-color: #e3e3e3;
-  border-radius: 4px;
-  padding: 10px;
+const Container = styled.View`
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
 `;
 
 const SpecialLoginButton = styled.View`
@@ -197,8 +114,68 @@ const SpecialLoginText = styled.Text`
   font-size: 15px;
 `;
 
+const DivisionContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+`;
+
+const LineContainer = styled.View`
+  width: 40%;
+`;
+
 const Line = styled.Text`
   height: 1px;
   background-color: #e3e3e3;
   margin: 5px 0;
+`;
+
+const OrContainer = styled.View`
+  width: 20%;
+`;
+
+const Or = styled.Text`
+  font-size: 12px;
+  color: #b4b4b4;
+  margin-bottom: 2%;
+  text-align: center;
+`;
+
+const TitleAndInput = styled.View`
+  width: 90%;
+`;
+
+const Title = styled.Text`
+  font-size: 12px;
+  color: #b4b4b4;
+  margin-bottom: 2%;
+`;
+
+const PasswordInput = styled.TextInput`
+  border-width: 1px;
+  color: #2b2b2b;
+  border-color: #e3e3e3;
+  border-radius: 4px;
+  padding: 10px;
+`;
+
+const OtherSide = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+`;
+
+const LeftSideContainer = styled.View`
+  width: 60%;
+`;
+
+const RightSideContainer = styled.View`
+  background-color: white;
+`;
+
+const LoginButtonView = styled.View`
+  justify-content: center;
+  width: 70%;
 `;

@@ -1,21 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
+import { TextInput } from 'react-native';
 
 const Container = styled.View`
   margin-bottom: 10px;
 `;
 
-const TextInput = styled.TextInput`
-  width: 100%;
-  border-width: 1px;
-  color: #2b2b2b;
-  border-color: #e3e3e3;
-  border-radius: 4px;
-  padding: 10px;
-`;
+// const TextInput = styled.TextInput`
+//   width: 100%;
+//   border-width: 1px;
+//   color: #2b2b2b;
+//   border-color: #e3e3e3;
+//   border-radius: 4px;
+//   padding: 10px;
+// `;
 
-const AuthInput = ({
+interface AuthInputProps {
+  placeholder: string;
+  value: any;
+  keyboardType: string;
+  autoCapitalize: string;
+}
+
+const AuthInput: React.FC<AuthInputProps> = ({
   placeholder,
   value,
   keyboardType = 'default',
@@ -26,23 +33,11 @@ const AuthInput = ({
       keyboardType={keyboardType}
       placeholder={placeholder}
       autoCapitalize={autoCapitalize}
+      onChangeText={() => null}
       value={value}
     />
+    {/* TextInput 해결하기 */}
   </Container>
 );
-
-AuthInput.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  keyboardType: PropTypes.oneOf([
-    'default',
-    'number-pad',
-    'decimal-pad',
-    'numeric',
-    'email-address',
-    'phone-pad',
-  ]),
-  autoCapitalize: PropTypes.oneOf(['none', 'sentences', 'words', 'characters']),
-};
 
 export default AuthInput;
