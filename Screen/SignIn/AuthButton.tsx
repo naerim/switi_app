@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { ActivityIndicator } from 'react-native';
 
-const Touchable = styled.TouchableOpacity``;
+const Touchable = styled.TouchableOpacity`
+  flex-direction: row;
+  height: 40px;
+  padding: 0 10px;
+  margin: 20px 0;
+`;
 
 const Container = styled.View`
   width: 100%;
@@ -23,7 +28,7 @@ const Text = styled.Text`
 interface AuthButtonProps {
   text: string;
   onPress: () => void;
-  loading?: boolean;
+  loading: boolean;
 }
 
 const AuthButton: React.FC<AuthButtonProps> = ({

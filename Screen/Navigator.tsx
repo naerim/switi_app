@@ -16,8 +16,8 @@ const MaterialTopTab = createMaterialTopTabNavigator();
 
 const LoginNavigation = () => (
   <Stack.Navigator>
-    <Stack.Screen name="로그인" component={SignIn} />
-    <Stack.Screen name="회원가입" component={SignUp} />
+    <Stack.Screen name="SignIn" component={SignIn} />
+    <Stack.Screen name="SignUp" component={SignUp} />
   </Stack.Navigator>
 );
 
