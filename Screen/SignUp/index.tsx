@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { useGoSignIn } from '../../util/navigationHooks';
-import { EmailInput, PasswordInput } from '../../Component/AuthInput';
+import { PasswordInput } from '../../Component/AuthInput';
 import GenderRadioButton from '../../Component/GenderRadioButton';
 import AgreeCheckBox from '../../Component/AgreeCheckBox';
 import SignupButton from '../../Component/button/SignupButton';
 import SignupContent from '../../Component/layout/SignupContent';
 import BasicContainer from '../../Component/layout/BasicContainer';
-import NickNameInput from '../../Component/input/NickNameInput';
+import NicknameInput from '../../Component/input/NicknameInput';
+import EmailInput from '../../Component/input/EmailInput';
 
 const SignUp = () => {
   const goLogin = useGoSignIn();
@@ -18,12 +19,13 @@ const SignUp = () => {
       </SignupContent>
 
       <SignupContent title="닉네임">
-        <NickNameInput />
+        <NicknameInput />
       </SignupContent>
 
       <SignupContent title="이메일">
         <EmailInput />
       </SignupContent>
+
       <SignupContent title="비밀번호 (8자리 이상 영문, 숫자, 특수문자)">
         <PasswordInput />
       </SignupContent>

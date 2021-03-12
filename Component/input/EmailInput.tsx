@@ -1,25 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import EmailButton from '../button/EmailButton';
 
-const NickNameInput = () => {
+const EmailInput = () => {
   return (
     <Container>
       <Input />
-      <EmailButton />
     </Container>
   );
 };
 
 const Container = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 `;
 
 const Input = styled.TextInput`
-  width: 70%;
-  margin-right: 10px;
   border-width: 1px;
   color: #2b2b2b;
   border-color: #e3e3e3;
@@ -27,4 +21,4 @@ const Input = styled.TextInput`
   padding: 10px;
 `;
 
-export default NickNameInput;
+export default EmailInput;

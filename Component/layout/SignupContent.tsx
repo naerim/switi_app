@@ -23,7 +23,7 @@ const Content = styled.View`
 const Title = styled.Text`
   font-size: 12px;
   color: #b4b4b4;
-  margin-bottom: 2%;
+  padding-bottom: 1%;
 `;
 
 export default SignupContent;

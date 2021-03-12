@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const EmailButton = () => {
+const NicknameButton = () => {
   return (
     <Container>
       <ButtonText
@@ -20,8 +20,8 @@ const Container = styled.View`
   background-color: #b4b4b4;
   border-radius: 20px;
   align-items: center;
-  height: 100%;
   justify-content: center;
+  height: 90%;
 `;
 
 const ButtonText = styled.Text`
@@ -29,4 +29,4 @@ const ButtonText = styled.Text`
   font-size: 12px;
 `;
 
-export default EmailButton;
+export default NicknameButton;
