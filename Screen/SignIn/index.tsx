@@ -6,9 +6,9 @@ import useInput from './Hooks/useInput';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import SocialLogin from './Social/SocialLogin';
-import Division from './etc/Division';
+import Division from './Components/Division';
 import SignInForm from './EmailPassword/SignInForm';
-import OptionMenu from './etc/OptionMenu';
+import OptionMenu from './Components/OptionMenu';
 
 export default () => {
   const emailInput = useInput('');
