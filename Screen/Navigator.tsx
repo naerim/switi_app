@@ -9,15 +9,33 @@ import Search from './Search';
 import Management from './Management';
 import MyPage from './MyPage';
 import SignUp from './SignUp';
+import FirstProfile from './Profile/firstProfile';
+import SecondProfile from './Profile/secondProfile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MaterialTopTab = createMaterialTopTabNavigator();
 
 const LoginNavigation = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    mode="modal"
+    headerMode="none"
+    screenOptions={{ animationEnabled: false }}
+  >
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignUp" component={SignUp} />
+    <Stack.Screen name="Profile" component={ProfileNavigation} />
+  </Stack.Navigator>
+);
+
+const ProfileNavigation = () => (
+  <Stack.Navigator
+    mode="modal"
+    headerMode="none"
+    screenOptions={{ animationEnabled: false }}
+  >
+    <Stack.Screen name="firstProfile" component={FirstProfile} />
+    <Stack.Screen name="secondProfile" component={SecondProfile} />
   </Stack.Navigator>
 );
 
@@ -66,7 +84,7 @@ const MainNavigation = () => {
 };
 
 const RootNavigator = () => {
-  const user = false;
+  const user = true;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}
