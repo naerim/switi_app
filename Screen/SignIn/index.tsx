@@ -19,21 +19,20 @@ export default () => {
   const toggleChecked = () => setChecked(!checked);
 
   const handleLogin = () => {
-    const { value } = emailInput;
-    //const { value } = passwordInput;
+    const email = emailInput;
+    const password = passwordInput;
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setIsLoading(true);
-    // 추후에 if 결과 변경, 비밀번호 체크
-    if (value === '') {
-      Alert.alert("Email can't be empty");
-    } else if (!value.includes('@') || !value.includes('.')) {
-      Alert.alert('Please write an email');
-    } else if (!emailRegex.test(value)) {
-      Alert.alert('That email is invalid');
-    }
-    // } else if (secretValue === '') {
-    //   Alert.alert("Password can't be empty");
-    // }
+    setIsLoading(false);
+    if (email.value === '') {
+      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    } else if (!email.value.includes('@') || !email.value.includes('.')) {
+      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    } else if (!emailRegex.test(email.value)) {
+      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    } else if (password.value === '') {
+      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    } else if (password.value.length < 8)
+      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
   };
 
   return (
