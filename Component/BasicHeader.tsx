@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import styled from 'styled-components/native';
 
 interface Props {
   title: string;
@@ -7,22 +7,21 @@ interface Props {
 
 const BasicHeader: React.FC<Props> = ({ title }) => {
   return (
-    <View style={styles.wrap}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <Wrap>
+      <Title>{title}</Title>
+    </Wrap>
   );
 };
 
-const styles = StyleSheet.create({
-  wrap: {
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 46,
-  },
-  title: {
-    fontSize: 14,
-  },
-});
+const Wrap = styled.View`
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+`;
+
+const Title = styled.Text`
+  font-size: 14px;
+`;
 
 export default BasicHeader;

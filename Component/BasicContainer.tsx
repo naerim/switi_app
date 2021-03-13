@@ -1,22 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import BasicHeader from '../BasicHeader';
+import BasicHeader from './BasicHeader';
 
 interface Props {
-  children: React.ReactNode;
-  header: string;
+  headerTitle: string;
 }
 
-const BasicContainer: React.FC<Props> = ({ children, header }) => {
+const BasicContainer: React.FC<Props> = ({ children, headerTitle }) => {
   return (
     <Wrap>
-      <BasicHeader title={header} />
+      <BasicHeader title={headerTitle} />
       <Container>{children}</Container>
     </Wrap>
   );
 };
-
-export default BasicContainer;
 
 const Wrap = styled.SafeAreaView`
   flex: 1;
@@ -28,3 +25,5 @@ const Container = styled.View`
   margin: 0 24px;
   background-color: #fff;
 `;
+
+export default BasicContainer;

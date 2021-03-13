@@ -2,20 +2,19 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  children: React.ReactNode;
   title: string;
 }
 
 const SignupContent: React.FC<Props> = ({ children, title }) => {
   return (
-    <Content>
+    <Container>
       <Title>{title}</Title>
       {children}
-    </Content>
+    </Container>
   );
 };
 
-const Content = styled.View`
+const Container = styled.View`
   flex: 1;
   justify-content: center;
 `;

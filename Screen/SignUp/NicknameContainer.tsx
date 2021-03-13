@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import NicknameButton from '../button/NicknameButton';
+import NicknameButton from './NicknameButton';
 
-const NicknameInput = () => {
+const NicknameContainer = () => {
   return (
     <Container>
       <Input />
@@ -27,4 +27,4 @@ const Input = styled.TextInput`
   padding: 10px;
 `;
 
-export default NicknameInput;
+export default NicknameContainer;
