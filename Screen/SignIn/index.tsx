@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-import AuthButton from './AuthButton';
-import useInput from './useInput';
+import AuthButton from './EmailPassword/AuthButton';
+import useInput from './Hooks/useInput';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import SocialLogin from './SocialLogin';
-import Division from './Division';
-import SignInForm from './SignInForm';
-import OptionMenu from './OptionMenu';
+import SocialLogin from './Social/SocialLogin';
+import Division from './etc/Division';
+import SignInForm from './EmailPassword/SignInForm';
+import OptionMenu from './etc/OptionMenu';
 
 export default () => {
   const emailInput = useInput('');
@@ -20,6 +20,7 @@ export default () => {
 
   const handleLogin = () => {
     const { value } = emailInput;
+    //const { value } = passwordInput;
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(true);
     // 추후에 if 결과 변경, 비밀번호 체크
@@ -30,6 +31,9 @@ export default () => {
     } else if (!emailRegex.test(value)) {
       Alert.alert('That email is invalid');
     }
+    // } else if (secretValue === '') {
+    //   Alert.alert("Password can't be empty");
+    // }
   };
 
   return (

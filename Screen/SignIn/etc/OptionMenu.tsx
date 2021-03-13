@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoSignUp } from '../../NavigationHooks(copy)';
+import { useGoSignUp } from '../../../NavigationHooks(copy)';
 
 const OptionMenu = () => {
   const goSignUp = useGoSignUp();
