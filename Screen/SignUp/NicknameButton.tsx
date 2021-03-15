@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const NicknameButton = () => {
+interface Props {
+  value: string;
+}
+const NicknameButton: React.FC<Props> = ({ value }) => {
   return (
     <Container>
       <ButtonText
         onPress={() => {
-          console.log('btn');
+          console.log(value);
         }}
       >
         중복확인

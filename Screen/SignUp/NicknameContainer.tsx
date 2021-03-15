@@ -2,11 +2,27 @@ import React from 'react';
 import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
 
-const NicknameContainer = () => {
+interface InputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+interface Props {
+  input: InputProps;
+}
+
+const NicknameContainer: React.FC<Props> = ({ input }) => {
   return (
     <Container>
-      <Input />
-      <NicknameButton />
+      <Input
+        value={input.value}
+        onChangeText={input.onChange}
+        placeholder="공백, 특수문자 불가"
+        keyboardType="default"
+        returnKeyType="next"
+        secureTextEntry={false}
+      />
+      <NicknameButton value={input.value} />
     </Container>
   );
 };
