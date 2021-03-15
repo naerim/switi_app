@@ -10,16 +10,16 @@ interface Props {
   input: InputProps;
 }
 
-const EmailInput: React.FC<Props> = ({ input }) => {
+const PasswordCheckInput: React.FC<Props> = ({ input }) => {
   return (
     <Container>
       <Input
         value={input.value}
         onChangeText={input.onChange}
-        placeholder="abc@dfg.com"
-        keyboardType="email-address"
+        placeholder="8자리 이상 영문, 숫자, 특수문자"
+        keyboardType="numbers-and-punctuation"
         returnKeyType="next"
-        secureTextEntry={false}
+        secureTextEntry={true}
       />
     </Container>
   );
@@ -37,4 +37,4 @@ const Input = styled.TextInput`
   padding: 10px;
 `;
 
-export default EmailInput;
+export default PasswordCheckInput;

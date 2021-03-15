@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 
-const GenderRadioButton = () => {
-  const [radio, setRadio] = useState(0);
+interface InputProps {
+  gender: number;
+  setGender: (value: number) => void;
+}
+
+interface Props {
+  input: InputProps;
+}
+
+const GenderRadioButton: React.FC<Props> = ({ input }) => {
   const radio_props = [
     { label: '남', value: 0 },
     { label: '여', value: 1 },
@@ -18,13 +26,13 @@ const GenderRadioButton = () => {
           <RadioButtonInput
             obj={obj}
             index={i}
-            isSelected={radio === i}
+            isSelected={input.gender === i}
             buttonInnerColor={'#D1D1D1'}
             buttonOuterColor={'#D1D1D1'}
             buttonSize={14}
             buttonWrapStyle={{ marginRight: 5 }}
             onPress={(v) => {
-              setRadio(v);
+              input.setGender(v);
             }}
           />
           <RadioButtonLabel
@@ -33,7 +41,7 @@ const GenderRadioButton = () => {
             labelStyle={{ fontSize: 12, color: '#2B2B2B' }}
             labelWrapStyle={{ marginRight: 20 }}
             onPress={(v) => {
-              setRadio(v);
+              input.setGender(v);
             }}
           />
         </RadioButton>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoSignIn } from '../../util/navigationHooks';
-import { PasswordInput } from './AuthInput';
 import GenderRadioButton from './GenderRadioButton';
 import AgreeCheckBox from './AgreeCheckBox';
 import SignupButton from './SignupButton';
@@ -10,20 +9,23 @@ import BasicContainer from '../../Component/BasicContainer';
 import NicknameContainer from './NicknameContainer';
 import EmailInput from './EmailInput';
 import useInput from '../../util/useInput';
+import PasswordInput from './passwordInput';
+import PasswordCheckInput from './passwordCheckInput';
 
 const SignUp = () => {
   const goLogin = useGoSignIn();
-  const genderInput = useState(0);
+  const [gender, setGender] = useState(0);
   const nicknameInput = useInput('');
   const emailInput = useInput('');
   const passwordInput = useInput('');
+  const passwordCheckInput = useInput('');
   const agreeCheck = useState(0);
 
   const signupData = [
     {
       title: '성별',
       Component: GenderRadioButton,
-      input: passwordInput,
+      input: { gender, setGender },
     },
     {
       title: '닉네임',
@@ -42,8 +44,8 @@ const SignUp = () => {
     },
     {
       title: '비밀번호 확인',
-      Component: PasswordInput,
-      input: passwordInput,
+      Component: PasswordCheckInput,
+      input: { passwordInput, passwordCheckInput },
     },
   ];
   return (
