@@ -3,13 +3,24 @@ import styled from 'styled-components/native';
 
 interface Props {
   value: string;
+  check: (value: string) => void;
 }
-const NicknameButton: React.FC<Props> = ({ value }) => {
+
+const NicknameButton: React.FC<Props> = ({ value, check }) => {
+  const special = /[~!@#$%^&*()_+|<>?:{}]/;
+  const checkNickname = (value: string) => {
+    if (value == '' || value == null) {
+      return '닉네임 입력은 필수';
+    } else if (special.test(value) || value.search(/\s/) != -1) {
+      return '공백, 특수문자는 사용 불가합니다.';
+    }
+  };
   return (
     <Container>
       <ButtonText
         onPress={() => {
           console.log(value);
+          check('ddd');
         }}
       >
         중복확인

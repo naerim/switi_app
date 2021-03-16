@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
 
@@ -12,22 +12,35 @@ interface Props {
 }
 
 const NicknameContainer: React.FC<Props> = ({ input }) => {
+  const [message, setMessage] = useState('');
   return (
     <Container>
-      <Input
-        value={input.value}
-        onChangeText={input.onChange}
-        placeholder="공백, 특수문자 불가"
-        keyboardType="default"
-        returnKeyType="next"
-        secureTextEntry={false}
-      />
-      <NicknameButton value={input.value} />
+      <InputContainer>
+        <Input
+          value={input.value}
+          onChangeText={input.onChange}
+          placeholder="공백, 특수문자 불가"
+          keyboardType="default"
+          returnKeyType="next"
+          secureTextEntry={false}
+        />
+        <NicknameButton
+          value={input.value}
+          check={() => {
+            setMessage('');
+          }}
+        />
+      </InputContainer>
+      <Warning>{message}</Warning>
     </Container>
   );
 };
 
 const Container = styled.View`
+  flex-direction: column;
+`;
+
+const InputContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -41,6 +54,11 @@ const Input = styled.TextInput`
   border-color: #e3e3e3;
   border-radius: 4px;
   padding: 10px;
+`;
+
+const Warning = styled.Text`
+  color: red;
+  font-size: 12px;
 `;
 
 export default NicknameContainer;
