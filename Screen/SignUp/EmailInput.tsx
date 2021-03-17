@@ -30,6 +30,7 @@ const Container = styled.View`
 `;
 
 const Input = styled.TextInput`
+  font-size: 12px;
   border-width: 1px;
   color: #2b2b2b;
   border-color: #e3e3e3;

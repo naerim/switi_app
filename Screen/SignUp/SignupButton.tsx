@@ -12,7 +12,7 @@ const SignupButton = () => {
 };
 
 const Container = styled.TouchableOpacity`
-  background-color: #000;
+  background-color: #4fd5a7;
   align-items: center;
   justify-content: center;
   border-radius: 40px;

@@ -3,24 +3,16 @@ import styled from 'styled-components/native';
 
 interface Props {
   value: string;
-  check: (value: string) => void;
+  check: () => void;
 }
 
 const NicknameButton: React.FC<Props> = ({ value, check }) => {
-  const special = /[~!@#$%^&*()_+|<>?:{}]/;
-  const checkNickname = (value: string) => {
-    if (value == '' || value == null) {
-      return '닉네임 입력은 필수';
-    } else if (special.test(value) || value.search(/\s/) != -1) {
-      return '공백, 특수문자는 사용 불가합니다.';
-    }
-  };
   return (
-    <Container>
+    <Container activeOpacity={0.8}>
       <ButtonText
         onPress={() => {
           console.log(value);
-          check('ddd');
+          check();
         }}
       >
         중복확인
@@ -29,9 +21,9 @@ const NicknameButton: React.FC<Props> = ({ value, check }) => {
   );
 };
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   width: 25%;
-  background-color: #b4b4b4;
+  background-color: #ffd57a;
   border-radius: 20px;
   align-items: center;
   justify-content: center;
