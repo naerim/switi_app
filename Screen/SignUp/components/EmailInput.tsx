@@ -1,16 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { InputProps } from '../inteface';
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-interface Props {
-  input: InputProps;
-}
-
-const EmailInput: React.FC<Props> = ({ input }) => {
+const EmailInput: React.FC<InputProps> = ({ input }) => {
   return (
     <Container>
       <Input
