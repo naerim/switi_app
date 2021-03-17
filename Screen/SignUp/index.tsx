@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { useGoSignIn } from '../../util/navigationHooks';
-import GenderRadioButton from './GenderRadioButton';
-import AgreeCheckBox from './AgreeCheckBox';
-import SignupButton from './SignupButton';
-import SignupContent from './SignupContent';
+import GenderRadioButton from './components/GenderRadioButton';
+import AgreeCheckBox from './components/AgreeCheckBox';
+import SignupButton from './components/SignupButton';
+import SignupContent from './components/Layout/SignupContent';
 import BasicContainer from '../../Component/BasicContainer';
-import NicknameContainer from './NicknameContainer';
-import EmailInput from './EmailInput';
+import EmailInput from './components/EmailInput';
 import useInput from '../../util/useInput';
-import PasswordInput from './passwordInput';
-import PasswordCheckInput from './passwordCheckInput';
+import PasswordInput from './components/PasswordInput';
+import PasswordCheckInput from './components/PasswordCheckInput';
+import OptionMenu from './components/OptionMenu';
+import NicknameContainer from './components/Nickname';
 
 const SignUp = () => {
-  const goLogin = useGoSignIn();
   const [gender, setGender] = useState(0);
   const nicknameInput = useInput('');
   const emailInput = useInput('');
@@ -62,10 +61,7 @@ const SignUp = () => {
 
       <Content>
         <SignupButton />
-        <GoLoginView>
-          <TextStyle>이미 회원이세요? </TextStyle>
-          <TextLine onPress={goLogin}>로그인하기</TextLine>
-        </GoLoginView>
+        <OptionMenu />
       </Content>
     </BasicContainer>
   );
@@ -74,22 +70,6 @@ const SignUp = () => {
 const Content = styled.View`
   flex: 2;
   justify-content: center;
-`;
-
-const GoLoginView = styled.View`
-  flex-direction: row;
-  padding-top: 15px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TextStyle = styled.Text`
-  font-size: 12px;
-`;
-
-const TextLine = styled.Text`
-  font-size: 12px;
-  text-decoration: underline;
 `;
 
 export default SignUp;
