@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import GenderRadioButton from './components/GenderRadioButton';
 import AgreeCheckBox from './components/AgreeCheckBox';
@@ -8,9 +8,9 @@ import BasicContainer from '../../Component/BasicContainer';
 import EmailInput from './components/EmailInput';
 import useInput from '../../util/useInput';
 import PasswordInput from './components/PasswordInput';
-import PasswordCheckInput from './components/PasswordCheckInput';
 import OptionMenu from './components/OptionMenu';
 import NicknameContainer from './components/Nickname';
+import PasswordCheckInput from './components/PasswordCheckInput';
 
 const SignUp = () => {
   const [gender, setGender] = useState(0);
@@ -18,14 +18,15 @@ const SignUp = () => {
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
-  const agreeCheck = useState(0);
 
+  const handleCheck = (pwd, checkPwd) => {
+    if (pwd.value === checkPwd.value) {
+      return ' ';
+    } else {
+      return '비밀번호가 일치하지 않습니다.';
+    }
+  };
   const signupData = [
-    {
-      title: '성별',
-      Component: GenderRadioButton,
-      input: { gender, setGender },
-    },
     {
       title: '닉네임',
       Component: NicknameContainer,
@@ -41,20 +42,20 @@ const SignUp = () => {
       Component: PasswordInput,
       input: passwordInput,
     },
-    {
-      title: '비밀번호 확인',
-      Component: PasswordCheckInput,
-      input: { passwordInput, passwordCheckInput },
-    },
   ];
   return (
     <BasicContainer headerTitle="회원가입">
+      <GenderRadioButton title="성별" input={{ gender, setGender }} />
       {signupData.map(({ title, Component, input }) => (
         <SignupContent key={title} title={title}>
           <Component input={input} />
         </SignupContent>
       ))}
-
+      <PasswordCheckInput
+        title="비밀번호 확인"
+        input={passwordCheckInput}
+        error={handleCheck(passwordInput, passwordCheckInput)}
+      />
       <Content>
         <AgreeCheckBox />
       </Content>
