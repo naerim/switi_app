@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { InputProps } from '../inteface';
+import { InputProps, WarningProps } from '../inteface';
 
-const PasswordInput: React.FC<InputProps> = ({ input }) => {
+const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
+  const WarningColor = error !== ' ' ? 'red' : '#4FD5A7';
   return (
     <Container>
-      {console.log(input.value)}
       <Input
         value={input.value}
         onChangeText={input.onChange}
@@ -13,7 +13,9 @@ const PasswordInput: React.FC<InputProps> = ({ input }) => {
         keyboardType="numbers-and-punctuation"
         returnKeyType="next"
         secureTextEntry={true}
+        color={WarningColor}
       />
+      <Warning color={WarningColor}>{error}</Warning>
     </Container>
   );
 };
@@ -22,13 +24,19 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput<WarningProps>`
   font-size: 12px;
   border-width: 1px;
   color: #2b2b2b;
-  border-color: #e3e3e3;
   border-radius: 4px;
   padding: 10px;
+  border-color: ${(props) => props.color};
+`;
+
+const Warning = styled.Text<WarningProps>`
+  color: ${(props) => props.color};
+  font-size: 9px;
+  margin-top: 4px;
 `;
 
 export default PasswordInput;
