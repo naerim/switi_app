@@ -3,17 +3,18 @@ import styled from 'styled-components/native';
 import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import useInput from './util/useInput';
-import AuthButton from './components/AuthButton';
-import SocialLogin from './components/SocialLogin';
-import Division from './components/Division';
-import SignInForm from './components/SignInForm';
-import OptionMenu from './components/OptionMenu';
+import AuthButton from './Components/AuthButton';
+import SocialLogin from './Components/SocialLogin';
+import Division from './Components/Division';
+import SignInForm from './Components/SignInForm';
+import OptionMenu from './Components/OptionMenu';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [failCount, setFailCount] = useState(0);
 
   const toggleChecked = () => setChecked(!checked);
 
@@ -22,6 +23,7 @@ const SignIn: React.FC = () => {
     const password = passwordInput;
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(false);
+
     if (email.value === '') {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
     } else if (!email.value.includes('@') || !email.value.includes('.')) {
@@ -30,8 +32,9 @@ const SignIn: React.FC = () => {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
     } else if (password.value === '') {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
-    } else if (password.value.length < 8)
+    } else if (password.value.length < 8) {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    }
   };
 
   return (
