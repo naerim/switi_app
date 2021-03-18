@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-import AuthButton from './EmailPassword/AuthButton';
-import useInput from './Hooks/useInput';
-import { Alert } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import SocialLogin from './Social/SocialLogin';
-import Division from './Components/Division';
-import SignInForm from './EmailPassword/SignInForm';
-import OptionMenu from './Components/OptionMenu';
+import useInput from './util/useInput';
+import AuthButton from './components/AuthButton';
+import SocialLogin from './components/SocialLogin';
+import Division from './components/Division';
+import SignInForm from './components/SignInForm';
+import OptionMenu from './components/OptionMenu';
 
-export default () => {
+const SignIn: React.FC = () => {
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
@@ -69,3 +68,5 @@ const CheckBoxContainer = styled.View`
   width: 100%;
   padding: 0 10px;
 `;
+
+export default SignIn;
