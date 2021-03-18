@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 interface Props {
   desc: string;
 }
+
 const Description: React.FC<Props> = ({ desc }) => (
   <Container>
     <Desc>{desc}</Desc>

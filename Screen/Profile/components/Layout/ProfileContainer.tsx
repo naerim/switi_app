@@ -2,35 +2,31 @@ import React from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../../../Component/BasicContainer';
 import Description from '../Description';
+import NextButton from '../NextButton';
 
 interface Props {
   desc: string;
   buttonText: string;
+  onClick: () => void;
 }
 
-const ProfileContainer: React.FC<Props> = ({ desc, children, buttonText }) => {
+const ProfileContainer: React.FC<Props> = ({
+  desc,
+  children,
+  buttonText,
+  onClick,
+}) => {
   return (
     <BasicContainer headerTitle="프로필 설정">
       <Description desc={desc} />
       <Container>{children}</Container>
-      <NextButton>
-        <ButtonText>{buttonText}</ButtonText>
-      </NextButton>
+      <NextButton buttonText={buttonText} onClick={onClick} />
     </BasicContainer>
   );
 };
 
 const Container = styled.View`
-  background-color: aqua;
-  flex: 8;
+  flex: 6;
 `;
 
-const NextButton = styled.TouchableOpacity`
-  background-color: beige;
-  flex: 1;
-`;
-
-const ButtonText = styled.Text`
-  font-size: 14px;
-`;
 export default ProfileContainer;
