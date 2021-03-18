@@ -9,6 +9,7 @@ import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
+import EmailModal from './EmailModal';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -56,6 +57,7 @@ const SignIn: React.FC = () => {
           </CheckBoxContainer>
           <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
           <OptionMenu />
+          <EmailModal />
         </Container>
       </TouchableWithoutFeedback>
     </BasicContainer>
