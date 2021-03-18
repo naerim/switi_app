@@ -77,14 +77,18 @@ const TabNavigation = () => {
 
 const MainNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    /*mode="modal"
+      headerMode="none"
+      screenOptions={{ animationEnabled: false }}*/
+    >
       <Stack.Screen name="Switi" component={TabNavigation} />
     </Stack.Navigator>
   );
 };
 
 const RootNavigator = () => {
-  const user = false;
+  const user = true;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}
