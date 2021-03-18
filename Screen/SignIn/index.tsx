@@ -3,11 +3,12 @@ import styled from 'styled-components/native';
 import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import useInput from './util/useInput';
-import AuthButton from './Components/AuthButton';
-import SocialLogin from './Components/SocialLogin';
-import Division from './Components/Division';
-import SignInForm from './Components/SignInForm';
-import OptionMenu from './Components/OptionMenu';
+import AuthButton from './components/AuthButton';
+import SocialLogin from './components/SocialLogin';
+import Division from './components/Division';
+import SignInForm from './components/SignInForm';
+import OptionMenu from './components/OptionMenu';
+import BasicContainer from '../../Component/BasicContainer';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -38,24 +39,26 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <Container>
-        <SocialLogin />
-        <Division />
-        <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
-        <CheckBoxContainer>
-          <CheckBox
-            rightText="로그인 기억하기"
-            rightTextStyle={{ fontSize: 12 }}
-            checkBoxColor="#E3E3E3"
-            isChecked={checked}
-            onClick={toggleChecked}
-          />
-        </CheckBoxContainer>
-        <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
-        <OptionMenu />
-      </Container>
-    </TouchableWithoutFeedback>
+    <BasicContainer headerTitle="로그인">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <SocialLogin />
+          <Division />
+          <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
+          <CheckBoxContainer>
+            <CheckBox
+              rightText="로그인 기억하기"
+              rightTextStyle={{ fontSize: 12 }}
+              checkBoxColor="#E3E3E3"
+              isChecked={checked}
+              onClick={toggleChecked}
+            />
+          </CheckBoxContainer>
+          <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
+          <OptionMenu />
+        </Container>
+      </TouchableWithoutFeedback>
+    </BasicContainer>
   );
 };
 
