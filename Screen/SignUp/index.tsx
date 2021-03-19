@@ -79,7 +79,7 @@ const SignUp = () => {
     },
   ];
   return (
-    <BasicContainer headerTitle="회원가입">
+    <BasicContainer headerTitle="회원가입" display={false}>
       <GenderRadioButton title="성별" input={{ gender, setGender }} />
       {signupData.map(({ title, Component, input, error }) => (
         <SignupContent key={title} title={title}>

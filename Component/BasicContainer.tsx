@@ -4,12 +4,19 @@ import BasicHeader from './BasicHeader';
 
 interface Props {
   headerTitle: string;
+  display: boolean;
+  onPress?: () => void;
 }
 
-const BasicContainer: React.FC<Props> = ({ children, headerTitle }) => {
+const BasicContainer: React.FC<Props> = ({
+  children,
+  headerTitle,
+  onPress,
+  display,
+}) => {
   return (
     <Wrap>
-      <BasicHeader title={headerTitle} />
+      <BasicHeader title={headerTitle} onPress={onPress} display={display} />
       <Container>{children}</Container>
     </Wrap>
   );
