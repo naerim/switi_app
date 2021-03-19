@@ -1,4 +1,5 @@
 import React from 'react';
+import { AsyncStorage, AsyncStorageStatic, Text } from 'react-native';
 import SearchContainer from './components/SearchHeader/SearchHeaderContainer';
 import SearchForm from './components/SearchForm/SearchForm';
 import styled from 'styled-components/native';
@@ -8,6 +9,20 @@ import RecommendContainer from './components/Recommend/RecommendContainer';
 
 const Search = () => {
   const searchInput = useInput('');
+
+  const searchSomething = () => {
+    const search = searchInput;
+    const searchVoca = search.value;
+    AsyncStorage.setItem('beforeSearch', JSON.stringify({ searchVoca }), () => {
+      console.log(searchVoca, '저장 완료');
+    });
+
+    AsyncStorage.getItem('beforeSearch', (err, result) => {
+      const BeforeSearch = JSON.parse(result);
+      console.log(BeforeSearch.searchVoca, '가져옴');
+    });
+  };
+
   return (
     <SearchContainer headerTitle="검색">
       <Container>
@@ -15,6 +30,7 @@ const Search = () => {
         <OptionMenu />
         <Line />
         <RecommendContainer />
+        <Button title="검색" onPress={searchSomething} />
       </Container>
     </SearchContainer>
   );
@@ -32,6 +48,10 @@ const Line = styled.Text`
   height: 10px;
   background-color: #e3e3e3;
   margin: 10px 0;
+`;
+
+const Button = styled.Button`
+  background-color: violet;
 `;
 
 export default Search;
