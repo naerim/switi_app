@@ -24,7 +24,7 @@ const LoginNavigation = () => (
   >
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignUp" component={SignUp} />
-    <Stack.Screen name="Profile" component={ProfileNavigation} />
+    <Stack.Screen name="firstProfile" component={ProfileNavigation} />
   </Stack.Navigator>
 );
 
