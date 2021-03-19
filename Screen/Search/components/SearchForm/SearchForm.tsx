@@ -7,11 +7,11 @@ interface Input {
   onChange: (value: string) => void;
 }
 
-interface SignInFormProps {
+interface SearchFormProps {
   searchInput: Input;
 }
 
-const SignInForm: React.FC<SignInFormProps> = ({ searchInput }) => (
+const SearchForm: React.FC<SearchFormProps> = ({ searchInput }) => (
   <Container>
     <SearchInput
       value={searchInput.value}
@@ -30,4 +30,4 @@ const Container = styled.View`
   margin: 15px 0;
 `;
 
-export default SignInForm;
+export default SearchForm;
