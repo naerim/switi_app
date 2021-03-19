@@ -36,7 +36,7 @@ const Input = styled.TextInput<WarningProps>`
 const Warning = styled.Text<WarningProps>`
   color: ${(props) => props.color};
   font-size: 9px;
-  margin-top: 4px;
+  margin-top: 2px;
 `;
 
 export default PasswordInput;

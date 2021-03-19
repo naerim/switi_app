@@ -48,7 +48,6 @@ const NicknameContainer: React.FC<Props> = ({ input }) => {
         <NicknameButton
           value={input.value}
           check={() => {
-            // @ts-ignore // 질문
             setMessage(checkNickname(input.value));
           }}
         />
@@ -81,7 +80,7 @@ const Input = styled.TextInput<WarningColor>`
 const Warning = styled.Text<WarningColor>`
   color: ${(props) => props.warning};
   font-size: 9px;
-  margin-top: 4px;
+  margin-top: 2px;
 `;
 
 export default NicknameContainer;

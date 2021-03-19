@@ -56,7 +56,6 @@ const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
 };
 
 const Container = styled.View`
-  flex: 1;
   justify-content: center;
 `;
 
