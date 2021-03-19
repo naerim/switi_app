@@ -11,48 +11,53 @@ import SearchStoryList from './record/searchStoryList';
 
 const Search = () => {
   //최근 검색어 초기 배열
-  const [searches, setSearches] = useState('');
 
-  // const [searches, setSearches] = useState([
-  //   {
-  //     id: 1,
-  //     text: '토익공부',
-  //   },
-  //   {
-  //     id: 2,
-  //     text: '파이썬공부',
-  //   },
-  //   {
-  //     id: 3,
-  //     text: '코딩테스트',
-  //   },
-  // ]);
-  // const nextId = useRef(4);
-  //
-  // const onInsert = useCallback(
-  //   (text) => {
-  //     const search = {
-  //       id: nextId.current,
-  //       text,
-  //     };
-  //     setSearches(searches.concat(search));
-  //     nextId.current += 1;
-  //   },
-  //   [searches]
-  // );
+const [value,setValue] = useState('');
+  const [searches, setSearches] = useState([
+    {
+      id: 1,
+      text: '토익공부',
+    },
+    {
+      id: 2,
+      text: '파이썬공부',
+    },
+    {
+      id: 3,
+      text: '코딩테스트',
+    },
+  ]);
+  const nextId = useRef(4);
+
+  const onInsert = useCallback(
+    (text) => {
+      const search = {
+        id: nextId.current,
+        text,
+      };
+      setSearches(searches.concat(search));
+      nextId.current += 1;
+    },
+    [searches]
+  );
 
   const searchInput = useInput('');
 
   const searchSomething = () => {
     const searchVoca = searchInput.value;
-    AsyncStorage.setItem('beforeSearch', JSON.stringify({ searchVoca }), () => {
-      console.log(searchVoca, '저장 완료');
-    });
+    AsyncStorage.setItem(
+      'beforeSearch',
+      JSON.stringify({ id: nextId.current, text: searchVoca }),
+      () => {
+        console.log(searchVoca, '저장 완료');
+      }
+    );
 
     AsyncStorage.getItem('beforeSearch', (err, result) => {
       const BeforeSearch = JSON.parse(result);
-      console.log(BeforeSearch.searchVoca, '가져옴');
-      setSearches(BeforeSearch.searchVoca);
+      console.log(BeforeSearch, '가져옴');
+      onInsert(BeforeSearch.text);
+      //setSearches(BeforeSearch.searchVoca);
     });
   };
 
@@ -63,9 +68,9 @@ const Search = () => {
         <SearchForm searchInput={searchInput}></SearchForm>
         {/*<SearchInsert></SearchInsert>*/}
         <OptionMenu />
-        <Text>{searches}</Text>
+        {/*<Text>{searches}</Text>*/}
         {/*<RecordContainer><Text>저장</Text></RecordContainer>*/}
-        {/*<SearchStoryList searches={searches} />*/}
+        <SearchStoryList searches={searches} />
         <Line />
         <RecommendContainer />
         <Button title="검색" onPress={searchSomething} />
