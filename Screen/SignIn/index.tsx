@@ -16,9 +16,10 @@ const SignIn: React.FC = () => {
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [failCount, setFailCount] = useState(0);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const toggleChecked = () => setChecked(!checked);
+  const closeModal = () => setModalVisible(false);
 
   const handleLogin = () => {
     const email = emailInput;
@@ -57,7 +58,7 @@ const SignIn: React.FC = () => {
           </CheckBoxContainer>
           <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
           <OptionMenu />
-          <EmailModal />
+          <EmailModal modalVisible={modalVisible} closeModal={closeModal} />
         </Container>
       </TouchableWithoutFeedback>
     </BasicContainer>

@@ -11,16 +11,14 @@ interface EmailFromProps {
 }
 
 const EmailForm: React.FC<EmailFromProps> = ({ emailInput }) => (
-  <>
-    <EmailAuthItem
-      value={emailInput.value}
-      onChangeText={emailInput.onChange}
-      placeholder=""
-      keyboardType="email-address"
-      secureTextEntry={false}
-      returnKeyType="send"
-    />
-  </>
+  <EmailAuthItem
+    value={emailInput.value}
+    onChangeText={emailInput.onChange}
+    placeholder=""
+    keyboardType="email-address"
+    secureTextEntry={false}
+    returnKeyType="send"
+  />
 );
 
 export default EmailForm;

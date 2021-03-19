@@ -6,15 +6,17 @@ interface AuthButtonProps {
   text: string;
   onPress: () => void;
   loading: boolean;
+  color?: string;
 }
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   text,
   onPress,
   loading = false,
+  color,
 }) => (
   <Touchable disabled={loading} onPress={onPress}>
-    <Container>
+    <Container color={color}>
       {loading ? <ActivityIndicator color={'white'} /> : <Text>{text}</Text>}
     </Container>
   </Touchable>
@@ -22,19 +24,19 @@ const AuthButton: React.FC<AuthButtonProps> = ({
 
 const Touchable = styled.TouchableOpacity`
   flex-direction: row;
-  height: 40px;
+  height: 50px;
   padding: 0 10px;
   margin: 20px 0;
 `;
 
 const Container = styled.View`
   width: 100%;
-  background-color: #b4b4b4;
   border-radius: 20px;
   align-items: center;
   justify-content: center;
   padding: 10px;
   margin: 0 50px;
+  background-color: ${({ color }: { color?: string }) => color || '#b4b4b4'};
 `;
 
 const Text = styled.Text`
