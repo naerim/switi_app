@@ -24,7 +24,7 @@ const RecommendContainer: React.FC = () => {
     <Wrap>
       <Title>추천 검색어</Title>
       {recommendData.map(({ text }) => (
-        <RecommendTerm term={text} />
+        <RecommendTerm key={text} term={text} />
       ))}
     </Wrap>
   );

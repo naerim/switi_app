@@ -12,7 +12,7 @@ import SearchStoryList from './record/searchStoryList';
 const Search = () => {
   //최근 검색어 초기 배열
 
-const [value,setValue] = useState('');
+  const [value, setValue] = useState('');
   const [searches, setSearches] = useState([
     {
       id: 1,
@@ -65,7 +65,7 @@ const [value,setValue] = useState('');
     <SearchContainer headerTitle="검색">
       <Container>
         {/*<SearchInsert searchInput={searchInput} onInsert={onInsert}/>*/}
-        <SearchForm searchInput={searchInput}></SearchForm>
+        <SearchForm searchInput={searchInput} onPress={searchSomething} />
         {/*<SearchInsert></SearchInsert>*/}
         <OptionMenu />
         {/*<Text>{searches}</Text>*/}
@@ -73,7 +73,6 @@ const [value,setValue] = useState('');
         <SearchStoryList searches={searches} />
         <Line />
         <RecommendContainer />
-        <Button title="검색" onPress={searchSomething} />
       </Container>
     </SearchContainer>
   );

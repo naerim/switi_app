@@ -9,9 +9,10 @@ interface Input {
 
 interface SearchFormProps {
   searchInput: Input;
+  onPress: () => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ searchInput }) => (
+const SearchForm: React.FC<SearchFormProps> = ({ searchInput,onPress }) => (
   <Container>
     <SearchInput
       value={searchInput.value}
@@ -20,6 +21,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ searchInput }) => (
       keyboardType="default"
       secureTextEntry={false}
       returnKeyType="send"
+      onPress={onPress}
     />
   </Container>
 );

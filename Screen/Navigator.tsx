@@ -77,11 +77,7 @@ const TabNavigation = () => {
 
 const MainNavigation = () => {
   return (
-    <Stack.Navigator
-    /*mode="modal"
-      headerMode="none"
-      screenOptions={{ animationEnabled: false }}*/
-    >
+    <Stack.Navigator headerMode="none">
       <Stack.Screen name="Switi" component={TabNavigation} />
     </Stack.Navigator>
   );

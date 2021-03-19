@@ -14,6 +14,7 @@ export interface TextInputInterface {
     | 'phone-pad';
   secureTextEntry: boolean;
   returnKeyType: 'done' | 'go' | 'next' | 'search' | 'send';
+  onPress: () => void;
 }
 
 const SearchInput: React.FC<TextInputInterface> = ({
@@ -23,6 +24,7 @@ const SearchInput: React.FC<TextInputInterface> = ({
   secureTextEntry,
   keyboardType,
   returnKeyType,
+  onPress,
 }) => (
   <Container>
     <TextInput
@@ -33,6 +35,7 @@ const SearchInput: React.FC<TextInputInterface> = ({
       secureTextEntry={secureTextEntry}
       returnKeyType={returnKeyType}
       autoCorrect={false}
+      onSubmitEditing={onPress}
     />
   </Container>
 );
