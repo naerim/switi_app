@@ -26,7 +26,7 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
         <BackButtonImg source={imagePath} />
       </BackButton>
       <Title>{title}</Title>
-      <Title> </Title>
+      <HiddenText>빈</HiddenText>
     </Wrap>
   );
 };
@@ -53,6 +53,11 @@ const BackButtonImg = styled.Image`
 const Title = styled.Text`
   font-size: 14px;
   text-align: center;
+`;
+
+const HiddenText = styled.Text`
+  font-size: 14px;
+  color: white;
 `;
 
 export default BasicHeader;

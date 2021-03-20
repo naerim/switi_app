@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import CheckBox from 'react-native-check-box';
+import { useGoTerms } from '../../../util/navigationHooks';
 
 const AgreeCheckBox = () => {
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
@@ -10,6 +11,8 @@ const AgreeCheckBox = () => {
   });
 
   const allCheck = checked.service && checked.info && checked.event;
+  const goTerms = useGoTerms(0);
+  const goTerms2 = useGoTerms(1);
 
   const setAll = () => {
     const changeValue = !allCheck;
@@ -37,6 +40,7 @@ const AgreeCheckBox = () => {
         isChecked={checked.service}
         onClick={() => {
           itemCheck('service');
+          goTerms();
         }}
       />
       <CheckBox
@@ -46,6 +50,7 @@ const AgreeCheckBox = () => {
         isChecked={checked.info}
         onClick={() => {
           itemCheck('info');
+          goTerms2();
         }}
       />
       <CheckBox

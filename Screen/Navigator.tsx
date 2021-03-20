@@ -11,6 +11,7 @@ import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
+import Terms from './Terms';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ const LoginNavigation = () => (
   >
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignUp" component={SignUp} />
+    <Stack.Screen name="Terms" component={Terms} />
     <Stack.Screen name="firstProfile" component={ProfileNavigation} />
   </Stack.Navigator>
 );
