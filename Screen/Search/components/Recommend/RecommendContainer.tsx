@@ -39,6 +39,7 @@ const Wrap = styled.View`
 const Title = styled.Text`
   font-weight: bold;
   color: #b4b4b4;
+  margin-top: 10px;
 `;
 
 export default RecommendContainer;

@@ -34,6 +34,7 @@ const Text = styled.Text`
   font-size: 12px;
   color: #2b2b2b;
   text-align: left;
+  margin-top: 10px;
 `;
 
 export default RecommendTerm;
