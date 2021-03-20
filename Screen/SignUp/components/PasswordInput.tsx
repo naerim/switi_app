@@ -15,6 +15,16 @@ const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
         secureTextEntry={true}
         color={WarningColor}
       />
+      <VisibilityIcon>
+        <Icon
+          source={
+            WarningColor === 'red'
+              ? require('../../../Img/icon_lock.png')
+              : require('../../../Img/icon_unlock.png')
+          }
+          resizeMode="contain"
+        />
+      </VisibilityIcon>
       <Warning color={WarningColor}>{error}</Warning>
     </Container>
   );
@@ -31,6 +41,17 @@ const Input = styled.TextInput<WarningProps>`
   border-radius: 4px;
   padding: 10px;
   border-color: ${(props) => props.color};
+`;
+
+const VisibilityIcon = styled.View`
+  position: absolute;
+  right: 10px;
+  top: 8px;
+`;
+
+const Icon = styled.Image`
+  height: 20px;
+  width: 18px;
 `;
 
 const Warning = styled.Text<WarningProps>`
