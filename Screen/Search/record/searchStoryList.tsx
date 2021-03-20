@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 const SearchStoryList = ({ searches }) => {
   return (
-    <Scroll>
+    <Scroll directionalLockEnabled={true}>
       <Container>
         {searches.map((search) => (
           <SearchStoryItem search={search} key={search.id} />
