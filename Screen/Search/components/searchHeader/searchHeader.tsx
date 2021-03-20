@@ -20,7 +20,7 @@ const Wrap = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   padding: 20px;
 `;

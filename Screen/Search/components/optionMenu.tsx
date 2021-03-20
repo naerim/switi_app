@@ -16,6 +16,8 @@ const Container = styled.View`
   flex-direction: column;
   width: 100%;
   padding: 0 20px;
+  margin-top: 10px;
+  margin-bottom: 25px;
 `;
 
 const ItemContainer = styled.View`

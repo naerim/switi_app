@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text, View } from 'react-native';
+import { Text} from 'react-native';
 
 const SearchStoryItem = ({ search }) => {
-  const {text} = search;
-  return <Tag><Text>{text}</Text></Tag>;
+  const { text } = search;
+  return <Tag><Text>{text} X</Text></Tag>;
 };
 
 

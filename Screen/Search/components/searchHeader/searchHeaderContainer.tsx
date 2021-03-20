@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import SearchHeader from './SearchHeader';
+import SearchHeader from './searchHeader';
 
 interface Props {
   headerTitle: string;
