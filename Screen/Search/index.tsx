@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { AsyncStorage, ScrollView, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import SearchContainer from './components/searchHeader/searchHeaderContainer';
+import SearchForm from './components/SearchForm/SearchForm';
 import styled from 'styled-components/native';
 import useInput from '../SignIn/util/useInput';
 import OptionMenu from './components/optionMenu';
@@ -36,31 +37,34 @@ const Search = () => {
     [searches]
   );
 
-  //const searchInput = useInput('');
+  const searchInput = useInput('');
 
-  // const searchSomething = () => {
-  //   const searchVoca = searchInput.value;
-  //   AsyncStorage.setItem(
-  //     'beforeSearch',
-  //     JSON.stringify({ id: nextId.current, text: searchVoca }),
-  //     () => {
-  //       console.log(searchVoca, '저장 완료');
-  //     }
-  //   );
-  //
-  //   AsyncStorage.getItem('beforeSearch', (err, result) => {
-  //     const BeforeSearch = JSON.parse(result);
-  //     console.log(BeforeSearch, '가져옴');
-  //     onInsert(BeforeSearch.text);
-  //     //setSearches(BeforeSearch.searchVoca);
-  //   });
-  // };
+  const searchSomething = () => {
+    const searchVoca = searchInput.value;
+    AsyncStorage.setItem(
+      'beforeSearch',
+      JSON.stringify({ id: nextId.current, text: searchVoca }),
+      () => {
+        console.log(searchVoca, '저장 완료');
+      }
+    );
+
+    AsyncStorage.getItem('beforeSearch', (err, result) => {
+      const BeforeSearch = JSON.parse(result);
+      console.log(BeforeSearch, '가져옴');
+      onInsert(BeforeSearch.text);
+      //setSearches(BeforeSearch.searchVoca);
+    });
+  };
 
   return (
     <SearchContainer headerTitle="검색">
       <Container>
+        <SearchForm searchInput={searchInput} onPress={searchSomething} />
         <OptionMenu />
-        <SearchStoryList searches={searches} />
+        <ListContainer>
+          <SearchStoryList searches={searches} />
+        </ListContainer>
         <Line />
         <RecommendContainer />
       </Container>
@@ -75,6 +79,12 @@ const Container = styled.View`
   background-color: white;
 `;
 
+const ListContainer = styled.View`
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0 10px;
+`;
 const Line = styled.Text`
   width: 100%;
   height: 10px;
@@ -83,4 +93,3 @@ const Line = styled.Text`
 `;
 
 export default Search;
-

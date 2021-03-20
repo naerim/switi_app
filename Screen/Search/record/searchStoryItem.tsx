@@ -10,7 +10,7 @@ const SearchStoryItem = ({ search }) => {
 
 const Tag = styled.View`
   background-color: #ffdd94;
-  padding: 10px;
+  padding: 7px;
   margin: 0 5px;
   border-radius: 20px;
 `;
