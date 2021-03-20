@@ -10,6 +10,7 @@ import useInput from '../../util/useInput';
 import PasswordInput from './components/PasswordInput';
 import OptionMenu from './components/OptionMenu';
 import NicknameContainer from './components/Nickname';
+import { Status } from './inteface';
 
 const SignUp = () => {
   const [gender, setGender] = useState(0);
@@ -21,11 +22,14 @@ const SignUp = () => {
   const isEmail = (email) => {
     const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (email == '' || email == null) {
-      return '필수 정보입니다.';
+      return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (!regex.test(email)) {
-      return '이메일 형식이 올바르지 않습니다.';
+      return {
+        status: Status.ERROR,
+        text: '이메일 형식이 올바르지 않습니다.',
+      };
     } else {
-      return ' ';
+      return { status: Status.SUCCESS, text: ' ' };
     }
   };
 
@@ -69,13 +73,13 @@ const SignUp = () => {
       title: '비밀번호 (8자리 이상 영문, 숫자, 특수문자)',
       Component: PasswordInput,
       input: passwordInput,
-      error: isPassword(passwordInput.value),
+      // error: isPassword(passwordInput.value),
     },
     {
       title: '비밀번호 확인',
       Component: PasswordInput,
       input: passwordCheckInput,
-      error: passwordCheck(passwordInput, passwordCheckInput),
+      // error: passwordCheck(passwordInput, passwordCheckInput),
     },
   ];
   return (
