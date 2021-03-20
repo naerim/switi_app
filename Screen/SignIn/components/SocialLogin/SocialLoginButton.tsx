@@ -3,11 +3,13 @@ import styled from 'styled-components/native';
 
 interface SocialLoginButtonProps {
   title: string;
+  //color: string;
   onPress: () => void;
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   title,
+  //color,
   onPress,
 }) => (
   <Container onPress={onPress}>
@@ -24,6 +26,7 @@ const Container = styled.TouchableOpacity`
   justify-content: center;
   padding: 10px;
   margin: 10px;
+  //color: {{color: }};
 `;
 
 const Title = styled.Text`
