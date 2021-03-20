@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  value: string;
+  disabled: boolean;
   check: () => void;
 }
 
-const NicknameButton: React.FC<Props> = ({ value, check }) => {
+const NicknameButton: React.FC<Props> = ({ disabled, check }) => {
   return (
     <Container
       activeOpacity={0.8}
       onPress={() => {
-        console.log(value);
         check();
       }}
+      disabled={disabled}
     >
       <ButtonText>중복확인</ButtonText>
     </Container>
@@ -23,7 +23,7 @@ const NicknameButton: React.FC<Props> = ({ value, check }) => {
 const Container = styled.TouchableOpacity`
   flex: 1;
   width: 25%;
-  background-color: #ffd57a;
+  background-color: ${(props) => (props.disabled ? '#e3e3e3' : '#ffd57a')};
   border-radius: 20px;
   align-items: center;
   justify-content: center;

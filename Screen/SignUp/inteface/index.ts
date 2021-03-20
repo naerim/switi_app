@@ -10,5 +10,5 @@ export interface InputProps {
 }
 
 export interface WarningProps {
-  color: string;
+  color: boolean;
 }

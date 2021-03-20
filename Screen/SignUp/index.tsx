@@ -19,6 +19,19 @@ const SignUp = () => {
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
 
+  const isNickname = (nickname) => {
+    const special = /[~!@#$%^&*()_+|<>?:{}]/;
+    if (nickname == '' || nickname == null) {
+      return { status: Status.NORMARL, text: '필수 정보입니다.' };
+    } else if (special.test(nickname) || nickname.search(/\s/) != -1) {
+      return {
+        status: Status.ERROR,
+        text: '공백, 특수문자는 사용 불가합니다.',
+      };
+    } else {
+      return { status: Status.SUCCESS, text: '멋진 닉네임이네요!' };
+    }
+  };
   const isEmail = (email) => {
     const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (email == '' || email == null) {
@@ -29,7 +42,6 @@ const SignUp = () => {
       return { status: Status.SUCCESS, text: ' ' };
     }
   };
-
   const isPassword = (pwd) => {
     if (pwd == '' || pwd == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
@@ -62,6 +74,7 @@ const SignUp = () => {
       title: '닉네임',
       Component: NicknameContainer,
       input: nicknameInput,
+      error: isNickname(nicknameInput.value),
     },
     {
       title: '이메일',
@@ -82,6 +95,7 @@ const SignUp = () => {
       error: passwordCheck(passwordInput, passwordCheckInput),
     },
   ];
+
   return (
     <BasicContainer headerTitle="회원가입" display={false}>
       <GenderRadioButton title="성별" input={{ gender, setGender }} />
