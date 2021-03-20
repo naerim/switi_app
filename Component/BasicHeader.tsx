@@ -26,7 +26,6 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
         <BackButtonImg source={imagePath} />
       </BackButton>
       <Title>{title}</Title>
-      <HiddenText>빈</HiddenText>
     </Wrap>
   );
 };
@@ -34,14 +33,15 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
 const Wrap = styled.View`
   flex-direction: row;
   background-color: #fff;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 46px;
   margin: 0 24px;
 `;
 
 const BackButton = styled.TouchableOpacity<DisplayProps>`
-  align-items: center;
+  position: absolute;
+  left: 0;
   opacity: ${(props) => (props.display ? '100' : '0')};
 `;
 
@@ -53,11 +53,6 @@ const BackButtonImg = styled.Image`
 const Title = styled.Text`
   font-size: 14px;
   text-align: center;
-`;
-
-const HiddenText = styled.Text`
-  font-size: 14px;
-  color: white;
 `;
 
 export default BasicHeader;
