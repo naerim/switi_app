@@ -7,21 +7,32 @@ const SocialLogin: React.FC = () => {
     {
       title: '네이버',
       onPress: () => console.log('네이버로 로그인'),
+      color: '#40A436',
+      fontcolor: '#fff',
     },
     {
       title: '카카오',
       onPress: () => console.log('카카오로 로그인'),
+      color: '#FFDF00',
+      fontcolor: '#fff',
     },
     {
       title: '구글',
       onPress: () => console.log('구글로 로그인'),
+      fontcolor: '#707071',
     },
   ];
 
   return (
     <Container>
-      {socialData.map(({ title, onPress }) => (
-        <SocialLoginButton key={title} title={title} onPress={onPress} />
+      {socialData.map(({ title, onPress, color, fontcolor}) => (
+        <SocialLoginButton
+          key={title}
+          title={title}
+          onPress={onPress}
+          color={color}
+          fontColor={fontcolor}
+        />
       ))}
     </Container>
   );
