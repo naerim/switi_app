@@ -10,7 +10,7 @@ const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
         value={input.value}
         onChangeText={input.onChange}
         placeholder="8자리 이상 영문, 숫자, 특수문자"
-        keyboardType="numbers-and-punctuation"
+        keyboardType="email-address"
         returnKeyType="next"
         secureTextEntry={true}
         color={WarningColor}

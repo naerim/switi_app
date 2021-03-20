@@ -37,9 +37,9 @@ const SignUp = () => {
       !/[a-zA-Z]/.test(pwd) ||
       !/[~!@#$%<>^&*]/.test(pwd) ||
       pwd.length < 8 ||
-      pwd.length > 50
+      pwd.length > 16
     ) {
-      return '공백, 특수문자는 사용 불가합니다.';
+      return '8~16문자 영문, 숫자, 특수문자를 사용하세요.';
     } else {
       return ' ';
     }
