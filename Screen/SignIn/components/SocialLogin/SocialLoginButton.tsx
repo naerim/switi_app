@@ -15,7 +15,10 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   fontColor,
 }) => (
   <Container onPress={onPress} color={color}>
-    <Title fontColor={fontColor}>{title}로 로그인</Title>
+    <SocialIcon source={require('./i_google.png')} />
+    <TitleContainer>
+      <Title fontColor={fontColor}>{title}로 로그인</Title>
+    </TitleContainer>
   </Container>
 );
 
@@ -24,15 +27,27 @@ const Container = styled.TouchableOpacity`
   border: 1px solid #b4b4b4;
   border-radius: 4px;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
+  justify-content: space-between;
+  padding: 10px 20px 10px 10px;
   margin: 10px;
   background-color: ${({ color }: { color?: string }) => color || 'white'};
+  flex-direction: row;
 `;
 
+const TitleContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 90%;
+`;
 const Title = styled.Text`
   font-size: 15px;
   color: ${({ fontColor }: { fontColor?: string }) => fontColor || 'white'};
+`;
+
+const SocialIcon = styled.Image`
+  width: 15px;
+  height: 15px;
 `;
 
 export default SocialLoginButton;
