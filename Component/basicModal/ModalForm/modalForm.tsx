@@ -1,5 +1,5 @@
 import React from 'react';
-import EmailAuthItem from './emailAuthItem';
+import ModalAuthItem from './ModalAuthItem';
 
 interface Input {
   value: string;
@@ -10,8 +10,8 @@ interface EmailFromProps {
   emailInput: Input;
 }
 
-const EmailForm: React.FC<EmailFromProps> = ({ emailInput }) => (
-  <EmailAuthItem
+const ModalForm: React.FC<EmailFromProps> = ({ emailInput }) => (
+  <ModalAuthItem
     value={emailInput.value}
     onChangeText={emailInput.onChange}
     placeholder=""
@@ -21,4 +21,4 @@ const EmailForm: React.FC<EmailFromProps> = ({ emailInput }) => (
   />
 );
 
-export default EmailForm;
+export default ModalForm;

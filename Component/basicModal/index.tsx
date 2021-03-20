@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import Modal from 'react-native-modal';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
-import EmailOption from './emailOption';
-import AuthButton from '../components/AuthButton';
-import useInput from '../util/useInput';
-import EmailForm from './emailForm/emailForm';
+import ModalOption from './modalOption';
+import AuthButton from '../../Screen/SignIn/components/AuthButton';
+import useInput from '../../Screen/SignIn/util/useInput';
+import ModalForm from './ModalForm/modalForm';
 
 interface EmailModalProps {
   modalVisible: boolean;
@@ -43,8 +43,8 @@ const EmailModal: React.FC<EmailModalProps> = ({
         <StyledModalGradeWrapper>
           <EmailText>switi@purplecode.com</EmailText>
         </StyledModalGradeWrapper>
-        <EmailForm emailInput={certificationNumber} />
-        <EmailOption />
+        <ModalForm emailInput={certificationNumber} />
+        <ModalOption />
         <ButtonContainer>
           <AuthButton
             text="이메일 인증하기"

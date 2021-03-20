@@ -9,7 +9,7 @@ import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
-import EmailModal from './EmailModal';
+import EmailModal from '../../Component/basicModal';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');

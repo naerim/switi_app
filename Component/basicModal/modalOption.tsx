@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
 
-const EmailOption = () => {
+const ModalOption = () => {
   return (
     <Container>
       <ItemContainer>
@@ -30,4 +30,4 @@ const Answer = styled.Text`
   text-decoration: #b4b4b4 underline;
 `;
 
-export default EmailOption;
+export default ModalOption;

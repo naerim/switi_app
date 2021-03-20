@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import AuthInput, {
   TextInputInterface,
-} from '../../components/SignInForm/AuthInput';
+} from '../../../Screen/SignIn/components/SignInForm/AuthInput';
 
-const EmailAuthItem: React.FC<TextInputInterface> = ({
+const ModalAuthItem: React.FC<TextInputInterface> = ({
   value,
   onChangeText,
   placeholder,
@@ -29,4 +29,4 @@ const Container = styled.View`
   padding: 0 55px;
 `;
 
-export default EmailAuthItem;
+export default ModalAuthItem;
