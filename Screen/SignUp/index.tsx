@@ -24,10 +24,7 @@ const SignUp = () => {
     if (email == '' || email == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (!regex.test(email)) {
-      return {
-        status: Status.ERROR,
-        text: '이메일 형식이 올바르지 않습니다.',
-      };
+      return { status: Status.ERROR, text: '이메일 형식이 올바르지 않습니다.' };
     } else {
       return { status: Status.SUCCESS, text: ' ' };
     }
@@ -35,7 +32,7 @@ const SignUp = () => {
 
   const isPassword = (pwd) => {
     if (pwd == '' || pwd == null) {
-      return '필수 정보입니다.';
+      return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (
       !/[0-9]/.test(pwd) ||
       !/[a-zA-Z]/.test(pwd) ||
@@ -43,18 +40,21 @@ const SignUp = () => {
       pwd.length < 8 ||
       pwd.length > 16
     ) {
-      return '8~16문자 영문, 숫자, 특수문자를 사용하세요.';
+      return {
+        status: Status.ERROR,
+        text: '8~16문자 영문, 숫자, 특수문자를 사용하세요.',
+      };
     } else {
-      return ' ';
+      return { status: Status.SUCCESS, text: ' ' };
     }
   };
   const passwordCheck = (pwd, checkPwd) => {
     if (checkPwd.value == '' || checkPwd.value == null) {
-      return '필수 정보입니다.';
+      return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (pwd.value === checkPwd.value) {
-      return ' ';
+      return { status: Status.SUCCESS, text: ' ' };
     } else {
-      return '비밀번호가 일치하지 않습니다.';
+      return { status: Status.ERROR, text: '비밀번호가 일치하지 않습니다.' };
     }
   };
   const signupData = [
@@ -73,13 +73,13 @@ const SignUp = () => {
       title: '비밀번호 (8자리 이상 영문, 숫자, 특수문자)',
       Component: PasswordInput,
       input: passwordInput,
-      // error: isPassword(passwordInput.value),
+      error: isPassword(passwordInput.value),
     },
     {
       title: '비밀번호 확인',
       Component: PasswordInput,
       input: passwordCheckInput,
-      // error: passwordCheck(passwordInput, passwordCheckInput),
+      error: passwordCheck(passwordInput, passwordCheckInput),
     },
   ];
   return (
