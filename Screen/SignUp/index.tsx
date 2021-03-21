@@ -15,9 +15,14 @@ import { Status } from './inteface';
 const SignUp = () => {
   const [gender, setGender] = useState(0);
   const nicknameInput = useInput('');
+  const [confirm, setConfirm] = useState(false);
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
+    service: false,
+    info: false,
+  });
 
   const isNickname = (nickname) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
@@ -69,12 +74,14 @@ const SignUp = () => {
       return { status: Status.ERROR, text: '비밀번호가 일치하지 않습니다.' };
     }
   };
+
   const signupData = [
     {
       title: '닉네임',
       Component: NicknameContainer,
       input: nicknameInput,
       error: isNickname(nicknameInput.value),
+      confirm: { confirm, setConfirm },
     },
     {
       title: '이메일',
@@ -95,21 +102,37 @@ const SignUp = () => {
       error: passwordCheck(passwordInput, passwordCheckInput),
     },
   ];
+  // 회원가입 성공 여부
+  const success =
+    confirm &&
+    isEmail(emailInput.value).status === Status.SUCCESS &&
+    isPassword(passwordInput.value).status === Status.SUCCESS &&
+    passwordCheck(passwordInput, passwordCheckInput).status ===
+      Status.SUCCESS &&
+    checked.service &&
+    checked.info;
+  // 회원가입시 넘길 input 값
+  const input = {
+    gender: gender === 0 ? '남' : '여',
+    nickname: nicknameInput.value,
+    email: emailInput.value,
+    password: passwordInput.value,
+  };
 
   return (
     <BasicContainer headerTitle="회원가입" display={false}>
       <GenderRadioButton title="성별" input={{ gender, setGender }} />
-      {signupData.map(({ title, Component, input, error }) => (
+      {signupData.map(({ title, Component, input, error, confirm }) => (
         <SignupContent key={title} title={title}>
-          <Component input={input} error={error} />
+          <Component input={input} error={error} confirm={confirm} />
         </SignupContent>
       ))}
       <Content>
-        <AgreeCheckBox />
+        <AgreeCheckBox check={{ checked, setChecked }} />
       </Content>
 
       <Content>
-        <SignupButton />
+        <SignupButton success={success} input={input} />
         <OptionMenu />
       </Content>
     </BasicContainer>

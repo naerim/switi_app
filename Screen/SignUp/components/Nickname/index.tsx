@@ -16,8 +16,11 @@ const getColor = ({ status }: { status: Status }) => {
   }
 };
 
-const NicknameContainer: React.FC<InputProps> = ({ input, error }) => {
+const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
   const [message, setMessage] = useState(' ');
+  const onChange = (state: boolean) => {
+    confirm?.setConfirm(state);
+  };
 
   return (
     <Container>
@@ -35,6 +38,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error }) => {
         <NicknameButton
           disabled={message === '멋진 닉네임이네요!'}
           check={() => {
+            onChange(true);
             setMessage(error.text);
           }}
         />
