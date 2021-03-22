@@ -1,28 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import ProfileContent from './Layout/ProfileContent';
+import SelectButton from '../../../Component/SelectButton';
+import BasicModal from '../../../Component/BasicModal';
 
 const InterestArea = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const onPress = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
   return (
     <ProfileContent title="관심지역 (3개 이하 선택)">
-      <Input
-        value="선택해주세요"
-        placeholder="abc@dfg.com"
-        keyboardType="email-address"
-        returnKeyType="next"
-        secureTextEntry={false}
-      />
+      <SelectButton onPress={onPress} />
+      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+        <Test>hi</Test>
+      </BasicModal>
     </ProfileContent>
   );
 };
 
-const Input = styled.TextInput`
-  border-width: 1px;
-  border-radius: 4px;
+const Test = styled.Text`
   font-size: 12px;
-  height: 36px;
-  border-color: #e3e3e3;
-  text-align: center;
 `;
-
 export default InterestArea;
