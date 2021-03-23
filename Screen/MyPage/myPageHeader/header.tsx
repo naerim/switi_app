@@ -20,6 +20,10 @@ const Wrap = styled.View`
   background-color: #fff;
   justify-content: space-between;
   height: 46px;
+  position: relative;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 24px;
 `;
 
 const Container = styled.View`
@@ -29,7 +33,7 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  padding: 20px;
+  padding: 24px;
 `;
 
 const AlarmIcon = styled.Image`
