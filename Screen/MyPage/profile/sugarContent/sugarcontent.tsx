@@ -35,4 +35,6 @@ const Text = styled.Text`
   margin-top: 10px;
 `;
 
+
+
 export default SugarContent;

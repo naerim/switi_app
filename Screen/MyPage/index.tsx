@@ -3,13 +3,16 @@ import { StyleSheet, View, Text } from 'react-native';
 import HeaderContainer from './myPageHeader/headerContainer';
 import UserInfo from './profile/userInfo';
 import SugarContainer from './profile/sugarContent/sugarContainer';
+import styled from 'styled-components/native';
+import MoveScreen from './moveScreen';
 const MyPage = () => {
   return (
     <HeaderContainer headerTitle="마이페이지">
       <View style={styles.container}>
         <UserInfo title="사용자" />
         <SugarContainer />
-        <Text>MyPage Screen</Text>
+        <Line />
+        <MoveScreen />
       </View>
     </HeaderContainer>
   );
@@ -22,4 +25,10 @@ const styles = StyleSheet.create({
   },
 });
 
+const Line = styled.Text`
+  width: 100%;
+  height: 16px;
+  background-color: #e3e3e3;
+  margin: 30px 0;
+`;
 export default MyPage;
