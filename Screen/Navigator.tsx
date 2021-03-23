@@ -59,7 +59,7 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ tabBarLabel: '검색' }}
+        options={{ tabBarLabel: '검색', unmountOnBlur: true }}
       />
       <Tab.Screen
         name="Management"
