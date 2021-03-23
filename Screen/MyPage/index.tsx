@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import HeaderContainer from './myPageHeader/headerContainer';
-
+import UserInfo from './profile/userInfo';
 const MyPage = () => {
   return (
     <HeaderContainer headerTitle="마이페이지">
       <View style={styles.container}>
+        <UserInfo title="사용자" />
         <Text>MyPage Screen</Text>
       </View>
     </HeaderContainer>
@@ -14,9 +15,7 @@ const MyPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
 });
