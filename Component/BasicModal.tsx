@@ -29,13 +29,12 @@ const BasicModal: React.FC<Props> = ({
 
 const Container = styled.SafeAreaView`
   background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 `;
 
 const Content = styled.View`
   padding: 24px;
-`;
-const T = styled.Text`
-  font-size: 14px;
 `;
 
 export default BasicModal;
