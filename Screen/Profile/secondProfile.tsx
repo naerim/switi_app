@@ -1,7 +1,9 @@
 import React from 'react';
 import { useGoFirstProfile, useGoSignIn } from '../../util/navigationHooks';
-import { Text } from 'react-native';
 import ProfileContainer from './components/Layout/ProfileContainer';
+import MyState from './components/MyState';
+import Character from './components/Character';
+import Introduce from './components/Introduce';
 
 const SecondProfile = () => {
   const desc =
@@ -16,7 +18,9 @@ const SecondProfile = () => {
       onClick={goLogin}
       onPress={goFirstProfile}
     >
-      <Text>second profile</Text>
+      <MyState />
+      <Character />
+      <Introduce />
     </ProfileContainer>
   );
 };

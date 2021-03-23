@@ -15,7 +15,7 @@ const InterestField = () => {
   const onPress = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
   const [dataSource, setDataSource] = useState(InterestList);
-  const [select, setSelect] = useState('');
+  const [select, setSelect] = useState([]);
 
   const FlatListItemSeparator = () => <Line />;
   const selectItem = (data) => {
@@ -34,7 +34,10 @@ const InterestField = () => {
       }}
     >
       <Category check={select === data.item.name}>{data.item.name}</Category>
-      <Icon source={require('../../../Img/icon_check.png')} />
+      <Icon
+        check={select === data.item.name}
+        source={require('../../../Img/icon_check.png')}
+      />
     </Container>
   );
 
@@ -90,9 +93,10 @@ const Category = styled.Text<Props>`
   color: ${(props) => (props.check ? '#4fd5a7' : '#2b2b2b')};
 `;
 
-const Icon = styled.Image`
+const Icon = styled.Image<Props>`
   width: 12px;
   height: 12px;
+  display: ${(props) => (props.check ? 'flex' : 'none')};
 `;
 
 const Line = styled.View`
@@ -101,5 +105,3 @@ const Line = styled.View`
 `;
 
 export default InterestField;
-
-// color: ${(props) => (props.checked ? '#4fd5a7' : '#2b2b2b')};

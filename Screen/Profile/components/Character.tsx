@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
+import { FlatList } from 'react-native';
 import ProfileContent from './Layout/ProfileContent';
 import SelectButton from '../../../Component/SelectButton';
 import BasicModal from '../../../Component/BasicModal';
-import { FlatList } from 'react-native';
-import { Area } from '../../../Data';
+import { CharacterList } from '../../../Data';
 
 interface Props {
   check: boolean;
 }
 
-const InterestArea = () => {
+const Character = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const onPress = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  const [dataSource, setDataSource] = useState(Area);
+  const [dataSource, setDataSource] = useState(CharacterList);
   const [select, setSelect] = useState([]);
 
   const FlatListItemSeparator = () => <Line />;
@@ -41,7 +41,7 @@ const InterestArea = () => {
     </Container>
   );
   return (
-    <ProfileContent title="관심지역 (3개 이하 선택)">
+    <ProfileContent title="나의 성격 (3개 이하 선택)">
       <SelectButton onPress={onPress} />
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
@@ -80,4 +80,4 @@ const Line = styled.View`
   background-color: #f3f3f3;
 `;
 
-export default InterestArea;
+export default Character;
