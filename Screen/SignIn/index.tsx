@@ -56,7 +56,7 @@ const SignIn: React.FC = () => {
               onClick={toggleChecked}
             />
           </CheckBoxContainer>
-          <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
+          <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" color="#86E3C3"/>
           <OptionMenu />
           <EmailModal modalVisible={modalVisible} closeModal={closeModal} />
         </Container>
