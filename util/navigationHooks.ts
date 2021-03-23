@@ -13,10 +13,17 @@ export const useGoSignUp = () => {
 
 export const useGoFirstProfile = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('Profile'), [navigation]);
+  return useCallback(() => navigation.navigate('firstProfile'), [navigation]);
 };
 
 export const useGoSecondProfile = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('secondProfile'), [navigation]);
+};
+
+export const useGoTerms = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('Terms', { idx: idx }), [
+    navigation,
+  ]);
 };

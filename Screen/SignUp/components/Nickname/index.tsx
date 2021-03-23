@@ -1,36 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
+import { InputProps, Status, WarningProps } from '../../inteface';
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
+const getColor = ({ status }: { status: Status }) => {
+  switch (status) {
+    case Status.NORMARL:
+      return '#e3e3e3';
+    case Status.SUCCESS:
+      return '#4fd5a7';
+    case Status.ERROR:
+      return '#ff0000';
+    default:
+      return '#e3e3e3';
+  }
+};
 
-interface Props {
-  input: InputProps;
-}
-
-interface WarningColor {
-  warning: string;
-}
-
-const NicknameContainer: React.FC<Props> = ({ input }) => {
-  const [warning, setWarning] = useState('#E3E3E3');
+const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
   const [message, setMessage] = useState(' ');
-
-  const special = /[~!@#$%^&*()_+|<>?:{}]/;
-  const checkNickname = (value: string) => {
-    if (value == '' || value == null) {
-      setWarning('red');
-      return '필수 정보입니다.';
-    } else if (special.test(value) || value.search(/\s/) != -1) {
-      setWarning('red');
-      return '공백, 특수문자는 사용 불가합니다.';
-    } else {
-      setWarning('#4fd5a7');
-      return '멋진 닉네임이네요!';
-    }
+  const onChange = (state: boolean) => {
+    confirm?.setConfirm(state);
   };
 
   return (
@@ -43,17 +32,18 @@ const NicknameContainer: React.FC<Props> = ({ input }) => {
           keyboardType="default"
           returnKeyType="next"
           secureTextEntry={false}
-          warning={warning}
+          status={error.status}
+          editable={message !== '멋진 닉네임이네요!'}
         />
         <NicknameButton
-          value={input.value}
+          disabled={message === '멋진 닉네임이네요!'}
           check={() => {
-            // @ts-ignore // 질문
-            setMessage(checkNickname(input.value));
+            onChange(true);
+            setMessage(error.text);
           }}
         />
       </InputContainer>
-      <Warning warning={warning}>{message}</Warning>
+      <Warning color={message !== '멋진 닉네임이네요!'}>{message}</Warning>
     </Container>
   );
 };
@@ -68,7 +58,7 @@ const InputContainer = styled.View`
   align-items: center;
 `;
 
-const Input = styled.TextInput<WarningColor>`
+const Input = styled.TextInput`
   font-size: 12px;
   width: 70%;
   margin-right: 10px;
@@ -76,12 +66,13 @@ const Input = styled.TextInput<WarningColor>`
   color: #2b2b2b;
   border-radius: 4px;
   padding: 10px;
-  border-color: ${(props) => props.warning};
+  border-color: ${getColor};
 `;
-const Warning = styled.Text<WarningColor>`
-  color: ${(props) => props.warning};
+
+const Warning = styled.Text<WarningProps>`
+  color: ${(props) => (props.color ? 'red' : '#4fd5a7')};
   font-size: 9px;
-  margin-top: 4px;
+  margin-top: 2px;
 `;
 
 export default NicknameContainer;

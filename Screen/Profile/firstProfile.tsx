@@ -1,25 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { useGoSecondProfile } from '../../util/navigationHooks';
+import { useGoSecondProfile, useGoSignIn } from '../../util/navigationHooks';
+import ProfileContainer from './components/Layout/ProfileContainer';
+import Age from './components/Age';
+import InterestField from './components/InterestField';
+import InterestArea from './components/InterestArea';
 
 const FirstProfile = () => {
+  const desc =
+    '관심지역과 분야를 설정하면,\n내가 원하는 스터디 모집 알림을 받을 수 있어요!';
   const goSecondProfile = useGoSecondProfile();
+  const goSignIn = useGoSignIn();
 
   return (
-    <View style={styles.container}>
-      <Text>first Profile Screen</Text>
-      <Button title="다음" onPress={goSecondProfile} />
-    </View>
+    <ProfileContainer
+      buttonText="다음"
+      desc={desc}
+      onClick={goSecondProfile}
+      onPress={goSignIn}
+    >
+      <Age />
+      <InterestArea />
+      <InterestField />
+    </ProfileContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default FirstProfile;
