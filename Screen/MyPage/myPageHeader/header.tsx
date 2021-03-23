@@ -33,7 +33,7 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
-  padding: 24px;
+  padding-left: 24px;
 `;
 
 const AlarmIcon = styled.Image`
