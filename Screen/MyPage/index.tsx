@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import HeaderContainer from './myPageHeader/headerContainer';
 
 const MyPage = () => {
   return (
-    <View style={styles.container}>
-      <Text>MyPage Screen</Text>
-    </View>
+    <HeaderContainer headerTitle="마이페이지">
+      <View style={styles.container}>
+        <Text>MyPage Screen</Text>
+      </View>
+    </HeaderContainer>
   );
 };
 
