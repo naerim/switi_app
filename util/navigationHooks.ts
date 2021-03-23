@@ -20,3 +20,8 @@ export const useGoSecondProfile = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('secondProfile'), [navigation]);
 };
+
+export const useGoMyPageProfile = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_profile'), [navigation]);
+};

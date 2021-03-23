@@ -11,6 +11,7 @@ import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
+import MyPage_profile from './MyPage_profile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,6 +28,19 @@ const LoginNavigation = () => (
     <Stack.Screen name="Profile" component={ProfileNavigation} />
   </Stack.Navigator>
 );
+
+function MyPageNavigator() {
+  return (
+    <Stack.Navigator
+      mode="modal"
+      headerMode="none"
+      screenOptions={{ animationEnabled: false }}
+    >
+      <Stack.Screen name="MyPage" component={MyPage} />
+      <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
+    </Stack.Navigator>
+  );
+}
 
 const ProfileNavigation = () => (
   <Stack.Navigator
@@ -68,7 +82,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="MyPage"
-        component={MyPage}
+        component={MyPageNavigator}
         options={{ tabBarLabel: '마이페이지' }}
       />
     </Tab.Navigator>
