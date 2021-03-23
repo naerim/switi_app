@@ -8,20 +8,32 @@ interface Props {
 const Headder: React.FC<Props> = ({ title }) => {
   return (
     <Wrap>
-      <Title>{title}</Title>
+      <Container>
+        <Title>{title}</Title>
+      </Container>
+      <AlarmIcon source={require('./bell.png')} />
     </Wrap>
   );
 };
 
 const Wrap = styled.View`
   background-color: #fff;
-  justify-content: center;
+  justify-content: space-between;
   height: 46px;
+`;
+
+const Container = styled.View`
+  background-color: #fff;
 `;
 
 const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
   padding: 20px;
+`;
+
+const AlarmIcon = styled.Image`
+  width: 18px;
+  height: 18px;
 `;
 export default Headder;
