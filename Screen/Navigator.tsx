@@ -12,7 +12,7 @@ import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import MyPage_profile from './MyPage_profile';
-import UserInfo from "./UserInfo";
+import UserInfo from './UserInfo';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
