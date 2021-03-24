@@ -16,7 +16,7 @@ interface Props {
 
 const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
   return (
-    <Wrap>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <BackButton
         activeOpacity={0.8}
         onPress={onPress}
@@ -42,7 +42,6 @@ const Wrap = styled.View`
 const BackButton = styled.TouchableOpacity<DisplayProps>`
   position: absolute;
   left: 0;
-  padding-top: 20px;
   opacity: ${(props) => (props.display ? '100' : '0')};
 `;
 
@@ -52,7 +51,6 @@ const BackButtonImg = styled.Image`
 `;
 
 const Title = styled.Text`
-  padding-top: 20px;
   font-size: 14px;
   text-align: center;
   justify-content: center;

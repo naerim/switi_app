@@ -11,21 +11,21 @@ export const InterestList = [
 ];
 
 export const Area = [
-  { key: 0, category: 'all', name: '서울특별시' },
-  { key: 1, category: 'job', name: '경기도' },
-  { key: 2, category: 'language', name: '강원도' },
-  { key: 3, category: 'exam', name: '대전광역시' },
-  { key: 4, category: 'publicOfficer', name: '세종특별자치시' },
-  { key: 5, category: 'free', name: '충청남도' },
-  { key: 6, category: 'IT', name: '충청북도' },
-  { key: 7, category: 'hobby', name: '부산광역시' },
-  { key: 8, category: 'etc', name: '경상남도' },
-  { key: 9, category: 'etc', name: '경상북도' },
-  { key: 10, category: 'etc', name: '대구광역시' },
-  { key: 11, category: 'etc', name: '광주광역시' },
-  { key: 12, category: 'etc', name: '전라남도' },
-  { key: 13, category: 'etc', name: '전라북도' },
-  { key: 14, category: 'etc', name: '제주특별자치도' },
+  { key: 0, name: '서울특별시' },
+  { key: 1, name: '경기도' },
+  { key: 2, name: '강원도' },
+  { key: 3, name: '대전광역시' },
+  { key: 4, name: '세종특별자치시' },
+  { key: 5, name: '충청남도' },
+  { key: 6, name: '충청북도' },
+  { key: 7, name: '부산광역시' },
+  { key: 8, name: '경상남도' },
+  { key: 9, name: '경상북도' },
+  { key: 10, name: '대구광역시' },
+  { key: 11, name: '광주광역시' },
+  { key: 12, name: '전라남도' },
+  { key: 13, name: '전라북도' },
+  { key: 14, name: '제주특별자치도' },
 ];
 
 export const CharacterList = [
