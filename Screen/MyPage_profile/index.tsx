@@ -24,35 +24,18 @@ const MyPage_profile = () => {
     },
   ];
 
-  const interestedState = [
-    {
-      id: 1,
-      text: '서울 전체',
-    },
-  ];
-
-  const interestedParts = [
-    {
-      id: 1,
-      text: '취업',
-    },
-    {
-      id: 1,
-      text: '어학',
-    },
-  ];
   return (
     <BasicContainer headerTitle="내 프로필">
       <Title>연령</Title>
       <Content>만 22세</Content>
       <Title>관심지역</Title>
-      <PrintList lists={interestedState}></PrintList>
+      <Content>만 22세</Content>
       <Title>관심분야</Title>
-      <PrintList lists={interestedParts}></PrintList>
+      <Content>만 22세</Content>
       <Title>나의 상황</Title>
-      <Content>대학생/취준생</Content>
+      <Content>만 22세</Content>
       <Title>나의 성격</Title>
-      <PrintList lists={myCharacter} flexDirection="column"></PrintList>
+      <PrintList lists={myCharacter}>만 22세</PrintList>
       <Title>자기소개</Title>
       <Content>
         취미, 희망직무 등 나에 대해 간단히 소개해 주세요. 취미, 희망직무 등 나에
