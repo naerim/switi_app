@@ -73,13 +73,13 @@ const UserImageContainer = styled.View`
 const Line = styled.Text`
   width: 100%;
   height: 10px;
-  background-color: #e3e3e3;
+  background-color: #f3f3f3;
 `;
 
 const SmallLine = styled.Text`
   width: 100%;
   height: 1px;
-  background-color: #e3e3e3;
+  background-color: #f3f3f3;
 `;
 
 const Text = styled.Text`
