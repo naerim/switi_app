@@ -1,17 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native';
 import styled from 'styled-components/native';
-import BasicContainer from '../../Component/BasicContainer';
+import UserInfoContainer from './userInfoContainer';
 import UserName from '../../Component/UserName';
 const UserInfo = () => {
   return (
-    <BasicContainer headerTitle="회원정보">
+    <UserInfoContainer headerTitle="회원정보">
       <UserImageContainer>
         <UserImage source={require('./image/profile.png')} />
         <UserName title="사용자" />
       </UserImageContainer>
-      <Text>회원 정보</Text>
-    </BasicContainer>
+      <Line />
+    </UserInfoContainer>
   );
 };
 
@@ -21,7 +20,15 @@ const UserImage = styled.Image`
 `;
 
 const UserImageContainer = styled.View`
-  margin: 24px 0;
+  margin: 0px 0;
   align-items: center;
+  padding: 20px 0;
 `;
+
+const Line = styled.Text`
+  width: 100%;
+  height: 10px;
+  background-color: #e3e3e3;
+`;
+
 export default UserInfo;
