@@ -2,9 +2,19 @@ import React from 'react';
 import ListItem from './listItem';
 import styled from 'styled-components/native';
 
-const PrintList = ({ lists }) => {
+interface ListItemProps {
+  id: number;
+  text: string;
+}
+
+interface PrintListProps {
+  lists: ListItemProps[];
+  flexDirection?: string;
+}
+
+const PrintList: React.FC<PrintListProps> = ({ lists, flexDirection }) => {
   return (
-    <Container>
+    <Container flexDirection={flexDirection}>
       {lists.map((list) => (
         <ListItem list={list} key={list.id} />
       ))}
@@ -12,7 +22,8 @@ const PrintList = ({ lists }) => {
   );
 };
 const Container = styled.View`
-  flex-direction: column-reverse;
+  flex-direction: ${({ flexDirection }: { flexDirection?: string }) =>
+    flexDirection || 'row'};
 `;
 
 export default PrintList;

@@ -15,6 +15,7 @@ const Tag = styled.View`
   margin-top: 5px;
   border-radius: 20px;
   border: 1px #dbdbdb;
+  margin-right: 5px;
 `;
 
 const Text = styled.Text`
