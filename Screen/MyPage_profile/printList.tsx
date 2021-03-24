@@ -12,7 +12,7 @@ const PrintList = ({ lists }) => {
   );
 };
 const Container = styled.View`
-  flex-direction: column;
+  flex-direction: column-reverse;
 `;
 
 export default PrintList;
