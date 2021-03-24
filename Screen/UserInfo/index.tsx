@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import UserInfoContainer from './userInfoContainer';
 import UserName from '../../Component/UserName';
+import BasicModal from "../../Component/BasicModal";
 const UserInfo = () => {
   return (
     <UserInfoContainer headerTitle="회원정보">
