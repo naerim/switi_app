@@ -12,6 +12,7 @@ import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import MyPage_profile from './MyPage_profile';
+import UserInfo from "./UserInfo";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,6 +39,7 @@ function MyPageNavigator() {
     >
       <Stack.Screen name="MyPage" component={MyPage} />
       <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
+      <Stack.Screen name="UserInfo" component={UserInfo} />
     </Stack.Navigator>
   );
 }

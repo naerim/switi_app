@@ -7,7 +7,7 @@ interface Props {
 }
 
 const UserInfo: React.FC<Props> = ({ title }) => {
-  const goSignIn = useGoMyPageProfile();
+  const goProfile = useGoMyPageProfile();
   return (
     <Container>
       <UserName>
@@ -16,7 +16,7 @@ const UserInfo: React.FC<Props> = ({ title }) => {
       </UserName>
 
       <ProfileButton>
-        <MyProFileText onPress={() => goSignIn()}>내 프로필</MyProFileText>
+        <MyProFileText onPress={() => goProfile()}>내 프로필</MyProFileText>
       </ProfileButton>
     </Container>
   );
