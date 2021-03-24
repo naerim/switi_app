@@ -28,7 +28,7 @@ const Wrap = styled.SafeAreaView`
 `;
 
 const Container = styled.View`
-  flex: 1;
+  flex: 12;
   margin: 0 24px;
   background-color: #fff;
 `;

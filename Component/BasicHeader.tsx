@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Platform, StatusBar } from 'react-native';
 
 const imagePath = require('../Img/btn_back.png');
 
@@ -31,17 +32,17 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
 };
 
 const Wrap = styled.View`
+  flex: 1;
   flex-direction: row;
-  background-color: #fff;
   justify-content: center;
   align-items: center;
-  height: 46px;
   margin: 0 24px;
 `;
 
 const BackButton = styled.TouchableOpacity<DisplayProps>`
   position: absolute;
   left: 0;
+  padding-top: 20px;
   opacity: ${(props) => (props.display ? '100' : '0')};
 `;
 
@@ -51,8 +52,11 @@ const BackButtonImg = styled.Image`
 `;
 
 const Title = styled.Text`
+  padding-top: 20px;
   font-size: 14px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default BasicHeader;
