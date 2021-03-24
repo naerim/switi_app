@@ -11,7 +11,7 @@ const MoveScreen = () => (
     <Line />
     <Container>
       <Title>설정</Title>
-      <Content>회원정</Content>
+      <Content>회원정보</Content>
       <Content>알림 설정</Content>
     </Container>
     <Line />
