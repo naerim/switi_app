@@ -2,20 +2,20 @@ import React from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
-
+import PrintList from './printList';
 const MyPage_profile = () => {
   const myCharacter = [
     {
       id: 1,
-      text: '토익공부',
+      text: '체계적이고 계획적인 사람이에요',
     },
     {
       id: 2,
-      text: '파이썬공부',
+      text: '솔직하고 시원시원해요',
     },
     {
       id: 3,
-      text: '코딩테스트',
+      text: '시간을 잘 지켜요',
     },
   ];
 
@@ -30,7 +30,7 @@ const MyPage_profile = () => {
       <Title>나의 상황</Title>
       <Content>만 22세</Content>
       <Title>나의 성격</Title>
-      <Content>만 22세</Content>
+      <PrintList lists={myCharacter}>만 22세</PrintList>
       <Title>자기소개</Title>
       <Content>
         취미, 희망직무 등 나에 대해 간단히 소개해 주세요. 취미, 희망직무 등 나에
