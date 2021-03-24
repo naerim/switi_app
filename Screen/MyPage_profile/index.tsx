@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import PrintList from './printList';
-import AuthButton from '../SignIn/components/AuthButton';
+import ColorButton from '../../Component/ColorButton';
+
 const MyPage_profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [onPress, setonPress] = useState(false);
@@ -42,7 +43,12 @@ const MyPage_profile = () => {
         주세요. 취미, 희망직무 등 나에 대해 간단히 소개해 주세요. 취미, 희망직무
         등 나에 대해 간단히 소개해 주세요.
       </Content>
-      <AuthButton text="수정하기" onPress={onPress} loading={isLoading}/>
+      <ColorButton
+        text="수정하기"
+        onPress={onPress}
+        loading={isLoading}
+        color="#86E3C3"
+      />
     </BasicContainer>
   );
 };
