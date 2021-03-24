@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import ProfileContent from './Layout/ProfileContent';
+import { InputProps } from '../interface';
 
-const Introduce = () => {
+const Introduce: React.FC<InputProps> = ({ input }) => {
   return (
     <ProfileContent title="자기소개">
       <Input
+        value={input.value}
+        onChangeText={input.onChange}
         placeholder="취미, 희망직무 등 나에 대해 간단히 소개해 주세요 (10자 이상)"
         keyboardType="email-address"
         returnKeyType="next"
@@ -13,6 +16,7 @@ const Introduce = () => {
         multiline
         numberOfLines={4}
         maxLength={400}
+        textAlignVertical="top"
       />
     </ProfileContent>
   );

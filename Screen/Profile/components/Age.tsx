@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import ProfileContent from './Layout/ProfileContent';
+import { InputProps } from '../interface';
 
-const Age = () => {
+const Age: React.FC<InputProps> = ({ input }) => {
   return (
     <ProfileContent title="연령">
       <Container>
         <SmallText>만</SmallText>
         <Input
-          value="hi"
-          placeholder="abc@dfg.com"
-          keyboardType="email-address"
+          value={input.value}
+          onChangeText={input.onChange}
+          placeholder="25"
+          keyboardType="numbers-and-punctuation"
           returnKeyType="next"
           secureTextEntry={false}
+          maxLength={2}
         />
         <SmallText>세</SmallText>
       </Container>

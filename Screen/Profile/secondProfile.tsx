@@ -4,8 +4,10 @@ import ProfileContainer from './components/Layout/ProfileContainer';
 import MyState from './components/MyState';
 import Character from './components/Character';
 import Introduce from './components/Introduce';
+import useInput from '../../util/useInput';
 
 const SecondProfile = () => {
+  const introduceInput = useInput('');
   const desc =
     '나와 더 잘 맞는 스터디원과의 만남을 위해\n프로필을 작성해주세요!';
   const goLogin = useGoSignIn();
@@ -25,7 +27,7 @@ const SecondProfile = () => {
     >
       <MyState check={{ checked, setChecked }} />
       <Character />
-      <Introduce />
+      <Introduce input={introduceInput} />
     </ProfileContainer>
   );
 };

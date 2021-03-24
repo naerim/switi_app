@@ -44,15 +44,13 @@ const Character = () => {
     <ProfileContent title="나의 성격 (3개 이하 선택)">
       <SelectButton onPress={onPress} />
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-        <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-          <FlatList
-            ItemSeparatorComponent={FlatListItemSeparator}
-            data={dataSource}
-            renderItem={(item) => renderItem(item)}
-            keyExtractor={(item) => item.key.toString()}
-            extraData={dataSource}
-          />
-        </BasicModal>
+        <FlatList
+          ItemSeparatorComponent={FlatListItemSeparator}
+          data={dataSource}
+          renderItem={(item) => renderItem(item)}
+          keyExtractor={(item) => item.key.toString()}
+          extraData={dataSource}
+        />
       </BasicModal>
     </ProfileContent>
   );
