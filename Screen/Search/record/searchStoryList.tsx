@@ -4,13 +4,12 @@ import styled from 'styled-components/native';
 
 interface searchArrayProps {
   id: number;
-  test: string;
+  text: string;
 }
 
 interface SearchStoryItemProps {
-  // searches: searchArrayProps;->map에 오
-  searches: any;
-  onPressX: () => void;
+  searches: searchArrayProps[];
+  onPressX: (id: number) => void;
 }
 
 const SearchStoryList: React.FC<SearchStoryItemProps> = ({

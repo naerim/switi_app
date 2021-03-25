@@ -5,12 +5,12 @@ import { Text } from 'react-native';
 
 interface searchArrayProps {
   id: number;
-  test: string;
+  text: string;
 }
 
 interface SearchStoryItemProps {
   search: searchArrayProps;
-  onPressX: () => void;
+  onPressX: (id: number) => void;
 }
 
 const SearchStoryItem: React.FC<SearchStoryItemProps> = ({

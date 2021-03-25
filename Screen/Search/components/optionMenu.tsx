@@ -5,7 +5,7 @@ interface Props {
   onPressSearchDelete: () => void;
 }
 
-const OptionMenu: React.FC<Props> = (onPressSearchDelete) => {
+const OptionMenu: React.FC<Props> = ({ onPressSearchDelete }) => {
   return (
     <Container>
       <ItemContainer>

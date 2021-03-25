@@ -26,10 +26,8 @@ const Search = () => {
 
   const nextId = useRef(4);
 
-  const onPressSearchDelete = () => console.log('삭제');
-
   const RealonPressSearchDelete = useCallback(() => {
-    setSearches(searches.splice(0, searches.length));
+    setSearches([]);
   }, [searches]);
   // 이게 맞을까? 배열 초기화
 
@@ -76,7 +74,7 @@ const Search = () => {
     <SearchContainer headerTitle="검색">
       <Container>
         <SearchForm searchInput={searchInput} onPress={searchSomething} />
-        <OptionMenu onPressSearchDelete={onPressSearchDelete} />
+        <OptionMenu onPressSearchDelete={RealonPressSearchDelete} />
         <ListContainer>
           <SearchStoryList searches={searches} onPressX={onRemove} />
         </ListContainer>
