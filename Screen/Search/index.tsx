@@ -32,6 +32,7 @@ const Search = () => {
   };
   // 이게 맞을까? 한개의 원소는 객체를 원소를 가지는 배열로 하려고 살리고 나머지를 초기화 시키고 싶다.
 
+  const onPressX = () => console.log('onPress X');
   const onInsert = useCallback(
     (text) => {
       const search = {
@@ -70,7 +71,7 @@ const Search = () => {
         <SearchForm searchInput={searchInput} onPress={searchSomething} />
         <OptionMenu onPress={onPressSearchDelete} />
         <ListContainer>
-          <SearchStoryList searches={searches} />
+          <SearchStoryList searches={searches} onPressX={onPressX} />
         </ListContainer>
         <Line />
         <RecommendContainer />

@@ -2,12 +2,30 @@ import React from 'react';
 import SearchStoryItem from './searchStoryItem';
 import styled from 'styled-components/native';
 
-const SearchStoryList = ({ searches }) => {
+interface searchArrayProps {
+  id: number;
+  test: string;
+}
+
+interface SearchStoryItemProps {
+  // searches: searchArrayProps;->map에 오
+  searches: any;
+  onPressX: () => void;
+}
+
+const SearchStoryList: React.FC<SearchStoryItemProps> = ({
+  searches,
+  onPressX,
+}) => {
   return (
     <Scroll directionalLockEnabled={true}>
       <Container>
         {searches.map((search) => (
-          <SearchStoryItem search={search} key={search.id} />
+          <SearchStoryItem
+            search={search}
+            key={search.id}
+            onPressX={onPressX}
+          />
         ))}
       </Container>
     </Scroll>
