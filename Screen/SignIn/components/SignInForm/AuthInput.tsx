@@ -1,5 +1,12 @@
-import React from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import styled from 'styled-components/native';
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import React from 'react';
 
 export interface TextInputInterface {
   value: string;
@@ -24,17 +31,21 @@ const AuthInput: React.FC<TextInputInterface> = ({
   keyboardType,
   returnKeyType,
 }) => (
-  <Container>
-    <TextInput
-      value={value}
-      onChangeText={onChangeText}
-      placeholder={placeholder}
-      keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
-      returnKeyType={returnKeyType}
-      autoCorrect={false}
-    />
-  </Container>
+  <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <TextInput
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+          secureTextEntry={secureTextEntry}
+          returnKeyType={returnKeyType}
+          autoCorrect={false}
+        />
+      </Container>
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
 );
 
 const Container = styled.View`
