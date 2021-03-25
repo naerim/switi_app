@@ -6,16 +6,7 @@ import SelectButton from '../../../Component/SelectButton';
 import BasicModal from '../../../Component/BasicModal';
 import { CharacterList } from '../../../Data';
 import IconCheck from '../../../Img/icon_check.png';
-
-interface dataType {
-  key: number;
-  name: string;
-}
-
-interface itemType {
-  index: number;
-  item: dataType;
-}
+import { itemType } from '../interface';
 
 interface Props {
   check: boolean;

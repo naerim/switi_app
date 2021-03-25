@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import IconImg from '../Img/icon_filter.png';
 
 interface Props {
   onPress: () => void;
@@ -9,7 +10,7 @@ const SelectButton: React.FC<Props> = ({ onPress }) => {
   return (
     <Container activeOpacity={0.8} onPress={onPress}>
       <ButtonText>선택해 주세요</ButtonText>
-      <Icon source={require('../Img/icon_filter.png')} />
+      <Icon source={IconImg} />
     </Container>
   );
 };

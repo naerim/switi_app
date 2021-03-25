@@ -6,16 +6,7 @@ import BasicModal from '../../../Component/BasicModal';
 import { FlatList } from 'react-native';
 import { Area } from '../../../Data';
 import IconCheck from '../../../Img/icon_check.png';
-
-interface dataType {
-  key: number;
-  name: string;
-}
-
-interface itemType {
-  index: number;
-  item: dataType;
-}
+import { itemType } from '../interface';
 
 interface Props {
   check: boolean;
@@ -89,6 +80,14 @@ const Icon = styled.Image<Props>`
 const Line = styled.View`
   height: 1px;
   background-color: #f3f3f3;
+`;
+
+const TagContainer = styled.View`
+  flex-direction: row;
+`;
+
+const Tag = styled.Text`
+  background-color: aquamarine;
 `;
 
 export default InterestArea;

@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { InputProps, Status } from '../inteface';
+import DefaultIcon from '../../../Img/icon_lock_default.png';
+import UnlockIcon from '../../../Img/icon_unlock.png';
+import LockIcon from '../../../Img/icon_lock.png';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -19,13 +22,13 @@ const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
   const getIcon = (status: Status) => {
     switch (status) {
       case Status.NORMARL:
-        return require('../../../Img/icon_lock_default.png');
+        return DefaultIcon;
       case Status.SUCCESS:
-        return require('../../../Img/icon_unlock.png');
+        return UnlockIcon;
       case Status.ERROR:
-        return require('../../../Img/icon_lock.png');
+        return LockIcon;
       default:
-        return require('../../../Img/icon_lock_default.png');
+        return DefaultIcon;
     }
   };
   return (
