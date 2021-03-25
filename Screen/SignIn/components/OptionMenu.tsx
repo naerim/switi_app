@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoSignUp } from '../../../util/navigationHooks';
+import { useGoEmailAuth, useGoSignUp } from '../../../util/navigationHooks';
 
 const OptionMenu = () => {
   const goSignUp = useGoSignUp();
+  const goEmailAuth = useGoEmailAuth();
+
   return (
     <Container>
       <ItemContainer>
@@ -12,7 +14,7 @@ const OptionMenu = () => {
       </ItemContainer>
       <ItemContainer>
         <Question>혹시 비밀번호를 잊으셨나요?</Question>
-        <Answer>비밀번호 찾기</Answer>
+        <Answer onPress={goEmailAuth}>비밀번호 찾기</Answer>
       </ItemContainer>
     </Container>
   );

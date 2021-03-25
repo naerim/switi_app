@@ -12,6 +12,9 @@ import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import Terms from './Terms';
+import EmailAuth from './ResetPassword/emailAuth';
+import Certification from './ResetPassword/certification';
+import RenewPassword from './ResetPassword/renewPassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,6 +30,7 @@ const LoginNavigation = () => (
     <Stack.Screen name="SignUp" component={SignUp} />
     <Stack.Screen name="Terms" component={Terms} />
     <Stack.Screen name="firstProfile" component={ProfileNavigation} />
+    <Stack.Screen name="emailAuth" component={ResetPasswordNavigation} />
   </Stack.Navigator>
 );
 
@@ -41,49 +45,55 @@ const ProfileNavigation = () => (
   </Stack.Navigator>
 );
 
-const HomeNavigation = () => {
-  return (
-    <MaterialTopTab.Navigator>
-      <MaterialTopTab.Screen name="오프라인" component={Home} />
-      <MaterialTopTab.Screen name="온라인" component={Home} />
-    </MaterialTopTab.Navigator>
-  );
-};
+const ResetPasswordNavigation = () => (
+  <Stack.Navigator
+    mode="modal"
+    headerMode="none"
+    screenOptions={{ animationEnabled: false }}
+  >
+    <Stack.Screen name="emailAuth" component={EmailAuth} />
+    <Stack.Screen name="certification" component={Certification} />
+    <Stack.Screen name="renewPassword" component={RenewPassword} />
+  </Stack.Navigator>
+);
 
-const TabNavigation = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="HomeNavi"
-        component={HomeNavigation}
-        options={{ tabBarLabel: '홈' }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{ tabBarLabel: '검색', unmountOnBlur: true }}
-      />
-      <Tab.Screen
-        name="Management"
-        component={Management}
-        options={{ tabBarLabel: '스터디 관리' }}
-      />
-      <Tab.Screen
-        name="MyPage"
-        component={MyPage}
-        options={{ tabBarLabel: '마이페이지' }}
-      />
-    </Tab.Navigator>
-  );
-};
+const HomeNavigation = () => (
+  <MaterialTopTab.Navigator>
+    <MaterialTopTab.Screen name="오프라인" component={Home} />
+    <MaterialTopTab.Screen name="온라인" component={Home} />
+  </MaterialTopTab.Navigator>
+);
 
-const MainNavigation = () => {
-  return (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="Switi" component={TabNavigation} />
-    </Stack.Navigator>
-  );
-};
+const TabNavigation = () => (
+  <Tab.Navigator>
+    <Tab.Screen
+      name="HomeNavi"
+      component={HomeNavigation}
+      options={{ tabBarLabel: '홈' }}
+    />
+    <Tab.Screen
+      name="Search"
+      component={Search}
+      options={{ tabBarLabel: '검색', unmountOnBlur: true }}
+    />
+    <Tab.Screen
+      name="Management"
+      component={Management}
+      options={{ tabBarLabel: '스터디 관리' }}
+    />
+    <Tab.Screen
+      name="MyPage"
+      component={MyPage}
+      options={{ tabBarLabel: '마이페이지' }}
+    />
+  </Tab.Navigator>
+);
+
+const MainNavigation = () => (
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name="Switi" component={TabNavigation} />
+  </Stack.Navigator>
+);
 
 const RootNavigator = () => {
   const user = false;

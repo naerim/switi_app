@@ -27,3 +27,18 @@ export const useGoTerms = (idx: number) => {
     navigation,
   ]);
 };
+
+export const useGoEmailAuth = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('emailAuth'), [navigation]);
+};
+
+export const useGoCertification = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('certification'), [navigation]);
+};
+
+export const useGoRenewPassword = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('renewPassword'), [navigation]);
+};
