@@ -32,9 +32,7 @@ const SugarContent = () => {
     },
   ];
 
-  const currentSwiti = 50;
-
-  const switiChoice = (currentSiwiti) => {
+  function switiChoice(currentSwiti) {
     let result = 0;
     console.log(currentSwiti);
     if (0 <= currentSwiti && currentSwiti <= 10) {
@@ -57,9 +55,9 @@ const SugarContent = () => {
       console.log(result);
     } else console.log('오류');
     return result;
-  };
+  }
 
-  switiChoice(5);
+  switiChoice(70);
 
   return (
     <Container>
