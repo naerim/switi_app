@@ -20,7 +20,7 @@ const EmailModal: React.FC<EmailModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const certificationNumber = useInput('');
 
-  const handleEmail = () => {
+  const handleNum = () => {
     setIsLoading(false);
 
     if (!certificationNumber.value) {
@@ -48,7 +48,7 @@ const EmailModal: React.FC<EmailModalProps> = ({
         <ButtonContainer>
           <AuthButton
             text="이메일 인증하기"
-            onPress={handleEmail}
+            onPress={handleNum}
             loading={isLoading}
             color="#4FD5A7"
           />
