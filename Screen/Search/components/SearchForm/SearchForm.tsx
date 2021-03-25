@@ -12,7 +12,7 @@ interface SearchFormProps {
   onPress: () => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ searchInput,onPress }) => (
+const SearchForm: React.FC<SearchFormProps> = ({ searchInput, onPress }) => (
   <Container>
     <SearchInput
       value={searchInput.value}

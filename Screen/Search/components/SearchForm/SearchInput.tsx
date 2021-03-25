@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+// import icon from '../../record/image/search.png;->에
 
 export interface TextInputInterface {
   value: string;
@@ -27,6 +28,7 @@ const SearchInput: React.FC<TextInputInterface> = ({
   onPress,
 }) => (
   <Container>
+    <SearchIcon source={require('../../image/search.png')} />
     <TextInput
       value={value}
       onChangeText={onChangeText}
@@ -44,6 +46,14 @@ const Container = styled.View`
   margin-bottom: 10px;
   background-color: #e3e3e3;
   border-radius: 20px;
+  align-items: center;
+  flex-direction: row;
+  padding-left: 10px;
+`;
+
+const SearchIcon = styled.Image`
+  height: 16px;
+  width: 16px;
 `;
 
 const TextInput = styled.TextInput`

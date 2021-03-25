@@ -22,7 +22,7 @@ const SearchStoryItem: React.FC<SearchStoryItemProps> = ({
     <Tag>
       <Text>{text}</Text>
       <IconContainer onPress={() => onPressX(id)}>
-        <Icon source={require('./image/x.png')} />
+        <Icon source={require('../image/x.png')} />
       </IconContainer>
     </Tag>
   );
