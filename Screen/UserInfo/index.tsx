@@ -6,15 +6,19 @@ import BasicModal from '../../Component/BasicModal';
 import ModalButton from './modal/modalButton';
 const UserInfo = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  // const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
+  const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
 
   const onPressLogout = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
+  const closeModal = () => {
+    setModalVisible(false);
+    setConfigModalVisible(false);
+  };
+
   const onPressCancel = () => setModalVisible(false);
-  //   const onPressRealLogout = () => (
-  //       setModalVisible(false)
-  //     setConfigModalVisible(true)
-  // );
+  const onPressRealLogout = () => {
+    setModalVisible(false);
+    setConfigModalVisible(true);
+  };
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -43,13 +47,13 @@ const UserInfo = () => {
           />
           <ModalButton
             text="로그아웃"
-            onPress={onPressCancel}
+            onPress={onPressRealLogout}
             loading={isLoading}
             color="#86E3C3"
           />
         </ModalButtonContainer>
       </BasicModal>
-      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+      <BasicModal modalVisible={configModalVisible} closeModal={closeModal}>
         <ModalBigText>로그아웃 로그아웃이 완료되었습니다?</ModalBigText>
         <ModalSmallText>
           로그아웃이 완료되었습니다! 다음에 또 뵈어요:)

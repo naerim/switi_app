@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
 const ListItem = ({ list }) => {
   const { text } = list;
   return (
-    <Tag>
-      <Text>{text}</Text>
-    </Tag>
+    <View>
+      <Tag>
+        <Text>{text}</Text>
+      </Tag>
+    </View>
   );
 };
+
+const View = styled.View`
+  flex-direction: row;
+`;
 
 const Tag = styled.View`
   padding: 7px;
