@@ -1,28 +1,32 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { useGoMyPageUserInfo } from '../../../util/navigationHooks';
 
-const MoveScreen = () => (
-  <Wrap>
-    <Container>
-      <Title>내활동</Title>
-      <Content>스크랩</Content>
-      <Content>참여기록</Content>
-    </Container>
-    <Line />
-    <Container>
-      <Title>설정</Title>
-      <Content>회원정보</Content>
-      <Content>알림 설정</Content>
-    </Container>
-    <Line />
-    <Container>
-      <Title>고객센터</Title>
-      <Content>공지사항</Content>
-      <Content>문의</Content>
-      <Content>신고하기</Content>
-    </Container>
-  </Wrap>
-);
+const MoveScreen = () => {
+  const goUserInfo = useGoMyPageUserInfo();
+  return (
+    <Wrap>
+      <Container>
+        <Title>내활동</Title>
+        <Content>스크랩</Content>
+        <Content>참여기록</Content>
+      </Container>
+      <Line />
+      <Container>
+        <Title>설정</Title>
+        <Content onPress={() => goUserInfo()}>회원정보</Content>
+        <Content>알림 설정</Content>
+      </Container>
+      <Line />
+      <Container>
+        <Title>고객센터</Title>
+        <Content>공지사항</Content>
+        <Content>문의</Content>
+        <Content>신고하기</Content>
+      </Container>
+    </Wrap>
+  );
+};
 
 const Wrap = styled.View``;
 

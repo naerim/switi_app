@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { useGoMyPageProfile } from '../../../util/navigationHooks';
 
 interface Props {
   title: string;
 }
 
 const UserInfo: React.FC<Props> = ({ title }) => {
+  const goProfile = useGoMyPageProfile();
   return (
     <Container>
       <UserName>
@@ -14,7 +16,7 @@ const UserInfo: React.FC<Props> = ({ title }) => {
       </UserName>
 
       <ProfileButton>
-        <MyProFileText>내 프로필</MyProFileText>
+        <MyProFileText onPress={() => goProfile()}>내 프로필</MyProFileText>
       </ProfileButton>
     </Container>
   );
