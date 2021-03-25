@@ -28,14 +28,10 @@ const Search = () => {
 
   const onPressSearchDelete = () => console.log('삭제');
 
-  const RealonPressSearchDelete = (searches) => {
-    searches.split(1, searches.length);
-  };
-  // 이게 맞을까? 한개의 원소는 객체를 원소를 가지는 배열로 하려고 살리고 나머지를 초기화 시키고 싶다.
-
-  const onPressX = () => console.log('onPress X');
-
-  //const RealOnPress = () => {};
+  const RealonPressSearchDelete = useCallback(() => {
+    setSearches(searches.splice(0, searches.length));
+  }, [searches]);
+  // 이게 맞을까? 배열 초기화
 
   const onInsert = useCallback(
     (text) => {
