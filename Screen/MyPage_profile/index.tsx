@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import PrintList from './printList';

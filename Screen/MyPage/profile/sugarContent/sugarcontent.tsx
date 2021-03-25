@@ -1,12 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components/native';
-
+// import * as Progress from 'expo-progress';
+// import PregressBar from '../../progressBar/progressbar';
 const SugarContent = () => (
   <Container>
     <SugarContainer>
       <SugarImage source={require('./image/sweet50.png')} />
       <Text>50%</Text>
     </SugarContainer>
+    {/*<PregressBar />*/}
+    {/*<Progress.Bar isIndeterminate color="blue" />*/}
   </Container>
 );
 
@@ -34,7 +37,5 @@ const Text = styled.Text`
   color: #86e3c3;
   margin-top: 10px;
 `;
-
-
 
 export default SugarContent;
