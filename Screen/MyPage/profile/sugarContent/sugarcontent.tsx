@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 // import * as Progress from 'expo-progress';
 // import PregressBar from '../../progressBar/progressbar';
+import * as Progress from 'react-native-progress';
 
 const SugarContent = () => {
   const sugarData = [
@@ -65,6 +66,7 @@ const SugarContent = () => {
         <SugarImage source={require('./image/3switi.png')} />
         <Text>50%</Text>
       </SugarContainer>
+      <Progress.Bar progress={0.3} width={200} />
       {/*<PregressBar />*/}
       {/*<Progress.Bar isIndeterminate color="blue" />*/}
     </Container>
