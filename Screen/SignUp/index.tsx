@@ -24,7 +24,7 @@ const SignUp = () => {
     info: false,
   });
 
-  const isNickname = (nickname) => {
+  const isNickname = (nickname: string) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
     if (nickname == '' || nickname == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
@@ -37,7 +37,7 @@ const SignUp = () => {
       return { status: Status.SUCCESS, text: '멋진 닉네임이네요!' };
     }
   };
-  const isEmail = (email) => {
+  const isEmail = (email: string) => {
     const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (email == '' || email == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
@@ -47,7 +47,7 @@ const SignUp = () => {
       return { status: Status.SUCCESS, text: ' ' };
     }
   };
-  const isPassword = (pwd) => {
+  const isPassword = (pwd: string) => {
     if (pwd == '' || pwd == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (
@@ -65,7 +65,10 @@ const SignUp = () => {
       return { status: Status.SUCCESS, text: ' ' };
     }
   };
-  const passwordCheck = (pwd, checkPwd) => {
+  const passwordCheck = (
+    pwd: { value: string },
+    checkPwd: { value: string }
+  ) => {
     if (checkPwd.value == '' || checkPwd.value == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (pwd.value === checkPwd.value) {

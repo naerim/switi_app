@@ -3,36 +3,53 @@ import styled from 'styled-components/native';
 import ProfileContent from './Layout/ProfileContent';
 
 interface Props {
-  checked?: string;
+  checkColor?: boolean;
+  check?: {
+    checked: { [key: string]: boolean };
+    setChecked: (
+      prev: (prev: { [p: string]: boolean }) => { [p: string]: boolean }
+    ) => void;
+  };
 }
 
-const MyState = ({ check }) => {
+const MyState: React.FC<Props> = ({ check }) => {
   const itemCheck = (key: string) => {
-    check.setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+    check &&
+      check.setChecked((prev: { [key: string]: boolean }) => ({
+        ...prev,
+        [key]: !prev[key],
+      }));
   };
+
   const stateList = [
     {
       title: '대학생',
-      checked: check.checked.student,
+      checked: check && check.checked.student,
       onPress: () => itemCheck('student'),
     },
     {
       title: '취준생',
-      checked: check.checked.jobSeeker,
+      checked: check && check.checked.jobSeeker,
       onPress: () => itemCheck('jobSeeker'),
     },
     {
       title: '직장인',
-      checked: check.checked.worker,
+      checked: check && check.checked.worker,
       onPress: () => itemCheck('worker'),
     },
   ];
+
   return (
     <ProfileContent title="나의 상황 (복수선택 가능)">
       <Container>
         {stateList.map(({ title, checked, onPress }) => (
-          <Button activeOpacity={0.8} key={title} checked={checked} onPress={onPress}>
-            <Title checked={checked}>{title}</Title>
+          <Button
+            activeOpacity={0.8}
+            key={title}
+            checkColor={checked}
+            onPress={onPress}
+          >
+            <Title checkColor={checked}>{title}</Title>
           </Button>
         ))}
       </Container>
@@ -54,13 +71,13 @@ const Button = styled.TouchableOpacity<Props>`
   width: 30%;
   height: 40px;
   justify-content: center;
-  background-color: ${(props) => (props.checked ? '#ffd57a' : '#fff')};
-  border-color: ${(props) => (props.checked ? '#ffd57a' : '#e3e3e3')};
+  background-color: ${(props) => (props.checkColor ? '#ffd57a' : '#fff')};
+  border-color: ${(props) => (props.checkColor ? '#ffd57a' : '#e3e3e3')};
 `;
 
 const Title = styled.Text<Props>`
   font-size: 12px;
-  color: ${(props) => (props.checked ? '#fff' : '#b4b4b4')};
+  color: ${(props) => (props.checkColor ? '#fff' : '#b4b4b4')};
   text-align: center;
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Platform, StatusBar } from 'react-native';
+import { Platform } from 'react-native';
 
 const imagePath = require('../Img/btn_back.png');
 

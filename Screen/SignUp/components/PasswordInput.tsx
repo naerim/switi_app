@@ -16,7 +16,7 @@ const getColor = ({ status }: { status: Status }) => {
 };
 
 const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
-  const getIcon = (status) => {
+  const getIcon = (status: Status) => {
     switch (status) {
       case Status.NORMARL:
         return require('../../../Img/icon_lock_default.png');

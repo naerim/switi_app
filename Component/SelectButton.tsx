@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const SelectButton = ({ onPress }) => {
+interface Props {
+  onPress: () => void;
+}
+
+const SelectButton: React.FC<Props> = ({ onPress }) => {
   return (
     <Container activeOpacity={0.8} onPress={onPress}>
       <ButtonText>선택해 주세요</ButtonText>

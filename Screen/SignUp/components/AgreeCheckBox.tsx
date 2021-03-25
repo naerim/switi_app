@@ -3,7 +3,14 @@ import styled from 'styled-components/native';
 import CheckBox from 'react-native-check-box';
 import { useGoTerms } from '../../../util/navigationHooks';
 
-const AgreeCheckBox = ({ check }) => {
+interface Props {
+  check: {
+    checked: { [key: string]: boolean };
+    setChecked: any;
+  };
+}
+
+const AgreeCheckBox: React.FC<Props> = ({ check }) => {
   const allCheck = check.checked.service && check.checked.info;
   const goService = useGoTerms(0);
   const goInfo = useGoTerms(1);
@@ -14,7 +21,10 @@ const AgreeCheckBox = ({ check }) => {
   };
 
   const itemCheck = (key: string) => {
-    check.setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+    check.setChecked((prev: { [key: string]: number }) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (

@@ -10,6 +10,10 @@ export interface InputProps {
   confirm?: { confirm: boolean; setConfirm: (value: boolean) => void };
 }
 
+export interface RadioProps {
+  check: { checked: boolean; setChecked: (value: boolean) => void };
+}
+
 export interface WarningProps {
   color: boolean;
 }

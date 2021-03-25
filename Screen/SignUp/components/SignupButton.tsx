@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { useGoFirstProfile } from '../../../util/navigationHooks';
 
-const SignupButton = ({ success, input }) => {
+interface Props {
+  success: boolean;
+  input: { gender: string; nickname: string; email: string; password: string };
+}
+
+const SignupButton: React.FC<Props> = ({ success, input }) => {
   const goFirstProfile = useGoFirstProfile();
   return (
     <Container disabled={success} onPress={goFirstProfile}>
