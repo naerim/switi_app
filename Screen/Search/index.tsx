@@ -25,6 +25,13 @@ const Search = () => {
   ]);
   const nextId = useRef(4);
 
+  const onPressSearchDelete = () => console.log('삭제');
+
+  const RealonPressSearchDelete = (searches) => {
+    searches.split(1, searches.length);
+  };
+  // 이게 맞을까? 한개의 원소는 객체를 원소를 가지는 배열로 하려고 살리고 나머지를 초기화 시키고 싶다.
+
   const onInsert = useCallback(
     (text) => {
       const search = {
@@ -61,7 +68,7 @@ const Search = () => {
     <SearchContainer headerTitle="검색">
       <Container>
         <SearchForm searchInput={searchInput} onPress={searchSomething} />
-        <OptionMenu />
+        <OptionMenu onPress={onPressSearchDelete} />
         <ListContainer>
           <SearchStoryList searches={searches} />
         </ListContainer>

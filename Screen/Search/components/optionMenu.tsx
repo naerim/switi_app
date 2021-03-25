@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
+interface Props {
+  onPressSearchDelete: () => void;
+}
 
-const OptionMenu = () => {
+const OptionMenu: React.FC<Props> = (onPressSearchDelete) => {
   return (
     <Container>
       <ItemContainer>
-        <Question>최근 검색어</Question>
-        <Answer>전체 삭제</Answer>
+        <Title>최근 검색어</Title>
+        <DeleteContainer>
+          <DeleteSearches onPress={onPressSearchDelete}>
+            전체 삭제
+          </DeleteSearches>
+        </DeleteContainer>
       </ItemContainer>
     </Container>
   );
@@ -25,12 +32,16 @@ const ItemContainer = styled.View`
   justify-content: space-between;
 `;
 
-const Question = styled.Text`
+const Title = styled.Text`
   font-weight: bold;
   color: #b4b4b4;
 `;
 
-const Answer = styled.Text`
+const DeleteContainer = styled.TouchableOpacity`
+  background-color: white;
+`;
+
+const DeleteSearches = styled.Text`
   font-weight: bold;
   text-decoration: #b4b4b4 underline;
   color: #b4b4b4;
