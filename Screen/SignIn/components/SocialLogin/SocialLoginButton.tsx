@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { ImageProps } from 'react-native';
 
 interface SocialLoginButtonProps {
   title: string;
   color?: string;
   onPress: () => void;
   fontColor?: string;
+  imageSource: ImageProps;
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
@@ -13,9 +15,10 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   color,
   onPress,
   fontColor,
+  imageSource,
 }) => (
   <Container onPress={onPress} color={color}>
-    <SocialIcon source={require('./i_google.png')} />
+    <SocialIcon source={imageSource} />
     <TitleContainer>
       <Title fontColor={fontColor}>{title}로 로그인</Title>
     </TitleContainer>
