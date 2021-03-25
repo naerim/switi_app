@@ -23,6 +23,7 @@ const Search = () => {
       text: '코딩테스트',
     },
   ]);
+
   const nextId = useRef(4);
 
   const onPressSearchDelete = () => console.log('삭제');
@@ -33,6 +34,9 @@ const Search = () => {
   // 이게 맞을까? 한개의 원소는 객체를 원소를 가지는 배열로 하려고 살리고 나머지를 초기화 시키고 싶다.
 
   const onPressX = () => console.log('onPress X');
+
+  //const RealOnPress = () => {};
+
   const onInsert = useCallback(
     (text) => {
       const search = {
@@ -41,6 +45,13 @@ const Search = () => {
       };
       setSearches(searches.concat(search));
       nextId.current += 1;
+    },
+    [searches]
+  );
+
+  const onRemove = useCallback(
+    (id) => {
+      setSearches(searches.filter((search) => search.id !== id));
     },
     [searches]
   );
@@ -69,9 +80,9 @@ const Search = () => {
     <SearchContainer headerTitle="검색">
       <Container>
         <SearchForm searchInput={searchInput} onPress={searchSomething} />
-        <OptionMenu onPress={onPressSearchDelete} />
+        <OptionMenu onPressSearchDelete={onPressSearchDelete} />
         <ListContainer>
-          <SearchStoryList searches={searches} onPressX={onPressX} />
+          <SearchStoryList searches={searches} onPressX={onRemove} />
         </ListContainer>
         <Line />
         <RecommendContainer />

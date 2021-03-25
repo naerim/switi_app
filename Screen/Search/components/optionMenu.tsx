@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+
 interface Props {
   onPressSearchDelete: () => void;
 }
@@ -9,10 +10,8 @@ const OptionMenu: React.FC<Props> = (onPressSearchDelete) => {
     <Container>
       <ItemContainer>
         <Title>최근 검색어</Title>
-        <DeleteContainer>
-          <DeleteSearches onPress={onPressSearchDelete}>
-            전체 삭제
-          </DeleteSearches>
+        <DeleteContainer onPress={onPressSearchDelete}>
+          <DeleteSearches>전체 삭제</DeleteSearches>
         </DeleteContainer>
       </ItemContainer>
     </Container>
@@ -37,9 +36,7 @@ const Title = styled.Text`
   color: #b4b4b4;
 `;
 
-const DeleteContainer = styled.TouchableOpacity`
-  background-color: white;
-`;
+const DeleteContainer = styled.TouchableOpacity``;
 
 const DeleteSearches = styled.Text`
   font-weight: bold;

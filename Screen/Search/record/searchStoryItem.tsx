@@ -17,11 +17,11 @@ const SearchStoryItem: React.FC<SearchStoryItemProps> = ({
   search,
   onPressX,
 }) => {
-  const { text } = search;
+  const { id, text } = search;
   return (
     <Tag>
       <Text>{text}</Text>
-      <IconContainer onPress={onPressX}>
+      <IconContainer onPress={() => onPressX(id)}>
         <Icon source={require('./image/x.png')} />
       </IconContainer>
     </Tag>
