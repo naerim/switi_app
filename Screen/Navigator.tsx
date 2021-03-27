@@ -59,7 +59,7 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ tabBarLabel: '검색' }}
+        options={{ tabBarLabel: '검색', unmountOnBlur: true }}
       />
       <Tab.Screen
         name="Management"
@@ -77,14 +77,14 @@ const TabNavigation = () => {
 
 const MainNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="none">
       <Stack.Screen name="Switi" component={TabNavigation} />
     </Stack.Navigator>
   );
 };
 
 const RootNavigator = () => {
-  const user = false;
+  const user = true;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}
