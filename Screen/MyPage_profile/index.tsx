@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import PrintList from './printList';
@@ -37,12 +36,12 @@ const MyPage_profile = () => {
       text: '취업',
     },
     {
-      id: 1,
+      id: 2,
       text: '어학',
     },
   ];
   return (
-    <BasicContainer headerTitle="내 프로필">
+    <BasicContainer headerTitle="내 프로필" display>
       <Line />
       <Title>연령</Title>
       <Content>만 22세</Content>
@@ -70,11 +69,6 @@ const MyPage_profile = () => {
     </BasicContainer>
   );
 };
-
-// const Container = styled.View`
-//   width: Dimentions.get('window') .width / 4;
-//   background-color: pink;
-// `;
 
 const Line = styled.Text`
   width: 100%;
