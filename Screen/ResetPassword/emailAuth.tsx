@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import ResetPwdContainer from './components/Layout/ResetPwdContainer';
 import { useGoCertification, useGoSignIn } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
+import AuthInput from './components/AuthInput';
 
 const EmailAuth = () => {
   const goLogin = useGoSignIn();
@@ -28,15 +29,7 @@ const EmailAuth = () => {
         <BigText>{'이메일 인증 후\n비밀번호를 재발급 받으세요'}</BigText>
         <SmallText>{desc}</SmallText>
       </Container>
-      <Title>이메일을 입력해 주세요.</Title>
-      <Input
-        value={email.value}
-        onChangeText={email.onChange}
-        placeholder="abc@dfg.com"
-        keyboardType="email-address"
-        returnKeyType="next"
-        secureTextEntry={false}
-      />
+      <AuthInput input={email} title="이메일을 입력해 주세요." />
     </ResetPwdContainer>
   );
 };
@@ -58,22 +51,6 @@ const SmallText = styled.Text`
   text-align: center;
   font-size: 12px;
   color: #b4b4b4;
-`;
-
-const Title = styled.Text`
-  font-size: 12px;
-  color: #b4b4b4;
-  margin-bottom: 2%;
-`;
-
-const Input = styled.TextInput`
-  font-size: 12px;
-  border-width: 1px;
-  color: #2b2b2b;
-  border-radius: 4px;
-  padding: 10px;
-  border-color: #e3e3e3;
-  height: 40px;
 `;
 
 export default EmailAuth;
