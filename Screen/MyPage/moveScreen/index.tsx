@@ -42,7 +42,7 @@ const Title = styled.Text`
 `;
 
 const Content = styled.Text`
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: 20px;
 `;
 
