@@ -17,6 +17,16 @@ import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
 import Certification from './ResetPassword/certification';
 import RenewPassword from './ResetPassword/renewPassword';
+import HomeIcon from '../Img/menu_home.png';
+import HomeTintIcon from '../Img/menu_home_tint.png';
+import StudyIcon from '../Img/menu_study.png';
+import StudyTintIcon from '../Img/menu_study_tint.png';
+import SearchIcon from '../Img/menu_search.png';
+import SearchTintIcon from '../Img/menu_search_tint.png';
+import MyPageIcon from '../Img/menu_mypage.png';
+import MyPageTintIcon from '../Img/menu_mypage_tint.png';
+import styled from 'styled-components/native';
+import { Platform, SafeAreaView } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,26 +92,52 @@ const HomeNavigation = () => (
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#4FD5A7',
+        inactiveTintColor: '#b4b4b4',
+      }}
+    >
       <Tab.Screen
         name="HomeNavi"
         component={HomeNavigation}
-        options={{ tabBarLabel: '홈' }}
+        options={{
+          tabBarLabel: '홈',
+          tabBarIcon: ({ focused }) => (
+            <Icon source={focused ? HomeTintIcon : HomeIcon} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ tabBarLabel: '검색', unmountOnBlur: true }}
+        options={{
+          tabBarLabel: '검색',
+          unmountOnBlur: true,
+          tabBarIcon: ({ focused }) => (
+            <Icon source={focused ? SearchTintIcon : SearchIcon} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Management"
         component={Management}
-        options={{ tabBarLabel: '스터디 관리' }}
+        options={{
+          tabBarLabel: '스터디 관리',
+          tabBarIcon: ({ focused }) => (
+            <Icon source={focused ? StudyTintIcon : StudyIcon} />
+          ),
+        }}
       />
       <Tab.Screen
         name="MyPage"
         component={MyPageNavigator}
-        options={{ tabBarLabel: '마이페이지' }}
+        options={{
+          tabBarLabel: '마이페이지',
+          tabBarIcon: ({ focused }) => (
+            <Icon source={focused ? MyPageTintIcon : MyPageIcon} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -121,5 +157,10 @@ const RootNavigator = () => {
     </NavigationContainer>
   );
 };
+
+const Icon = styled.Image`
+  width: 24px;
+  height: 24px;
+`;
 
 export default RootNavigator;
