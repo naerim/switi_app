@@ -34,6 +34,7 @@ const Container = styled.SafeAreaView`
 `;
 
 const Content = styled.View`
+  max-height: 500px;
   padding: 24px;
 `;
 

@@ -13,6 +13,10 @@ import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import MyPage_profile from './MyPage_profile';
 import UserInfo from './UserInfo';
+import Terms from './Terms';
+import EmailAuth from './ResetPassword/emailAuth';
+import Certification from './ResetPassword/certification';
+import RenewPassword from './ResetPassword/renewPassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,7 +30,9 @@ const LoginNavigation = () => (
   >
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignUp" component={SignUp} />
-    <Stack.Screen name="Profile" component={ProfileNavigation} />
+    <Stack.Screen name="Terms" component={Terms} />
+    <Stack.Screen name="firstProfile" component={ProfileNavigation} />
+    <Stack.Screen name="emailAuth" component={ResetPasswordNavigation} />
   </Stack.Navigator>
 );
 
@@ -55,14 +61,24 @@ const ProfileNavigation = () => (
   </Stack.Navigator>
 );
 
-const HomeNavigation = () => {
-  return (
-    <MaterialTopTab.Navigator>
-      <MaterialTopTab.Screen name="오프라인" component={Home} />
-      <MaterialTopTab.Screen name="온라인" component={Home} />
-    </MaterialTopTab.Navigator>
-  );
-};
+const ResetPasswordNavigation = () => (
+  <Stack.Navigator
+    mode="modal"
+    headerMode="none"
+    screenOptions={{ animationEnabled: false }}
+  >
+    <Stack.Screen name="emailAuth" component={EmailAuth} />
+    <Stack.Screen name="certification" component={Certification} />
+    <Stack.Screen name="renewPassword" component={RenewPassword} />
+  </Stack.Navigator>
+);
+
+const HomeNavigation = () => (
+  <MaterialTopTab.Navigator>
+    <MaterialTopTab.Screen name="오프라인" component={Home} />
+    <MaterialTopTab.Screen name="온라인" component={Home} />
+  </MaterialTopTab.Navigator>
+);
 
 const TabNavigation = () => {
   return (
@@ -91,16 +107,14 @@ const TabNavigation = () => {
   );
 };
 
-const MainNavigation = () => {
-  return (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="Switi" component={TabNavigation} />
-    </Stack.Navigator>
-  );
-};
+const MainNavigation = () => (
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name="Switi" component={TabNavigation} />
+  </Stack.Navigator>
+);
 
 const RootNavigator = () => {
-  const user = true;
+  const user = false;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}

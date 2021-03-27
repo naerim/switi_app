@@ -2,21 +2,26 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { useGoFirstProfile } from '../../../util/navigationHooks';
 
-const SignupButton = () => {
+interface Props {
+  success: boolean;
+  input: { gender: string; nickname: string; email: string; password: string };
+}
+
+const SignupButton: React.FC<Props> = ({ success, input }) => {
   const goFirstProfile = useGoFirstProfile();
   return (
-    <Container onPress={goFirstProfile}>
+    <Container disabled={success} onPress={goFirstProfile}>
       <TextStyle>이메일로 가입</TextStyle>
     </Container>
   );
 };
 
 const Container = styled.TouchableOpacity`
-  background-color: #4fd5a7;
   align-items: center;
   justify-content: center;
   border-radius: 40px;
-  height: 30%;
+  height: 40px;
+  background-color: ${(props) => (props.disabled ? '#dcdcdc' : '#4fd5a7')};
 `;
 
 const TextStyle = styled.Text`

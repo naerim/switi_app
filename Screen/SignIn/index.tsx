@@ -41,7 +41,7 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <BasicContainer headerTitle="로그인">
+    <BasicContainer headerTitle="로그인" display={false}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <SocialLogin />

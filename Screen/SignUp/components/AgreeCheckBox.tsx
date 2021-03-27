@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import CheckBox from 'react-native-check-box';
+import { useGoTerms } from '../../../util/navigationHooks';
 
-const AgreeCheckBox = () => {
-  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
-    service: false,
-    info: false,
-    event: false,
-  });
+interface Props {
+  check: {
+    checked: { [key: string]: boolean };
+    setChecked: any;
+  };
+}
 
-  const allCheck = checked.service && checked.info && checked.event;
+const AgreeCheckBox: React.FC<Props> = ({ check }) => {
+  const allCheck = check.checked.service && check.checked.info;
+  const goService = useGoTerms(0);
+  const goInfo = useGoTerms(1);
 
   const setAll = () => {
     const changeValue = !allCheck;
-    setChecked({ service: changeValue, info: changeValue, event: changeValue });
+    check.setChecked({ service: changeValue, info: changeValue });
   };
 
   const itemCheck = (key: string) => {
-    setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+    check.setChecked((prev: { [key: string]: number }) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (
@@ -34,27 +41,20 @@ const AgreeCheckBox = () => {
         rightText="서비스 이용약관 (필수)"
         rightTextStyle={{ fontSize: 12, textDecorationLine: 'underline' }}
         checkBoxColor="#E3E3E3"
-        isChecked={checked.service}
+        isChecked={check.checked.service}
         onClick={() => {
           itemCheck('service');
+          goService();
         }}
       />
       <CheckBox
         rightText="개인정보 처리 방침 (필수)"
         rightTextStyle={{ fontSize: 12, textDecorationLine: 'underline' }}
         checkBoxColor="#E3E3E3"
-        isChecked={checked.info}
+        isChecked={check.checked.info}
         onClick={() => {
           itemCheck('info');
-        }}
-      />
-      <CheckBox
-        rightText="이벤트 등 프로모션 알림 메일 수신 (선택)"
-        rightTextStyle={{ fontSize: 12 }}
-        checkBoxColor="#E3E3E3"
-        isChecked={checked.event}
-        onClick={() => {
-          itemCheck('event');
+          goInfo();
         }}
       />
     </Container>
@@ -66,7 +66,7 @@ const Container = styled.View``;
 const Line = styled.Text`
   height: 1px;
   background-color: #e3e3e3;
-  margin: 5px 0;
+  margin: 8px 0;
 `;
 
 export default AgreeCheckBox;

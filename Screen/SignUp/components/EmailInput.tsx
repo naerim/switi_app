@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { InputProps, Status } from '../inteface';
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
+const getColor = ({ status }: { status: Status }) => {
+  switch (status) {
+    case Status.NORMARL:
+      return '#e3e3e3';
+    case Status.SUCCESS:
+      return '#4fd5a7';
+    case Status.ERROR:
+      return '#ff0000';
+    default:
+      return '#e3e3e3';
+  }
+};
 
-interface Props {
-  input: InputProps;
-}
-
-const EmailInput: React.FC<Props> = ({ input }) => {
+const EmailInput: React.FC<InputProps> = ({ input, error }) => {
   return (
     <Container>
       <Input
@@ -20,7 +25,9 @@ const EmailInput: React.FC<Props> = ({ input }) => {
         keyboardType="email-address"
         returnKeyType="next"
         secureTextEntry={false}
+        status={error.status}
       />
+      <Warning>{error.text}</Warning>
     </Container>
   );
 };
@@ -33,9 +40,15 @@ const Input = styled.TextInput`
   font-size: 12px;
   border-width: 1px;
   color: #2b2b2b;
-  border-color: #e3e3e3;
   border-radius: 4px;
   padding: 10px;
+  border-color: ${getColor};
+`;
+
+const Warning = styled.Text`
+  color: red;
+  font-size: 9px;
+  margin-top: 2px;
 `;
 
 export default EmailInput;
