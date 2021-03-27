@@ -9,7 +9,7 @@ import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
-import EmailModal from '../../Component/basicModal';
+import BasicModal from '../../Component/basicModal';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -63,7 +63,7 @@ const SignIn: React.FC = () => {
             color="#86E3C3"
           />
           <OptionMenu />
-          <EmailModal modalVisible={modalVisible} closeModal={closeModal} />
+          <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
         </Container>
       </TouchableWithoutFeedback>
     </BasicContainer>
