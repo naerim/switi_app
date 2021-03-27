@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoCertification, useGoSignIn } from '../../util/navigationHooks';
 import ResetPwdContainer from './components/Layout/ResetPwdContainer';
 import PasswordInput from '../SignUp/components/PasswordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
+import CompleteModal from './components/CompleteModal';
 
 const RenewPassword = () => {
   const goLogin = useGoSignIn();
   const goCertification = useGoCertification();
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModal = () => setModalVisible(false);
+
+  const onClick = () => {
+    setModalVisible(true);
+    setTimeout(() => {
+      goLogin();
+    }, 2000);
+  };
 
   const isPassword = (pwd: string) => {
     if (pwd == '' || pwd == null) {
@@ -59,7 +69,7 @@ const RenewPassword = () => {
   return (
     <ResetPwdContainer
       buttonText="재설정 완료"
-      onClick={goLogin}
+      onClick={onClick}
       onPress={goCertification}
     >
       {passwordData.map(({ title, input, error }) => (
@@ -68,6 +78,7 @@ const RenewPassword = () => {
           <PasswordInput input={input} error={error} />
         </Container>
       ))}
+      <CompleteModal modalVisible={modalVisible} closeModal={closeModal} />
     </ResetPwdContainer>
   );
 };
