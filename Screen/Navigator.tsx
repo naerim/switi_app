@@ -26,7 +26,8 @@ import SearchTintIcon from '../Img/menu_search_tint.png';
 import MyPageIcon from '../Img/menu_mypage.png';
 import MyPageTintIcon from '../Img/menu_mypage_tint.png';
 import styled from 'styled-components/native';
-import { Platform, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import HomeContainer from '../Component/HomeContainer';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -84,18 +85,12 @@ const ResetPasswordNavigation = () => (
 );
 
 const HomeNavigation = () => (
-  <SafeAreaView
-    style={{
-      flex: 1,
-      backgroundColor: '#fff',
-      paddingTop: Platform.OS === 'ios' ? 0 : 20,
-    }}
-  >
+  <HomeContainer>
     <MaterialTopTab.Navigator>
       <MaterialTopTab.Screen name="오프라인" component={Home} />
       <MaterialTopTab.Screen name="온라인" component={Home} />
     </MaterialTopTab.Navigator>
-  </SafeAreaView>
+  </HomeContainer>
 );
 
 const TabNavigation = () => (
