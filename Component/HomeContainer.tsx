@@ -8,9 +8,10 @@ interface Props {
 }
 
 const HomeContainer: React.FC<Props> = ({ children, onPress }) => {
+  const goAlarm = () => console.log('alarm'); // 알람페이지로 이동
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
-      <HomeHeader onPress={onPress} />
+      <HomeHeader onPress={goAlarm} />
       <Container>{children}</Container>
     </Wrap>
   );

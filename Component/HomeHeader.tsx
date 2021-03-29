@@ -11,7 +11,9 @@ const HomeHeader: React.FC<Props> = ({ onPress }) => {
   return (
     <Wrap>
       <Icon source={Logo} />
-      <Icon source={AlarmIcon} />
+      <AlarmButton activeOpacity={0.8} onPress={onPress}>
+        <Icon source={AlarmIcon} />
+      </AlarmButton>
     </Wrap>
   );
 };
@@ -28,5 +30,7 @@ const Wrap = styled.View`
 const Icon = styled.Image`
   height: 18px;
 `;
+
+const AlarmButton = styled.TouchableOpacity``;
 
 export default HomeHeader;

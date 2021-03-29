@@ -86,7 +86,13 @@ const ResetPasswordNavigation = () => (
 
 const HomeNavigation = () => (
   <HomeContainer>
-    <MaterialTopTab.Navigator>
+    <MaterialTopTab.Navigator
+      tabBarOptions={{
+        indicatorStyle: {
+          backgroundColor: '#86E3C3',
+        },
+      }}
+    >
       <MaterialTopTab.Screen name="오프라인" component={Home} />
       <MaterialTopTab.Screen name="온라인" component={Home} />
     </MaterialTopTab.Navigator>

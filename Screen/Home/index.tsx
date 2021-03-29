@@ -1,26 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import styled from 'styled-components/native';
 
 const Home = () => {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Text>Home Screen</Text>
-        <Text>Home Screen</Text>
-        <Text>Home Screen</Text>
-      </View>
-    </SafeAreaView>
+    <Container>
+      <Content>
+        <TestText>test</TestText>
+      </Content>
+    </Container>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 24,
-    marginRight: 24,
-  },
-});
+const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: #fff;
+`;
+
+const Content = styled.View`
+  margin: 0 24px;
+`;
+const TestText = styled.Text`
+  font-size: 30px;
+`;
 
 export default Home;
