@@ -84,18 +84,32 @@ const ResetPasswordNavigation = () => (
 );
 
 const HomeNavigation = () => (
-  <MaterialTopTab.Navigator>
-    <MaterialTopTab.Screen name="오프라인" component={Home} />
-    <MaterialTopTab.Screen name="온라인" component={Home} />
-  </MaterialTopTab.Navigator>
+  <SafeAreaView
+    style={{
+      flex: 1,
+      backgroundColor: '#fff',
+      paddingTop: Platform.OS === 'ios' ? 0 : 20,
+    }}
+  >
+    <MaterialTopTab.Navigator>
+      <MaterialTopTab.Screen name="오프라인" component={Home} />
+      <MaterialTopTab.Screen name="온라인" component={Home} />
+    </MaterialTopTab.Navigator>
+  </SafeAreaView>
 );
 
-const TabNavigation = () => {
-  return (
+const TabNavigation = () => (
+  <SafeAreaView
+    style={{
+      flex: 1,
+      backgroundColor: '#fff',
+    }}
+  >
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#4FD5A7',
         inactiveTintColor: '#b4b4b4',
+        style: { height: 60, paddingBottom: 7 },
       }}
     >
       <Tab.Screen
@@ -140,8 +154,8 @@ const TabNavigation = () => {
         }}
       />
     </Tab.Navigator>
-  );
-};
+  </SafeAreaView>
+);
 
 const MainNavigation = () => (
   <Stack.Navigator headerMode="none">
