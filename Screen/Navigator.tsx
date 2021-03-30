@@ -93,8 +93,16 @@ const HomeNavigation = () => (
         },
       }}
     >
-      <MaterialTopTab.Screen name="오프라인" component={Home} />
-      <MaterialTopTab.Screen name="온라인" component={Home} />
+      <MaterialTopTab.Screen
+        name="오프라인"
+        component={Home}
+        initialParams={{ idx: 1 }}
+      />
+      <MaterialTopTab.Screen
+        name="온라인"
+        component={Home}
+        initialParams={{ idx: 0 }}
+      />
     </MaterialTopTab.Navigator>
   </HomeContainer>
 );
