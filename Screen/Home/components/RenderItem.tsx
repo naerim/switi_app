@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../interface';
 import StudyImage from './StudyImage';
+import Category from './Category';
+import Scrap from './Scrap';
 
 const RenderItem: React.FC<ItemType> = (data) => {
   const itemClick = (index: number): void => {
@@ -19,14 +21,14 @@ const RenderItem: React.FC<ItemType> = (data) => {
       <Content>
         <Title>{data.item.title}</Title>
         <Desc>{data.item.desc}</Desc>
-        <CategoryArea>
-          <Category>
-            <CategoryItem>{data.item.address}</CategoryItem>
-            <CategoryItem>{data.item.category}</CategoryItem>
-            <CategoryItem>{data.item.target}</CategoryItem>
-          </Category>
-          <Scrap>{data.item.scrap}</Scrap>
-        </CategoryArea>
+        <Bottom>
+          <Category
+            address={data.item.address}
+            category={data.item.category}
+            target={data.item.target}
+          />
+          <Scrap scrap={data.item.scrap} />
+        </Bottom>
       </Content>
     </Container>
   );
@@ -56,30 +58,10 @@ const Desc = styled.Text`
   margin: 5px 0;
 `;
 
-const CategoryArea = styled.View`
+const Bottom = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Category = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CategoryItem = styled.Text`
-  color: #2b2b2b;
-  font-size: 10px;
-  border-color: #ececec;
-  border-radius: 10px;
-  border-width: 1px;
-  padding: 5px;
-  margin-right: 5px;
-`;
-
-const Scrap = styled.Text`
-  color: #2b2b2b;
-  font-size: 10px;
 `;
 
 export default RenderItem;
