@@ -23,7 +23,6 @@ const Container = styled.SafeAreaView`
 
 const CategoryArea = styled.View`
   margin-left: 24px;
-  background-color: beige;
   padding: 24px 0;
 `;
 

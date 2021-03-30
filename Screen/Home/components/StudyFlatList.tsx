@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { StudyList } from '../../../Data';
 import RenderItem from './RenderItem';
+import ListHeader from './ListHeader';
 
 interface Props {
   idx: number;
 }
 
 const StudyFlatList: React.FC<Props> = ({ idx }) => {
+  const [checked, setChecked] = useState(true);
   const FlatListItemSeparator = () => <Line />;
 
   // 0 : 온라인, 1 : 오프라인
@@ -16,6 +18,7 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
 
   return (
     <Container>
+      <ListHeader num={OnOffStudy.length} check={{ checked, setChecked }} />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         data={OnOffStudy}

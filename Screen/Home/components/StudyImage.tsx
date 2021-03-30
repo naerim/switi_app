@@ -14,12 +14,13 @@ const StudyImage: React.FC<Props> = ({ online }) => {
 };
 
 const Container = styled.View`
-  background-color: #fdc4bd;
+  background-color: #ffeec9;
   flex: 1;
   width: 84px;
   height: 84px;
   align-items: center;
   justify-content: center;
+  border-radius: 9px;
 `;
 
 const Flag = styled.Text`
