@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../interface';
+import StudyImage from './StudyImage';
 
 const RenderItem: React.FC<ItemType> = (data) => {
   const itemClick = (index: number): void => {
@@ -14,7 +15,7 @@ const RenderItem: React.FC<ItemType> = (data) => {
         itemClick(data.index);
       }}
     >
-      <ImageView>{data.item.flag}</ImageView>
+      <StudyImage online={data.item.online_flag} />
       <Content>
         <Title>{data.item.title}</Title>
         <Desc>{data.item.desc}</Desc>
@@ -34,17 +35,12 @@ const RenderItem: React.FC<ItemType> = (data) => {
 const Container = styled.TouchableOpacity`
   flex-direction: row;
   padding: 16px 0;
+  align-items: center;
 `;
 
 const Content = styled.View`
   flex: 3;
   padding: 10px;
-`;
-
-const ImageView = styled.Text`
-  font-size: 12px;
-  background-color: antiquewhite;
-  flex: 1;
 `;
 
 const Title = styled.Text`
