@@ -4,7 +4,7 @@ import BasicContainer from '../../Component/BasicContainer';
 import { useGoSignUp } from '../../util/navigationHooks';
 import { TermData } from './TermData';
 
-const Terms = ({ route }) => {
+const Terms = ({ route }: any) => {
   const goSignUp = useGoSignUp();
   const idx = route.params.idx;
 

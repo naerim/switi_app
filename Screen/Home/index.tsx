@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import StudyFlatList from './components/StudyFlatList';
 
 const Home = () => {
   return (
@@ -7,9 +8,7 @@ const Home = () => {
       <CategoryArea>
         <CategoryText>카테고리영역</CategoryText>
       </CategoryArea>
-      <Content>
-        <CategoryText>flatList 영역</CategoryText>
-      </Content>
+      <StudyFlatList />
     </Container>
   );
 };

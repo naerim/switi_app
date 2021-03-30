@@ -52,3 +52,11 @@ export const useGoRenewPassword = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('renewPassword'), [navigation]);
 };
+
+export const useGoHome = (online_flag: number) => {
+  const navigation = useNavigation();
+  return useCallback(
+    () => navigation.navigate('Home', { online_flag: online_flag }),
+    [navigation]
+  );
+};
