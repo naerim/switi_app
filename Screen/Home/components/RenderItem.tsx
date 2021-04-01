@@ -6,14 +6,21 @@ import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../util/navigationHooks';
 
-const RenderItem: React.FC<ItemType> = ({ item}) => {
+const RenderItem: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.idx);
+
+  // 글자수 제한
+  const limitTitle = (title: string) =>
+    title.length > 17 ? title.substr(0, 17) + '...' : title;
+  const limitDesc = (desc: string) =>
+    desc.length > 40 ? desc.substr(0, 40) + '...' : desc;
+
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
       <StudyImage online={item.online_flag} />
       <Content>
-        <Title>{item.title}</Title>
-        <Desc>{item.desc}</Desc>
+        <Title>{limitTitle(item.title)}</Title>
+        <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
           <Category
             address={item.address}
