@@ -53,9 +53,11 @@ export const useGoRenewPassword = () => {
   return useCallback(() => navigation.navigate('renewPassword'), [navigation]);
 };
 
-export const useGoStudyDetail = () => {
+export const useGoStudyDetail = (idx: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('StudyDetail'), [navigation]);
+  return useCallback(() => navigation.navigate('StudyDetail', { idx: idx }), [
+    navigation,
+  ]);
 };
 
 export const useGoHome = () => {

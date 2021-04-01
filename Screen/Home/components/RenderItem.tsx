@@ -4,10 +4,12 @@ import { ItemType } from '../interface';
 import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
+import { useGoStudyDetail } from '../../../util/navigationHooks';
 
-const RenderItem: React.FC<ItemType> = ({ item, onPress }) => {
+const RenderItem: React.FC<ItemType> = ({ item}) => {
+  const goStudyDetail = useGoStudyDetail(item.idx);
   return (
-    <Container activeOpacity={0.8} onPress={onPress}>
+    <Container activeOpacity={0.8} onPress={goStudyDetail}>
       <StudyImage online={item.online_flag} />
       <Content>
         <Title>{item.title}</Title>

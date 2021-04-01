@@ -1,19 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import StudyFlatList from './components/StudyFlatList';
-import { useGoStudyDetail } from '../../util/navigationHooks';
 
 const Home = ({ route }: any) => {
   // 0 : 온라인, 1 : 오프라인
   const idx = route.params.idx;
-  const goStudyDetail = useGoStudyDetail();
 
   return (
     <Container>
       <CategoryArea>
         <CategoryText>카테고리영역</CategoryText>
       </CategoryArea>
-      <StudyFlatList idx={idx} onPress={goStudyDetail} />
+      <StudyFlatList idx={idx} />
     </Container>
   );
 };
