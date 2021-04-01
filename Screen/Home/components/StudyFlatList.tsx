@@ -25,6 +25,8 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
         renderItem={({ item }) => <RenderItem index={item.idx} item={item} />}
         keyExtractor={(item) => item.idx.toString()}
         extraData={OnOffStudy}
+        contentContainerStyle={{ paddingBottom: 80 }}
+        showsVerticalScrollIndicator={false}
       />
     </Container>
   );

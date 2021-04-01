@@ -29,7 +29,7 @@ const RenderItem: React.FC<ItemType> = ({ item}) => {
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding: 16px 0;
+  padding-bottom: 16px;
   align-items: center;
 `;
 
@@ -46,7 +46,6 @@ const Title = styled.Text`
 const Desc = styled.Text`
   font-size: 12px;
   color: #b4b4b4;
-  height: 30px;
   width: 80%;
   margin: 5px 0;
 `;

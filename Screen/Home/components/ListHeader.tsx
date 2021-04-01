@@ -30,6 +30,7 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
 `;
 
 const Number = styled.Text`
