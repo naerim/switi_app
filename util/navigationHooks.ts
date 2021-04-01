@@ -64,3 +64,8 @@ export const useGoHome = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Switi'), [navigation]);
 };
+
+export const useGoAddStudy = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('AddStudy'), [navigation]);
+};
