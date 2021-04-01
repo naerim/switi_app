@@ -5,29 +5,20 @@ import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
 
-const RenderItem: React.FC<ItemType> = (data) => {
-  const itemClick = (index: number): void => {
-    console.log(index);
-  };
-
+const RenderItem: React.FC<ItemType> = ({ item, onPress }) => {
   return (
-    <Container
-      activeOpacity={0.8}
-      onPress={() => {
-        itemClick(data.index);
-      }}
-    >
-      <StudyImage online={data.item.online_flag} />
+    <Container activeOpacity={0.8} onPress={onPress}>
+      <StudyImage online={item.online_flag} />
       <Content>
-        <Title>{data.item.title}</Title>
-        <Desc>{data.item.desc}</Desc>
+        <Title>{item.title}</Title>
+        <Desc>{item.desc}</Desc>
         <Bottom>
           <Category
-            address={data.item.address}
-            category={data.item.category}
-            target={data.item.target}
+            address={item.address}
+            category={item.category}
+            target={item.target}
           />
-          <Scrap scrap={data.item.scrap} />
+          <Scrap scrap={item.scrap} />
         </Bottom>
       </Content>
     </Container>

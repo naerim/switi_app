@@ -20,4 +20,5 @@ export interface DataType {
 export interface ItemType {
   index: number;
   item: DataType;
+  onPress: () => void;
 }

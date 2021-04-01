@@ -7,9 +7,10 @@ import ListHeader from './ListHeader';
 
 interface Props {
   idx: number;
+  onPress: () => void;
 }
 
-const StudyFlatList: React.FC<Props> = ({ idx }) => {
+const StudyFlatList: React.FC<Props> = ({ idx, onPress }) => {
   const [checked, setChecked] = useState(true);
   const FlatListItemSeparator = () => <Line />;
 
@@ -22,7 +23,9 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         data={OnOffStudy}
-        renderItem={RenderItem}
+        renderItem={({ item }) => (
+          <RenderItem onPress={onPress} index={item.idx} item={item} />
+        )}
         keyExtractor={(item) => item.idx.toString()}
         extraData={OnOffStudy}
       />

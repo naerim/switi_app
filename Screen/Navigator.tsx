@@ -28,6 +28,7 @@ import MyPageTintIcon from '../Img/menu_mypage_tint.png';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native';
 import HomeContainer from '../Component/HomeContainer';
+import StudyDetail from './StudyDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -169,6 +170,7 @@ const TabNavigation = () => (
 const MainNavigation = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Switi" component={TabNavigation} />
+    <Stack.Screen name="StudyDetail" component={StudyDetail} />
   </Stack.Navigator>
 );
 
