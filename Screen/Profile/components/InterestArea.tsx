@@ -44,9 +44,15 @@ const InterestArea = () => {
     );
   };
 
+  // 선택한 아이템의 string 값을 저장한 배열
+  const nameList = () => select.map((i) => Area[i].name);
+
   return (
     <ProfileContent title="관심지역 (3개 이하 선택)">
       <SelectButton onPress={onPress} />
+      <TagContainer>
+        <Tag>{nameList()}</Tag>
+      </TagContainer>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <FlatList
           ItemSeparatorComponent={FlatListItemSeparator}
