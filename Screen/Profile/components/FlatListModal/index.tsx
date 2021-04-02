@@ -17,6 +17,7 @@ const FlatListModal: React.FC<FlatListType> = ({
   data,
   select,
   setSelect,
+  column,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const onPress = () => setModalVisible(true);
@@ -59,6 +60,7 @@ const FlatListModal: React.FC<FlatListType> = ({
         select={select}
         setSelect={setSelect}
         data={data}
+        column={column}
       />
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <FlatList
@@ -67,6 +69,7 @@ const FlatListModal: React.FC<FlatListType> = ({
           renderItem={renderItem}
           keyExtractor={(item) => item.key.toString()}
           extraData={data}
+          showsVerticalScrollIndicator={false}
         />
       </BasicModal>
     </ProfileContent>

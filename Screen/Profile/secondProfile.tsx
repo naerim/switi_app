@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useGoFirstProfile, useGoSignIn } from '../../util/navigationHooks';
 import ProfileContainer from './components/Layout/ProfileContainer';
 import MyState from './components/MyState';
-import Character from './components/Character';
 import Introduce from './components/Introduce';
 import useInput from '../../util/useInput';
+import FlatListModal from './components/FlatListModal';
+import { CharacterList } from '../../Data';
 
 const SecondProfile = () => {
   const introduceInput = useInput('');
@@ -18,6 +19,8 @@ const SecondProfile = () => {
     worker: false,
   });
 
+  const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
+
   return (
     <ProfileContainer
       buttonText="프로필 설정 완료"
@@ -26,7 +29,13 @@ const SecondProfile = () => {
       onPress={goFirstProfile}
     >
       <MyState check={{ checked, setChecked }} />
-      <Character />
+      <FlatListModal
+        title="나의 성격 (3개 이하 선택)"
+        data={CharacterList}
+        select={selectCharacter}
+        setSelect={setSelectCharacter}
+        column
+      />
       <Introduce input={introduceInput} />
     </ProfileContainer>
   );

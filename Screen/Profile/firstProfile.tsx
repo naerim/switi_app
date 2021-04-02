@@ -18,9 +18,6 @@ const FirstProfile = () => {
 
   // 다음 버튼
   const clickNextButton = () => {
-    console.log(ageInput.value);
-    console.log(selectArea);
-    console.log(selectInterest);
     goSecondProfile();
   };
 

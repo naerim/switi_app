@@ -15,7 +15,7 @@ const Introduce: React.FC<InputProps> = ({ input }) => {
         secureTextEntry={false}
         multiline
         numberOfLines={4}
-        maxLength={400}
+        maxLength={250}
         textAlignVertical="top"
       />
     </ProfileContent>
@@ -25,7 +25,7 @@ const Introduce: React.FC<InputProps> = ({ input }) => {
 const Input = styled.TextInput`
   border-width: 1px;
   border-radius: 4px;
-  height: 250px;
+  height: 150px;
   font-size: 12px;
   border-color: #e3e3e3;
   padding: 10px;

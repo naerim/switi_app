@@ -17,6 +17,7 @@ export interface TagType {
   select: number[];
   setSelect: (prev: (prev: number[]) => number[]) => void;
   data: dataType[];
+  column?: boolean;
 }
 
 export interface FlatListType {
@@ -24,4 +25,5 @@ export interface FlatListType {
   data: dataType[];
   select: number[];
   setSelect: (prev: (prev: number[]) => number[]) => void;
+  column?: boolean;
 }
