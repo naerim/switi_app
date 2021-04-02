@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import ProfileContent from './Layout/ProfileContent';
-import SelectButton from '../../../Component/SelectButton';
-import BasicModal from '../../../Component/BasicModal';
+import { FlatListType, itemType } from '../../interface';
+import IconCheck from '../../../../Img/icon_check.png';
+import ProfileContent from '../Layout/ProfileContent';
+import SelectButton from '../../../../Component/SelectButton';
+import Tag from './Tag';
+import BasicModal from '../../../../Component/BasicModal';
 import { FlatList } from 'react-native';
-import { Area } from '../../../Data';
-import IconCheck from '../../../Img/icon_check.png';
-import { itemType } from '../interface';
-import Tag from './FlatList/Tag';
 
 interface Props {
   check: boolean;
 }
 
-const InterestArea = () => {
+const FlatListModal: React.FC<FlatListType> = ({
+  title,
+  data,
+  select,
+  setSelect,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const onPress = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  const [select, setSelect] = useState<number[]>([]);
 
   const FlatListItemSeparator = () => <Line />;
 
@@ -46,19 +49,24 @@ const InterestArea = () => {
   };
 
   // 선택한 아이템의 string 값을 저장한 배열
-  const nameList = () => select.map((i) => Area[i].name);
+  const nameList = () => select.map((i) => data[i].name);
 
   return (
-    <ProfileContent title="관심지역 (3개 이하 선택)">
+    <ProfileContent title={title}>
       <SelectButton onPress={onPress} />
-      <Tag nameList={nameList()} select={select} setSelect={setSelect} data={Area}/>
+      <Tag
+        nameList={nameList()}
+        select={select}
+        setSelect={setSelect}
+        data={data}
+      />
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <FlatList
           ItemSeparatorComponent={FlatListItemSeparator}
-          data={Area}
+          data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.key.toString()}
-          extraData={Area}
+          extraData={data}
         />
       </BasicModal>
     </ProfileContent>
@@ -87,4 +95,4 @@ const Line = styled.View`
   background-color: #f3f3f3;
 `;
 
-export default InterestArea;
+export default FlatListModal;

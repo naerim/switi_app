@@ -18,3 +18,10 @@ export interface TagType {
   setSelect: (prev: (prev: number[]) => number[]) => void;
   data: dataType[];
 }
+
+export interface FlatListType {
+  title: string;
+  data: dataType[];
+  select: number[];
+  setSelect: (prev: (prev: number[]) => number[]) => void;
+}
