@@ -7,6 +7,7 @@ import { FlatList } from 'react-native';
 import { Area } from '../../../Data';
 import IconCheck from '../../../Img/icon_check.png';
 import { itemType } from '../interface';
+import XIconBtn from '../../../Img/btn_x_green.png';
 
 interface Props {
   check: boolean;
@@ -47,11 +48,23 @@ const InterestArea = () => {
   // 선택한 아이템의 string 값을 저장한 배열
   const nameList = () => select.map((i) => Area[i].name);
 
+  const deleteList = (name: string) => {
+    const idx = select.find((i) => Area[i].name === name);
+    setSelect((prev) => prev.filter((i) => i !== idx));
+  };
+
   return (
     <ProfileContent title="관심지역 (3개 이하 선택)">
       <SelectButton onPress={onPress} />
       <TagContainer>
-        <Tag>{nameList()}</Tag>
+        {nameList().map((i) => (
+          <TagContent key={i}>
+            <Tag>{i}</Tag>
+            <XButton onPress={() => deleteList(i)}>
+              <XIcon source={XIconBtn} />
+            </XButton>
+          </TagContent>
+        ))}
       </TagContainer>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <FlatList
@@ -90,10 +103,34 @@ const Line = styled.View`
 
 const TagContainer = styled.View`
   flex-direction: row;
+  align-items: center;
+  height: 40px;
+`;
+
+const TagContent = styled.View`
+  border-color: #86e3c3;
+  flex-direction: row;
+  border-width: 1px;
+  border-radius: 19px;
+  padding: 3px 5px;
+  margin-right: 5px;
+  align-items: center;
 `;
 
 const Tag = styled.Text`
-  background-color: aquamarine;
+  font-size: 12px;
+  color: #4fd5a7;
+  margin-right: 8px;
+`;
+
+const XIcon = styled.Image`
+  width: 10px;
+  height: 10px;
+`;
+
+const XButton = styled.TouchableOpacity`
+  width: 10px;
+  height: 10px;
 `;
 
 export default InterestArea;
