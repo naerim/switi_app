@@ -11,3 +11,10 @@ export interface itemType {
   index: number;
   item: dataType;
 }
+
+export interface TagType {
+  nameList: string[];
+  select: number[];
+  setSelect: (prev: (prev: number[]) => number[]) => void;
+  data: dataType[];
+}
