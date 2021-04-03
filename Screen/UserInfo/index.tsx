@@ -4,7 +4,11 @@ import UserInfoContainer from './userInfoContainer';
 import UserName from '../../Component/UserName';
 import BasicModal from '../../Component/BasicModal';
 import ModalButton from './modal/modalButton';
+import { useGoMyPage } from '../../util/navigationHooks';
+
 const UserInfo = () => {
+  const goMyPage = useGoMyPage();
+
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
 
@@ -22,8 +26,7 @@ const UserInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <UserInfoContainer headerTitle="회원정보">
-      <SmallLine />
+    <UserInfoContainer headerTitle="회원정보" display onPress={() => goMyPage()}>
       <UserImageContainer>
         <UserImage source={require('./image/profile.png')} />
         <UserName title="사용자" />
