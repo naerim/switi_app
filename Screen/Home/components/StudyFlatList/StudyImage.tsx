@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 
 interface Props {
-  online: number;
+  done: number;
 }
 
-const StudyImage: React.FC<Props> = ({ online }) => {
+const StudyImage: React.FC<Props> = ({ done }) => {
   return (
     <Container>
-      <Flag>{online}</Flag>
+      <RecruitIcon done={done === 0} />
     </Container>
   );
 };
@@ -21,10 +22,6 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-`;
-
-const Flag = styled.Text`
-  font-size: 12px;
 `;
 
 export default StudyImage;

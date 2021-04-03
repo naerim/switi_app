@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
-import { StudyList } from '../../../Data';
 import RenderItem from './RenderItem';
-import ListHeader from './ListHeader';
+import { StudyList } from '../../../../Data';
+import ListHeader from '../ListHeader';
 
 interface Props {
   idx: number;

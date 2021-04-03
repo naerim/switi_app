@@ -135,7 +135,7 @@ export const StudyList = [
     createAt: '2021-04-03',
     endDate: '2021-06-03',
     scrap: 7,
-    flag: 1,
+    flag: 0,
   },
   {
     idx: 5,
