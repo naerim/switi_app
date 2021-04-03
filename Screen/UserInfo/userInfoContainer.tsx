@@ -4,12 +4,19 @@ import BasicHeader from '../../Component/BasicHeader';
 
 interface Props {
   headerTitle: string;
+  display: boolean;
+  onPress?: () => void;
 }
 
-const UserInfoContainer: React.FC<Props> = ({ children, headerTitle }) => {
+const UserInfoContainer: React.FC<Props> = ({
+  children,
+  headerTitle,
+  onPress,
+  display,
+}) => {
   return (
     <Wrap>
-      <BasicHeader title={headerTitle} />
+      <BasicHeader title={headerTitle} onPress={onPress} display={display} />
       <Container>{children}</Container>
     </Wrap>
   );
@@ -21,7 +28,7 @@ const Wrap = styled.SafeAreaView`
 `;
 
 const Container = styled.View`
-  flex: 1;
+  flex: 12;
   background-color: #fff;
 `;
 
