@@ -3,8 +3,11 @@ import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import PrintList from './printList';
 import ColorButton from '../../Component/ColorButton';
+import { useGoMyPage } from '../../util/navigationHooks';
 
 const MyPage_profile = () => {
+  const goUserInfo = useGoMyPage();
+
   const [isLoading, setIsLoading] = useState(false);
   const [onPress, setonPress] = useState(false);
 
@@ -41,7 +44,7 @@ const MyPage_profile = () => {
     },
   ];
   return (
-    <BasicContainer headerTitle="내 프로필" display>
+    <BasicContainer headerTitle="내 프로필" display onPress={goUserInfo}>
       <Line />
       <Title>연령</Title>
       <Content>만 22세</Content>
