@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ItemType } from '../interface';
+import { ItemType } from '../../interface';
 import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
-import { useGoStudyDetail } from '../../../util/navigationHooks';
+import { useGoStudyDetail } from '../../../../util/navigationHooks';
 
 const RenderItem: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.idx);
