@@ -4,11 +4,14 @@ import BasicContainer from '../../Component/BasicContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import TwoButton from './twoButton';
 import RadioButtonContainer from './radioButtonContainer';
+import ReasonText from './reasonText';
+import useInput from '../../util/useInput';
 const MyPage_Withdrawal = () => {
   const goMyPage = useGoMyPage();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
+  const reasonInput = useInput('');
 
   const onPressLogout = () => setModalVisible(true);
   const closeModal = () => {
@@ -35,6 +38,7 @@ const MyPage_Withdrawal = () => {
       <ReasonContainer>
         <Question>탈퇴하려는 이유가 무엇인가요?</Question>
         <RadioButtonContainer />
+        <ReasonText input={reasonInput} />
       </ReasonContainer>
       <ButtonContainer>
         <TwoButton
@@ -47,6 +51,7 @@ const MyPage_Withdrawal = () => {
           onPress={onPressRealLogout}
           loading={isLoading}
           color="#86E3C3"
+          textColor="white"
         />
       </ButtonContainer>
     </BasicContainer>
@@ -66,9 +71,8 @@ const Answer = styled.Text`
 `;
 
 const GuideContainer = styled.View`
+  padding-top: 10px;
   flex: 2;
-  background-color: pink;
-  justify-content: center;
 `;
 
 const ReasonContainer = styled.View`
@@ -77,7 +81,6 @@ const ReasonContainer = styled.View`
 
 const ButtonContainer = styled.View`
   flex: 1;
-  background-color: lightblue;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

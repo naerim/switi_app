@@ -7,6 +7,7 @@ interface AuthButtonProps {
   onPress: () => void;
   loading: boolean;
   color?: string;
+  textColor?: string;
 }
 
 const TwoButton: React.FC<AuthButtonProps> = ({
@@ -14,10 +15,15 @@ const TwoButton: React.FC<AuthButtonProps> = ({
   onPress,
   loading = false,
   color,
+  textColor,
 }) => (
   <Touchable disabled={loading} onPress={onPress}>
     <Container color={color}>
-      {loading ? <ActivityIndicator color={'white'} /> : <Text>{text}</Text>}
+      {loading ? (
+        <ActivityIndicator color={'white'} />
+      ) : (
+        <Text color={textColor}>{text}</Text>
+      )}
     </Container>
   </Touchable>
 );
@@ -33,11 +39,11 @@ const Container = styled.View`
   border-radius: 30px;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color }: { color?: string }) => color || '#b4b4b4'};
+  background-color: ${({ color }: { color?: string }) => color || '#E3E3E3'};
 `;
 
 const Text = styled.Text`
-  color: white;
+  color: ${({ color }: { color?: string }) => color || '#B4B4B4'};
   text-align: center;
   font-weight: 600;
 `;
