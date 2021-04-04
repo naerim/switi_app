@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import StudyFlatList from './components/StudyFlatList';
+import TopCategory from './components/TopCategory';
 
 const Home = ({ route }: any) => {
   // 0 : 온라인, 1 : 오프라인
@@ -8,9 +9,7 @@ const Home = ({ route }: any) => {
 
   return (
     <Container>
-      <CategoryArea>
-        <CategoryText>카테고리영역</CategoryText>
-      </CategoryArea>
+      <TopCategory />
       <StudyFlatList idx={idx} />
     </Container>
   );
