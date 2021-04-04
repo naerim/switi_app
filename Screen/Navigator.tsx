@@ -13,6 +13,7 @@ import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import MyPage_profile from './MyPage_profile';
 import UserInfo from './UserInfo';
+import MyPage_Withdrawal from './MyPage_Withdrawal';
 import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
 import Certification from './ResetPassword/certification';
@@ -46,6 +47,7 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage" component={MyPage} />
       <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
       <Stack.Screen name="UserInfo" component={UserInfo} />
+      <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
     </Stack.Navigator>
   );
 }

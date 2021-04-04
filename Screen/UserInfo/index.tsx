@@ -4,10 +4,11 @@ import UserInfoContainer from './userInfoContainer';
 import UserName from '../../Component/UserName';
 import BasicModal from '../../Component/BasicModal';
 import ModalButton from './modal/modalButton';
-import { useGoMyPage } from '../../util/navigationHooks';
+import { useGoMyPage, UseGoWithdrawal } from '../../util/navigationHooks';
 
 const UserInfo = () => {
   const goMyPage = useGoMyPage();
+  const goWithdrawal = UseGoWithdrawal();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
@@ -26,7 +27,11 @@ const UserInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <UserInfoContainer headerTitle="회원정보" display onPress={() => goMyPage()}>
+    <UserInfoContainer
+      headerTitle="회원정보"
+      display
+      onPress={() => goMyPage()}
+    >
       <UserImageContainer>
         <UserImage source={require('./image/profile.png')} />
         <UserName title="사용자" />
@@ -36,7 +41,7 @@ const UserInfo = () => {
       <SmallLine />
       <Text onPress={onPressLogout}>로그아웃</Text>
       <SmallLine />
-      <LinkText>회원탈퇴</LinkText>
+      <LinkText onPress={goWithdrawal}>회원탈퇴</LinkText>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <ModalBigText>로그아웃 하시겠습니까?</ModalBigText>
         <ModalSmallText>

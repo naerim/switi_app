@@ -6,7 +6,7 @@ import ColorButton from '../../Component/ColorButton';
 import { useGoMyPage } from '../../util/navigationHooks';
 
 const MyPage_profile = () => {
-  const goUserInfo = useGoMyPage();
+  const goMyPage = useGoMyPage();
 
   const [isLoading, setIsLoading] = useState(false);
   const [onPress, setonPress] = useState(false);
@@ -44,7 +44,7 @@ const MyPage_profile = () => {
     },
   ];
   return (
-    <BasicContainer headerTitle="내 프로필" display onPress={goUserInfo}>
+    <BasicContainer headerTitle="내 프로필" display onPress={goMyPage}>
       <Line />
       <Title>연령</Title>
       <Content>만 22세</Content>

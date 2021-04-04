@@ -36,6 +36,13 @@ export const useGoMyPage = () => {
   return useCallback(() => navigation.navigate('MyPage'), [navigation]);
 };
 
+export const UseGoWithdrawal = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_Withdrawal'), [
+    navigation,
+  ]);
+};
+
 export const useGoTerms = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Terms', { idx: idx }), [
