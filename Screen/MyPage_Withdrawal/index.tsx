@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import TwoButton from './twoButton';
+import RadioButtonContainer from './radioButtonContainer';
 const MyPage_Withdrawal = () => {
   const goMyPage = useGoMyPage();
 
@@ -33,6 +34,7 @@ const MyPage_Withdrawal = () => {
       </GuideContainer>
       <ReasonContainer>
         <Question>탈퇴하려는 이유가 무엇인가요?</Question>
+        <RadioButtonContainer />
       </ReasonContainer>
       <ButtonContainer>
         <TwoButton
