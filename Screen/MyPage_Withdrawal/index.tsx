@@ -73,7 +73,6 @@ const GuideContainer = styled.View`
 
 const ReasonContainer = styled.View`
   flex: 7;
-  background-color: wheat;
 `;
 
 const ButtonContainer = styled.View`

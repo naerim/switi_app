@@ -63,8 +63,9 @@ const RadioButtonContainer = () => {
   );
 };
 
-const Container = styled.View``;
-const Radio = styled.View`
-  background-color: pink;
+const Container = styled.View`
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
+
 export default RadioButtonContainer;
