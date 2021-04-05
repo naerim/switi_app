@@ -123,7 +123,9 @@ const MyPage_FixUserInfo = () => {
 
   return (
     <BasicContainer headerTitle="회원탈퇴" display onPress={goMyPage}>
-      <PictureContainer></PictureContainer>
+      <PictureContainer>
+        <UserImage source={require('./image/profile.png')} />
+      </PictureContainer>
       <InputContainer>
         {fixUserInfoData.map(({ title, Component, input, error, confirm }) => (
           <SignupContent key={title} title={title}>
@@ -138,18 +140,24 @@ const MyPage_FixUserInfo = () => {
   );
 };
 
+const UserImage = styled.Image`
+  width: 68px;
+  height: 68px;
+`;
+
 const PictureContainer = styled.View`
-  background-color: pink;
-  flex: 3;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
 `;
 const InputContainer = styled.View`
-  background-color: wheat;
   flex: 10;
+  padding-top: 10px;
 `;
 
 const ButtonContainer = styled.View`
-  background-color: skyblue;
   flex: 1;
+  justify-content: center;
 `;
 
 export default MyPage_FixUserInfo;
