@@ -1,10 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-// import * as Progress from 'expo-progress';
-// import PregressBar from '../../progressBar/progressbar';
 import * as Progress from 'react-native-progress';
+import { useState } from 'react';
+
+interface switiChoiceProps {
+  switi: number;
+}
 
 const SugarContent = () => {
+  const [sugar, setSugar] = useState(70);
   const sugarData = [
     {
       grade: 1,
@@ -33,32 +37,32 @@ const SugarContent = () => {
     },
   ];
 
-  function switiChoice(currentSwiti) {
+  const switiChoice: React.FC<switiChoiceProps> = ({ switi }) => {
     let result = 0;
-    console.log(currentSwiti);
-    if (0 <= currentSwiti && currentSwiti <= 10) {
+    console.log(switi);
+    if (0 <= switi && switi <= 10) {
       result = 1;
       console.log(result);
-    } else if (10 < currentSwiti && currentSwiti <= 40) {
+    } else if (10 < switi && switi <= 40) {
       result = 2;
       console.log(result);
-    } else if (40 < currentSwiti && currentSwiti <= 55) {
+    } else if (40 < switi && switi <= 55) {
       result = 3;
       console.log(result);
-    } else if (55 < currentSwiti && currentSwiti <= 80) {
+    } else if (55 < switi && switi <= 80) {
       result = 4;
       console.log(result);
-    } else if (80 < currentSwiti && currentSwiti <= 90) {
+    } else if (80 < switi && switi <= 90) {
       result = 5;
       console.log(result);
-    } else if (90 < currentSwiti && currentSwiti <= 100) {
+    } else if (90 < switi && switi <= 100) {
       result = 6;
       console.log(result);
     } else console.log('오류');
     return result;
-  }
+  };
 
-  switiChoice(70);
+  // switiChoice(70);
 
   return (
     <Container>
@@ -66,9 +70,16 @@ const SugarContent = () => {
         <SugarImage source={require('./image/3switi.png')} />
         <Text>50%</Text>
       </SugarContainer>
-      <Progress.Bar progress={0.3} width={200} />
-      {/*<PregressBar />*/}
-      {/*<Progress.Bar isIndeterminate color="blue" />*/}
+      <ProgressContainer>
+        <Progress.Bar
+          progress={sugar / 100}
+          width={270}
+          height={10}
+          color="#86E3C3"
+          unfilledColor="#F3F3F3"
+          borderWidth={0}
+        />
+      </ProgressContainer>
     </Container>
   );
 };
@@ -80,10 +91,17 @@ const Container = styled.View`
   border-radius: 20px;
   justify-content: center;
   padding: 10px;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const SugarContainer = styled.View`
   position: relative;
+  justify-content: center;
+`;
+
+const ProgressContainer = styled.View`
+  padding-left: 20px;
   justify-content: center;
 `;
 
