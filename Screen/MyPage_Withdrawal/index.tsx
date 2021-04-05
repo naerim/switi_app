@@ -10,6 +10,7 @@ import BasicModal from '../../Component/BasicModal';
 
 const MyPage_Withdrawal = () => {
   const goMyPage = useGoMyPageUserInfo();
+  const [reason, setReason] = useState(0);
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const reasonInput = useInput('');
@@ -30,7 +31,7 @@ const MyPage_Withdrawal = () => {
       </GuideContainer>
       <ReasonContainer>
         <Question>탈퇴하려는 이유가 무엇인가요?</Question>
-        <RadioButtonContainer />
+        <RadioButtonContainer input={{ reason, setReason }} />
         <ReasonText input={reasonInput} />
       </ReasonContainer>
       <ButtonContainer>

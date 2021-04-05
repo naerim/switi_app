@@ -26,10 +26,7 @@ const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
       <Title>{title}</Title>
       <RadioForm formHorizontal={true}>
         {radio_props.map((obj, i) => (
-          <RadioButton
-            labelHorizontal={true}
-            key={i}
-          >
+          <RadioButton labelHorizontal={true} key={i}>
             <RadioButtonInput
               obj={obj}
               index={i}
