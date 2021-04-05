@@ -37,12 +37,15 @@ export default function ImagePickerContainer() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <PictureContainer onPress={pickImage}>
-        <UserImage source={require('./profile.png')} />
-        {image && (
+        {/*기본이미지*/}
+        {/*삽입이미지*/}
+        {image ? (
           <Image
             source={{ uri: image }}
             style={{ width: 68, height: 68, borderRadius: 40 }}
           />
+        ) : (
+          <UserImage source={require('./profile.png')} />
         )}
       </PictureContainer>
     </View>
