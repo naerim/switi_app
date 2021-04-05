@@ -1,15 +1,15 @@
 import styled from 'styled-components/native';
-import { View, Text, Picker } from 'react-native';
 import React, { useState } from 'react';
 import BasicContainer from '../../Component/BasicContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
-import NicknameContainer from '../SignUp/components/Nickname';
-import EmailInput from '../SignUp/components/EmailInput';
-import PasswordInput from '../SignUp/components/PasswordInput';
+import NicknameContainer from './Nickname';
+import EmailInput from './emailInput';
+import PasswordInput from './passwordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import SignupContent from '../SignUp/components/Layout/SignupContent';
 import FixButton from './fixButton';
+import { Alert } from 'react-native';
 
 const MyPage_FixUserInfo = () => {
   const goMyPage = useGoMyPage();
@@ -74,6 +74,13 @@ const MyPage_FixUserInfo = () => {
     }
   };
 
+  const FixButtonOnPress = () => {
+    if (success) {
+      Alert.alert('수정완료');
+    } else {
+      Alert.alert('이메일이나 비밀번호의 입력값에 오류가 있습니다. ');
+    }
+  };
   const fixUserInfoData = [
     {
       title: '닉네임',
@@ -122,7 +129,7 @@ const MyPage_FixUserInfo = () => {
   };
 
   return (
-    <BasicContainer headerTitle="회원탈퇴" display onPress={goMyPage}>
+    <BasicContainer headerTitle="회원정보 수정" display onPress={goMyPage}>
       <PictureContainer>
         <UserImage source={require('./image/profile.png')} />
       </PictureContainer>
@@ -133,8 +140,9 @@ const MyPage_FixUserInfo = () => {
           </SignupContent>
         ))}
       </InputContainer>
+      <NothingContainer />
       <ButtonContainer>
-        <FixButton success={success} input={input} />
+        <FixButton success={success} input={input} onPress={FixButtonOnPress} />
       </ButtonContainer>
     </BasicContainer>
   );
@@ -151,8 +159,12 @@ const PictureContainer = styled.View`
   justify-content: center;
 `;
 const InputContainer = styled.View`
-  flex: 10;
+  flex: 8;
   padding-top: 10px;
+`;
+
+const NothingContainer = styled.View`
+  flex: 1;
 `;
 
 const ButtonContainer = styled.View`
