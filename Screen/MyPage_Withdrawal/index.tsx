@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
-import { useGoMyPage } from '../../util/navigationHooks';
+import { useGoMyPage, useGoMyPageUserInfo } from '../../util/navigationHooks';
 import TwoButton from './twoButton';
 import RadioButtonContainer from './radioButtonContainer';
 import ReasonText from './reasonText';
 import useInput from '../../util/useInput';
+import BasicModal from '../../Component/BasicModal';
+
 const MyPage_Withdrawal = () => {
-  const goMyPage = useGoMyPage();
+  const goMyPage = useGoMyPageUserInfo();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
   const reasonInput = useInput('');
-
-  const onPressLogout = () => setModalVisible(true);
   const closeModal = () => {
     setModalVisible(false);
-    setConfigModalVisible(false);
   };
-
-  const onPressCancel = () => setModalVisible(false);
-  const onPressRealLogout = () => {
-    setModalVisible(false);
-    setConfigModalVisible(true);
-  };
+  const onPressWithdrawal = () => setModalVisible(true);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -43,17 +36,26 @@ const MyPage_Withdrawal = () => {
       <ButtonContainer>
         <TwoButton
           text="나중에 할께요"
-          onPress={onPressCancel}
+          onPress={goMyPage}
           loading={isLoading}
         />
         <TwoButton
           text="네, 탈퇴할래요"
-          onPress={onPressRealLogout}
+          onPress={onPressWithdrawal}
           loading={isLoading}
           color="#86E3C3"
           textColor="white"
         />
       </ButtonContainer>
+      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+        <ModalTextContainer>
+          <ModalBigText>회원탈퇴가 완료되었습니다</ModalBigText>
+          <ModalSmallText>계정이 삭제되었습니다.</ModalSmallText>
+          <ModalSmallText>
+            다음에 다시 볼 수 있었으면 좋겠네요 :)
+          </ModalSmallText>
+        </ModalTextContainer>
+      </BasicModal>
     </BasicContainer>
   );
 };
@@ -85,4 +87,22 @@ const ButtonContainer = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+
+const ModalTextContainer = styled.View`
+  padding: 40px;
+`;
+
+const ModalBigText = styled.Text`
+  font-size: 18px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  text-align: center;
+  font-weight: bold;
+`;
+
+const ModalSmallText = styled.Text`
+  font-size: 14px;
+  text-align: center;
+`;
+
 export default MyPage_Withdrawal;

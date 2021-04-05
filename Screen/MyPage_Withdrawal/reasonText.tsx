@@ -28,6 +28,7 @@ const Input = styled.TextInput`
   font-size: 12px;
   border-color: #e3e3e3;
   padding: 10px;
+  margin-top: 10px;
 `;
 
 const InputContainer = styled.View``;

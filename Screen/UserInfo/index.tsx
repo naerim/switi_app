@@ -62,7 +62,7 @@ const UserInfo = () => {
         </ModalButtonContainer>
       </BasicModal>
       <BasicModal modalVisible={configModalVisible} closeModal={closeModal}>
-        <ModalBigText>로그아웃 로그아웃이 완료되었습니다?</ModalBigText>
+        <ModalBigText>로그아웃이 완료되었습니다</ModalBigText>
         <ModalSmallText>
           로그아웃이 완료되었습니다! 다음에 또 뵈어요:)
         </ModalSmallText>
