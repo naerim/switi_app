@@ -37,10 +37,13 @@ export default function ImagePickerContainer() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <PictureContainer onPress={pickImage}>
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
         <UserImage source={require('./profile.png')} />
+        {image && (
+          <Image
+            source={{ uri: image }}
+            style={{ width: 68, height: 68, borderRadius: 40 }}
+          />
+        )}
       </PictureContainer>
     </View>
   );
@@ -54,4 +57,5 @@ const PictureContainer = styled.TouchableOpacity`
 const UserImage = styled.Image`
   width: 68px;
   height: 68px;
+  border-radius: 40px;
 `;
