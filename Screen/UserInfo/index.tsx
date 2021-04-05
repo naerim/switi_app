@@ -4,11 +4,16 @@ import UserInfoContainer from './userInfoContainer';
 import UserName from '../../Component/UserName';
 import BasicModal from '../../Component/BasicModal';
 import ModalButton from './modal/modalButton';
-import { useGoMyPage, UseGoWithdrawal } from '../../util/navigationHooks';
+import {
+  UseGoFixUserInfo,
+  useGoMyPage,
+  UseGoWithdrawal,
+} from '../../util/navigationHooks';
 
 const UserInfo = () => {
   const goMyPage = useGoMyPage();
   const goWithdrawal = UseGoWithdrawal();
+  const goFixUserInfo = UseGoFixUserInfo();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [configModalVisible, setConfigModalVisible] = useState<boolean>(false);
@@ -37,7 +42,7 @@ const UserInfo = () => {
         <UserName title="사용자" />
       </UserImageContainer>
       <Line />
-      <Text>회원정보 수정</Text>
+      <Text onPress={goFixUserInfo}>회원정보 수정</Text>
       <SmallLine />
       <Text onPress={onPressLogout}>로그아웃</Text>
       <SmallLine />

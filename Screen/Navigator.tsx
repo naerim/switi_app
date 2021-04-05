@@ -18,7 +18,7 @@ import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
 import Certification from './ResetPassword/certification';
 import RenewPassword from './ResetPassword/renewPassword';
-
+import MyPage_FixUserInfo from './MyPage_FixUserInfo';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MaterialTopTab = createMaterialTopTabNavigator();
@@ -48,6 +48,7 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
       <Stack.Screen name="UserInfo" component={UserInfo} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
+      <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
     </Stack.Navigator>
   );
 }
