@@ -28,27 +28,71 @@ const Alarm = () => {
           color="#86E3C3"
         />
       </ButtonContainer>
-      <SwitchContainer>
-        <View style={styles.container}>
-          <Text>{switchValue ? 'Switch is ON' : 'Switch is OFF'}</Text>
+      <AllSwithContainer>
+        <SwitchContainer>
+          <SwitchTextContainer>
+            <BasicText>관심 스터디/클래스 알림</BasicText>
+            <SmallText>
+              내 프로필 설정에 맞는 스터디/클래스가 올라왔을 때
+            </SmallText>
+          </SwitchTextContainer>
           <Switch
-            style={{ marginTop: 30 }}
             onValueChange={toggleSwitch}
             value={switchValue}
+            trackColor={{
+              true: '#86E3C3',
+              false: '#DBDBDB',
+            }}
           />
-        </View>
-      </SwitchContainer>
+        </SwitchContainer>
+        <SwitchContainer>
+          <SwitchTextContainer>
+            <BasicText>스터디/클래스 신청 알림</BasicText>
+            <SmallText>누군가 내 스터디/클래스를 신청했을 때 </SmallText>
+          </SwitchTextContainer>
+          <Switch
+            onValueChange={toggleSwitch}
+            value={switchValue}
+            trackColor={{
+              true: '#86E3C3',
+              false: '#DBDBDB',
+            }}
+          />
+        </SwitchContainer>
+        <SwitchContainer>
+          <SwitchTextContainer>
+            <BasicText>스터디/클래스 수락 알림</BasicText>
+            <SmallText>스터디/클래스 신청이 수락되었을 때</SmallText>
+          </SwitchTextContainer>
+          <Switch
+            onValueChange={toggleSwitch}
+            value={switchValue}
+            trackColor={{
+              true: '#86E3C3',
+              false: '#DBDBDB',
+            }}
+          />
+        </SwitchContainer>
+        <SwitchContainer>
+          <SwitchTextContainer>
+            <BasicText>상호평가 알림</BasicText>
+            <SmallText>
+              스터디 기간 완료 후 스터디원 상호평가가 필요할 때
+            </SmallText>
+          </SwitchTextContainer>
+          <Switch
+            onValueChange={toggleSwitch}
+            value={switchValue}
+            trackColor={{
+              true: '#86E3C3',
+              false: '#DBDBDB',
+            }}
+          />
+        </SwitchContainer>
+      </AllSwithContainer>
     </BasicContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 const TopTextContainer = styled.View`
   flex: 1;
@@ -62,12 +106,28 @@ const ButtonContainer = styled.View`
 `;
 
 const SwitchContainer = styled.View`
-  background-color: skyblue;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 24px;
+`;
+
+const AllSwithContainer = styled.View`
   flex: 10;
 `;
 
 const BasicText = styled.Text`
   font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
+const SmallText = styled.Text`
+  font-size: 10px;
+  color: #b4b4b4;
+  margin-bottom: 10px;
+`;
+
+const SwitchTextContainer = styled.View`
+  text-align: left;
+`;
 export default Alarm;
