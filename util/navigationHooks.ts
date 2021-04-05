@@ -50,6 +50,13 @@ export const UseGoFixUserInfo = () => {
   ]);
 };
 
+export const UseGoAlarm = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('Alarm'), [
+    navigation,
+  ]);
+};
+
 export const useGoTerms = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Terms', { idx: idx }), [

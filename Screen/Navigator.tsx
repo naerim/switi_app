@@ -18,7 +18,7 @@ import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
 import Certification from './ResetPassword/certification';
 import RenewPassword from './ResetPassword/renewPassword';
-
+import Alarm from "./Alarm";
 import MyPage_FixUserInfo from './MyPage_FixUserInfo';
 import HomeIcon from '../Img/menu_home.png';
 import HomeTintIcon from '../Img/menu_home_tint.png';
@@ -61,6 +61,7 @@ function MyPageNavigator() {
       <Stack.Screen name="UserInfo" component={UserInfo} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
+        <Stack.Screen name="Alarm" component={Alarm} />
     </Stack.Navigator>
   );
 }

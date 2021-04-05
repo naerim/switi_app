@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoMyPageUserInfo } from '../../../util/navigationHooks';
+import { useGoMyPageUserInfo, UseGoAlarm } from '../../../util/navigationHooks';
 
 const MoveScreen = () => {
   const goUserInfo = useGoMyPageUserInfo();
+  const goUseAlarm = UseGoAlarm();
   return (
     <Wrap>
       <Container>
@@ -15,7 +16,7 @@ const MoveScreen = () => {
       <Container>
         <Title>설정</Title>
         <Content onPress={() => goUserInfo()}>회원정보</Content>
-        <Content>알림 설정</Content>
+        <Content onPress={() => goUseAlarm()}>알림 설정</Content>
       </Container>
       <Line />
       <Container>
