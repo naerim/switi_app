@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -18,40 +17,28 @@ interface Props {
 const RadioButtonContainer: React.FC<Props> = ({ input }) => {
   const radio_props = [
     {
-      id: 1,
       label: '자주 사용하지 않아요',
-      value: 'option1',
-      size: 20,
+      value: 0,
     },
     {
-      id: 2,
       label: '이용이 불편해요',
-      value: 'option2',
-      size: 20,
+      value: 1,
     },
     {
-      id: 3,
       label: '시스템 오류가 잦아요',
-      value: 'option2',
-      size: 20,
+      value: 2,
     },
     {
-      id: 4,
       label: '스터디 모집이 어려워요',
-      value: 'option2',
-      size: 20,
+      value: 3,
     },
     {
-      id: 5,
       label: '새 계정으로 다시 이용하고 싶어요',
-      value: 'option2',
-      size: 20,
+      value: 4,
     },
     {
-      id: 6,
       label: '기타 (직접작성)',
-      value: 'option2',
-      size: 20,
+      value: 5,
     },
   ];
 
@@ -65,7 +52,6 @@ const RadioButtonContainer: React.FC<Props> = ({ input }) => {
 
   return (
     <Container>
-      {/*<RadioGroup radioButtons={radioButtons} onPress={onPressRadioButton} />*/}
       <RadioForm>
         {radio_props.map((obj, i) => (
           <RadioButton labelHorizontal={true} key={i}>
