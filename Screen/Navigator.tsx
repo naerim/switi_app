@@ -13,10 +13,13 @@ import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
 import MyPage_profile from './MyPage_profile';
 import UserInfo from './UserInfo';
+import MyPage_Withdrawal from './MyPage_Withdrawal';
 import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
 import Certification from './ResetPassword/certification';
 import RenewPassword from './ResetPassword/renewPassword';
+
+import MyPage_FixUserInfo from './MyPage_FixUserInfo';
 import HomeIcon from '../Img/menu_home.png';
 import HomeTintIcon from '../Img/menu_home_tint.png';
 import StudyIcon from '../Img/menu_study.png';
@@ -28,7 +31,6 @@ import MyPageTintIcon from '../Img/menu_mypage_tint.png';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native';
 import HomeContainer from '../Component/HomeContainer';
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MaterialTopTab = createMaterialTopTabNavigator();
@@ -57,6 +59,8 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage" component={MyPage} />
       <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
       <Stack.Screen name="UserInfo" component={UserInfo} />
+      <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
+      <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
     </Stack.Navigator>
   );
 }
