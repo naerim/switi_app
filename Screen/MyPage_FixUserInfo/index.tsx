@@ -10,6 +10,7 @@ import { Status } from '../SignUp/inteface';
 import SignupContent from '../SignUp/components/Layout/SignupContent';
 import FixButton from './fixButton';
 import { Alert } from 'react-native';
+import ImagePickerContainer from './image/imagePicker';
 
 const MyPage_FixUserInfo = () => {
   const goMyPage = useGoMyPage();
@@ -131,7 +132,7 @@ const MyPage_FixUserInfo = () => {
   return (
     <BasicContainer headerTitle="회원정보 수정" display onPress={goMyPage}>
       <PictureContainer>
-        <UserImage source={require('./image/profile.png')} />
+        <ImagePickerContainer />
       </PictureContainer>
       <InputContainer>
         {fixUserInfoData.map(({ title, Component, input, error, confirm }) => (
