@@ -20,13 +20,4 @@ const Container = styled.SafeAreaView`
   background-color: #fff;
 `;
 
-const CategoryArea = styled.View`
-  margin-left: 24px;
-  padding: 24px 0;
-`;
-
-const CategoryText = styled.Text`
-  font-size: 12px;
-`;
-
 export default Home;

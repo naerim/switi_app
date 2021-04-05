@@ -1,34 +1,35 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoHome } from '../../util/navigationHooks';
 import { StudyList } from '../../Data';
+import StudyImage from './components/StudyImage';
 
 const StudyDetail = ({ route }: any) => {
-  const goHome = useGoHome();
   const idx = route.params.idx;
   const item = StudyList.find((i) => i.idx === idx);
 
   return (
     <Container>
-      <Title>{item && item.title}</Title>
-      <PrevButton title="이전버튼" onPress={goHome} />
+      <StudyImage />
+      <Detail>
+        <Title>{item && item.title}</Title>
+      </Detail>
     </Container>
   );
 };
 
-const Container = styled.View`
-  flex: 1;
+const Container = styled.SafeAreaView`
   background-color: #fff;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PrevButton = styled.Button`
-  font-size: 14px;
+  flex: 1;
 `;
 
 const Title = styled.Text`
-  font-size: 16px;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+const Detail = styled.View`
+  padding: 0 24px;
 `;
 
 export default StudyDetail;
