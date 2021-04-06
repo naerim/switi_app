@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { StudyList } from '../../Data';
 import StudyImage from './components/StudyImage';
+import StudyInfo from './components/StudyInfo';
+import BottomButton from './components/BottomButton';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -10,9 +12,12 @@ const StudyDetail = ({ route }: any) => {
   return (
     <Container>
       <StudyImage />
-      <Detail>
+      <Content>
         <Title>{item && item.title}</Title>
-      </Detail>
+        <Desc>{item?.desc}</Desc>
+      </Content>
+      <StudyInfo item={item} />
+      <BottomButton />
     </Container>
   );
 };
@@ -28,8 +33,14 @@ const Title = styled.Text`
   font-weight: bold;
 `;
 
-const Detail = styled.View`
+const Content = styled.View`
   padding: 0 24px;
+  flex: 3;
+`;
+
+const Desc = styled.Text`
+  font-size: 12px;
+  color: #2b2b2b;
 `;
 
 export default StudyDetail;

@@ -21,7 +21,7 @@ const StudyImage = () => {
 };
 
 const Container = styled.View`
-  height: 30%;
+  flex: 3;
 `;
 
 const MainImage = styled.View`
