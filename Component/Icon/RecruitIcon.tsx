@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  done: boolean;
+  done?: boolean;
+  use?: string;
 }
 
-const RecruitIcon: React.FC<Props> = ({ done }) => {
+const RecruitIcon: React.FC<Props> = ({ done, use }) => {
   return (
-    <Container done={done}>
-      <Title>{done ? '모집완료 ' : '모집중'}</Title>
+    <Container done={done} use={use}>
+      <Title use={use}>{done ? '모집완료' : '모집중'}</Title>
     </Container>
   );
 };
@@ -20,13 +21,15 @@ const Container = styled.View<Props>`
   justify-content: center;
   padding: 2px 4px;
   position: absolute;
-  left: 5px;
-  top: 5px;
+  ${(props) =>
+    props.use === 'StudyDetail'
+      ? `bottom:10px; right:24px`
+      : `top:5px; left:5px`};
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<Props>`
   color: white;
-  font-size: 10px;
+  font-size: ${(props) => (props.use === 'StudyDetail' ? '12px' : '10px')};
 `;
 
 export default RecruitIcon;

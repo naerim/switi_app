@@ -12,7 +12,7 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyImage />
+      <StudyImage done={item?.flag === 0} />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo

@@ -3,8 +3,13 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import { useGoHome } from '../../../util/navigationHooks';
 import BackIcon from '../../../Img/btn_back_w.png';
+import RecruitIcon from '../../../Component/Icon/RecruitIcon';
 
-const StudyImage = () => {
+interface Props {
+  done?: boolean;
+}
+
+const StudyImage: React.FC<Props> = ({ done }) => {
   const goHome = useGoHome();
 
   return (
@@ -16,6 +21,7 @@ const StudyImage = () => {
       >
         <Icon source={BackIcon} />
       </PrevButton>
+      <RecruitIcon done={done} use="StudyDetail" />
     </Container>
   );
 };
