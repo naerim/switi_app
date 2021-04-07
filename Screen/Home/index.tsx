@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import StudyFlatList from './components/StudyFlatList';
+import TopCategory from './components/TopCategory';
 
-const Home = () => {
+const Home = ({ route }: any) => {
+  // 0 : 온라인, 1 : 오프라인
+  const idx = route.params.idx;
+
   return (
     <Container>
-      <Content>
-        <TestText>test</TestText>
-      </Content>
+      <TopCategory />
+      <StudyFlatList idx={idx} />
     </Container>
   );
 };
@@ -14,13 +18,6 @@ const Home = () => {
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
-`;
-
-const Content = styled.View`
-  margin: 0 24px;
-`;
-const TestText = styled.Text`
-  font-size: 30px;
 `;
 
 export default Home;

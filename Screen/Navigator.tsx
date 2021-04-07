@@ -31,6 +31,9 @@ import MyPageTintIcon from '../Img/menu_mypage_tint.png';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native';
 import HomeContainer from '../Component/HomeContainer';
+import StudyDetail from './StudyDetail';
+import AddStudy from './AddStudy';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MaterialTopTab = createMaterialTopTabNavigator();
@@ -98,8 +101,16 @@ const HomeNavigation = () => (
         },
       }}
     >
-      <MaterialTopTab.Screen name="오프라인" component={Home} />
-      <MaterialTopTab.Screen name="온라인" component={Home} />
+      <MaterialTopTab.Screen
+        name="오프라인"
+        component={Home}
+        initialParams={{ idx: 1 }}
+      />
+      <MaterialTopTab.Screen
+        name="온라인"
+        component={Home}
+        initialParams={{ idx: 0 }}
+      />
     </MaterialTopTab.Navigator>
   </HomeContainer>
 );
@@ -166,11 +177,13 @@ const TabNavigation = () => (
 const MainNavigation = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Switi" component={TabNavigation} />
+    <Stack.Screen name="StudyDetail" component={StudyDetail} />
+    <Stack.Screen name="AddStudy" component={AddStudy} />
   </Stack.Navigator>
 );
 
 const RootNavigator = () => {
-  const user = false;
+  const user = true;
   return (
     <NavigationContainer>
       {user ? <MainNavigation /> : <LoginNavigation />}

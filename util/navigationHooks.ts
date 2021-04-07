@@ -78,3 +78,20 @@ export const useGoRenewPassword = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('renewPassword'), [navigation]);
 };
+
+export const useGoStudyDetail = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('StudyDetail', { idx: idx }), [
+    navigation,
+  ]);
+};
+
+export const useGoHome = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('Switi'), [navigation]);
+};
+
+export const useGoAddStudy = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('AddStudy'), [navigation]);
+};

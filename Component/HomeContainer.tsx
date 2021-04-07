@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import HomeHeader from './HomeHeader';
+import AddStudyButton from '../Screen/Home/components/AddStudyButton';
 
 interface Props {
   onPress?: () => void;
@@ -13,6 +14,7 @@ const HomeContainer: React.FC<Props> = ({ children, onPress }) => {
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <HomeHeader onPress={goAlarm} />
       <Container>{children}</Container>
+      <AddStudyButton />
     </Wrap>
   );
 };
