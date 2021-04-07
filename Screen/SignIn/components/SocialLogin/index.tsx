@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import SocialLoginButton from './SocialLoginButton';
 import google from './i_google.png';
 import naver from './naver.png';
+import kakao from './kakao.png';
 
 const SocialLogin: React.FC = () => {
   const socialData = [
@@ -18,7 +19,7 @@ const SocialLogin: React.FC = () => {
       onPress: () => console.log('카카오로 로그인'),
       color: '#FFDF00',
       fontcolor: '#fff',
-      imageSource: google,
+      imageSource: kakao,
     },
     {
       title: '구글',
