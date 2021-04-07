@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import NotScrapIcon from '../../../../Img/icon_notScrap.png';
 
 interface Props {
-  scrap: number;
+  scrap?: number;
 }
 
 const Scrap: React.FC<Props> = ({ scrap }) => {

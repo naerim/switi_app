@@ -4,6 +4,7 @@ import { StudyList } from '../../Data';
 import StudyImage from './components/StudyImage';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
+import OtherInfo from './components/OtherInfo';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -14,6 +15,11 @@ const StudyDetail = ({ route }: any) => {
       <StudyImage />
       <Content>
         <Title>{item && item.title}</Title>
+        <OtherInfo
+          username={item?.username}
+          createAt={item?.createAt}
+          scrap={item?.scrap}
+        />
         <Desc>{item?.desc}</Desc>
       </Content>
       <StudyInfo item={item} />
@@ -35,12 +41,16 @@ const Title = styled.Text`
 
 const Content = styled.View`
   padding: 0 24px;
-  flex: 3;
+  margin-bottom: 20px;
+  flex: 4;
+  border-bottom-width: 1px;
+  border-color: #f3f3f3;
 `;
 
 const Desc = styled.Text`
   font-size: 12px;
   color: #2b2b2b;
+  flex: 6;
 `;
 
 export default StudyDetail;
