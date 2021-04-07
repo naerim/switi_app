@@ -38,7 +38,7 @@ const ImagePickerContainer = () => {
   };
   return (
     <Container style={{}}>
-      <PictureContainer onPress={pickImage}>
+      <PictureContainer onPress={pickImage} activeOpacity={0.8}>
         <UserImage
           source={{
             uri: image,
