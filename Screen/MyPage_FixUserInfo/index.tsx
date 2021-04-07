@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import React, { useState } from 'react';
 import BasicContainer from '../../Component/BasicContainer';
-import { useGoMyPage } from '../../util/navigationHooks';
+import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import NicknameContainer from './Nickname';
 import EmailInput from './emailInput';
 import PasswordInput from './passwordInput';
@@ -13,7 +13,7 @@ import { Alert } from 'react-native';
 import ImagePickerContainer from './image/imagePicker';
 
 const MyPage_FixUserInfo = () => {
-  const goMyPage = useGoMyPage();
+  const goMyPageUserInfo = useGoMyPageUserInfo();
   const nicknameInput = useInput('');
   const emailInput = useInput('');
   const passwordInput = useInput('');
@@ -130,7 +130,11 @@ const MyPage_FixUserInfo = () => {
   };
 
   return (
-    <BasicContainer headerTitle="회원정보 수정" display onPress={goMyPage}>
+    <BasicContainer
+      headerTitle="회원정보 수정"
+      display
+      onPress={goMyPageUserInfo}
+    >
       <PictureContainer>
         <ImagePickerContainer />
       </PictureContainer>

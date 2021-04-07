@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { UseGoAlarm } from '../../../util/navigationHooks';
 
 interface Props {
   title: string;
 }
 
 const Headder: React.FC<Props> = ({ title }) => {
+  const goAlarm = UseGoAlarm();
   return (
     <Wrap>
       <Container>
         <Title>{title}</Title>
       </Container>
-      <AlarmIcon source={require('./bell.png')} />
+      <IconContainer onPress={goAlarm}>
+        <AlarmIcon source={require('./Alarm2.png')} />
+      </IconContainer>
     </Wrap>
   );
 };
@@ -36,6 +40,7 @@ const Title = styled.Text`
   padding-left: 24px;
 `;
 
+const IconContainer = styled.TouchableOpacity``;
 const AlarmIcon = styled.Image`
   width: 18px;
   height: 18px;

@@ -68,21 +68,17 @@ const SugarContent = () => {
     } else console.log('오류');
     return grade;
   };
-까
+
   let sugarGrade = 4;
   // sugarGrade = switiChoice(sugar);
   //왜 오류가 나지? sugar : number, switi : number 함수 동작 안하는 이유?
 
   return (
     <Container>
-      {/*{sugarData.forEach(({ grade, image }) => (*/}
-      {/*  <SugarExpression imageSource={image} sugarContent={sugar} />*/}
-      {/*))}*/}
       <SugarExpression
         imageSource={sugarData[sugarGrade - 1].image}
         sugarContent={sugar}
       />
-      {/*<SugarExpression imageSource={sugarData[3].image} sugarContent={sugar} />*/}
       <ProgressContainer>
         <Progress.Bar
           progress={sugar / 100}
