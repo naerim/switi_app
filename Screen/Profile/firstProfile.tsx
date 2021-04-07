@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGoSecondProfile, useGoSignIn } from '../../util/navigationHooks';
 import ProfileContainer from './components/Layout/ProfileContainer';
 import Age from './components/Age';
-import InterestField from './components/InterestField';
-import InterestArea from './components/InterestArea';
 import useInput from '../../util/useInput';
+import FlatListModal from './components/FlatListModal';
+import { Area, InterestList } from '../../Data';
 
 const FirstProfile = () => {
   const ageInput = useInput('');
@@ -13,16 +13,34 @@ const FirstProfile = () => {
   const goSecondProfile = useGoSecondProfile();
   const goSignIn = useGoSignIn();
 
+  const [selectArea, setSelectArea] = useState<number[]>([]);
+  const [selectInterest, setSelectInterest] = useState<number[]>([]);
+
+  // 다음 버튼
+  const clickNextButton = () => {
+    goSecondProfile();
+  };
+
   return (
     <ProfileContainer
       buttonText="다음"
       desc={desc}
-      onClick={goSecondProfile}
+      onClick={clickNextButton}
       onPress={goSignIn}
     >
       <Age input={ageInput} />
-      <InterestArea />
-      <InterestField />
+      <FlatListModal
+        title="관심지역 (3개 이하 선택)"
+        data={Area}
+        select={selectArea}
+        setSelect={setSelectArea}
+      />
+      <FlatListModal
+        title="관심분야 (3개 이하 선택)"
+        data={InterestList}
+        select={selectInterest}
+        setSelect={setSelectInterest}
+      />
     </ProfileContainer>
   );
 };

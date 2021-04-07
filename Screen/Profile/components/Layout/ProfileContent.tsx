@@ -16,7 +16,7 @@ const ProfileContent: React.FC<Props> = ({ children, title }) => {
 
 const Container = styled.View`
   justify-content: center;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 `;
 
 const Title = styled.Text`
