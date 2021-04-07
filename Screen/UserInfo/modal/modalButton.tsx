@@ -1,41 +1,30 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ActivityIndicator } from 'react-native';
 
 interface AuthButtonProps {
   text: string;
   onPress: () => void;
-  loading: boolean;
   color?: string;
 }
 
-const ModalButton : React.FC<AuthButtonProps> = ({
-  text,
-  onPress,
-  loading = false,
-  color,
-}) => (
-  <Touchable disabled={loading} onPress={onPress}>
-    <Container color={color}>
-      {loading ? <ActivityIndicator color={'white'} /> : <Text>{text}</Text>}
-    </Container>
-  </Touchable>
+interface ColorProps {
+  color?: string;
+}
+
+const ModalButton: React.FC<AuthButtonProps> = ({ text, onPress, color }) => (
+  <Container onPress={onPress} color={color}>
+    <Text>{text}</Text>
+  </Container>
 );
 
-const Touchable = styled.TouchableOpacity`
+const Container = styled.TouchableOpacity<ColorProps>`
+  border-radius: 30px;
   flex-direction: row;
   height: 40px;
-  width: 180px;
-  margin: 0px 10px;
-`;
-
-const Container = styled.View`
-  width: 100%;
-  border-radius: 30px;
+  width: 160px;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  background-color: ${({ color }: { color?: string }) => color || '#b4b4b4'};
+  background-color: ${(props) => props.color || '#b4b4b4'};
 `;
 
 const Text = styled.Text`

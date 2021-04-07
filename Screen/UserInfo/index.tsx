@@ -25,9 +25,12 @@ const UserInfo = () => {
   };
 
   const onPressCancel = () => setModalVisible(false);
+
   const onPressRealLogout = () => {
     setModalVisible(false);
-    setConfigModalVisible(true);
+    setTimeout(() => {
+      setConfigModalVisible(true);
+    }, 500);
   };
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,15 +56,10 @@ const UserInfo = () => {
           스터디와 클래스 신청 및 모집에 제한이 생겨요 :(
         </ModalSmallText>
         <ModalButtonContainer>
-          <ModalButton
-            text="취소"
-            onPress={onPressCancel}
-            loading={isLoading}
-          />
+          <ModalButton text="취소" onPress={onPressCancel} />
           <ModalButton
             text="로그아웃"
             onPress={onPressRealLogout}
-            loading={isLoading}
             color="#86E3C3"
           />
         </ModalButtonContainer>
