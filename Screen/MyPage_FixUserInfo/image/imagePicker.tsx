@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components/native';
+import CameraIcon from './camera.png';
 
-export default function ImagePickerContainer() {
-  const [image, setImage] = useState(null);
+const ImagePickerContainer = () => {
+  const [image, setImage] = useState(
+    'https://github.com/purplecode-team/switi_app/blob/feature/mypage/Screen/MyPage_FixUserInfo/image/profile.png?raw=true'
+  );
 
   useEffect(() => {
     (async () => {
@@ -33,24 +36,25 @@ export default function ImagePickerContainer() {
       setImage(result.uri);
     }
   };
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Container style={{}}>
       <PictureContainer onPress={pickImage}>
-        {/*기본이미지*/}
-        {/*삽입이미지*/}
-        {image ? (
-          <Image
-            source={{ uri: image }}
-            style={{ width: 68, height: 68, borderRadius: 40 }}
-          />
-        ) : (
-          <UserImage source={require('./profile.png')} />
-        )}
+        <UserImage
+          source={{
+            uri: image,
+          }}
+        />
+        <CameraImage source={CameraIcon} />
       </PictureContainer>
-    </View>
+    </Container>
   );
-}
+};
+
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 const PictureContainer = styled.TouchableOpacity`
   align-items: center;
@@ -62,3 +66,13 @@ const UserImage = styled.Image`
   height: 68px;
   border-radius: 40px;
 `;
+
+const CameraImage = styled.Image`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+export default ImagePickerContainer;
