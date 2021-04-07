@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import * as Progress from 'react-native-progress';
-import { useState } from 'react';
 import SugarExpression from './sugarExpression';
 import switi1 from './image/1switi.png';
 import switi2 from './image/2switi.png';
@@ -10,12 +9,8 @@ import switi4 from './image/4switi.png';
 import switi5 from './image/5switi.png';
 import switi6 from './image/6switi.png';
 
-interface switiChoiceProps {
-  switi: number;
-}
-
 const SugarContent = () => {
-  const [sugar, setSugar] = useState(50);
+  const sugar = 50;
   const sugarData = [
     {
       grade: 1,
@@ -44,7 +39,7 @@ const SugarContent = () => {
   ];
   //grade key는 필요없을지도? sugarData[grade-1].image로 하면 되니
 
-  const switiChoice: React.FC<switiChoiceProps> = ({ switi }) => {
+  const switiChoice = (switi: number) => {
     let grade = 0;
     console.log(switi);
     if (0 <= switi && switi <= 10) {
@@ -69,8 +64,9 @@ const SugarContent = () => {
     return grade;
   };
 
-  let sugarGrade = 4;
+  const sugarGrade = switiChoice(sugar);
   // sugarGrade = switiChoice(sugar);
+
   //왜 오류가 나지? sugar : number, switi : number 함수 동작 안하는 이유?
 
   return (
@@ -104,25 +100,9 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const SugarContainer = styled.View`
-  position: relative;
-  justify-content: center;
-`;
-
 const ProgressContainer = styled.View`
   padding-left: 20px;
   justify-content: center;
-`;
-
-const SugarImage = styled.Image`
-  width: 25.17px;
-  height: 40.19px;
-`;
-
-const Text = styled.Text`
-  font-size: 11px;
-  color: #86e3c3;
-  margin-top: 10px;
 `;
 
 export default SugarContent;
