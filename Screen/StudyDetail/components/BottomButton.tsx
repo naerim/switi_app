@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 const BottomButton = () => {
   return (
-    <Container style={{ paddingBottom: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Container>
       <ColorButton>
         <ButtonText>신청하기</ButtonText>
       </ColorButton>
@@ -14,7 +13,9 @@ const BottomButton = () => {
 
 const Container = styled.View`
   flex: 2;
-  padding: 0 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 20px;
   justify-content: flex-end;
 `;
 

@@ -18,6 +18,7 @@ const StudyImage: React.FC<Props> = ({ done }) => {
       <PrevButton
         onPress={goHome}
         style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
         <Icon source={BackIcon} />
       </PrevButton>
@@ -27,7 +28,7 @@ const StudyImage: React.FC<Props> = ({ done }) => {
 };
 
 const Container = styled.View`
-  flex: 3;
+  flex: 4;
 `;
 
 const MainImage = styled.View`
