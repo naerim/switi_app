@@ -1,0 +1,82 @@
+import React from 'react';
+import styled from 'styled-components/native';
+import { dataType, itemType } from '../../Screen/Profile/interface';
+import IconCheck from '../../Img/icon_check.png';
+import { FlatList } from 'react-native';
+
+interface FlatListProps {
+  data: dataType[];
+  select: number[];
+  setSelect: (prev: (prev: number[]) => number[]) => void;
+}
+
+interface Props {
+  check: boolean;
+}
+
+const SelectFlatList: React.FC<FlatListProps> = ({
+  data,
+  select,
+  setSelect,
+}) => {
+  const FlatListItemSeparator = () => <Line />;
+
+  const itemClick = (isChecked: boolean, index: number): void => {
+    if (!isChecked && select.length !== 3) {
+      setSelect((prev) => [...prev, index]);
+      return;
+    }
+
+    setSelect((prev) => prev.filter((i) => i !== index));
+  };
+
+  const renderItem = (data: itemType) => {
+    const isChecked = !!select.filter((i) => i === data.index).length;
+    return (
+      <Container
+        activeOpacity={0.8}
+        onPress={() => {
+          itemClick(isChecked, data.index);
+        }}
+      >
+        <Category check={isChecked}>{data.item.name}</Category>
+        <Icon check={isChecked} source={IconCheck} />
+      </Container>
+    );
+  };
+
+  return (
+    <FlatList
+      ItemSeparatorComponent={FlatListItemSeparator}
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.key.toString()}
+      extraData={data}
+      showsVerticalScrollIndicator={false}
+    />
+  );
+};
+
+const Container = styled.TouchableOpacity`
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 16px 0;
+`;
+
+const Category = styled.Text<Props>`
+  font-size: 12px;
+  color: ${(props) => (props.check ? '#4fd5a7' : '#2b2b2b')};
+`;
+
+const Icon = styled.Image<Props>`
+  width: 12px;
+  height: 12px;
+  display: ${(props) => (props.check ? 'flex' : 'none')};
+`;
+
+const Line = styled.View`
+  height: 1px;
+  background-color: #f3f3f3;
+`;
+
+export default SelectFlatList;
