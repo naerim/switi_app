@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Area, InterestList, TargetList } from '../../../../Data';
 
 const TopCategory = () => {
   const categoryData = [
     {
       title: '카테고리',
+      data: InterestList,
     },
     {
       title: '지역',
+      data: Area,
     },
     {
       title: '모집대상',
+      data: TargetList,
     },
   ];
 

@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { dataType, itemType } from '../../Screen/Profile/interface';
 import IconCheck from '../../Img/icon_check.png';
 import { FlatList } from 'react-native';
+import SelectCategoryButton from './SelectCategoryButton';
 
 interface FlatListProps {
   data: dataType[];
@@ -46,16 +47,24 @@ const SelectFlatList: React.FC<FlatListProps> = ({
   };
 
   return (
-    <FlatList
-      ItemSeparatorComponent={FlatListItemSeparator}
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.key.toString()}
-      extraData={data}
-      showsVerticalScrollIndicator={false}
-    />
+    <BigContainer>
+      <FlatList
+        ItemSeparatorComponent={FlatListItemSeparator}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key.toString()}
+        extraData={data}
+        showsVerticalScrollIndicator={false}
+        style={{ marginBottom: 20 }}
+      />
+      <SelectCategoryButton onPress={() => console.log('click Button')} />
+    </BigContainer>
   );
 };
+
+const BigContainer = styled.View`
+  margin-bottom: 40px;
+`;
 
 const Container = styled.TouchableOpacity`
   justify-content: space-between;
