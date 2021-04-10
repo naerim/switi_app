@@ -9,6 +9,7 @@ interface FlatListProps {
   data: dataType[];
   select: number[];
   setSelect: (prev: (prev: number[]) => number[]) => void;
+  closeModal: () => void;
 }
 
 interface Props {
@@ -19,6 +20,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
   data,
   select,
   setSelect,
+  closeModal,
 }) => {
   const FlatListItemSeparator = () => <Line />;
 
@@ -57,7 +59,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
         showsVerticalScrollIndicator={false}
         style={{ marginBottom: 20 }}
       />
-      <SelectCategoryButton onPress={() => console.log('click Button')} />
+      <SelectCategoryButton onPress={closeModal} />
     </BigContainer>
   );
 };

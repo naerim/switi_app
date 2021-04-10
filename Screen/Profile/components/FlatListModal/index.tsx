@@ -30,8 +30,13 @@ const FlatListModal: React.FC<FlatListType> = ({
         data={data}
         column={column}
       />
-      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-        <SelectFlatList data={data} select={select} setSelect={setSelect} />
+      <BasicModal modalVisible={modalVisible}>
+        <SelectFlatList
+          data={data}
+          select={select}
+          setSelect={setSelect}
+          closeModal={closeModal}
+        />
       </BasicModal>
     </ProfileContent>
   );

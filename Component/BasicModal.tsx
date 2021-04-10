@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 interface Props {
   modalVisible: boolean;
-  closeModal: () => void;
+  closeModal?: () => void;
 }
 
 const BasicModal: React.FC<Props> = ({
