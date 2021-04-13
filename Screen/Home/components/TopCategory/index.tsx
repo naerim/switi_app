@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { Area, InterestList, TargetList } from '../../../../Data';
 import SelectFlatList from '../../../../Component/SelectFlatList';
 import BasicModal from '../../../../Component/BasicModal';
+import TagContainer from './TagContainer';
 
 const TopCategory = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,7 +29,6 @@ const TopCategory = () => {
   //   const array = nameList().concat(nameList1());
   //   setTag(array);
   // };
-
   const categoryData = [
     {
       title: '카테고리',
@@ -43,6 +43,8 @@ const TopCategory = () => {
       data: TargetList,
     },
   ];
+
+  const nameList = () => select.map((i) => InterestList[i].name);
 
   return (
     <Container>
@@ -61,6 +63,12 @@ const TopCategory = () => {
           </Content>
         ))}
       </SelectContainer>
+      <TagContainer
+        nameList={nameList()}
+        select={select}
+        setSelect={setSelect}
+        data={InterestList}
+      />
     </Container>
   );
 };
