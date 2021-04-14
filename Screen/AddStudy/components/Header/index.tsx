@@ -10,7 +10,11 @@ const Header: React.FC<Props> = ({ onPress }) => {
   return (
     <Container>
       <Title>모집글 작성</Title>
-      <PrevButton activeOpacity={0.8} onPress={onPress}>
+      <PrevButton
+        activeOpacity={0.8}
+        onPress={onPress}
+        hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
+      >
         <ButtonImg source={BtnXIcon} />
       </PrevButton>
     </Container>
