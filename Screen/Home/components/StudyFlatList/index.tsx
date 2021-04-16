@@ -16,6 +16,10 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
   // 0 : 온라인, 1 : 오프라인
   const OnOffStudy = StudyList.filter((i) => i.online_flag === idx);
 
+  const handleLoadMore = () => {
+    console.log('reached');
+  };
+
   return (
     <Container>
       <ListHeader num={OnOffStudy.length} check={{ checked, setChecked }} />
@@ -26,11 +30,13 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
         keyExtractor={(item) => item.idx.toString()}
         extraData={OnOffStudy}
         contentContainerStyle={{ paddingBottom: 80 }}
-        showsVerticalScrollIndicator={false}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0}
       />
     </Container>
   );
 };
+// showsVerticalScrollIndicator={false}
 
 const Container = styled.View`
   margin: 0 24px;
