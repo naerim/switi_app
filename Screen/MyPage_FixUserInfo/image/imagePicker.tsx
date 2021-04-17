@@ -3,11 +3,10 @@ import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components/native';
 import CameraIcon from './camera.png';
+import Profile from './profile.png';
 
 const ImagePickerContainer = () => {
-  const [image, setImage] = useState(
-    'https://github.com/purplecode-team/switi_app/blob/feature/mypage/Screen/MyPage_FixUserInfo/image/profile.png?raw=true'
-  );
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -39,11 +38,11 @@ const ImagePickerContainer = () => {
   return (
     <Container style={{}}>
       <PictureContainer onPress={pickImage} activeOpacity={0.8}>
-        <UserImage
-          source={{
-            uri: image,
-          }}
-        />
+        {image ? (
+          <UserImage source={{ uri: image }} />
+        ) : (
+          <UserImage source={Profile} />
+        )}
         <CameraImage source={CameraIcon} />
       </PictureContainer>
     </Container>
