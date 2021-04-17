@@ -6,9 +6,12 @@ import { Platform, ScrollView } from 'react-native';
 import AddImage from './components/AddImage';
 import Category from './components/Category';
 import Target from './components/Target';
+import useInput from '../../util/useInput';
 
 const AddStudy = () => {
+  const selectTarget = useInput('');
   const goHome = useGoHome();
+
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <Header onPress={goHome} />
@@ -19,7 +22,7 @@ const AddStudy = () => {
         <AddImage />
         <Content>
           <Category />
-          <Target />
+          <Target select={selectTarget} />
         </Content>
       </ScrollView>
     </Container>
