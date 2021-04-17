@@ -7,61 +7,57 @@ import TagContainer from './TagContainer';
 
 const TopCategory = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const onPress = (data: { key: number; name: string }[]) => {
+
+  // 카테고리 선택했을 때
+  const onPress = (dataList: { key: number; name: string }[]) => {
     setModalVisible(true);
-    setSelectData(data);
-    //addTagList();
+    setData(dataList);
   };
   const closeModal = () => setModalVisible(false);
 
-  // const [interest, setInterest] = useState<number[]>([]);
-  // const [area, setArea] = useState<number[]>([]);
-  // const [target, setTarget] = useState<number[]>([]);
+  const [selectCategory, setSelectCategory] = useState<number[]>([]);
+  const [selectArea, setSelectArea] = useState<number[]>([]);
+  const [selectTarget, setSelectTarget] = useState<number[]>([]);
+
   const [select, setSelect] = useState<number[]>([]);
-  const [selectData, setSelectData] = useState<{ key: number; name: string }[]>(
-    []
-  );
-  // const [tag, setTag] = useState<string[]>([]);
+  const [data, setData] = useState<{ key: number; name: string }[]>([]);
 
-  // const addTagList = () => {
-  //   const nameList = () => interest.map((i) => InterestList[i].name);
-  //   const nameList1 = () => area.map((i) => Area[i].name);
-  //   const array = nameList().concat(nameList1());
-  //   setTag(array);
-  // };
-  const categoryData = [
-    {
-      title: '카테고리',
-      data: InterestList,
-    },
-    {
-      title: '지역',
-      data: Area,
-    },
-    {
-      title: '모집대상',
-      data: TargetList,
-    },
-  ];
+  const determineSelect = (data) => {
+    if (data === InterestList) {
+      return selectCategory;
+    } else if (data === Area) {
+      return selectArea;
+    } else return selectTarget;
+  };
 
-  const nameList = () => select.map((i) => InterestList[i].name);
+  const determineSetSelect = (data) => {
+    if (data === InterestList) {
+      return setSelectCategory;
+    } else if (data === Area) {
+      return setSelectArea;
+    } else return setSelectTarget;
+  };
+
+  const nameList = () => {
+    const category = selectCategory.map((i) => InterestList[i].name);
+    const area = selectArea.map((i) => Area[i].name);
+    const target = selectTarget.map((i) => TargetList[i].name);
+    const array = category.concat(area, target);
+    return array;
+  };
 
   return (
     <Container>
       <SelectContainer>
-        {categoryData.map(({ title, data }) => (
-          <Content key={title} onPress={() => onPress(data)}>
-            <Title>{title}</Title>
-            <BasicModal modalVisible={modalVisible}>
-              <SelectFlatList
-                data={selectData}
-                select={select}
-                setSelect={setSelect}
-                closeModal={closeModal}
-              />
-            </BasicModal>
-          </Content>
-        ))}
+        <Content onPress={() => onPress(InterestList)}>
+          <Title>카테고리</Title>
+        </Content>
+        <Content onPress={() => onPress(Area)}>
+          <Title>지역</Title>
+        </Content>
+        <Content onPress={() => onPress(TargetList)}>
+          <Title>모집대상</Title>
+        </Content>
       </SelectContainer>
       <TagContainer
         nameList={nameList()}
@@ -69,6 +65,14 @@ const TopCategory = () => {
         setSelect={setSelect}
         data={InterestList}
       />
+      <BasicModal modalVisible={modalVisible}>
+        <SelectFlatList
+          data={data}
+          select={determineSelect(data)}
+          setSelect={determineSetSelect(data)}
+          closeModal={closeModal}
+        />
+      </BasicModal>
     </Container>
   );
 };
@@ -91,14 +95,6 @@ const Content = styled.TouchableOpacity`
 const Title = styled.Text`
   color: #2b2b2b;
   font-size: 12px;
-`;
-
-const Div = styled.View`
-  flex-direction: column;
-`;
-
-const Desc = styled.Text`
-  color: red;
 `;
 
 export default TopCategory;
