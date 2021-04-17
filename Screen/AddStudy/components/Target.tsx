@@ -15,14 +15,17 @@ const Target: React.FC<TargetProps> = ({ select }) => {
     { title: '무관' },
   ];
 
+  const onPress = (title: string) => select.onChange(title);
+
   return (
     <AddStudyContainer title="모집대상">
       <Container>
         {targetList.map(({ title }) => (
           <Content
             key={title}
-            onPress={() => select.onChange(title)}
+            onPress={() => onPress(title)}
             color={title === select.value}
+            activeOpacity={0.8}
           >
             <Title color={title === select.value}>{title}</Title>
           </Content>

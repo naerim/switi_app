@@ -7,9 +7,13 @@ import AddImage from './components/AddImage';
 import Category from './components/Category';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
+import Input from './components/Input';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
+  const periodInput = useInput('');
+  const contactInput = useInput('');
+  const titleInput = useInput('');
   const goHome = useGoHome();
 
   return (
@@ -23,6 +27,21 @@ const AddStudy = () => {
         <Content>
           <Category />
           <Target select={selectTarget} />
+          <Input
+            title="활동기간"
+            input={periodInput}
+            placeholder="활동기간을 입력해주세요"
+          />
+          <Input
+            title="문의"
+            input={contactInput}
+            placeholder="오픈채팅 링크, 전화번호 등 문의처를 입력해주세요"
+          />
+          <Input
+            title="제목"
+            input={titleInput}
+            placeholder="스터디 제목을 입력해주세요"
+          />
         </Content>
       </ScrollView>
     </Container>
