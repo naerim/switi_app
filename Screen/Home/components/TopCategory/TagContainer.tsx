@@ -1,13 +1,42 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import XIconBtn from '../../../../Img/btn_x_green.png';
-import { TagType } from '../../../Profile/interface';
+import { TagType } from '../../interface';
+import { Area, InterestList, TargetList } from '../../../../Data';
 
-const Tag: React.FC<TagType> = ({ nameList, select, setSelect, data }) => {
+const TagContainer: React.FC<TagType> = ({
+  nameList,
+  setSelectCategory,
+  setSelectArea,
+  setSelectTarget,
+}) => {
   // x 버튼
   const deleteList = (name: string) => {
-    const idx = select.find((i: number) => data[i].name === name);
-    setSelect((prev: number[]) => prev.filter((i) => i !== idx));
+    Area.forEach((current, i) => {
+      if (name === current.name) {
+        const idx = i;
+        setSelectArea((prev: number[]) => prev.filter((i) => i !== idx));
+      }
+    });
+
+    InterestList.forEach((current, i) => {
+      if (name === current.name) {
+        const idx = i;
+        setSelectCategory((prev: number[]) => prev.filter((i) => i !== idx));
+        return;
+      }
+    });
+
+    TargetList.forEach((current, i) => {
+      if (name === current.name) {
+        const idx = i;
+        setSelectTarget((prev: number[]) => prev.filter((i) => i !== idx));
+        return;
+      }
+    });
+
+    //const idx = select.find((i: number) => data[i].name === name);
+    //setSelect((prev: number[]) => prev.filter((i) => i !== idx));
   };
 
   return (
@@ -56,4 +85,4 @@ const XButton = styled.TouchableOpacity`
   height: 10px;
 `;
 
-export default Tag;
+export default TagContainer;

@@ -4,6 +4,7 @@ import { Area, InterestList, TargetList } from '../../../../Data';
 import SelectFlatList from '../../../../Component/SelectFlatList';
 import BasicModal from '../../../../Component/BasicModal';
 import TagContainer from './TagContainer';
+import { dataType } from '../../../Profile/interface';
 
 const TopCategory = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,10 +20,9 @@ const TopCategory = () => {
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectTarget, setSelectTarget] = useState<number[]>([]);
 
-  const [select, setSelect] = useState<number[]>([]);
   const [data, setData] = useState<{ key: number; name: string }[]>([]);
 
-  const determineSelect = (data) => {
+  const determineSelect = (data: dataType[]) => {
     if (data === InterestList) {
       return selectCategory;
     } else if (data === Area) {
@@ -30,7 +30,7 @@ const TopCategory = () => {
     } else return selectTarget;
   };
 
-  const determineSetSelect = (data) => {
+  const determineSetSelect = (data: dataType[]) => {
     if (data === InterestList) {
       return setSelectCategory;
     } else if (data === Area) {
@@ -61,9 +61,9 @@ const TopCategory = () => {
       </SelectContainer>
       <TagContainer
         nameList={nameList()}
-        select={select}
-        setSelect={setSelect}
-        data={InterestList}
+        setSelectCategory={setSelectCategory}
+        setSelectArea={setSelectArea}
+        setSelectTarget={setSelectTarget}
       />
       <BasicModal modalVisible={modalVisible}>
         <SelectFlatList

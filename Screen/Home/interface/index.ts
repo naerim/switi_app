@@ -1,3 +1,5 @@
+import { dataType } from '../../Profile/interface';
+
 export interface DataType {
   idx: number;
   username: string;
@@ -20,4 +22,11 @@ export interface DataType {
 export interface ItemType {
   index: number;
   item: DataType;
+}
+
+export interface TagType {
+  nameList: string[];
+  setSelectCategory: (prev: (prev: number[]) => number[]) => void;
+  setSelectArea: (prev: (prev: number[]) => number[]) => void;
+  setSelectTarget: (prev: (prev: number[]) => number[]) => void;
 }
