@@ -19,24 +19,7 @@ const TopCategory = () => {
   const [selectCategory, setSelectCategory] = useState<number[]>([]);
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectTarget, setSelectTarget] = useState<number[]>([]);
-
   const [data, setData] = useState<{ key: number; name: string }[]>([]);
-
-  const determineSelect = (data: dataType[]) => {
-    if (data === InterestList) {
-      return selectCategory;
-    } else if (data === Area) {
-      return selectArea;
-    } else return selectTarget;
-  };
-
-  const determineSetSelect = (data: dataType[]) => {
-    if (data === InterestList) {
-      return setSelectCategory;
-    } else if (data === Area) {
-      return setSelectArea;
-    } else return setSelectTarget;
-  };
 
   const nameList = () => {
     const category = selectCategory.map((i) => InterestList[i].name);
@@ -44,6 +27,16 @@ const TopCategory = () => {
     const target = selectTarget.map((i) => TargetList[i].name);
     const array = category.concat(area, target);
     return array;
+  };
+
+  const determine = (data: dataType[]) => {
+    if (data === InterestList) {
+      return { select: selectCategory, setSelect: setSelectCategory };
+    } else if (data === Area) {
+      return { select: selectArea, setSelect: setSelectArea };
+    } else {
+      return { select: selectTarget, setSelect: setSelectTarget };
+    }
   };
 
   return (
@@ -68,8 +61,8 @@ const TopCategory = () => {
       <BasicModal modalVisible={modalVisible}>
         <SelectFlatList
           data={data}
-          select={determineSelect(data)}
-          setSelect={determineSetSelect(data)}
+          select={determine(data).select}
+          setSelect={determine(data).setSelect}
           closeModal={closeModal}
         />
       </BasicModal>
