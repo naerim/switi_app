@@ -40,16 +40,21 @@ const TagContainer: React.FC<TagType> = ({
   };
 
   return (
-    <Container>
-      {nameList.map((i: string) => (
-        <Content key={i}>
-          <Title>{i}</Title>
-          <XButton onPress={() => deleteList(i)}>
-            <XIcon source={XIconBtn} />
-          </XButton>
-        </Content>
-      ))}
-    </Container>
+    <Scroll
+      directionalLockEnabled={true}
+      showsHorizontalScrollIndicator={false}
+    >
+      <Container>
+        {nameList.map((i: string) => (
+          <Content key={i}>
+            <Title>{i}</Title>
+            <XButton onPress={() => deleteList(i)}>
+              <XIcon source={XIconBtn} />
+            </XButton>
+          </Content>
+        ))}
+      </Container>
+    </Scroll>
   );
 };
 
@@ -57,6 +62,10 @@ const Container = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 10px;
+`;
+
+const Scroll = styled.ScrollView`
+  flex-direction: row;
 `;
 
 const Content = styled.View`
