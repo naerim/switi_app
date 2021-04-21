@@ -39,18 +39,20 @@ const TopCategory = () => {
     }
   };
 
+  const categoryList = [
+    { title: '카테고리', onPress: () => onPress(InterestList) },
+    { title: '지역', onPress: () => onPress(Area) },
+    { title: '모집대상', onPress: () => onPress(TargetList) },
+  ];
+
   return (
     <Container>
       <SelectContainer>
-        <Content onPress={() => onPress(InterestList)}>
-          <Title>카테고리</Title>
-        </Content>
-        <Content onPress={() => onPress(Area)}>
-          <Title>지역</Title>
-        </Content>
-        <Content onPress={() => onPress(TargetList)}>
-          <Title>모집대상</Title>
-        </Content>
+        {categoryList.map(({ title, onPress }) => (
+          <Content key={title} onPress={onPress}>
+            <Title>{title}</Title>
+          </Content>
+        ))}
       </SelectContainer>
       <TagContainer
         nameList={nameList()}
