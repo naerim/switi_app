@@ -8,12 +8,14 @@ import Category from './components/Category';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
 import Input from './components/Input';
+import LongInput from './components/LongInput';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
   const periodInput = useInput('');
   const contactInput = useInput('');
   const titleInput = useInput('');
+  const contentInput = useInput('');
   const goHome = useGoHome();
 
   return (
@@ -42,6 +44,7 @@ const AddStudy = () => {
             input={titleInput}
             placeholder="스터디 제목을 입력해주세요"
           />
+          <LongInput input={contentInput} />
         </Content>
       </ScrollView>
     </Container>

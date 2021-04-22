@@ -11,3 +11,7 @@ export interface InputProps {
   input: { value: string; onChange: (value: string) => void };
   placeholder: string;
 }
+
+export interface LongInputProps {
+  input: { value: string; onChange: (value: string) => void };
+}
