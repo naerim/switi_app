@@ -1,5 +1,6 @@
 export interface ContentProps {
   title: string;
+  subTitle?: string;
 }
 
 export interface TargetProps {

@@ -9,10 +9,12 @@ import Target from './components/Target';
 import useInput from '../../util/useInput';
 import Input from './components/Input';
 import LongInput from './components/LongInput';
+import EndDate from './components/EndDate';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
   const periodInput = useInput('');
+  const EndDateInput = useInput('');
   const contactInput = useInput('');
   const titleInput = useInput('');
   const contentInput = useInput('');
@@ -34,6 +36,7 @@ const AddStudy = () => {
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
+          <EndDate />
           <Input
             title="문의"
             input={contactInput}
