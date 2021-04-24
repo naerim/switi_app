@@ -10,11 +10,13 @@ import useInput from '../../util/useInput';
 import Input from './components/Input';
 import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
+import RecruitNum from './components/RecruitNum';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
   const periodInput = useInput('');
   const EndDateInput = useInput('');
+  const RecruitNumInput = useInput('');
   const contactInput = useInput('');
   const titleInput = useInput('');
   const contentInput = useInput('');
@@ -31,6 +33,7 @@ const AddStudy = () => {
         <Content>
           <Category />
           <Target select={selectTarget} />
+          <RecruitNum />
           <Input
             title="활동기간"
             input={periodInput}
