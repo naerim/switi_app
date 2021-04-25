@@ -29,7 +29,8 @@ const Input = styled.TextInput`
   border-radius: 4px;
   padding: 10px;
   border-color: #e3e3e3;
-  height: 150px;
+  height: 180px;
+  margin-bottom: 20px;
 `;
 
 export default LongInput;

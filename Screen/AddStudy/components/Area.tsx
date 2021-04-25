@@ -2,12 +2,12 @@ import React from 'react';
 import AddStudyContainer from './Layout/AddStudyContainer';
 import SelectButton from '../../../Component/SelectButton';
 
-const Category = () => {
+const Area = () => {
   return (
-    <AddStudyContainer title="카테고리">
-      <SelectButton onPress={() => console.log('select')} />
+    <AddStudyContainer title="지역">
+      <SelectButton onPress={() => console.log('area select')} />
     </AddStudyContainer>
   );
 };
 
-export default Category;
+export default Area;

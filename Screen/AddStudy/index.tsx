@@ -11,6 +11,9 @@ import Input from './components/Input';
 import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
+import ColorButton from '../../Component/ColorButton';
+import BasicButton from '../../Component/BasicButton';
+import Area from './components/Area';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
@@ -22,6 +25,10 @@ const AddStudy = () => {
   const contentInput = useInput('');
   const goHome = useGoHome();
 
+  const EnrollButton = () => {
+    goHome();
+  };
+
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <Header onPress={goHome} />
@@ -32,6 +39,7 @@ const AddStudy = () => {
         <AddImage />
         <Content>
           <Category />
+          <Area />
           <Target select={selectTarget} />
           <RecruitNum />
           <Input
@@ -51,6 +59,7 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
+          <BasicButton text="등록하기" onPress={EnrollButton} />
         </Content>
       </ScrollView>
     </Container>
@@ -64,6 +73,7 @@ const Container = styled.SafeAreaView`
 const Content = styled.ScrollView`
   background-color: white;
   padding: 20px 24px;
+  margin-bottom: 25px;
 `;
 
 export default AddStudy;
