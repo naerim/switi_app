@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
+import CalenderModal from './CalenderModal';
+import BasicModal from '../../../../Component/BasicModal';
 
-const EndDateInput = () => {
+interface Props {
+  value: { [key: string]: number };
+  setValue: any;
+}
+
+const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const onPress = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
   return (
     <Container>
-      <Year />
-      <Text>년</Text>
+      <TouchArea onPress={onPress}>
+        <Year />
+        <Text>년</Text>
+      </TouchArea>
       <Date />
       <Text>월</Text>
       <Date />
       <Text>일</Text>
+      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+        <CalenderModal closeModal={closeModal} />
+      </BasicModal>
     </Container>
   );
 };
@@ -18,6 +33,11 @@ const Container = styled.View`
   flex-direction: row;
   align-items: center;
   padding-bottom: 10px;
+`;
+
+const TouchArea = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
 `;
 
 const Year = styled.TextInput`

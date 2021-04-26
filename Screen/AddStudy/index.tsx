@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
@@ -11,19 +11,22 @@ import Input from './components/Input';
 import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
-import ColorButton from '../../Component/ColorButton';
 import BasicButton from '../../Component/BasicButton';
 import Area from './components/Area';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
   const periodInput = useInput('');
-  const EndDateInput = useInput('');
   const RecruitNumInput = useInput('');
   const contactInput = useInput('');
   const titleInput = useInput('');
   const contentInput = useInput('');
   const goHome = useGoHome();
+  const [EndDateInput, setEndDateInput] = useState<{ [key: string]: number }>({
+    year: 0,
+    month: 0,
+    day: 0,
+  });
 
   const EnrollButton = () => {
     goHome();
@@ -47,7 +50,7 @@ const AddStudy = () => {
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
-          <EndDate />
+          <EndDate input={{ EndDateInput, setEndDateInput }} />
           <Input
             title="문의"
             input={contactInput}
