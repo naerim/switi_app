@@ -4,7 +4,7 @@ import CalenderModal from './CalenderModal';
 import BasicModal from '../../../../Component/BasicModal';
 
 interface Props {
-  value: { [key: string]: number };
+  value: { [key: string]: string };
   setValue: any;
 }
 
@@ -15,15 +15,43 @@ const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
   return (
     <Container>
       <TouchArea onPress={onPress}>
-        <Year />
+        <Year
+          pointerEvents="none"
+          value={value.year}
+          onChangeText={setValue}
+          keyboardType="numeric"
+          secureTextEntry={false}
+          maxLength={4}
+          textAlign="right"
+        />
         <Text>년</Text>
+        <Date
+          pointerEvents="none"
+          value={value.month}
+          onChangeText={setValue}
+          keyboardType="numeric"
+          secureTextEntry={false}
+          maxLength={2}
+          textAlign="right"
+        />
+        <Text>월</Text>
+        <Date
+          pointerEvents="none"
+          value={value.day}
+          onChangeText={setValue}
+          keyboardType="numeric"
+          secureTextEntry={false}
+          maxLength={2}
+          textAlign="right"
+        />
+        <Text>일</Text>
       </TouchArea>
-      <Date />
-      <Text>월</Text>
-      <Date />
-      <Text>일</Text>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-        <CalenderModal closeModal={closeModal} />
+        <CalenderModal
+          closeModal={closeModal}
+          value={value}
+          setValue={setValue}
+        />
       </BasicModal>
     </Container>
   );

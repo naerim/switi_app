@@ -5,8 +5,11 @@ import ArrowIcon from '../../../../Img/btn_back.png';
 
 interface Props {
   closeModal: () => void;
+  value: { [key: string]: string };
+  setValue: any;
 }
-const CalenderModal: React.FC<Props> = ({ closeModal }) => {
+
+const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
   return (
     <Container>
       <Desc>스터디 예정 종료 날짜를 선택 해 주세요.</Desc>
@@ -19,12 +22,12 @@ const CalenderModal: React.FC<Props> = ({ closeModal }) => {
         maxDate={'2021-12-31'}
         // Handler which gets executed on day press. Default = undefined
         onDayPress={(day) => {
-          console.log('selected day', day);
+          setValue({
+            year: day.year.toString(),
+            month: day.month.toString(),
+            day: day.day.toString(),
+          });
           closeModal();
-        }}
-        // Handler which gets executed on day long press. Default = undefined
-        onDayLongPress={(day) => {
-          console.log('selected day', day);
         }}
         // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
         monthFormat={'yyyy MM'}

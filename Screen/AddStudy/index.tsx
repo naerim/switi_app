@@ -22,10 +22,10 @@ const AddStudy = () => {
   const titleInput = useInput('');
   const contentInput = useInput('');
   const goHome = useGoHome();
-  const [EndDateInput, setEndDateInput] = useState<{ [key: string]: number }>({
-    year: 0,
-    month: 0,
-    day: 0,
+  const [EndDateInput, setEndDateInput] = useState<{ [key: string]: string }>({
+    year: '',
+    month: '',
+    day: '',
   });
 
   const EnrollButton = () => {
@@ -50,7 +50,7 @@ const AddStudy = () => {
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
-          <EndDate input={{ EndDateInput, setEndDateInput }} />
+          <EndDate value={{ EndDateInput, setEndDateInput }} />
           <Input
             title="문의"
             input={contactInput}
