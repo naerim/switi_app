@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import AddStudyContainer from './Layout/AddStudyContainer';
-import { TargetProps } from '../interface';
-
-interface ColorProps {
-  color: boolean;
-}
+import { ColorProps, TargetProps } from '../interface';
 
 const Target: React.FC<TargetProps> = ({ select }) => {
   const targetList = [

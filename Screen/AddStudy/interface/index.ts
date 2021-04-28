@@ -16,3 +16,7 @@ export interface InputProps {
 export interface LongInputProps {
   input: { value: string; onChange: (value: string) => void };
 }
+
+export interface ColorProps {
+  color: boolean;
+}

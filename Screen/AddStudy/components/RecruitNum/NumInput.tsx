@@ -1,10 +1,23 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const NumInput = () => {
+interface Props {
+  input: { value: string; onChange: (value: string) => void };
+  select: boolean;
+}
+
+const NumInput: React.FC<Props> = ({ input, select }) => {
+  const setValue = () => (select ? '' : input.value);
   return (
     <Container>
-      <Input />
+      <Input
+        value={setValue()}
+        onChangeText={input.onChange}
+        keyboardType="numeric"
+        maxLength={3}
+        textAlign="right"
+        editable={!select}
+      />
       <Text>명</Text>
     </Container>
   );

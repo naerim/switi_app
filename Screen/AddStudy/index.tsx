@@ -17,7 +17,8 @@ import Area from './components/Area';
 const AddStudy = () => {
   const selectTarget = useInput('');
   const periodInput = useInput('');
-  const RecruitNumInput = useInput('');
+  const recruitNumInput = useInput('');
+  const [recruitSelect, setRecruitSelect] = useState(false);
   const contactInput = useInput('');
   const titleInput = useInput('');
   const contentInput = useInput('');
@@ -44,7 +45,10 @@ const AddStudy = () => {
           <Category />
           <Area />
           <Target select={selectTarget} />
-          <RecruitNum />
+          <RecruitNum
+            input={recruitNumInput}
+            select={{ recruitSelect, setRecruitSelect }}
+          />
           <Input
             title="활동기간"
             input={periodInput}
