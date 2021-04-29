@@ -3,16 +3,17 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import HomeHeader from './HomeHeader';
 import AddStudyButton from '../Screen/Home/components/AddStudyButton';
+import { UseGoAlarm } from '../util/navigationHooks';
 
 interface Props {
   onPress?: () => void;
 }
 
 const HomeContainer: React.FC<Props> = ({ children, onPress }) => {
-  const goAlarm = () => console.log('alarm'); // 알람페이지로 이동
+  const goAlarm = UseGoAlarm; // 알람페이지로 이동
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
-      <HomeHeader onPress={goAlarm} />
+      <HomeHeader onPress={goAlarm()} />
       <Container>{children}</Container>
       <AddStudyButton />
     </Wrap>

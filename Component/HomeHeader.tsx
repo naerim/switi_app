@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Logo from '../Img/logo_home.png';
-import AlarmIcon from '../Img/icon_alarm.png';
+import Logo from '../Img/logo_switi.png';
+import Alarm from '../Img/icon_alarm.png';
 
 interface Props {
   onPress?: () => void;
@@ -12,7 +12,7 @@ const HomeHeader: React.FC<Props> = ({ onPress }) => {
     <Wrap>
       <Icon source={Logo} />
       <AlarmButton activeOpacity={0.8} onPress={onPress}>
-        <Icon source={AlarmIcon} />
+        <AlarmIcon source={Alarm} />
       </AlarmButton>
     </Wrap>
   );
@@ -29,6 +29,12 @@ const Wrap = styled.View`
 
 const Icon = styled.Image`
   height: 18px;
+  width: 54px;
+`;
+
+const AlarmIcon = styled.Image`
+  height: 18px;
+  width: 18px;
 `;
 
 const AlarmButton = styled.TouchableOpacity``;
