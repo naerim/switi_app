@@ -1,3 +1,10 @@
+export const TargetList = [
+  { key: 0, name: '무관' },
+  { key: 1, name: '대학생' },
+  { key: 2, name: '취준생' },
+  { key: 3, name: '직장인' },
+];
+
 export const InterestList = [
   { key: 0, category: 'all', name: '전체' },
   { key: 1, category: 'job', name: '취업' },

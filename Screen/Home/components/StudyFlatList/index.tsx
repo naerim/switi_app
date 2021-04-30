@@ -11,7 +11,7 @@ interface Props {
 
 const StudyFlatList: React.FC<Props> = ({ idx }) => {
   const [checked, setChecked] = useState(true);
-  const FlatListItemSeparator = () => <Line />;
+  const FlatListItemSeparator = () => <SeparatorLine />;
 
   // 0 : 온라인, 1 : 오프라인
   const OnOffStudy = StudyList.filter((i) => i.online_flag === idx);
@@ -42,7 +42,7 @@ const Container = styled.View`
   margin: 0 24px;
 `;
 
-const Line = styled.View`
+const SeparatorLine = styled.View`
   height: 1px;
   background-color: #f3f3f3;
 `;
