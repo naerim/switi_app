@@ -20,10 +20,8 @@ const OptionMenu: React.FC<Props> = ({ onPressSearchDelete }) => {
 
 const Container = styled.View`
   flex-direction: column;
-  width: 100%;
-  padding: 0 20px;
+  padding: 0 24px;
   margin-top: 10px;
-  margin-bottom: 25px;
 `;
 
 const ItemContainer = styled.View`
@@ -32,16 +30,16 @@ const ItemContainer = styled.View`
 `;
 
 const Title = styled.Text`
-  font-weight: bold;
   color: #b4b4b4;
+  font-size: 12px;
 `;
 
 const DeleteContainer = styled.TouchableOpacity``;
 
 const DeleteSearches = styled.Text`
-  font-weight: bold;
   text-decoration: #b4b4b4 underline;
   color: #b4b4b4;
+  font-size: 12px;
 `;
 
 export default OptionMenu;

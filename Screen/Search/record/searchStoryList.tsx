@@ -17,7 +17,10 @@ const SearchStoryList: React.FC<SearchStoryItemProps> = ({
   onPressX,
 }) => {
   return (
-    <Scroll directionalLockEnabled={true}>
+    <Scroll
+      directionalLockEnabled={true}
+      showsHorizontalScrollIndicator={false}
+    >
       <Container>
         {searches.map((search) => (
           <SearchStoryItem
@@ -36,11 +39,8 @@ const Container = styled.View`
 `;
 
 const Scroll = styled.ScrollView`
-  height: 20%;
-  display: flex;
   flex-direction: row;
-  margin: 0px;
-  //directionalLockEnabled 이거 쓰고 싶은데 안된다. 세로로는 드레그 안되게 고정하고 싶다.
+  margin-left: 14px;
 `;
 
 export default SearchStoryList;

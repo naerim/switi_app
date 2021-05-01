@@ -21,25 +21,23 @@ const RecommendContainer: React.FC = () => {
     },
   ];
   return (
-    <Wrap>
+    <Container>
       <Title>추천 검색어</Title>
       {recommendData.map(({ text }) => (
         <RecommendTerm key={text} term={text} />
       ))}
-    </Wrap>
+    </Container>
   );
 };
 
-const Wrap = styled.View`
-  width: 100%;
-  padding: 0 20px;
-  margin: 5px 0;
+const Container = styled.View`
+  padding: 0 24px;
 `;
 
 const Title = styled.Text`
-  font-weight: bold;
   color: #b4b4b4;
-  margin-top: 10px;
+  margin: 10px 0;
+  font-size: 12px;
 `;
 
 export default RecommendContainer;

@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import SearchForm from '../components/SearchForm/SearchForm';
 import styled from 'styled-components/native';
 import useInput from '../../SignIn/util/useInput';
 import { Button, View } from 'react-native';
+import SearchForm from '../components/SearchForm';
 
 //Insert
 const SearchInsert = ({ onInsert, searchInput }) => {

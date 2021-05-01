@@ -1,12 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { AsyncStorage } from 'react-native';
-import SearchContainer from './components/searchHeader/searchHeaderContainer';
-import SearchForm from './components/SearchForm/SearchForm';
 import styled from 'styled-components/native';
 import useInput from '../SignIn/util/useInput';
 import OptionMenu from './components/optionMenu';
 import RecommendContainer from './components/Recommend/RecommendContainer';
 import SearchStoryList from './record/searchStoryList';
+import SearchContainer from '../../Component/SearchContainer';
+import SearchForm from './components/SearchForm';
+import { UseGoAlarm } from '../../util/navigationHooks';
 
 const Search = () => {
   const [searches, setSearches] = useState([
@@ -63,46 +64,38 @@ const Search = () => {
     );
 
     AsyncStorage.getItem('beforeSearch', (err, result) => {
-      const BeforeSearch = JSON.parse(result);
-      console.log(BeforeSearch, '가져옴');
-      onInsert(BeforeSearch.text);
+      if (typeof result === 'string') {
+        const BeforeSearch = JSON.parse(result);
+        console.log(BeforeSearch, '가져옴');
+        onInsert(BeforeSearch.text);
+      }
       //setSearches(BeforeSearch.searchVoca);
     });
   };
 
+  const goAlarm = UseGoAlarm;
   return (
-    <SearchContainer headerTitle="검색">
-      <Container>
-        <SearchForm searchInput={searchInput} onPress={searchSomething} />
-        <OptionMenu onPressSearchDelete={RealonPressSearchDelete} />
-        <ListContainer>
-          <SearchStoryList searches={searches} onPressX={onRemove} />
-        </ListContainer>
-        <Line />
-        <RecommendContainer />
-      </Container>
+    <SearchContainer title="검색" onPress={goAlarm()}>
+      <SearchForm searchInput={searchInput} onPress={searchSomething} />
+      <OptionMenu onPressSearchDelete={RealonPressSearchDelete} />
+      <ListContainer>
+        <SearchStoryList searches={searches} onPressX={onRemove} />
+      </ListContainer>
+      <Line />
+      <RecommendContainer />
     </SearchContainer>
   );
 };
 
-const Container = styled.View`
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+const ListContainer = styled.View`
+  margin: 20px 0;
 `;
 
-const ListContainer = styled.View`
-  height: 50px;
-  width: 100%;
-  margin: 10px 0;
-  padding: 0 10px;
-`;
 const Line = styled.Text`
-  width: 100%;
   height: 10px;
-  background-color: #e3e3e3;
-  margin: 10px 0;
+  background-color: #f3f3f3;
+  margin-top: 8px;
+  margin-bottom: 10px;
 `;
 
 export default Search;

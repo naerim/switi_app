@@ -27,8 +27,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ searchInput, onPress }) => (
 );
 
 const Container = styled.View`
-  width: 100%;
-  padding: 0 20px;
+  padding: 10px 20px;
   margin: 15px 0;
 `;
 
