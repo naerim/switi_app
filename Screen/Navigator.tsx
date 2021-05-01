@@ -179,6 +179,7 @@ const MainNavigation = () => (
     <Stack.Screen name="Switi" component={TabNavigation} />
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
+    <Stack.Screen name="Alarm" component={Alarm} />
   </Stack.Navigator>
 );
 

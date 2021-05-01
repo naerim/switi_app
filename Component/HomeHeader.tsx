@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Logo from '../Img/logo_switi.png';
 import Alarm from '../Img/icon_alarm.png';
+import { Platform } from 'react-native';
 
 interface Props {
   onPress?: () => void;
@@ -9,7 +10,7 @@ interface Props {
 
 const HomeHeader: React.FC<Props> = ({ onPress }) => {
   return (
-    <Wrap>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 3 : 23 }}>
       <Icon source={Logo} />
       <AlarmButton activeOpacity={0.8} onPress={onPress}>
         <AlarmIcon source={Alarm} />
