@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import styled from 'styled-components/native';
 import UserInfo from './profile/userInfo';
 import SugarContainer from './profile/sugarContent/sugarContainer';
-import styled from 'styled-components/native';
 import MoveScreen from './moveScreen';
 import MyPageModal from './myPageModal';
 import SearchContainer from '../../Component/SearchContainer';
@@ -24,7 +24,6 @@ const MyPage = () => {
 };
 
 const Line = styled.Text`
-  width: 100%;
   height: 16px;
   background-color: #f3f3f3;
   margin: 30px 0;

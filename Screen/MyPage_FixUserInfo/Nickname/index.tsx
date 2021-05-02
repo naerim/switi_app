@@ -29,7 +29,8 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
         <Input
           value={input.value}
           onChangeText={input.onChange}
-          placeholder="공백, 특수문자 불가"
+          placeholder="사용자"
+          placeholderTextColor="black"
           keyboardType="default"
           returnKeyType="next"
           secureTextEntry={false}

@@ -1,43 +1,31 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
 import Constants from 'expo-constants';
+import styled from 'styled-components/native';
 
 const ProgressBar = () => {
   return (
-    <View style={styles.container}>
+    <Container>
       <Text>Loading.....</Text>
-      <View style={styles.progressBar}>
-        {/*<Animated.View style={[StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: “50%”}}/>*/}
-      </View>
+      <ProgressBarContainer></ProgressBarContainer>
       <Text>50%</Text>
-    </View>
+    </Container>
   );
 };
 
 export default ProgressBar;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  progressBar: {
-    height: 20,
-    width: '100%',
-    backgroundColor: 'white',
-    borderColor: '#000',
-    borderWidth: 2,
-    borderRadius: 5,
-  },
-  absoluteFill: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: ${Constants.statusBarHeight} 8px 8px 8px;
+  background-color: #ecf0f1;
+`;
+
+const ProgressBarContainer = styled.View`
+  height: 20px;
+  background-color: white;
+  border: 2px #0000;
+  border-radius: 5px;
+`;

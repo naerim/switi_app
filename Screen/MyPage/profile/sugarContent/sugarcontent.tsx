@@ -2,12 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import * as Progress from 'react-native-progress';
 import SugarExpression from './sugarExpression';
-import switi1 from './image/1switi.png';
-import switi2 from './image/2switi.png';
-import switi3 from './image/3switi.png';
-import switi4 from './image/4switi.png';
-import switi5 from './image/5switi.png';
-import switi6 from './image/6switi.png';
+import switi1 from '../../../../Img/profile_switi_step1.png';
+import switi2 from '../../../../Img/profile_switi_step2.png';
+import switi3 from '../../../../Img/profile_switi_step3.png';
+import switi4 from '../../../../Img/profile_switi_step4.png';
+import switi5 from '../../../../Img/profile_switi_step5.png';
+import switi6 from '../../../../Img/profile_switi_step6.png';
 
 const SugarContent = () => {
   const sugar = 50;
@@ -37,7 +37,7 @@ const SugarContent = () => {
       image: switi6,
     },
   ];
-  //grade key는 필요없을지도? sugarData[grade-1].image로 하면 되니
+  //grade key는 필요없을지도? sugarData[grade-1].image로 하면 되니까 : 벡앤드 연결 후 결
 
   const switiChoice = (switi: number) => {
     let grade = 0;
@@ -63,12 +63,7 @@ const SugarContent = () => {
     } else console.log('오류');
     return grade;
   };
-
   const sugarGrade = switiChoice(sugar);
-  // sugarGrade = switiChoice(sugar);
-
-  //왜 오류가 나지? sugar : number, switi : number 함수 동작 안하는 이유?
-
   return (
     <Container>
       <SugarExpression
@@ -90,7 +85,6 @@ const SugarContent = () => {
 };
 
 const Container = styled.View`
-  width: 100%;
   height: 86px;
   background-color: #fffcf5;
   border-radius: 20px;

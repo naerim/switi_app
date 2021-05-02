@@ -48,7 +48,6 @@ const Content = styled.Text`
 `;
 
 const Line = styled.Text`
-  width: 100%;
   height: 1px;
   background-color: #f3f3f3;
 `;

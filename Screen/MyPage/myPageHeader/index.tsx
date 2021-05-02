@@ -6,7 +6,7 @@ interface Props {
   headerTitle: string;
 }
 
-const HeaderContainer: React.FC<Props> = ({ children, headerTitle }) => {
+const Index: React.FC<Props> = ({ children, headerTitle }) => {
   return (
     <Wrap>
       <SearchHeader title={headerTitle} />
@@ -25,4 +25,4 @@ const Container = styled.View`
   background-color: #fff;
 `;
 
-export default HeaderContainer;
+export default Index;

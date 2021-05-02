@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Platform } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components/native';
-import CameraIcon from './camera.png';
+import * as ImagePicker from 'expo-image-picker';
+import CameraIcon from '../../../Img/icon_camera.png';
 import Profile from '../../../Img/icon_profile.png';
 
 const ImagePickerContainer = () => {

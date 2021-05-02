@@ -36,7 +36,6 @@ const StyledModalContainer = styled.View`
   flex-direction: column;
   padding: 24px;
   /* 모달창 크기 조절 */
-  width: 100%;
   height: 200px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 30px;

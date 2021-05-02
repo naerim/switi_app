@@ -21,7 +21,9 @@ const EmailInput: React.FC<InputProps> = ({ input, error }) => {
       <Input
         value={input.value}
         onChangeText={input.onChange}
-        placeholder="abc@dfg.com"
+        placeholder="purplecode@naver.com"
+        placeholderTextColor="black"
+        editable={false}
         keyboardType="email-address"
         returnKeyType="next"
         secureTextEntry={false}
