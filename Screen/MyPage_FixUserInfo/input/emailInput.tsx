@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { InputProps, Status } from '../SignUp/inteface/index';
+import { InputProps, Status } from '../../SignUp/inteface';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -15,16 +15,18 @@ const getColor = ({ status }: { status: Status }) => {
   }
 };
 
-const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
+const EmailInput: React.FC<InputProps> = ({ input, error }) => {
   return (
     <Container>
       <Input
         value={input.value}
         onChangeText={input.onChange}
-        placeholder="8자리 이상 영문, 숫자, 특수문자"
+        placeholder="purplecode@naver.com"
+        placeholderTextColor="black"
+        editable={false}
         keyboardType="email-address"
         returnKeyType="next"
-        secureTextEntry={true}
+        secureTextEntry={false}
         status={error.status}
       />
     </Container>
@@ -44,4 +46,4 @@ const Input = styled.TextInput`
   border-color: ${getColor};
 `;
 
-export default PasswordInput;
+export default EmailInput;

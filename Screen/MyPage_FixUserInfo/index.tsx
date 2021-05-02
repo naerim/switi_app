@@ -3,14 +3,19 @@ import React, { useState } from 'react';
 import BasicContainer from '../../Component/BasicContainer';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import NicknameContainer from './Nickname';
-import EmailInput from './emailInput';
-import PasswordInput from './passwordInput';
+import EmailInput from './input/emailInput';
+import PasswordInput from './input/passwordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import SignupContent from '../SignUp/components/Layout/SignupContent';
 import FixButton from './fixButton';
 import { Alert } from 'react-native';
 import ImagePickerContainer from './image/imagePicker';
+import IsNickname from './input/inputConfirm/isNickname';
+import IsEmail from './input/inputConfirm/isEmail';
+import IsPassword from './input/inputConfirm/isPassword';
+import IsSamePassword from './input/inputConfirm/isSamePassword';
+import IsBeforePassword from './input/inputConfirm/isBeforePassword';
 
 const MyPage_FixUserInfo = () => {
   const goMyPageUserInfo = useGoMyPageUserInfo();
@@ -20,60 +25,6 @@ const MyPage_FixUserInfo = () => {
   const passwordCheckInput = useInput('');
   const BeforePasswordInput = useInput('');
   const [confirm, setConfirm] = useState(false);
-
-  const isNickname = (nickname: string) => {
-    const special = /[~!@#$%^&*()_+|<>?:{}]/;
-    if (nickname == '' || nickname == null) {
-      return { status: Status.NORMARL, text: '필수 정보입니다.' };
-    } else if (special.test(nickname) || nickname.search(/\s/) != -1) {
-      return {
-        status: Status.ERROR,
-        text: '공백, 특수문자는 사용 불가합니다.',
-      };
-    } else {
-      return { status: Status.SUCCESS, text: '멋진 닉네임이네요!' };
-    }
-  };
-  const isEmail = (email: string) => {
-    const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    if (email == '' || email == null) {
-      return { status: Status.NORMARL, text: '필수 정보입니다.' };
-    } else if (!regex.test(email)) {
-      return { status: Status.ERROR, text: '이메일 형식이 올바르지 않습니다.' };
-    } else {
-      return { status: Status.SUCCESS, text: ' ' };
-    }
-  };
-  const isPassword = (pwd: string) => {
-    if (pwd == '' || pwd == null) {
-      return { status: Status.NORMARL, text: '필수 정보입니다.' };
-    } else if (
-      !/[0-9]/.test(pwd) ||
-      !/[a-zA-Z]/.test(pwd) ||
-      !/[~!@#$%<>^&*]/.test(pwd) ||
-      pwd.length < 8 ||
-      pwd.length > 16
-    ) {
-      return {
-        status: Status.ERROR,
-        text: '8~16문자 영문, 숫자, 특수문자를 사용하세요.',
-      };
-    } else {
-      return { status: Status.SUCCESS, text: ' ' };
-    }
-  };
-  const passwordCheck = (
-    pwd: { value: string },
-    checkPwd: { value: string }
-  ) => {
-    if (checkPwd.value == '' || checkPwd.value == null) {
-      return { status: Status.NORMARL, text: '필수 정보입니다.' };
-    } else if (pwd.value === checkPwd.value) {
-      return { status: Status.SUCCESS, text: ' ' };
-    } else {
-      return { status: Status.ERROR, text: '비밀번호가 일치하지 않습니다.' };
-    }
-  };
 
   const FixButtonOnPress = () => {
     if (success) {
@@ -87,41 +38,41 @@ const MyPage_FixUserInfo = () => {
       title: '닉네임',
       Component: NicknameContainer,
       input: nicknameInput,
-      error: isNickname(nicknameInput.value),
+      error: IsNickname(nicknameInput.value),
       confirm: { confirm, setConfirm },
     },
     {
       title: '이메일',
       Component: EmailInput,
       input: emailInput,
-      error: isEmail(emailInput.value),
+      error: IsEmail(emailInput.value),
     },
     {
       title: '기존 비밀번호',
       Component: PasswordInput,
       input: BeforePasswordInput,
-      error: isPassword(passwordInput.value),
+      error: IsBeforePassword(BeforePasswordInput.value, 'abcd1234*'),
     },
     {
-      title: '새 비밀번호 (8자리 이상 영문, 숫자, 특수문자)',
+      title: '새 비밀번호',
       Component: PasswordInput,
       input: passwordInput,
-      error: isPassword(passwordInput.value),
+      error: IsPassword(passwordInput.value),
     },
     {
       title: '새 비밀번호 확인',
       Component: PasswordInput,
       input: passwordCheckInput,
-      error: passwordCheck(passwordInput, passwordCheckInput),
+      error: IsSamePassword(passwordInput, passwordCheckInput),
     },
   ];
 
   // 회원정 성공 여부
   const success =
     confirm &&
-    isEmail(emailInput.value).status === Status.SUCCESS &&
-    isPassword(passwordInput.value).status === Status.SUCCESS &&
-    passwordCheck(passwordInput, passwordCheckInput).status === Status.SUCCESS;
+    IsEmail(emailInput.value).status === Status.SUCCESS &&
+    IsPassword(passwordInput.value).status === Status.SUCCESS &&
+    IsSamePassword(passwordInput, passwordCheckInput).status === Status.SUCCESS;
   // 회원정보 넘길 input 값
   const input = {
     nickname: nicknameInput.value,
@@ -152,11 +103,6 @@ const MyPage_FixUserInfo = () => {
     </BasicContainer>
   );
 };
-
-const UserImage = styled.Image`
-  width: 68px;
-  height: 68px;
-`;
 
 const PictureContainer = styled.View`
   flex: 2;
