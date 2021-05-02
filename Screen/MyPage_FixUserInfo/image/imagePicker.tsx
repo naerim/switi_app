@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styled from 'styled-components/native';
 import CameraIcon from './camera.png';
-import Profile from './profile.png';
+import Profile from '../../../Img/icon_profile.png';
 
 const ImagePickerContainer = () => {
   const [image, setImage] = useState('');
