@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import CheckBox from 'react-native-check-box';
+import ArrangeIcon from '../../../Img/icon_arrange.png';
 
 interface Props {
   num: number;
@@ -15,13 +15,10 @@ const ListHeader: React.FC<Props> = ({ num, check }) => {
   return (
     <Container>
       <Number>총 {num}건</Number>
-      <CheckBox
-        style={{ position: 'absolute', right: 35 }}
-        checkBoxColor="#fdc4bd"
-        isChecked={check.checked}
-        onClick={onClick}
-      />
-      <Number>최신순</Number>
+      <RightWrap onPress={onClick}>
+        <Icon source={ArrangeIcon} />
+        <Number>{check.checked ? '인기순' : '최신순'}</Number>
+      </RightWrap>
     </Container>
   );
 };
@@ -33,9 +30,19 @@ const Container = styled.View`
   margin-bottom: 8px;
 `;
 
+const RightWrap = styled.TouchableOpacity`
+  flex-direction: row;
+`;
+
 const Number = styled.Text`
   color: #2b2b2b;
   font-size: 12px;
+`;
+
+const Icon = styled.Image`
+  width: 18px;
+  height: 14px;
+  margin-right: 5px;
 `;
 
 export default ListHeader;
