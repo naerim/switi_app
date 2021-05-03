@@ -4,12 +4,13 @@ import IconImg from '../Img/icon_filter.png';
 
 interface Props {
   onPress: () => void;
+  text?: string;
 }
 
-const SelectButton: React.FC<Props> = ({ onPress }) => {
+const SelectButton: React.FC<Props> = ({ onPress, text }) => {
   return (
     <Container activeOpacity={0.8} onPress={onPress}>
-      <ButtonText>선택해 주세요</ButtonText>
+      <ButtonText>{text ? text : '선택해 주세요'}</ButtonText>
       <Icon source={IconImg} />
     </Container>
   );

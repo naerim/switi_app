@@ -4,7 +4,7 @@ import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
 import { Platform, ScrollView } from 'react-native';
 import AddImage from './components/AddImage';
-import Category from './components/Category';
+import SelectOne from './components/SelectOne';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
 import Input from './components/Input';
@@ -12,7 +12,7 @@ import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
-import Area from './components/Area';
+import { InterestList, Area } from '../../Data';
 
 const AddStudy = () => {
   const selectTarget = useInput('');
@@ -42,8 +42,8 @@ const AddStudy = () => {
       >
         <AddImage />
         <Content>
-          <Category />
-          <Area />
+          <SelectOne title="카테고리" data={InterestList} />
+          <SelectOne title="지역" data={Area} />
           <Target select={selectTarget} />
           <RecruitNum
             input={recruitNumInput}
