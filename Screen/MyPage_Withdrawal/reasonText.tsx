@@ -24,13 +24,16 @@ const ReasonText: React.FC<InputProps> = ({ input }) => {
 const Input = styled.TextInput`
   border-width: 1px;
   border-radius: 4px;
-  height: 128px;
+  height: 90px;
   font-size: 12px;
   border-color: #e3e3e3;
   padding: 10px;
   margin-top: 10px;
 `;
 
-const InputContainer = styled.View``;
+const InputContainer = styled.View`
+  flex: 3;
+  margin-top: 5px;
+`;
 
 export default ReasonText;

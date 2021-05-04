@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Icon from '../../image/search.png';
+import Icon from '../../../../Img/icon_search.png';
 
 export interface TextInputInterface {
   value: string;

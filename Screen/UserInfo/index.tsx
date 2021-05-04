@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import UserInfoContainer from './userInfoContainer';
-import UserName from '../../Component/UserName';
+import UserName from './UserName';
 import BasicModal from '../../Component/BasicModal';
 import ModalButton from './modal/modalButton';
+import ProfileIcon from '../../Img/icon_profile.png';
+
 import {
   UseGoFixUserInfo,
   useGoMyPage,
@@ -41,7 +43,7 @@ const UserInfo = () => {
       onPress={() => goMyPage()}
     >
       <UserImageContainer>
-        <UserImage source={require('./image/profile.png')} />
+        <UserImage source={ProfileIcon} />
         <UserName title="사용자" />
       </UserImageContainer>
       <Line />

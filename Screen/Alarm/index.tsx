@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Switch } from 'react-native';
 import { useGoMyPage } from '../../util/navigationHooks';
-import ColorButton from '../../Component/ColorButton';
+import ColorButton from '../../Component/BasicButton';
 import AlarmContainer from '../../Component/MypageContainer';
 
 const Alarm = () => {
@@ -50,7 +50,6 @@ const Alarm = () => {
           text="기기 알림 설정하기"
           onPress={onPress}
           loading={isLoading}
-          color="#86E3C3"
         />
       </ButtonContainer>
       <AllSwithContainer>

@@ -36,18 +36,20 @@ const MyPage_Withdrawal = () => {
           <ReasonText input={reasonInput} />
         </ReasonContainer>
         <ButtonContainer>
-          <TwoButton
-            text="나중에 할께요"
-            onPress={goMyPage}
-            loading={isLoading}
-          />
-          <TwoButton
-            text="네, 탈퇴할래요"
-            onPress={onPressWithdrawal}
-            loading={isLoading}
-            color="#86E3C3"
-            textColor="white"
-          />
+          <ButtonRowContainer>
+            <TwoButton
+              text="나중에 할께요"
+              onPress={goMyPage}
+              loading={isLoading}
+            />
+            <TwoButton
+              text="네, 탈퇴할래요"
+              onPress={onPressWithdrawal}
+              loading={isLoading}
+              color="#86E3C3"
+              textColor="white"
+            />
+          </ButtonRowContainer>
         </ButtonContainer>
         <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
           <ModalTextContainer>
@@ -70,6 +72,7 @@ const MarginContainer = styled.View`
 `;
 
 const Question = styled.Text`
+  flex: 1;
   font-size: 16px;
   font-weight: bold;
   margin-top: 10px;
@@ -77,6 +80,7 @@ const Question = styled.Text`
 `;
 
 const Answer = styled.Text`
+  flex: 2;
   font-size: 12px;
   margin-bottom: 10px;
 `;
@@ -92,8 +96,13 @@ const ReasonContainer = styled.View`
 
 const ButtonContainer = styled.View`
   flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonRowContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 `;
 

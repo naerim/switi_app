@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import SocialLoginButton from './SocialLoginButton';
-import google from './i_google.png';
-import naver from './naver.png';
-import kakao from './kakao.png';
+import google from '../../../../Img/icon_google.png';
+import naver from '../../../../Img/icon_naver.png';
+import kakao from '../../../../Img/icon_kakao.png';
 
 const SocialLogin: React.FC = () => {
   const socialData = [

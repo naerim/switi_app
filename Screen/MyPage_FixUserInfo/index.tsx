@@ -10,7 +10,7 @@ import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import AllInputContainer from './input/InputContent';
 import FixButton from './fixButton';
-import ImagePickerContainer from './image/imagePicker';
+import ImagePickerContainer from './imagePicker';
 import IsNickname from './input/inputConfirm/isNickname';
 import IsEmail from './input/inputConfirm/isEmail';
 import IsPassword from './input/inputConfirm/isPassword';
@@ -136,10 +136,6 @@ const ButtonContainer = styled.View`
   flex: 1;
   justify-content: center;
   margin-bottom: 10px;
-`;
-
-const BottomBar = styled.View`
-  flex: 0.5;
 `;
 
 export default MyPage_FixUserInfo;
