@@ -13,8 +13,11 @@ import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
 import { InterestList, Area } from '../../Data';
+import EnrollModal from './components/EnrollModal';
 
 const AddStudy = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModal = () => setModalVisible(false);
   const selectTarget = useInput('');
   const periodInput = useInput('');
   const recruitNumInput = useInput('');
@@ -31,6 +34,10 @@ const AddStudy = () => {
 
   const EnrollButton = () => {
     goHome();
+  };
+
+  const onClick = () => {
+    setModalVisible(true);
   };
 
   return (
@@ -66,9 +73,14 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={EnrollButton} />
+          <BasicButton text="등록하기" onPress={onClick} />
         </Content>
       </ScrollView>
+      <EnrollModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        onPress={EnrollButton}
+      />
     </Container>
   );
 };
