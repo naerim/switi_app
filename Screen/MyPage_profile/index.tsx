@@ -45,7 +45,6 @@ const MyPage_profile = () => {
   ];
   return (
     <BasicContainer headerTitle="내 프로필" display onPress={goMyPage}>
-      <Line />
       <Title>연령</Title>
       <Content>만 22세</Content>
       <Title>관심지역</Title>
@@ -72,12 +71,6 @@ const MyPage_profile = () => {
     </BasicContainer>
   );
 };
-
-const Line = styled.Text`
-  width: 100%;
-  height: 1px;
-  background-color: #f3f3f3;
-`;
 
 const Title = styled.Text`
   font-size: 12px;

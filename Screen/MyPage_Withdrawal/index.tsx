@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
-import { useGoMyPage, useGoMyPageUserInfo } from '../../util/navigationHooks';
+import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import TwoButton from './twoButton';
 import RadioButtonContainer from './radioButtonContainer';
 import ReasonText from './reasonText';

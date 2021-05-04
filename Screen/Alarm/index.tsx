@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Switch } from 'react-native';
-import BasicContainer from '../../Component/BasicContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import ColorButton from '../../Component/ColorButton';
 import AlarmContainer from '../UserInfo/userInfoContainer';
