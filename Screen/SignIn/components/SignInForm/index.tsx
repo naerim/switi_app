@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthItem from './AuthItem';
+import styled from "styled-components/native";
 
 interface Input {
   value: string;
@@ -15,7 +16,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
   emailInput,
   passwordInput,
 }) => (
-  <>
+  <Wrap>
     <AuthItem
       title="이메일"
       value={emailInput.value}
@@ -34,7 +35,11 @@ const SignInForm: React.FC<SignInFormProps> = ({
       secureTextEntry={true}
       returnKeyType="send"
     />
-  </>
+  </Wrap>
 );
+
+const Wrap = styled.View`
+  flex: 1;
+`;
 
 export default SignInForm;

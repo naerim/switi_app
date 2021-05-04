@@ -82,7 +82,6 @@ const MyPage_profile = () => {
             text="수정하기"
             onPress={onPress}
             loading={isLoading}
-            color="#86E3C3"
           />
         </ButtonContainer>
       </MarginContainer>

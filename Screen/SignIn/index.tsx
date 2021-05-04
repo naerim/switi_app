@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import useInput from './util/useInput';
-import AuthButton from './components/AuthButton';
+import AuthButton from '../../Component/BasicButton';
 import SocialLogin from './components/SocialLogin';
 import Division from './components/Division';
 import SignInForm from './components/SignInForm';
@@ -42,44 +42,70 @@ const SignIn: React.FC = () => {
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container>
+      <Container>
+        <SocialLoginContainer>
           <SocialLogin />
+        </SocialLoginContainer>
+        <DivisionContainer>
           <Division />
+        </DivisionContainer>
+        <SignInFormContainer>
           <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
-          <CheckBoxContainer>
-            <CheckBox
-              rightText="로그인 기억하기"
-              rightTextStyle={{ fontSize: 12 }}
-              checkBoxColor="#E3E3E3"
-              isChecked={checked}
-              onClick={toggleChecked}
-            />
-          </CheckBoxContainer>
-          <AuthButton
-            onPress={handleLogin}
-            loading={isLoading}
-            text="로그인"
-            color="#86E3C3"
+        </SignInFormContainer>
+        <CheckBoxContainer>
+          <CheckBox
+            rightText="로그인 기억하기"
+            rightTextStyle={{ fontSize: 12 }}
+            checkBoxColor="#E3E3E3"
+            isChecked={checked}
+            onClick={toggleChecked}
           />
+        </CheckBoxContainer>
+        <AuthButtonContainer>
+          <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
+        </AuthButtonContainer>
+        <OptionContainer>
           <OptionMenu />
-          <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
-        </Container>
-      </TouchableWithoutFeedback>
+        </OptionContainer>
+        <EmptyContainer />
+        <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
+      </Container>
     </BasicContainer>
   );
 };
 
 const Container = styled.View`
   flex: 1;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+`;
+
+const SocialLoginContainer = styled.View`
+  flex: 3;
+  justify-content: center;
+`;
+
+const DivisionContainer = styled.View`
+  flex: 1;
+`;
+
+const SignInFormContainer = styled.View`
+  flex: 3;
 `;
 
 const CheckBoxContainer = styled.View`
-  width: 100%;
+  flex: 1;
   padding: 0 10px;
+`;
+
+const AuthButtonContainer = styled.View`
+  flex: 1.5;
+`;
+
+const OptionContainer = styled.View`
+  flex: 2;
+`;
+
+const EmptyContainer = styled.View`
+  flex: 1;
 `;
 
 export default SignIn;

@@ -35,6 +35,7 @@ const Container = styled.TouchableOpacity`
   margin: 10px;
   background-color: ${({ color }: { color?: string }) => color || 'white'};
   flex-direction: row;
+  height: 40px;
 `;
 
 const TitleContainer = styled.View`

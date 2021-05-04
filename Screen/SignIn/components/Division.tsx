@@ -2,18 +2,25 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Division = () => (
-  <Container>
-    <Line />
-    <Or>또는</Or>
-    <Line />
-  </Container>
+  <Wrap>
+    <Container>
+      <Line />
+      <Or>또는</Or>
+      <Line />
+    </Container>
+  </Wrap>
 );
+
+const Wrap = styled.View`
+  flex: 1;
+  flex-direction: column;
+`;
 
 const Container = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  flex: 1;
   padding: 0 10px;
 `;
 

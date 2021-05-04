@@ -17,26 +17,32 @@ const AuthItem: React.FC<AuthItemProps> = ({
 }) => (
   <Container>
     <Title>{title}</Title>
-    <AuthInput
-      value={value}
-      onChangeText={onChangeText}
-      placeholder={placeholder}
-      keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
-      returnKeyType={returnKeyType}
-    />
+    <AuthInputContainer>
+      <AuthInput
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        returnKeyType={returnKeyType}
+      />
+    </AuthInputContainer>
   </Container>
 );
 
 const Container = styled.View`
-  width: 100%;
+  flex: 1;
   padding: 0 10px;
 `;
 
 const Title = styled.Text`
   font-size: 12px;
   color: #b4b4b4;
-  margin-bottom: 2%;
+  flex: 0.5px;
+`;
+
+const AuthInputContainer = styled.View`
+  flex: 2;
 `;
 
 export default AuthItem;
