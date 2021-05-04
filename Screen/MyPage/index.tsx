@@ -19,14 +19,18 @@ const MyPage = () => {
       <Line />
       <MoveScreen />
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
+      <BottomBar />
     </SearchContainer>
   );
 };
 
 const Line = styled.Text`
-  height: 16px;
+  flex: 0.2;
   background-color: #f3f3f3;
-  margin: 30px 0;
+`;
+
+const BottomBar = styled.View`
+  flex: 4;
 `;
 
 export default MyPage;

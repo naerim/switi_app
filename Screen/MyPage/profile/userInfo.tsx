@@ -31,6 +31,7 @@ const Container = styled.View`
   justify-content: space-between;
   flex-direction: row;
   margin: 24px 24px;
+  flex: 0.8;
 `;
 
 const LeftWrap = styled.View`

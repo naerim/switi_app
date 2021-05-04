@@ -10,7 +10,12 @@ interface Props {
 
 const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
   return (
-    <Container style={{ paddingTop: Platform.OS === 'ios' ? 20 : 40 }}>
+    <Container
+      style={{
+        paddingTop: Platform.OS === 'ios' ? 20 : 50,
+      }}
+    >
+      {/*40->50수정 알람버튼 윗부분 클릭 시 안드로이드에서 상단 바 내려와서 수정했습니다. */}
       <HeaderContainer>
         <Title>{title}</Title>
         <AlarmButton activeOpacity={0.8} onPress={onPress}>
@@ -24,6 +29,7 @@ const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
 
 const Container = styled.View`
   flex: 1;
+  flex-flow: column;
   background-color: white;
 `;
 

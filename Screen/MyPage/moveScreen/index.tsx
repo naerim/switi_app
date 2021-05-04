@@ -29,7 +29,9 @@ const MoveScreen = () => {
   );
 };
 
-const Wrap = styled.View``;
+const Wrap = styled.View`
+  flex: 5;
+`;
 
 const Container = styled.View`
   padding: 0 24px;

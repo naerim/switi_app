@@ -85,13 +85,13 @@ const SugarContent = () => {
 };
 
 const Container = styled.View`
-  height: 86px;
   background-color: #fffcf5;
   border-radius: 20px;
   justify-content: center;
   padding: 10px;
   flex-direction: row;
   align-items: center;
+  flex: 5;
 `;
 
 const ProgressContainer = styled.View`
