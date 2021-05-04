@@ -35,6 +35,7 @@ const EmailInput: React.FC<InputProps> = ({ input, error }) => {
 
 const Container = styled.View`
   justify-content: center;
+  flex: 1;
 `;
 
 const Input = styled.TextInput`

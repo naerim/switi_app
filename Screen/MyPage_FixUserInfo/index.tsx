@@ -1,15 +1,15 @@
 import styled from 'styled-components/native';
 import React, { useState } from 'react';
-import BasicContainer from '../../Component/BasicContainer';
+import { Alert } from 'react-native';
+import BasicContainer from '../../Component/MypageContainer';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import NicknameContainer from './Nickname';
 import EmailInput from './input/emailInput';
 import PasswordInput from './input/passwordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
-import SignupContent from '../SignUp/components/Layout/SignupContent';
+import AllInputContainer from './input/InputContent';
 import FixButton from './fixButton';
-import { Alert } from 'react-native';
 import ImagePickerContainer from './image/imagePicker';
 import IsNickname from './input/inputConfirm/isNickname';
 import IsEmail from './input/inputConfirm/isEmail';
@@ -86,23 +86,37 @@ const MyPage_FixUserInfo = () => {
       display
       onPress={goMyPageUserInfo}
     >
-      <PictureContainer>
-        <ImagePickerContainer />
-      </PictureContainer>
-      <InputContainer>
-        {fixUserInfoData.map(({ title, Component, input, error, confirm }) => (
-          <SignupContent key={title} title={title}>
-            <Component input={input} error={error} confirm={confirm} />
-          </SignupContent>
-        ))}
-      </InputContainer>
-      <NothingContainer />
-      <ButtonContainer>
-        <FixButton success={success} input={input} onPress={FixButtonOnPress} />
-      </ButtonContainer>
+      <MarginContainer>
+        <PictureContainer>
+          <ImagePickerContainer />
+        </PictureContainer>
+        <InputContainer>
+          {fixUserInfoData.map(
+            ({ title, Component, input, error, confirm }) => (
+              <AllInputContainer key={title} title={title}>
+                <Component input={input} error={error} confirm={confirm} />
+              </AllInputContainer>
+            )
+          )}
+        </InputContainer>
+        <NothingContainer />
+        <ButtonContainer>
+          <FixButton
+            success={success}
+            input={input}
+            onPress={FixButtonOnPress}
+          />
+        </ButtonContainer>
+      </MarginContainer>
     </BasicContainer>
   );
 };
+
+const MarginContainer = styled.View`
+  margin-left: 24px;
+  margin-right: 24px;
+  flex: 1;
+`;
 
 const PictureContainer = styled.View`
   flex: 2;
@@ -115,12 +129,17 @@ const InputContainer = styled.View`
 `;
 
 const NothingContainer = styled.View`
-  flex: 1;
+  flex: 0.5;
 `;
 
 const ButtonContainer = styled.View`
   flex: 1;
   justify-content: center;
+  margin-bottom: 10px;
+`;
+
+const BottomBar = styled.View`
+  flex: 0.5;
 `;
 
 export default MyPage_FixUserInfo;

@@ -52,6 +52,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
 
 const Container = styled.View`
   flex-direction: column;
+  flex: 1;
 `;
 
 const InputContainer = styled.View`
@@ -69,6 +70,7 @@ const Input = styled.TextInput`
   border-radius: 4px;
   padding: 10px;
   border-color: ${getColor};
+  margin-top: 5px;
 `;
 
 export default NicknameContainer;

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Switch } from 'react-native';
 import { useGoMyPage } from '../../util/navigationHooks';
 import ColorButton from '../../Component/ColorButton';
-import AlarmContainer from '../UserInfo/userInfoContainer';
+import AlarmContainer from '../../Component/MypageContainer';
 
 const Alarm = () => {
   const [isLoading, setIsLoading] = useState(false);

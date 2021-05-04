@@ -34,6 +34,7 @@ const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
 
 const Container = styled.View`
   justify-content: center;
+  flex: 1;
 `;
 
 const Input = styled.TextInput`
@@ -43,6 +44,7 @@ const Input = styled.TextInput`
   border-radius: 4px;
   padding: 10px;
   border-color: ${getColor};
+  margin-top: 5px;
 `;
 
 const Warning = styled.Text`
