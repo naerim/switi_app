@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoMyPageUserInfo, UseGoAlarm } from '../../../util/navigationHooks';
+import {
+  useGoMyPageUserInfo,
+  UseGoAlarm,
+  UseGoNotice,
+} from '../../../util/navigationHooks';
 
 const MoveScreen = () => {
   const goUserInfo = useGoMyPageUserInfo();
-  const goUseAlarm = UseGoAlarm();
+  const goAlarm = UseGoAlarm();
+  const goNotice = UseGoNotice();
+
   return (
     <Wrap>
       <Container>
@@ -16,12 +22,14 @@ const MoveScreen = () => {
       <Container>
         <Title>설정</Title>
         <Content onPress={() => goUserInfo()}>회원정보</Content>
-        <Content onPress={() => goUseAlarm()}>알림 설정</Content>
+        <Content onPress={() => goAlarm()}>알림 설정</Content>
       </Container>
       <Line />
       <Container>
         <Title>고객센터</Title>
-        <Content>공지사항</Content>
+        <ContentContainer onPress={() => goNotice()}>
+          <Content>공지사항</Content>
+        </ContentContainer>
         <Content>문의</Content>
         <Content>신고하기</Content>
       </Container>
@@ -35,6 +43,9 @@ const Wrap = styled.View`
 
 const Container = styled.View`
   padding: 0 24px;
+`;
+
+const ContentContainer = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
