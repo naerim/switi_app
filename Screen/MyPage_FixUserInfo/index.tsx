@@ -63,7 +63,7 @@ const MyPage_FixUserInfo = () => {
       title: '새 비밀번호 확인',
       Component: PasswordInput,
       input: passwordCheckInput,
-      error: IsSamePassword(passwordInput, passwordCheckInput),
+      error: IsSamePassword(passwordInput.value, passwordCheckInput.value),
     },
   ];
 
