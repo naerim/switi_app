@@ -6,11 +6,13 @@ import {
   UseGoNotice,
 } from '../../../util/navigationHooks';
 
-const MoveScreen = () => {
-  const goUserInfo = useGoMyPageUserInfo();
-  const goAlarm = UseGoAlarm();
-  const goNotice = UseGoNotice();
+interface Props {
+  goAlarm: () => void;
+  goNotice: () => void;
+  goUserInfo: () => void;
+}
 
+const MoveScreen: React.FC<Props> = ({ goAlarm, goNotice, goUserInfo }) => {
   return (
     <Wrap>
       <Container>
@@ -21,15 +23,13 @@ const MoveScreen = () => {
       <Line />
       <Container>
         <Title>설정</Title>
-        <Content onPress={() => goUserInfo()}>회원정보</Content>
-        <Content onPress={() => goAlarm()}>알림 설정</Content>
+        <Content onPress={goUserInfo}>회원정보</Content>
+        <Content onPress={goAlarm}>알림 설정</Content>
       </Container>
       <Line />
       <Container>
         <Title>고객센터</Title>
-        <ContentContainer onPress={() => goNotice()}>
-          <Content>공지사항</Content>
-        </ContentContainer>
+        <Content onPress={() => goNotice}>공지사항</Content>
         <Content>문의</Content>
         <Content>신고하기</Content>
       </Container>
@@ -45,8 +45,7 @@ const Container = styled.View`
   padding: 0 24px;
 `;
 
-const ContentContainer = styled.TouchableOpacity`
-`;
+const ContentContainer = styled.TouchableOpacity``;
 
 const Title = styled.Text`
   font-size: 10px;
