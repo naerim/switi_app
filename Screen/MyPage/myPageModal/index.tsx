@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from 'react-native-modal';
 import styled from 'styled-components/native';
+import BasicModal from '../../../Component/BasicModal';
 
 interface MyPageModalProps {
   modalVisible: boolean;
@@ -12,13 +12,8 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   closeModal,
 }) => {
   return (
-    <Modal
-      isVisible={modalVisible}
-      useNativeDriver={true}
-      hideModalContentWhileAnimating={true}
-      onBackdropPress={closeModal}
-      style={{ margin: 0, justifyContent: 'flex-end' }}
-    >
+    <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+      {console.log(modalVisible)}
       <StyledModalContainer>
         <Title>나의 당도란?</Title>
         <Text>
@@ -28,7 +23,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           반영되어요.
         </Text>
       </StyledModalContainer>
-    </Modal>
+    </BasicModal>
   );
 };
 

@@ -14,20 +14,22 @@ import {
 const MyPage = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const closeModal = () => setModalVisible(false);
-  const goAlarm = UseGoAlarm;
+  const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
 
   return (
-    <SearchContainer title="마이페이지" onPress={goAlarm()}>
-      <UserInfo title="사용자" />
-      <SugarContainer />
-      <Line />
-      <MoveScreen
-        goAlarm={goAlarm()}
-        goUserInfo={goUserInfo}
-        goNotice={goNotice}
-      />
+    <SearchContainer title="마이페이지" onPress={goAlarm}>
+      <Container>
+        <UserInfo title="사용자" />
+        <SugarContainer />
+        <Line />
+        <MoveScreen
+          goAlarm={goAlarm}
+          goUserInfo={goUserInfo}
+          goNotice={goNotice}
+        />
+      </Container>
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
       <BottomBar />
     </SearchContainer>
@@ -42,5 +44,7 @@ const Line = styled.Text`
 const BottomBar = styled.View`
   flex: 4;
 `;
+
+const Container = styled.ScrollView``;
 
 export default MyPage;

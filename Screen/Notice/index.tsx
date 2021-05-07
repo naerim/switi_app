@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NoticeContainer from '../../Component/MypageContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import { Text } from 'react-native';
+import styled from 'styled-components/native';
 
 const Notice = () => {
   const goMyPage = useGoMyPage();

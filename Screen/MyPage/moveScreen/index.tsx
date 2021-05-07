@@ -1,10 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {
-  useGoMyPageUserInfo,
-  UseGoAlarm,
-  UseGoNotice,
-} from '../../../util/navigationHooks';
 
 interface Props {
   goAlarm: () => void;
@@ -17,21 +12,27 @@ const MoveScreen: React.FC<Props> = ({ goAlarm, goNotice, goUserInfo }) => {
     <Wrap>
       <Container>
         <Title>내활동</Title>
-        <Content>스크랩</Content>
-        <Content>참여기록</Content>
+        <SubTitle>스크랩</SubTitle>
+        <SubTitle>참여기록</SubTitle>
       </Container>
       <Line />
       <Container>
         <Title>설정</Title>
-        <Content onPress={goUserInfo}>회원정보</Content>
-        <Content onPress={goAlarm}>알림 설정</Content>
+        <Content onPress={goUserInfo}>
+          <SubTitle>회원정보</SubTitle>
+        </Content>
+        <Content onPress={goAlarm}>
+          <SubTitle>알림 설정</SubTitle>
+        </Content>
       </Container>
       <Line />
       <Container>
         <Title>고객센터</Title>
-        <Content onPress={() => goNotice}>공지사항</Content>
-        <Content>문의</Content>
-        <Content>신고하기</Content>
+        <Content onPress={goNotice}>
+          <SubTitle>공지사항</SubTitle>
+        </Content>
+        <SubTitle>문의</SubTitle>
+        <SubTitle>신고하기</SubTitle>
       </Container>
     </Wrap>
   );
@@ -54,7 +55,9 @@ const Title = styled.Text`
   padding-top: 20px;
 `;
 
-const Content = styled.Text`
+const Content = styled.TouchableOpacity``;
+
+const SubTitle = styled.Text`
   font-size: 12px;
   padding-bottom: 20px;
 `;
