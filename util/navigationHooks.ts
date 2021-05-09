@@ -60,6 +60,11 @@ export const UseGoNotice = () => {
   return useCallback(() => navigation.navigate('Notice'), [navigation]);
 };
 
+export const UseGoReport = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('Report'), [navigation]);
+};
+
 export const useGoTerms = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Terms', { idx: idx }), [

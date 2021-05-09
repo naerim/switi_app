@@ -34,6 +34,7 @@ import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
 import Notice from './Notice';
+import Report from './Report';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -182,6 +183,7 @@ const MainNavigation = () => (
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
+    <Stack.Screen name="Report" component={Report} />
   </Stack.Navigator>
 );
 

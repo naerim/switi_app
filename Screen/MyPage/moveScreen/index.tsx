@@ -5,9 +5,15 @@ interface Props {
   goAlarm: () => void;
   goNotice: () => void;
   goUserInfo: () => void;
+  goReport: () => void;
 }
 
-const MoveScreen: React.FC<Props> = ({ goAlarm, goNotice, goUserInfo }) => {
+const MoveScreen: React.FC<Props> = ({
+  goAlarm,
+  goNotice,
+  goUserInfo,
+  goReport,
+}) => {
   return (
     <Wrap>
       <Container>
@@ -18,21 +24,23 @@ const MoveScreen: React.FC<Props> = ({ goAlarm, goNotice, goUserInfo }) => {
       <Line />
       <Container>
         <Title>설정</Title>
-        <Content onPress={goUserInfo}>
+        <SubTitleContainer onPress={goUserInfo}>
           <SubTitle>회원정보</SubTitle>
-        </Content>
-        <Content onPress={goAlarm}>
+        </SubTitleContainer>
+        <SubTitleContainer onPress={goAlarm}>
           <SubTitle>알림 설정</SubTitle>
-        </Content>
+        </SubTitleContainer>
       </Container>
       <Line />
       <Container>
         <Title>고객센터</Title>
-        <Content onPress={goNotice}>
+        <SubTitleContainer onPress={goNotice}>
           <SubTitle>공지사항</SubTitle>
-        </Content>
+        </SubTitleContainer>
         <SubTitle>문의</SubTitle>
-        <SubTitle>신고하기</SubTitle>
+        <SubTitleContainer onPress={goReport}>
+          <SubTitle>신고하기</SubTitle>
+        </SubTitleContainer>
       </Container>
     </Wrap>
   );
@@ -55,7 +63,7 @@ const Title = styled.Text`
   padding-top: 20px;
 `;
 
-const Content = styled.TouchableOpacity``;
+const SubTitleContainer = styled.TouchableOpacity``;
 
 const SubTitle = styled.Text`
   font-size: 12px;

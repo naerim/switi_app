@@ -9,6 +9,7 @@ import {
   UseGoAlarm,
   useGoMyPageUserInfo,
   UseGoNotice,
+  UseGoReport,
 } from '../../util/navigationHooks';
 
 const MyPage = () => {
@@ -17,6 +18,7 @@ const MyPage = () => {
   const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
+  const goReport = UseGoReport();
 
   return (
     <SearchContainer title="마이페이지" onPress={goAlarm}>
@@ -28,6 +30,7 @@ const MyPage = () => {
           goAlarm={goAlarm}
           goUserInfo={goUserInfo}
           goNotice={goNotice}
+          goReport={goReport}
         />
       </Container>
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
