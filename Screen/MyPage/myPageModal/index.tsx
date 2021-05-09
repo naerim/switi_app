@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 import BasicModal from '../../../Component/BasicModal';
 
 interface MyPageModalProps {
@@ -13,8 +14,11 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
 }) => {
   return (
     <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-      {console.log(modalVisible)}
-      <StyledModalContainer>
+      <StyledModalContainer
+        style={{
+          paddingBottom: Platform.OS === 'ios' ? 0 : 24,
+        }}
+      >
         <Title>나의 당도란?</Title>
         <Text>
           나의 당도는 함께 활동한 스터디원들이 평가한 내 신뢰도를{'\n'}나타내는
@@ -29,11 +33,12 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
 
 const StyledModalContainer = styled.View`
   flex-direction: column;
-  padding: 24px;
   /* 모달창 크기 조절 */
-  height: 200px;
+  height: 120px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 30px;
+  text-align: left;
+  justify-content: center;
 `;
 
 const Title = styled.Text`
