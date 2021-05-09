@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../../Component/BasicModal';
-import ModalForm from '../../../../Component/basicModal/ModalForm/modalForm';
 import ModalOption from '../../../../Component/basicModal/modalOption';
-import AuthButton from '../AuthButton';
 import useInput from '../../util/useInput';
 import { Alert } from 'react-native';
+import ModalForm from './ModalForm';
+import BasicButton from '../../../../Component/BasicButton';
 
 interface Props {
   modalVisible: boolean;
@@ -34,23 +34,20 @@ const EmailAuthModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
         <SmallText>switi@purplecode.com</SmallText>
         <ModalForm emailInput={certificationNumber} />
         <ModalOption />
-        <AuthButton
-          text="이메일 인증하기"
-          onPress={handleNum}
-          loading={isLoading}
-          color="#4FD5A7"
-        />
+        <BasicButton text="이메일 인증하기" onPress={handleNum} />
       </Container>
     </BasicModal>
   );
 };
 
 const Container = styled.View`
-  align-items: center;
   padding-top: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 const BigText = styled.Text`
+  text-align: center;
   font-size: 18px;
   color: #2b2b2b;
 `;
