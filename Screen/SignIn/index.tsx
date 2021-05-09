@@ -9,14 +9,14 @@ import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
-import BasicModal from '../../Component/basicModal';
+import EmailAuthModal from './components/EmailAuthModal';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const toggleChecked = () => setChecked(!checked);
   const closeModal = () => setModalVisible(false);
@@ -63,7 +63,7 @@ const SignIn: React.FC = () => {
             color="#86E3C3"
           />
           <OptionMenu />
-          <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
+          <EmailAuthModal modalVisible={modalVisible} closeModal={closeModal} />
         </Container>
       </TouchableWithoutFeedback>
     </BasicContainer>
