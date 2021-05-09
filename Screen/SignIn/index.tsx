@@ -16,7 +16,7 @@ const SignIn: React.FC = () => {
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(true);
 
   const toggleChecked = () => setChecked(!checked);
   const closeModal = () => setModalVisible(false);

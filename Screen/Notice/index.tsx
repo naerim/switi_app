@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NoticeContainer from '../../Component/MypageContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import { Text } from 'react-native';

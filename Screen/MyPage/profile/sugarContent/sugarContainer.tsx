@@ -13,7 +13,9 @@ const SugarContainer = () => (
         <InfoIcon source={Icon_info} />
       </TitleHelpContainer>
     </TitleContainer>
-    <SugarContent />
+    <SugarContentContainer>
+      <SugarContent />
+    </SugarContentContainer>
     <EmptyContainer />
   </Container>
 );
@@ -46,7 +48,10 @@ const InfoIcon = styled.Image`
   height: 12px;
   width: 12px;
 `;
-
+const SugarContentContainer = styled.View`
+  margin-bottom: 24px;
+  margin-top: 12px;
+`;
 const EmptyContainer = styled.View`
   flex-direction: row;
   flex: 1;
