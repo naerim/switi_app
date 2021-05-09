@@ -46,8 +46,8 @@ const SocialLogin: React.FC = () => {
 };
 
 const Container = styled.View`
-  flex: 1;
-  justify-content: center;
+  padding-top: 20px;
+  height: 40px;
 `;
 
 export default SocialLogin;
