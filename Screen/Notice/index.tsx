@@ -24,7 +24,7 @@ const Notice = () => {
   );
 };
 
-const AllNoticeContainer = styled.View`
+const AllNoticeContainer = styled.ScrollView`
   flex: 1;
 `;
 

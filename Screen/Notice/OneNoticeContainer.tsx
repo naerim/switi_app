@@ -15,7 +15,7 @@ const OneNoticeContainer: React.FC<OneNoticeContainerProps> = ({
   content,
   createAt,
 }) => (
-  <Container>
+  <Container activeOpacity={0.8}>
     <Title>{title}</Title>
     <Date>{createAt}</Date>
     <Line />
