@@ -26,7 +26,8 @@ const ModalForm: React.FC<EmailFromProps> = ({ emailInput }) => (
 
 const Container = styled.View`
   padding-top: 30px;
-  width: 90%;
+  padding-left: 50px;
+  padding-right: 50px;
 `;
 
 export default ModalForm;
