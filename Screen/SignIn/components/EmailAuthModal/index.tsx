@@ -9,15 +9,26 @@ import ModalOption from './ModalOption';
 
 interface Props {
   modalVisible: boolean;
+  setModalVisible: any;
   closeModal: () => void;
+  setDoneModalVisible: any;
 }
-const EmailAuthModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
+const EmailAuthModal: React.FC<Props> = ({
+  modalVisible,
+  setModalVisible,
+  closeModal,
+  setDoneModalVisible,
+}) => {
   const certificationNumber = useInput('');
 
   const handleNum = () => {
     if (!certificationNumber.value) {
       Alert.alert('인증번호를 입력해주세요.');
     }
+    setModalVisible(false);
+    setTimeout(() => {
+      setDoneModalVisible(true);
+    }, 500);
   };
 
   return (
