@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { StudyList } from '../../Data';
-import StudyImage from './components/StudyImage';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
+import StudyImage from './components/StudyImage';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
