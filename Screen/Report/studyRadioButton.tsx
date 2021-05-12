@@ -5,7 +5,6 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import DrawLine from './line';
 interface InputProps {
   reason: number;
   setReason: (value: number) => void;
@@ -14,37 +13,15 @@ interface Props {
   input: InputProps;
 }
 
-const RadioButtonContainer: React.FC<Props> = ({ input }) => {
+const StudyRadioButton: React.FC<Props> = ({ input }) => {
   const radio_props = [
     {
-      label: '자주 사용하지 않아요',
+      label: '중국어 부수는 모임',
       value: 0,
-      line: true,
     },
     {
-      label: '이용이 불편해요',
+      label: '중국어 부수는 모임',
       value: 1,
-      line: true,
-    },
-    {
-      label: '시스템 오류가 잦아요',
-      value: 2,
-      line: true,
-    },
-    {
-      label: '스터디 모집이 어려워요',
-      value: 3,
-      line: true,
-    },
-    {
-      label: '새 계정으로 다시 이용하고 싶어요',
-      value: 4,
-      line: true,
-    },
-    {
-      label: '기타 (직접작성)',
-      value: 5,
-      line: false,
     },
   ];
 
@@ -76,7 +53,6 @@ const RadioButtonContainer: React.FC<Props> = ({ input }) => {
                 }}
               />
             </RadioContainer>
-            <DrawLine line={obj.line} />
           </RadioButton>
         ))}
       </RadioForm>
@@ -95,4 +71,4 @@ const RadioContainer = styled.View`
   flex-direction: row;
 `;
 
-export default RadioButtonContainer;
+export default StudyRadioButton;

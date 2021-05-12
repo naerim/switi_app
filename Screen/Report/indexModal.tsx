@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import BasicModal from '../../Component/BasicModal';
+import StudyRadioButton from './studyRadioButton';
 
 interface MyPageModalProps {
   modalVisible: boolean;
@@ -12,6 +13,8 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   modalVisible,
   closeModal,
 }) => {
+  const [study, setStudy] = useState(0);
+
   return (
     <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
       <StyledModalContainer
@@ -19,7 +22,8 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
       >
-        <Text>Notice</Text>
+        <Title>스터디 선택</Title>
+        <StudyRadioButton input={{ reason: study, setReason: setStudy }} />
       </StyledModalContainer>
     </BasicModal>
   );
@@ -35,8 +39,8 @@ const StyledModalContainer = styled.View`
   justify-content: center;
 `;
 
-const Text = styled.Text`
-  font-size: 12px;
+const Title = styled.Text`
+  font-size: 14px;
 `;
 
 export default MyPageModal;
