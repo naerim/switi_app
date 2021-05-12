@@ -11,9 +11,9 @@ const Notice = () => {
   return (
     <NoticeContainer onPress={goMyPage} display headerTitle="공지사항">
       <AllNoticeContainer>
-        {NoticeData.map(({ idx, title, content, createAt }) => (
+        {NoticeData.map(({ key, title, content, createAt }) => (
           <OneNoticeContainer
-            idx={idx}
+              key={key}
             title={title}
             content={content}
             createAt={createAt}

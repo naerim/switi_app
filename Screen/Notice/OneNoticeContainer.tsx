@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface OneNoticeContainerProps {
-  idx: number;
+  key: number;
   title: string;
   content: string;
   //아마도 내용은 나중에 스크린 만들어야 할 듯
@@ -10,7 +10,7 @@ interface OneNoticeContainerProps {
 }
 
 const OneNoticeContainer: React.FC<OneNoticeContainerProps> = ({
-  idx,
+  key,
   title,
   content,
   createAt,
