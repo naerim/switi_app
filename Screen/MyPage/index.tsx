@@ -5,6 +5,7 @@ import SugarContainer from './profile/sugarContent/sugarContainer';
 import MoveScreen from './moveScreen';
 import MyPageModal from './myPageModal';
 import SearchContainer from '../../Component/SearchContainer';
+import NoticeModal from '../Report/indexModal';
 import {
   UseGoAlarm,
   useGoMyPageUserInfo,
@@ -15,11 +16,14 @@ import {
 const MyPage = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const closeModal = () => setModalVisible(false);
+
+  const [noticeModalVisible, setNoticeModalVisible] = useState<boolean>(false);
+  const noticeCloseModal = () => setNoticeModalVisible(true);
+
   const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
-  const goReport = UseGoReport();
-
+  const goReport = () => setNoticeModalVisible(true);
   return (
     <SearchContainer title="마이페이지" onPress={goAlarm}>
       <Container>
@@ -35,6 +39,10 @@ const MyPage = () => {
       </Container>
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
       <BottomBar />
+      <NoticeModal
+        modalVisible={noticeModalVisible}
+        closeModal={noticeCloseModal}
+      />
     </SearchContainer>
   );
 };
