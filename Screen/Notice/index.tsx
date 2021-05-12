@@ -13,7 +13,7 @@ const Notice = () => {
       <AllNoticeContainer>
         {NoticeData.map(({ key, title, content, createAt }) => (
           <OneNoticeContainer
-              key={key}
+            key={key}
             title={title}
             content={content}
             createAt={createAt}

@@ -68,6 +68,7 @@ function MyPageNavigator() {
       <Stack.Screen name="Notice" component={Notice} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
+      <Stack.Screen name="Report" component={Report} />
     </Stack.Navigator>
   );
 }
@@ -183,7 +184,6 @@ const MainNavigation = () => (
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
-    <Stack.Screen name="Report" component={Report} />
   </Stack.Navigator>
 );
 
