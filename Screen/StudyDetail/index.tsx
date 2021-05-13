@@ -5,14 +5,18 @@ import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
 import StudyImage from './components/StudyImage';
+import DetailHeader from './components/DetailHeader';
+import { useGoHome } from '../../util/navigationHooks';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
   const item = StudyList.find((i) => i.idx === idx);
+  const goHome = useGoHome();
 
   return (
     <Container>
       <StudyImage done={item?.flag === 0} />
+      <DetailHeader onPress={goHome} />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
