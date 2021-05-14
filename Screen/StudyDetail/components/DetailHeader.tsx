@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BackIcon from '../../../Img/btn_back_w.png';
 import MenuIcon from '../../../Img/icon_dot3.png';
 import { Platform } from 'react-native';
+import MenuModal from './MenuModal';
 
 interface Props {
   onPress: () => void;
 }
 
 const DetailHeader: React.FC<Props> = ({ onPress }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
   return (
     <Container style={{ top: Platform.OS === 'ios' ? 54 : 24 }}>
       <Wrap
@@ -17,9 +20,16 @@ const DetailHeader: React.FC<Props> = ({ onPress }) => {
       >
         <Icon source={BackIcon} />
       </Wrap>
-      <Wrap hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+      <Wrap
+        onPress={showModal}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
         <RightIcon source={MenuIcon} />
       </Wrap>
+      <MenuModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </Container>
   );
 };
