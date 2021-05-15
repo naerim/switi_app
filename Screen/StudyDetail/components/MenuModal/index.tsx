@@ -1,6 +1,6 @@
 import React from 'react';
-import { Alert, Modal, Pressable } from 'react-native';
 import styled from 'styled-components/native';
+import Modal from 'react-native-modal';
 
 interface Props {
   modalVisible: boolean;
@@ -8,23 +8,22 @@ interface Props {
 }
 
 const MenuModal: React.FC<Props> = ({ modalVisible, setModalVisible }) => {
+  const closeModal = () => setModalVisible(!modalVisible);
   return (
     <Modal
-      animationType="slide"
-      transparent={true}
-      visible={modalVisible}
-      onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
-        setModalVisible(!modalVisible);
-      }}
+      useNativeDriver={true}
+      isVisible={modalVisible}
+      hideModalContentWhileAnimating={true}
     >
       <Container>
-        <ModalView>
-          <ModalText>Hello World!</ModalText>
-          <Pressable onPress={() => setModalVisible(!modalVisible)}>
-            <ModalText>Hide Modal</ModalText>
-          </Pressable>
-        </ModalView>
+        <MenuView>
+          <ModalText onPress={() => console.log('수정')}>모집글 수정</ModalText>
+          <Line />
+          <ModalText onPress={() => console.log('삭제')}>모집글 삭제</ModalText>
+        </MenuView>
+        <CancelView onPress={closeModal} activeOpacity={0.8}>
+          <CancelText>취소</CancelText>
+        </CancelView>
       </Container>
     </Modal>
   );
@@ -32,22 +31,38 @@ const MenuModal: React.FC<Props> = ({ modalVisible, setModalVisible }) => {
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
-  margin-top: 22px;
+  justify-content: flex-end;
 `;
 
-const ModalView = styled.View`
-  margin: 20px;
+const MenuView = styled.View`
   background-color: white;
-  padding: 35px;
-  border-radius: 20px;
-  align-items: center;
+  border-radius: 10px;
+  height: 101px;
+  justify-content: center;
 `;
 
 const ModalText = styled.Text`
-  margin-bottom: 15px;
   text-align: center;
+  color: #2b2b2b;
+`;
+
+const CancelText = styled.Text`
+  text-align: center;
+  color: red;
+`;
+const CancelView = styled.TouchableOpacity`
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  height: 47px;
+  justify-content: center;
+`;
+
+const Line = styled.View`
+  background-color: #f3f3f3;
+  height: 1px;
+  margin: 15px 0;
 `;
 
 export default MenuModal;
