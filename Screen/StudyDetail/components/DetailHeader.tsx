@@ -13,7 +13,7 @@ const DetailHeader: React.FC<Props> = ({ onPress }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const showModal = () => setModalVisible(true);
   return (
-    <Container style={{ top: Platform.OS === 'ios' ? 54 : 24 }}>
+    <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <Wrap
         onPress={onPress}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -39,10 +39,10 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
   font-size: 12px;
   left: 24px;
   right: 24px;
+  top: 24px;
 `;
 
 const Wrap = styled.TouchableOpacity``;
