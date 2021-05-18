@@ -4,6 +4,7 @@ import BasicModal from '../../../../Component/BasicModal';
 import Input from '../../../AddStudy/components/Input';
 import useInput from '../../../../util/useInput';
 import BasicButton from '../../../../Component/BasicButton';
+import ReasonInput from './ReasonInput';
 
 interface Props {
   modalVisible: boolean;
@@ -21,11 +22,7 @@ const ApplyModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
           input={Contact}
           placeholder="카카오톡 아이디 혹은 전화번호를 입력해주세요"
         />
-        <Input
-          title="신청사유"
-          input={Reason}
-          placeholder="카카오톡 아이디 혹은 전화번호를 입력해주세요"
-        />
+        <ReasonInput input={Reason} />
         <Title>신청 후 연락처와 신청사유는 수정이 어려워요.</Title>
       </Container>
       <BasicButton text="신청하기" onPress={closeModal} />
@@ -35,7 +32,7 @@ const ApplyModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
 
 const Container = styled.View`
   padding: 24px 0;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 `;
 
 const Title = styled.Text`
