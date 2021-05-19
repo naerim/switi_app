@@ -24,7 +24,7 @@ const ReasonText: React.FC<InputProps> = ({ input }) => {
 const Input = styled.TextInput`
   border-width: 1px;
   border-radius: 4px;
-  height: 40px;
+  height: 100px;
   font-size: 12px;
   border-color: #e3e3e3;
   padding: 10px;

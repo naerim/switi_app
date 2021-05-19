@@ -62,7 +62,6 @@ const StudyRadioButton: React.FC<Props> = ({ input }) => {
 };
 
 const Container = styled.View`
-  flex: 5;
   padding-top: 10px;
   padding-bottom: 10px;
   justify-content: center;
