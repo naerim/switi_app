@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
-import BasicModal from '../../Component/BasicModal';
-import StudyRadioButton from './studyRadioButton';
-import PersonRadioButton from './personRadioButton';
-import ReasonText from './reportReason';
-import useInput from '../../util/useInput';
-import check from '../../Img/icon_filter.png';
+import BasicModal from '../../../Component/BasicModal';
+import StudyRadioButton from '../details/studyRadioButton';
+import PersonRadioButton from '../details/personRadioButton';
+import ReasonText from '../details/reportReason';
+import useInput from '../../../util/useInput';
+import TwoModalButton from '../../../Component/basicModal/twoModalButton';
+import check from '../../../Img/icon_filter.png';
 
 interface MyPageModalProps {
   modalVisible: boolean;
@@ -71,6 +72,16 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           <Check source={check} />
         </TitleContainer>
         {reasonVisible ? <ReasonText input={reasonInput} /> : <Nothing />}
+        <AbsoluteContainer>
+          <ModalButtonContainer>
+            <TwoModalButton text="취소" onPress={closeModal} />
+            <TwoModalButton
+              text="신고하기"
+              onPress={closeModal}
+              color="#86E3C3"
+            />
+          </ModalButtonContainer>
+        </AbsoluteContainer>
       </StyledModalContainer>
     </BasicModal>
   );
@@ -106,4 +117,17 @@ const Line = styled.View`
 `;
 
 const Nothing = styled.View``;
+
+const ModalButtonContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  align-content: space-between;
+`;
+
+const AbsoluteContainer = styled.View`
+  position: absolute;
+  bottom: 5px;
+`;
+
 export default MyPageModal;

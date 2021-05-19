@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import UserInfoContainer from './userInfoContainer';
 import UserName from './UserName';
 import BasicModal from '../../Component/BasicModal';
-import ModalButton from './modal/modalButton';
+import TwoModalButton from '../../Component/basicModal/twoModalButton';
 import ProfileIcon from '../../Img/icon_profile.png';
 
 import {
@@ -58,8 +58,8 @@ const UserInfo = () => {
           스터디와 클래스 신청 및 모집에 제한이 생겨요 :(
         </ModalSmallText>
         <ModalButtonContainer>
-          <ModalButton text="취소" onPress={onPressCancel} />
-          <ModalButton
+          <TwoModalButton text="취소" onPress={onPressCancel} />
+          <TwoModalButton
             text="로그아웃"
             onPress={onPressRealLogout}
             color="#86E3C3"

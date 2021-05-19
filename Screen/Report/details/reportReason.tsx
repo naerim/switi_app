@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { InputProps } from './interface';
+import { InputProps } from '../interface';
 
 const ReasonText: React.FC<InputProps> = ({ input }) => {
   return (

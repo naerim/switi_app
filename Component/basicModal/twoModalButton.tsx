@@ -11,7 +11,7 @@ interface ColorProps {
   color?: string;
 }
 
-const ModalButton: React.FC<AuthButtonProps> = ({ text, onPress, color }) => (
+const TwoModalButton: React.FC<AuthButtonProps> = ({ text, onPress, color }) => (
   <Container onPress={onPress} color={color}>
     <Text>{text}</Text>
   </Container>
@@ -33,4 +33,4 @@ const Text = styled.Text`
   font-weight: 600;
 `;
 
-export default ModalButton;
+export default TwoModalButton;

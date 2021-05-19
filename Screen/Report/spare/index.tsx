@@ -1,6 +1,6 @@
 import React from 'react';
-import ReportContainer from '../../Component/MypageContainer';
-import { useGoMyPage } from '../../util/navigationHooks';
+import ReportContainer from '../../../Component/MypageContainer';
+import { useGoMyPage } from '../../../util/navigationHooks';
 import styled from 'styled-components/native';
 import { Text } from 'react-native';
 

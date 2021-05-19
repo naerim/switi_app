@@ -34,7 +34,7 @@ import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
 import Notice from './Notice';
-import Report from './Report';
+import Report from './Report/spare';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

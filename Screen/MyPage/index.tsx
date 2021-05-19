@@ -5,7 +5,7 @@ import SugarContainer from './profile/sugarContent/sugarContainer';
 import MoveScreen from './moveScreen';
 import MyPageModal from './myPageModal';
 import SearchContainer from '../../Component/SearchContainer';
-import NoticeModal from '../Report/indexModal';
+import NoticeModal from '../Report/modal/indexModal';
 import {
   UseGoAlarm,
   useGoMyPageUserInfo,
