@@ -13,15 +13,23 @@ interface Props {
   input: InputProps;
 }
 
-const StudyRadioButton: React.FC<Props> = ({ input }) => {
+const PersonRadioButton: React.FC<Props> = ({ input }) => {
   const radio_props = [
     {
-      label: '중국어 부수는 모임',
+      label: '스터디원1(모집장)',
       value: 0,
     },
     {
-      label: '중국어 부수는 모임',
+      label: '스터디원1(모집장)',
       value: 1,
+    },
+    {
+      label: '스터디원1(모집장)',
+      value: 2,
+    },
+    {
+      label: '스터디원1(모집장)',
+      value: 3,
     },
   ];
 
@@ -76,8 +84,8 @@ const RadioContainer = styled.View`
 const Imag = styled.View`
   height: 40px;
   width: 40px;
-  background-color: #e3e3e3;
-  border-radius: 10px;
+  background-color: #D1D1D1;
+  border-radius: 40px;
   margin-right: 5px;
 `;
-export default StudyRadioButton;
+export default PersonRadioButton;

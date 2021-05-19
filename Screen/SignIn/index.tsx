@@ -67,7 +67,6 @@ const SignIn: React.FC = () => {
         <OptionContainer>
           <OptionMenu />
         </OptionContainer>
-        <EmptyContainer />
         <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
       </Container>
     </BasicContainer>
@@ -79,8 +78,7 @@ const Container = styled.View`
 `;
 
 const SocialLoginContainer = styled.View`
-  flex: 3;
-  justify-content: center;
+  flex: 4;
 `;
 
 const DivisionContainer = styled.View`
@@ -102,10 +100,6 @@ const AuthButtonContainer = styled.View`
 
 const OptionContainer = styled.View`
   flex: 2;
-`;
-
-const EmptyContainer = styled.View`
-  flex: 1;
 `;
 
 export default SignIn;

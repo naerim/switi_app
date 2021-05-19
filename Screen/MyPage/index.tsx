@@ -17,13 +17,14 @@ const MyPage = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const closeModal = () => setModalVisible(false);
 
-  const [noticeModalVisible, setNoticeModalVisible] = useState<boolean>(false);
-  const noticeCloseModal = () => setNoticeModalVisible(true);
+  const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
+  const reportModalClose = () => setReportModalVisible(false);
 
   const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
-  const goReport = () => setNoticeModalVisible(true);
+  const goReport = () => setReportModalVisible(true);
+
   return (
     <SearchContainer title="마이페이지" onPress={goAlarm}>
       <Container>
@@ -40,8 +41,8 @@ const MyPage = () => {
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
       <BottomBar />
       <NoticeModal
-        modalVisible={noticeModalVisible}
-        closeModal={noticeCloseModal}
+        modalVisible={reportModalVisible}
+        closeModal={reportModalClose}
       />
     </SearchContainer>
   );
