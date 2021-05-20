@@ -10,6 +10,7 @@ interface FlatListProps {
   select: number[];
   setSelect: (prev: (prev: number[]) => number[]) => void;
   closeModal: () => void;
+  limit?: number;
 }
 
 interface Props {
@@ -21,11 +22,13 @@ const SelectFlatList: React.FC<FlatListProps> = ({
   select,
   setSelect,
   closeModal,
+  limit,
 }) => {
   const FlatListItemSeparator = () => <Line />;
 
   const itemClick = (isChecked: boolean, index: number): void => {
-    if (!isChecked && select.length !== 3) {
+    const limitNum = limit ? limit : 3; // 선택 제한 갯수
+    if (!isChecked && select.length !== limitNum) {
       setSelect((prev) => [...prev, index]);
       return;
     }

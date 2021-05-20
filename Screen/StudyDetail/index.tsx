@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { StudyList } from '../../Data';
-import StudyImage from './components/StudyImage';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
+import StudyImage from './components/StudyImage';
+import { useGoHome } from '../../util/navigationHooks';
+import ApplyModal from './components/ApplyModal';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
   const item = StudyList.find((i) => i.idx === idx);
+  const goHome = useGoHome();
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
 
   return (
     <Container>
-      <StudyImage done={item?.flag === 0} />
+      <StudyImage done={item?.flag === 0} onPress={goHome} />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
@@ -23,7 +29,8 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{item?.desc}</Desc>
       </Content>
       <StudyInfo item={item} />
-      <BottomButton />
+      <BottomButton onPress={showModal} />
+      <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
     </Container>
   );
 };

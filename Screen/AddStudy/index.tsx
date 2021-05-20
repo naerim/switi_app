@@ -4,7 +4,7 @@ import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
 import { Platform, ScrollView } from 'react-native';
 import AddImage from './components/AddImage';
-import Category from './components/Category';
+import SelectOne from './components/SelectOne';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
 import Input from './components/Input';
@@ -12,9 +12,12 @@ import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
-import Area from './components/Area';
+import { InterestList, Area } from '../../Data';
+import EnrollModal from './components/EnrollModal';
 
 const AddStudy = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModal = () => setModalVisible(false);
   const selectTarget = useInput('');
   const periodInput = useInput('');
   const recruitNumInput = useInput('');
@@ -33,6 +36,10 @@ const AddStudy = () => {
     goHome();
   };
 
+  const onClick = () => {
+    setModalVisible(true);
+  };
+
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <Header onPress={goHome} />
@@ -42,8 +49,8 @@ const AddStudy = () => {
       >
         <AddImage />
         <Content>
-          <Category />
-          <Area />
+          <SelectOne title="카테고리" data={InterestList} />
+          <SelectOne title="지역" data={Area} />
           <Target select={selectTarget} />
           <RecruitNum
             input={recruitNumInput}
@@ -66,9 +73,14 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={EnrollButton} />
+          <BasicButton text="등록하기" onPress={onClick} />
         </Content>
       </ScrollView>
+      <EnrollModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        onPress={EnrollButton}
+      />
     </Container>
   );
 };
