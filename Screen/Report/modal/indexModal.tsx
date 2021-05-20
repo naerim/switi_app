@@ -6,8 +6,8 @@ import StudyRadioButton from '../details/studyRadioButton';
 import PersonRadioButton from '../details/personRadioButton';
 import ReasonText from '../details/reportReason';
 import useInput from '../../../util/useInput';
-import TwoModalButton from '../../../Component/basicModal/twoModalButton';
 import check from '../../../Img/icon_filter.png';
+import TwoModalButton from '../../SignIn/components/EmailAuthModal/twoModalButton';
 
 interface MyPageModalProps {
   modalVisible: boolean;

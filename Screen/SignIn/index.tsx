@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
   const handleLogin = () => {
     const email = emailInput;
     const password = passwordInput;
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(false);
 
     if (email.value === '') {
@@ -71,14 +71,14 @@ const SignIn: React.FC = () => {
           <OptionMenu />
         </OptionContainer>
         <EmailAuthModal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            closeModal={closeModal}
-            setDoneModalVisible={setDoneModalVisible}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          closeModal={closeModal}
+          setDoneModalVisible={setDoneModalVisible}
         />
         <EmailAuthDoneModal
-            modalVisible={doneModalVisible}
-            closeModal={doneCloseModal}
+          modalVisible={doneModalVisible}
+          closeModal={doneCloseModal}
         />
       </Container>
     </BasicContainer>

@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import UserInfoContainer from './userInfoContainer';
 import UserName from './UserName';
 import BasicModal from '../../Component/BasicModal';
-import TwoModalButton from '../../Component/basicModal/twoModalButton';
 import ProfileIcon from '../../Img/icon_profile.png';
 
 import {
@@ -11,6 +10,7 @@ import {
   useGoMyPage,
   UseGoWithdrawal,
 } from '../../util/navigationHooks';
+import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 
 const UserInfo = () => {
   const goMyPage = useGoMyPage();
@@ -34,7 +34,6 @@ const UserInfo = () => {
       setConfigModalVisible(true);
     }, 500);
   };
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <UserInfoContainer
