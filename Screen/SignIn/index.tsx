@@ -9,7 +9,8 @@ import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
-import BasicModal from '../../Component/basicModal';
+import EmailAuthModal from './components/EmailAuthModal';
+import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -17,6 +18,8 @@ const SignIn: React.FC = () => {
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState<boolean>(true);
+  const [doneModalVisible, setDoneModalVisible] = useState(false);
+  const doneCloseModal = () => setDoneModalVisible(false);
 
   const toggleChecked = () => setChecked(!checked);
   const closeModal = () => setModalVisible(false);
@@ -67,7 +70,16 @@ const SignIn: React.FC = () => {
         <OptionContainer>
           <OptionMenu />
         </OptionContainer>
-        <BasicModal modalVisible={modalVisible} closeModal={closeModal} />
+        <EmailAuthModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            closeModal={closeModal}
+            setDoneModalVisible={setDoneModalVisible}
+        />
+        <EmailAuthDoneModal
+            modalVisible={doneModalVisible}
+            closeModal={doneCloseModal}
+        />
       </Container>
     </BasicContainer>
   );

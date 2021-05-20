@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import styled from 'styled-components/native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 interface Props {
   modalVisible: boolean;
@@ -20,9 +21,11 @@ const BasicModal: React.FC<Props> = ({
       onBackdropPress={closeModal}
       style={{ margin: 0, justifyContent: 'flex-end' }}
     >
-      <Container>
-        <Content>{children}</Content>
-      </Container>
+      <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'ios'}>
+        <Container>
+          <Content>{children}</Content>
+        </Container>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };
