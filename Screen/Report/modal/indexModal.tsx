@@ -43,6 +43,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   return (
     <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
       <StyledModalContainer
+        showsVerticalScrollIndicator={false}
         style={{
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
@@ -72,27 +73,22 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           <Check source={check} />
         </TitleContainer>
         {reasonVisible ? <ReasonText input={reasonInput} /> : <Nothing />}
-        <AbsoluteContainer>
-          <ModalButtonContainer>
-            <TwoModalButton text="취소" onPress={closeModal} />
-            <TwoModalButton
-              text="신고하기"
-              onPress={closeModal}
-              color="#86E3C3"
-            />
-          </ModalButtonContainer>
-        </AbsoluteContainer>
       </StyledModalContainer>
+      <ModalButtonContainer>
+        <TwoModalButton text="취소" onPress={closeModal} />
+        <TwoModalButton text="신고하기" onPress={closeModal} color="#86E3C3" />
+      </ModalButtonContainer>
     </BasicModal>
   );
 };
 
-const StyledModalContainer = styled.View`
+const StyledModalContainer = styled.ScrollView`
   /* 모달창 크기 조절 */
   height: 450px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 30px;
   text-align: left;
+  margin-bottom: 40px;
 `;
 
 const TitleContainer = styled.TouchableOpacity`
@@ -121,13 +117,6 @@ const Nothing = styled.View``;
 const ModalButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  display: flex;
-  align-content: space-between;
-`;
-
-const AbsoluteContainer = styled.View`
-  position: absolute;
-  bottom: 5px;
 `;
 
 export default MyPageModal;

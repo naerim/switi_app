@@ -56,11 +56,7 @@ const LoginNavigation = () => (
 
 function MyPageNavigator() {
   return (
-    <Stack.Navigator
-      mode="modal"
-      headerMode="none"
-      screenOptions={{ animationEnabled: false }}
-    >
+    <Stack.Navigator headerMode="none">
       <Stack.Screen name="MyPage" component={MyPage} />
       <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
       <Stack.Screen name="UserInfo" component={UserInfo} />

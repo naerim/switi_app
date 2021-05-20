@@ -19,7 +19,6 @@ const TwoModalButton: React.FC<AuthButtonProps> = ({ text, onPress, color }) => 
 
 const Container = styled.TouchableOpacity<ColorProps>`
   border-radius: 30px;
-  flex-direction: row;
   height: 40px;
   width: 160px;
   align-items: center;
