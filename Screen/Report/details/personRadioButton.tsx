@@ -5,6 +5,7 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+
 interface InputProps {
   reason: number;
   setReason: (value: number) => void;
@@ -83,7 +84,7 @@ const RadioContainer = styled.View`
 const Imag = styled.View`
   height: 40px;
   width: 40px;
-  background-color: #D1D1D1;
+  background-color: #d1d1d1;
   border-radius: 40px;
   margin-right: 5px;
 `;

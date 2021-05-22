@@ -34,7 +34,6 @@ import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
 import Notice from './Notice';
-import Report from './Report/spare';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,7 +63,6 @@ function MyPageNavigator() {
       <Stack.Screen name="Notice" component={Notice} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
-      <Stack.Screen name="Report" component={Report} />
     </Stack.Navigator>
   );
 }
