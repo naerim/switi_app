@@ -8,6 +8,7 @@ import ReasonText from './details/reportReason';
 import useInput from '../../util/useInput';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
+import ConfirmReport from './details/confirmReport';
 
 interface MyPageModalProps {
   modalVisible: boolean;
@@ -24,7 +25,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   const [studyVisible, setStudyVisible] = useState(true);
   const [personVisible, setPersonVisible] = useState(true);
   const [reasonVisible, setReasonVisible] = useState(false);
-
+  const [confirmReport, setConfirmReport] = useState(false);
   const onPressStudy = () => {
     if (studyVisible == true) setStudyVisible(false);
     else setStudyVisible(true);
@@ -38,6 +39,10 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   const onPressReason = () => {
     if (reasonVisible == true) setReasonVisible(false);
     else setReasonVisible(true);
+  };
+
+  const onPressReport = () => {
+    setConfirmReport(true);
   };
 
   return (
@@ -67,8 +72,17 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
       </StyledModalContainer>
       <ModalButtonContainer>
         <TwoModalButton text="취소" onPress={closeModal} />
-        <TwoModalButton text="신고하기" onPress={closeModal} color="#86E3C3" />
+        <TwoModalButton
+          text="신고하기"
+          onPress={onPressReport}
+          color="#86E3C3"
+        />
       </ModalButtonContainer>
+      <ConfirmReport
+        name="@@@"
+        closeModal={closeModal}
+        modalVisible={confirmReport}
+      />
     </BasicModal>
   );
 };
