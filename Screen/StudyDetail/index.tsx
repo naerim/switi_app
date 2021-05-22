@@ -7,6 +7,7 @@ import OtherInfo from './components/OtherInfo';
 import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
+import CancelModal from './components/CancelModal';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -15,6 +16,13 @@ const StudyDetail = ({ route }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const showModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
+  const [cancelModalVisible, setCancelModalVisible] = useState(false);
+  const closeCancelModal = () => setCancelModalVisible(false);
+
+  const onClick = () => {
+    //showModal();
+    setCancelModalVisible(true);
+  };
 
   return (
     <Container>
@@ -29,8 +37,12 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{item?.desc}</Desc>
       </Content>
       <StudyInfo item={item} />
-      <BottomButton onPress={showModal} />
+      <BottomButton onPress={onClick} />
       <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
+      <CancelModal
+        modalVisible={cancelModalVisible}
+        closeModal={closeCancelModal}
+      />
     </Container>
   );
 };
