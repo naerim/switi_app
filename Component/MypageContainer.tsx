@@ -18,7 +18,7 @@ const MypageContainer: React.FC<Props> = ({
   display,
 }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 40 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 70 }}>
       <BasicHeader title={headerTitle} onPress={onPress} display={display} />
       <Container>{children}</Container>
     </Wrap>

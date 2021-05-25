@@ -12,7 +12,7 @@ const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
   return (
     <Container
       style={{
-        paddingTop: Platform.OS === 'ios' ? 20 : 50,
+        paddingTop: Platform.OS === 'ios' ? 20 : 70,
       }}
     >
       {/*40->50수정 알람버튼 윗부분 클릭 시 안드로이드에서 상단 바 내려와서 수정했습니다. */}

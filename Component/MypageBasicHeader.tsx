@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 
 //설명 : 제가 만든 screen의 header입니다!
 
@@ -17,8 +18,7 @@ interface Props {
 
 const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
   return (
-    <Wrap>
-      {/*<Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>*/}
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 0 }}>
       {/*container 에서 위 조건을 주어야 글씨가 안밀려서 이렇게 만들었습니다. */}
       <BackButton
         activeOpacity={0.8}

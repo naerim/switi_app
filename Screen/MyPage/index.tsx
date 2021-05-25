@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 import UserInfo from './profile/userInfo';
 import SugarContainer from './profile/sugarContent/sugarContainer';
 import MoveScreen from './moveScreen';
