@@ -3,10 +3,11 @@ import styled from 'styled-components/native';
 import BasicContainer from '../../Component/MypageContainer';
 import PrintList from './printList';
 import ColorButton from '../../Component/BasicButton';
-import { useGoMyPage } from '../../util/navigationHooks';
+import { useGoMyPage, useGoMypageProfileFix } from '../../util/navigationHooks';
 
-const MyPage_profile = () => {
+const MyPage_Profile = () => {
   const goMyPage = useGoMyPage();
+  const goProfileFix = useGoMypageProfileFix();
 
   const [isLoading, setIsLoading] = useState(false);
   const [onPress, setonPress] = useState(false);
@@ -80,7 +81,7 @@ const MyPage_profile = () => {
         <ButtonContainer>
           <ColorButton
             text="수정하기"
-            onPress={onPress}
+            onPress={goProfileFix}
             loading={isLoading}
           />
         </ButtonContainer>
@@ -130,4 +131,4 @@ const ButtonContainer = styled.View`
   flex: 1;
 `;
 
-export default MyPage_profile;
+export default MyPage_Profile;

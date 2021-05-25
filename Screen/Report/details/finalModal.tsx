@@ -28,7 +28,7 @@ const FinalModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
 
 const StyledModalContainer = styled.View`
   /* 모달창 크기 조절 */
-  height: 120px;
+  height: 80px;
   background-color: rgba(255, 255, 255, 1);
   text-align: left;
   margin-bottom: 40px;
@@ -56,7 +56,6 @@ const Imag = styled.Image`
   height: 79px;
   width: 79px;
   align-self: center;
-  margin-bottom: 30px;
 `;
 
 export default FinalModal;

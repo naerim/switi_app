@@ -11,8 +11,8 @@ import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
-import MyPage_profile from './MyPage_profile';
-import UserInfo from './UserInfo';
+import MyPage_Profile from './MyPage_Profile';
+import MyPage_UserInfo from './MyPage_UserInfo';
 import MyPage_Withdrawal from './MyPage_Withdrawal';
 import Terms from './Terms';
 import EmailAuth from './ResetPassword/emailAuth';
@@ -34,6 +34,7 @@ import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
 import Notice from './Notice';
+import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,8 +58,9 @@ function MyPageNavigator() {
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="MyPage" component={MyPage} />
-      <Stack.Screen name="MyPage_profile" component={MyPage_profile} />
-      <Stack.Screen name="UserInfo" component={UserInfo} />
+      <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
+      <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
+      <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
       <Stack.Screen name="Alarm" component={Alarm} />
       <Stack.Screen name="Notice" component={Notice} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
