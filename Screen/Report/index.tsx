@@ -8,16 +8,17 @@ import ReasonText from './details/reportReason';
 import useInput from '../../util/useInput';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
-import ConfirmReport from './details/confirmReport';
 
 interface MyPageModalProps {
   modalVisible: boolean;
   closeModal: () => void;
+  confirmButton: () => void;
 }
 
 const MyPageModal: React.FC<MyPageModalProps> = ({
   modalVisible,
   closeModal,
+  confirmButton,
 }) => {
   const [study, setStudy] = useState(0);
   const [person, setPerson] = useState(0);
@@ -25,7 +26,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   const [studyVisible, setStudyVisible] = useState(true);
   const [personVisible, setPersonVisible] = useState(true);
   const [reasonVisible, setReasonVisible] = useState(false);
-  const [confirmReport, setConfirmReport] = useState(false);
+
   const onPressStudy = () => {
     if (studyVisible == true) setStudyVisible(false);
     else setStudyVisible(true);
@@ -39,10 +40,6 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   const onPressReason = () => {
     if (reasonVisible == true) setReasonVisible(false);
     else setReasonVisible(true);
-  };
-
-  const onPressReport = () => {
-    setConfirmReport(true);
   };
 
   return (
@@ -74,15 +71,10 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         <TwoModalButton text="취소" onPress={closeModal} />
         <TwoModalButton
           text="신고하기"
-          onPress={onPressReport}
+          onPress={confirmButton}
           color="#86E3C3"
         />
       </ModalButtonContainer>
-      <ConfirmReport
-        name="@@@"
-        closeModal={closeModal}
-        modalVisible={confirmReport}
-      />
     </BasicModal>
   );
 };
