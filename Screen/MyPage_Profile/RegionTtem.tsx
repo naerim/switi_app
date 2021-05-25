@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components/native';
-const ListItem = ({ list }) => {
-  const { name } = list;
+
+// interface InnerListProps {
+//   key: number;
+//   name: string;
+// }
+//
+// interface ListItemProps {
+//   Item: InnerListProps[];
+// }
+const ListItem = ({ Item }) => {
+  const { key, name } = Item;
   return (
     <View>
       <Tag>

@@ -2,13 +2,14 @@ import React from 'react';
 import ListItem from './listItem';
 import styled from 'styled-components/native';
 
-interface ListItemProps {
-  id: number;
-  text: string;
+interface InnerListProps {
+  key: number;
+  name: string;
+  category?: string;
 }
 
 interface PrintListProps {
-  lists: ListItemProps[];
+  lists: InnerListProps[];
   flexDirection?: string;
 }
 
@@ -16,7 +17,7 @@ const PrintList: React.FC<PrintListProps> = ({ lists, flexDirection }) => {
   return (
     <Container flexDirection={flexDirection}>
       {lists.map((list) => (
-        <ListItem list={list} key={list.id} />
+        <ListItem list={list} key={list.key} />
       ))}
     </Container>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import ListItem from './listItem';
+import RegionItem from './RegionTtem';
 import styled from 'styled-components/native';
 
 interface ListItemProps {
@@ -8,15 +8,15 @@ interface ListItemProps {
 }
 
 interface PrintListProps {
-  lists: ListItemProps[];
+  Items: ListItemProps[];
   flexDirection?: string;
 }
 
-const PrintRegion: React.FC<PrintListProps> = ({ lists, flexDirection }) => {
+const PrintRegion: React.FC<PrintListProps> = ({ Items, flexDirection }) => {
   return (
     <Container flexDirection={flexDirection}>
-      {lists.map((list) => (
-        <ListItem list={list} key={list.key} />
+      {Items.map((Item) => (
+        <RegionItem Item={Item} key={Item.key} />
       ))}
     </Container>
   );

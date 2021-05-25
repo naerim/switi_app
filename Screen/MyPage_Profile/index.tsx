@@ -5,52 +5,17 @@ import PrintList from './printList';
 import ColorButton from '../../Component/BasicButton';
 import { useGoMyPage, useGoMypageProfileFix } from '../../util/navigationHooks';
 import { User } from '../../Data/User';
-import PrintRegion from './printRegion';
 const MyPage_Profile = () => {
   const goMyPage = useGoMyPage();
   const goProfileFix = useGoMypageProfileFix();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const myCharacter = [
-    {
-      id: 1,
-      text: '체계적이고 계획적인 사람이에요',
-    },
-    {
-      id: 2,
-      text: '솔직하고 시원시원해요',
-    },
-    {
-      id: 3,
-      text: '시간을 잘 지켜요',
-    },
-  ];
+  const myCharacter = User[0].myCharacter;
 
-  const interestedState = [
-    {
-      id: 1,
-      text: '서울 전체',
-    },
-  ];
+  const myRegion = User[0].myRegion;
+  const myInterest = User[0].myInterest;
 
-  // myRegion: [
-  //   { key: 0, name: '서울' },
-  //   { key: 1, name: '경기도' },
-  // ],
-
-  const interestStateReal = User[0].myRegion;
-
-  const interestedParts = [
-    {
-      id: 1,
-      text: '취업',
-    },
-    {
-      id: 2,
-      text: '어학',
-    },
-  ];
   return (
     <BasicContainer headerTitle="내 프로필" display onPress={goMyPage}>
       <MarginContainer>
@@ -61,11 +26,11 @@ const MyPage_Profile = () => {
           </SmallSizeContainer>
           <PrintListContainer>
             <Title>관심지역</Title>
-            <PrintRegion lists={interestStateReal}></PrintRegion>
+            <PrintList lists={myRegion}></PrintList>
           </PrintListContainer>
           <PrintListContainer>
             <Title>관심분야</Title>
-            <PrintList lists={interestedParts}></PrintList>
+            <PrintList lists={myInterest}></PrintList>
           </PrintListContainer>
           <SmallSizeContainer>
             <Title>나의 상황</Title>
@@ -77,12 +42,7 @@ const MyPage_Profile = () => {
           </BigPrintListContainer>
           <BigSizeContainer>
             <Title>자기소개</Title>
-            <Content>
-              취미, 희망직무 등 나에 대해 간단히 소개해 주세요. 취미, 희망직무
-              등 나에 대해 간단히 소개해 주세요. 취미, 희망직무 등 나에 대해
-              간단히 소개해 주세요. 취미, 희망직무 등 나에 대해 간단히 소개해
-              주세요. 취미, 희망직무 등 나에 대해 간단히 소개해 주세요.
-            </Content>
+            <Content>{User[0].aboutMe}</Content>
           </BigSizeContainer>
         </ContentContainer>
         <ButtonContainer>
