@@ -4,13 +4,13 @@ import BasicContainer from '../../Component/MypageContainer';
 import PrintList from './printList';
 import ColorButton from '../../Component/BasicButton';
 import { useGoMyPage, useGoMypageProfileFix } from '../../util/navigationHooks';
-
+import { User } from '../../Data/User';
+import PrintRegion from './printRegion';
 const MyPage_Profile = () => {
   const goMyPage = useGoMyPage();
   const goProfileFix = useGoMypageProfileFix();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [onPress, setonPress] = useState(false);
 
   const myCharacter = [
     {
@@ -34,6 +34,13 @@ const MyPage_Profile = () => {
     },
   ];
 
+  // myRegion: [
+  //   { key: 0, name: '서울' },
+  //   { key: 1, name: '경기도' },
+  // ],
+
+  const interestStateReal = User[0].myRegion;
+
   const interestedParts = [
     {
       id: 1,
@@ -54,7 +61,7 @@ const MyPage_Profile = () => {
           </SmallSizeContainer>
           <PrintListContainer>
             <Title>관심지역</Title>
-            <PrintList lists={interestedState}></PrintList>
+            <PrintRegion lists={interestStateReal}></PrintRegion>
           </PrintListContainer>
           <PrintListContainer>
             <Title>관심분야</Title>
