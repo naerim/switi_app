@@ -72,7 +72,7 @@ const MyPage_FixUserInfo = () => {
     confirm &&
     IsEmail(emailInput.value).status === Status.SUCCESS &&
     IsPassword(passwordInput.value).status === Status.SUCCESS &&
-    IsSamePassword(passwordInput, passwordCheckInput).status === Status.SUCCESS;
+    IsSamePassword(passwordInput.value, passwordCheckInput.value).status === Status.SUCCESS;
   // 회원정보 넘길 input 값
   const input = {
     nickname: nicknameInput.value,

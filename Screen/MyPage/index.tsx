@@ -11,6 +11,7 @@ import {
   UseGoAlarm,
   useGoMyPageUserInfo,
   UseGoNotice,
+  UseGoScrap,
 } from '../../util/navigationHooks';
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
@@ -31,13 +32,15 @@ const MyPage = () => {
       setFinalModalVisible(true);
     }, 500);
   };
-  const fianlClose = () => {
+  const finalClose = () => {
     setFinalModalVisible(false);
   };
   const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
+  const goScrap = UseGoScrap();
   const goReport = () => setReportModalVisible(true);
+
   const confirm = () => {
     setReportModalVisible(false);
     setTimeout(() => {
@@ -56,6 +59,7 @@ const MyPage = () => {
           goUserInfo={goUserInfo}
           goNotice={goNotice}
           goReport={goReport}
+          goScrap={goScrap}
         />
       </Container>
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
@@ -71,7 +75,7 @@ const MyPage = () => {
         closeModal={closeConfirm}
         button={final}
       />
-      <FinalModal modalVisible={finalModalVisible} closeModal={fianlClose} />
+      <FinalModal modalVisible={finalModalVisible} closeModal={finalClose} />
     </SearchContainer>
   );
 };
