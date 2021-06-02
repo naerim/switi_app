@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Font from 'expo-font';
 import RootNavigator from './Screen/Navigator';
 
-const App = () => {
+const Fonts = () => {
   Font.loadAsync({
     'NotoSans': require('./assets/fonts/NotoSans-Regular.ttf'),
     'NotoSans-Light': require('./assets/fonts/NotoSans-Light.ttf'),
@@ -10,6 +10,9 @@ const App = () => {
     'NotoSans-SemiBold': require('./assets/fonts/NotoSans-SemiBold.ttf'),
     'NotoSans-Medium': require('./assets/fonts/NotoSans-Medium.ttf'),
   });
+};
+
+const App = () => {
   return <RootNavigator />;
 };
 
