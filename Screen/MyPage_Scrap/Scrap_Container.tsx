@@ -1,0 +1,42 @@
+import React from 'react';
+import styled from 'styled-components/native';
+import ScrapHeader from './Scrap_Header';
+import { Platform } from 'react-native';
+interface Props {
+  headerTitle: string;
+  display: boolean;
+  onPress?: () => void;
+  count?: number;
+}
+
+const ScrapContainer: React.FC<Props> = ({
+  children,
+  headerTitle,
+  onPress,
+  display,
+  count,
+}) => {
+  return (
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 70 }}>
+      <ScrapHeader
+        title={headerTitle}
+        onPress={onPress}
+        display={display}
+        count={count}
+      />
+      <Container>{children}</Container>
+    </Wrap>
+  );
+};
+
+const Wrap = styled.SafeAreaView`
+  flex: 1;
+  background-color: #fff;
+`;
+
+const Container = styled.View`
+  flex: 12;
+  background-color: #fff;
+`;
+
+export default ScrapContainer;
