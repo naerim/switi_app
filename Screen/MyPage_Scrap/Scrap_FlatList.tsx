@@ -1,28 +1,21 @@
 import React from 'react';
-import ScrapContainer from '../../Component/MypageContainer';
-import { useGoMyPage } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { FlatList } from 'react-native';
-import { StudyList } from '../../Data';
+import { ScrapList } from '../../Data/Scrap';
 
-interface Props {
-  idx: number;
-}
-
-const Scrap_FlatList: React.FC<Props> = ({ idx }) => {
+const Scrap_FlatList = () => {
   const FlatListItemSeparator = () => <SeparatorLine />;
-  const OnOffStudy = StudyList.filter((i) => i.online_flag === idx);
   const handleLoadMore = () => {
     console.log('reached');
   };
   return (
     <FlatList
       ItemSeparatorComponent={FlatListItemSeparator}
-      data={OnOffStudy}
+      data={ScrapList}
       renderItem={({ item }) => <RenderItem index={item.idx} item={item} />}
       keyExtractor={(item) => item.idx.toString()}
-      extraData={OnOffStudy}
+      extraData={ScrapList}
       contentContainerStyle={{ paddingBottom: 80 }}
       onEndReached={handleLoadMore}
       onEndReachedThreshold={0}

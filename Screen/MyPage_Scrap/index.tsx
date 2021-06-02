@@ -2,14 +2,14 @@ import React from 'react';
 import ScrapContainer from '../../Component/MypageContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
-import Scrap_FlatList from './FlatList';
+import Scrap_FlatList from './Scrap_FlatList';
 const MyPage_Scrap = () => {
   const goMyPage = useGoMyPage();
 
   return (
     <ScrapContainer onPress={goMyPage} display headerTitle="스크랩">
       <MarginContainer>
-        <Scrap_FlatList idx={1} />
+        <Scrap_FlatList />
       </MarginContainer>
     </ScrapContainer>
   );
