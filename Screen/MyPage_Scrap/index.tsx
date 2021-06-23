@@ -10,7 +10,12 @@ const MyPage_Scrap = () => {
   const ScrapListLength = ScrapList.length;
   const title = '스크랩 ';
   return (
-    <ScrapContainer onPress={goMyPage} display headerTitle={title} count={ScrapListLength}>
+    <ScrapContainer
+      onPress={goMyPage}
+      display
+      headerTitle={title}
+      count={ScrapListLength}
+    >
       <MarginContainer>
         <Scrap_FlatList />
       </MarginContainer>
