@@ -9,6 +9,7 @@ interface Props {
   headerTitle: string;
   display: boolean;
   onPress?: () => void;
+  scroll?: boolean;
 }
 
 const MypageContainer: React.FC<Props> = ({
@@ -16,10 +17,12 @@ const MypageContainer: React.FC<Props> = ({
   headerTitle,
   onPress,
   display,
+  scroll,
 }) => {
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 70 }}>
       <BasicHeader title={headerTitle} onPress={onPress} display={display} />
+      {scroll ? <Line /> : <Nothing />}
       <Container>{children}</Container>
     </Wrap>
   );
@@ -34,5 +37,11 @@ const Container = styled.View`
   flex: 12;
   background-color: #fff;
 `;
+
+const Line = styled.View`
+  height: 1px;
+  background-color: #f3f3f3;
+`;
+const Nothing = styled.View``;
 
 export default MypageContainer;
