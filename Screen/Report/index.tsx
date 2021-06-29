@@ -8,7 +8,6 @@ import ReasonText from './details/reportReason';
 import useInput from '../../util/useInput';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
-
 interface MyPageModalProps {
   modalVisible: boolean;
   closeModal: () => void;
@@ -43,7 +42,11 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   };
 
   return (
-    <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+    <BasicModal
+      modalVisible={modalVisible}
+      closeModal={closeModal}
+      // scroll={scroll}
+    >
       <StyledModalContainer
         showsVerticalScrollIndicator={false}
         style={{

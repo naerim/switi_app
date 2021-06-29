@@ -10,7 +10,7 @@ interface DisplayProps {
 
 interface Props {
   title: string;
-  count: number;
+  count?: number;
   display: boolean;
   onPress?: () => void;
 }

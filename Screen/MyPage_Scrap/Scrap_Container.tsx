@@ -7,6 +7,7 @@ interface Props {
   display: boolean;
   onPress?: () => void;
   count?: number;
+  scroll?: boolean;
 }
 
 const ScrapContainer: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const ScrapContainer: React.FC<Props> = ({
   onPress,
   display,
   count,
+  scroll,
 }) => {
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 70 }}>
@@ -24,12 +26,13 @@ const ScrapContainer: React.FC<Props> = ({
         display={display}
         count={count}
       />
+      {scroll ? <Line /> : <Nothing />}
       <Container>{children}</Container>
     </Wrap>
   );
 };
 
-const Wrap = styled.SafeAreaView`
+const Wrap = styled.View`
   flex: 1;
   background-color: #fff;
 `;
@@ -38,5 +41,11 @@ const Container = styled.View`
   flex: 12;
   background-color: #fff;
 `;
+
+const Line = styled.View`
+  height: 1px;
+  background-color: #f3f3f3;
+`;
+const Nothing = styled.View``;
 
 export default ScrapContainer;
