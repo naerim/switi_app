@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import BasicContainer from '../../Component/MypageContainer';
+import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageProfile } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
 import Age from '../Profile/components/Age';

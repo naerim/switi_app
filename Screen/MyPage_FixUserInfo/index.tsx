@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import BasicContainer from '../../Component/MypageContainer';
+import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import NicknameContainer from './Nickname';
 import EmailInput from './input/emailInput';

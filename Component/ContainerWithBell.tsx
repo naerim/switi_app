@@ -6,9 +6,15 @@ import { Platform } from 'react-native';
 interface Props {
   onPress?: () => void;
   title: string;
+  scroll?: boolean;
 }
 
-const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
+const ContainerWithBell: React.FC<Props> = ({
+  title,
+  children,
+  onPress,
+  scroll,
+}) => {
   return (
     <Container
       style={{
@@ -22,6 +28,7 @@ const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
           <AlarmIcon source={Alarm} />
         </AlarmButton>
       </HeaderContainer>
+      {scroll ? <Line /> : <Nothing />}
       {children}
     </Container>
   );
@@ -52,4 +59,10 @@ const AlarmIcon = styled.Image`
 
 const AlarmButton = styled.TouchableOpacity``;
 
-export default SearchContainer;
+const Line = styled.View`
+  height: 1px;
+  background-color: #f3f3f3;
+`;
+const Nothing = styled.View``;
+
+export default ContainerWithBell;

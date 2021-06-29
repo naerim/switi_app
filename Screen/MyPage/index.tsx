@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 import UserInfo from './profile/userInfo';
 import SugarContainer from './profile/sugarContent/sugarContainer';
 import MoveScreen from './moveScreen';
 import MyPageModal from './myPageModal';
-import SearchContainer from '../../Component/SearchContainer';
+import ContainerWithBell from '../../Component/ContainerWithBell';
 import ReportModal from '../Report';
 import {
   UseGoAlarm,
@@ -15,8 +14,11 @@ import {
 } from '../../util/navigationHooks';
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
+import useScroll from '../../util/useScroll';
 
 const MyPage = () => {
+  const { scroll, scrollOn } = useScroll();
+
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const [confirmModalVisible, setConfirmModalVisible] = useState<boolean>(
     false
@@ -49,36 +51,40 @@ const MyPage = () => {
   };
 
   return (
-    <SearchContainer title="마이페이지" onPress={goAlarm}>
-      <Container>
-        <UserInfo title="사용자" />
-        <SugarContainer />
-        <Line />
-        <MoveScreen
-          goAlarm={goAlarm}
-          goUserInfo={goUserInfo}
-          goNotice={goNotice}
-          goReport={goReport}
-          goScrap={goScrap}
+    <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
+      <ScrollContainer onScroll={scrollOn}>
+        <Container>
+          <UserInfo title="사용자" />
+          <SugarContainer />
+          <Line />
+          <MoveScreen
+            goAlarm={goAlarm}
+            goUserInfo={goUserInfo}
+            goNotice={goNotice}
+            goReport={goReport}
+            goScrap={goScrap}
+          />
+        </Container>
+        <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
+        <BottomBar />
+        <ReportModal
+          modalVisible={reportModalVisible}
+          closeModal={reportModalClose}
+          confirmButton={confirm}
         />
-      </Container>
-      <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
-      <BottomBar />
-      <ReportModal
-        modalVisible={reportModalVisible}
-        closeModal={reportModalClose}
-        confirmButton={confirm}
-      />
-      <ConfirmReport
-        name="@@@"
-        modalVisible={confirmModalVisible}
-        closeModal={closeConfirm}
-        button={final}
-      />
-      <FinalModal modalVisible={finalModalVisible} closeModal={finalClose} />
-    </SearchContainer>
+        <ConfirmReport
+          name="@@@"
+          modalVisible={confirmModalVisible}
+          closeModal={closeConfirm}
+          button={final}
+        />
+        <FinalModal modalVisible={finalModalVisible} closeModal={finalClose} />
+      </ScrollContainer>
+    </ContainerWithBell>
   );
 };
+
+const ScrollContainer = styled.ScrollView``;
 
 const Line = styled.Text`
   flex: 0.2;

@@ -1,5 +1,5 @@
 import React from 'react';
-import NoticeContainer from '../../Component/MypageContainer';
+import NoticeContainer from '../../Component/ContainerWithBack';
 import { useGoMyPage } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
 import { NoticeData } from '../../Data/NoticeData';

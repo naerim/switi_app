@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import BasicContainer from '../../Component/MypageContainer';
+import BasicContainer from '../../Component/ContainerWithBack';
 import PrintList from './components/printList';
 import ColorButton from '../../Component/BasicButton';
 import { useGoMyPage, useGoMypageProfileFix } from '../../util/navigationHooks';

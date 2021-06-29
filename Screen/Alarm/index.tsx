@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Switch } from 'react-native';
 import { useGoMyPage } from '../../util/navigationHooks';
 import ColorButton from '../../Component/BasicButton';
-import AlarmContainer from '../../Component/MypageContainer';
+import AlarmContainer from '../../Component/ContainerWithBack';
 import useScroll from '../../util/useScroll';
 
 const Alarm = () => {

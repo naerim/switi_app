@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import BasicContainer from '../../Component/MypageContainer';
+import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import TwoButton from './twoButton';
 import RadioButtonContainer from './radioButtonContainer';
