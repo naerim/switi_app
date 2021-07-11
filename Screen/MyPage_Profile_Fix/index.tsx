@@ -9,8 +9,11 @@ import { Area, CharacterList, InterestList } from '../../Data';
 import MyState from '../Profile/components/MyState';
 import Introduce from '../Profile/components/Introduce';
 import BasicButton from '../../Component/BasicButton';
+import useScroll from '../../util/useScroll';
 
 const MyPage_Profile_Fix = () => {
+  const { scroll, scrollOn } = useScroll();
+
   const goMyProfile = useGoMyPageProfile();
   const ageInput = useInput('');
   const desc =
@@ -28,8 +31,8 @@ const MyPage_Profile_Fix = () => {
 
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
   return (
-    <BasicContainer headerTitle="프로필 수정" display onPress={goMyProfile}>
-      <Wrap showsVerticalScrollIndicator={false}>
+    <BasicContainer headerTitle="프로필 수정" display onPress={goMyProfile} scroll={scroll}>
+      <Wrap showsVerticalScrollIndicator={false} onScroll={scrollOn}>
         <Explanation>{desc}</Explanation>
         <Age input={ageInput} />
         <FlatListModal
