@@ -27,12 +27,12 @@ const MoveScreen: React.FC<Props> = ({
       </Container>
       <Line />
       <Container>
-        <Title>설정</Title>
+        <Title>서비스 설정</Title>
         <SubTitleContainer onPress={goUserInfo}>
           <SubTitle>회원정보</SubTitle>
         </SubTitleContainer>
         <SubTitleContainer onPress={goAlarm}>
-          <SubTitle>알림 설정</SubTitle>
+          <SubTitle>설정</SubTitle>
         </SubTitleContainer>
       </Container>
       <Line />
@@ -41,7 +41,6 @@ const MoveScreen: React.FC<Props> = ({
         <SubTitleContainer onPress={goNotice}>
           <SubTitle>공지사항</SubTitle>
         </SubTitleContainer>
-        <SubTitle>문의</SubTitle>
         <SubTitleContainer onPress={goReport}>
           <SubTitle>신고하기</SubTitle>
         </SubTitleContainer>

@@ -85,7 +85,7 @@ const SugarContent = () => {
 };
 
 const Container = styled.View`
-  background-color: #fffcf5;
+  background-color: #fff8e3;
   border-radius: 20px;
   justify-content: center;
   padding: 10px;
