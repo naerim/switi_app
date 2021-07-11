@@ -6,8 +6,10 @@ import ColorButton from '../../Component/BasicButton';
 import { useGoMyPage, useGoMypageProfileFix } from '../../util/navigationHooks';
 import { User } from '../../Data/User';
 import DetailContainer from './components/detailContainer';
+import useScroll from '../../util/useScroll';
 
 const MyPage_Profile = () => {
+  const { scroll, scrollOn } = useScroll();
   const goMyPage = useGoMyPage();
   const goProfileFix = useGoMypageProfileFix();
 
@@ -20,9 +22,14 @@ const MyPage_Profile = () => {
 
   const age = '만' + String(User[0].age) + '세';
   return (
-    <BasicContainer headerTitle="내 프로필" display onPress={goMyPage}>
+    <BasicContainer
+      headerTitle="내 프로필"
+      display
+      onPress={goMyPage}
+      scroll={scroll}
+    >
       <MarginContainer>
-        <ContentContainer>
+        <ScrollContainer onScroll={scrollOn}>
           <DetailContainer title="연령" content={age} />
           <DetailContainer title="관심지역">
             <PrintList lists={myRegion}></PrintList>
@@ -35,7 +42,7 @@ const MyPage_Profile = () => {
             <PrintList lists={myCharacter} flexDirection="column"></PrintList>
           </DetailContainer>
           <DetailContainer title="자기소개" content={User[0].aboutMe} />
-        </ContentContainer>
+        </ScrollContainer>
         <ButtonContainer>
           <ColorButton
             text="수정하기"
@@ -52,14 +59,13 @@ const MarginContainer = styled.View`
   margin-left: 24px;
   margin-right: 24px;
   flex: 1;
+  justify-content: space-between;
 `;
 
-const ContentContainer = styled.View`
-  flex: 12;
+const ScrollContainer = styled.ScrollView`
+  margin-top: 10px;
 `;
 
-const ButtonContainer = styled.View`
-  flex: 1;
-`;
+const ButtonContainer = styled.View``;
 
 export default MyPage_Profile;

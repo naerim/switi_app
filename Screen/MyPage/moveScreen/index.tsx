@@ -57,8 +57,6 @@ const Container = styled.View`
   padding: 0 24px;
 `;
 
-const ContentContainer = styled.TouchableOpacity``;
-
 const Title = styled.Text`
   font-size: 10px;
   color: #b4b4b4;
