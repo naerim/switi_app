@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import RecruitIcon from '../../Component/Icon/RecruitIcon';
+import Participation_RecruitIcon from './Participation_RecruitIcon';
 
 interface Props {
   done: number;
@@ -9,7 +9,7 @@ interface Props {
 const Participation_StudyImage: React.FC<Props> = ({ done }) => {
   return (
     <Container>
-      <RecruitIcon done={true} />
+      <Participation_RecruitIcon done={done === 0} />
     </Container>
   );
 };
