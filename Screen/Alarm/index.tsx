@@ -53,7 +53,7 @@ const Alarm = () => {
     <AlarmContainer
       onPress={goMyPage}
       display
-      headerTitle="알림설정"
+      headerTitle="설정"
       scroll={scroll}
     >
       <ScrollContainer onScroll={scrollOn}>
@@ -133,20 +133,22 @@ const Alarm = () => {
           </SwitchContainer>
         </AllSwitchContainer>
         <BigLine />
-        <SwitchContainer>
-          <SwitchTextContainer>
-            <BasicText>다크모드</BasicText>
-          </SwitchTextContainer>
-          <Switch
-            onValueChange={darkModeToggleSwitch}
-            value={darkModeSwitchValue}
-            trackColor={{
-              true: '#86E3C3',
-              false: '#DBDBDB',
-            }}
-          />
-        </SwitchContainer>
-        <SmallLine />
+        <AllSwitchContainer>
+          <SwitchContainer>
+            <SwitchTextContainer>
+              <BasicText>다크모드</BasicText>
+            </SwitchTextContainer>
+            <Switch
+              onValueChange={darkModeToggleSwitch}
+              value={darkModeSwitchValue}
+              trackColor={{
+                true: '#86E3C3',
+                false: '#DBDBDB',
+              }}
+            />
+          </SwitchContainer>
+          <SmallLine />
+        </AllSwitchContainer>
       </ScrollContainer>
     </AlarmContainer>
   );
@@ -157,39 +159,37 @@ const TopTextContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  padding-top: 20px;
 `;
 
 const ButtonContainer = styled.View`
   flex: 1;
   justify-content: center;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin: 10px 24px;
 `;
 
 const SwitchContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-top: 15px;
 `;
 
 const AllSwitchContainer = styled.View`
   flex: 10;
   margin-top: 10px;
+  margin-right: 24px;
+  margin-left: 24px;
 `;
 
 const BasicText = styled.Text`
   font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const SmallText = styled.Text`
   font-size: 10px;
   color: #b4b4b4;
-  margin-bottom: 10px;
 `;
 
 const SwitchTextContainer = styled.View`
@@ -200,15 +200,12 @@ const SmallLine = styled.Text`
   width: 100%;
   height: 1px;
   background-color: #f3f3f3;
-  margin-left: 24px;
-  margin-right: 24px;
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 const BigLine = styled.Text`
   flex: 0.2;
   background-color: #f3f3f3;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 25px;
 `;
 export default Alarm;
