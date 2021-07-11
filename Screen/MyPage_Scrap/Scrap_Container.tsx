@@ -44,7 +44,7 @@ const Container = styled.View`
 
 const Line = styled.View`
   height: 1px;
-  background-color: #f3f3f3;
+  background-color: #d8d8d8;
 `;
 const Nothing = styled.View``;
 

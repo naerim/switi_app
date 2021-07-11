@@ -31,7 +31,12 @@ const MyPage_Profile_Fix = () => {
 
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
   return (
-    <BasicContainer headerTitle="프로필 수정" display onPress={goMyProfile} scroll={scroll}>
+    <BasicContainer
+      headerTitle="프로필 수정"
+      display
+      onPress={goMyProfile}
+      scroll={scroll}
+    >
       <Wrap showsVerticalScrollIndicator={false} onScroll={scrollOn}>
         <Explanation>{desc}</Explanation>
         <Age input={ageInput} />
