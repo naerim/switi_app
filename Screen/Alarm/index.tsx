@@ -40,6 +40,13 @@ const Alarm = () => {
     setEvaluationSwitchValue(value);
   };
 
+  //다크모드
+  //상호평가 알림
+  const [darkModeSwitchValue, setDarkModeSwitchValue] = useState(false);
+  const darkModeToggleSwitch = (value: any) => {
+    setDarkModeSwitchValue(value);
+  };
+
   const goMyPage = useGoMyPage();
 
   return (
@@ -60,7 +67,7 @@ const Alarm = () => {
             loading={isLoading}
           />
         </ButtonContainer>
-        <AllSwithContainer>
+        <AllSwitchContainer>
           <SwitchContainer>
             <SwitchTextContainer>
               <BasicText>관심 스터디/클래스 알림</BasicText>
@@ -124,7 +131,22 @@ const Alarm = () => {
               }}
             />
           </SwitchContainer>
-        </AllSwithContainer>
+        </AllSwitchContainer>
+        <BigLine />
+        <SwitchContainer>
+          <SwitchTextContainer>
+            <BasicText>다크모드</BasicText>
+          </SwitchTextContainer>
+          <Switch
+            onValueChange={darkModeToggleSwitch}
+            value={darkModeSwitchValue}
+            trackColor={{
+              true: '#86E3C3',
+              false: '#DBDBDB',
+            }}
+          />
+        </SwitchContainer>
+        <SmallLine />
       </ScrollContainer>
     </AlarmContainer>
   );
@@ -147,13 +169,15 @@ const ButtonContainer = styled.View`
 const SwitchContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 24px;
+  align-items: center;
+  margin-top: 10px;
   margin-left: 24px;
   margin-right: 24px;
 `;
 
-const AllSwithContainer = styled.View`
+const AllSwitchContainer = styled.View`
   flex: 10;
+  margin-top: 10px;
 `;
 
 const BasicText = styled.Text`
@@ -176,6 +200,15 @@ const SmallLine = styled.Text`
   width: 100%;
   height: 1px;
   background-color: #f3f3f3;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 10px;
 `;
 
+const BigLine = styled.Text`
+  flex: 0.2;
+  background-color: #f3f3f3;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
 export default Alarm;
