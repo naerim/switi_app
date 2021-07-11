@@ -36,6 +36,7 @@ import AddStudy from './AddStudy';
 import Notice from './Notice';
 import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 import MyPage_Scrap from './MyPage_Scrap';
+import MyPage_Participation from './MyPage_Participation';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,6 +68,10 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
       <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />
+      <Stack.Screen
+        name="MyPage_Participation"
+        component={MyPage_Participation}
+      />
     </Stack.Navigator>
   );
 }

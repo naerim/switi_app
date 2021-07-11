@@ -74,6 +74,13 @@ export const UseGoScrap = () => {
   return useCallback(() => navigation.navigate('MyPage_Scrap'), [navigation]);
 };
 
+export const UseGoParticipation = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_Participation'), [
+    navigation,
+  ]);
+};
+
 export const useGoTerms = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Terms', { idx: idx }), [

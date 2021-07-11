@@ -11,6 +11,7 @@ import {
   useGoMyPageUserInfo,
   UseGoNotice,
   UseGoScrap,
+  UseGoParticipation,
 } from '../../util/navigationHooks';
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
@@ -42,6 +43,7 @@ const MyPage = () => {
   const goNotice = UseGoNotice();
   const goScrap = UseGoScrap();
   const goReport = () => setReportModalVisible(true);
+  const GoParticipation = UseGoParticipation();
 
   const confirm = () => {
     setReportModalVisible(false);
@@ -63,6 +65,7 @@ const MyPage = () => {
             goNotice={goNotice}
             goReport={goReport}
             goScrap={goScrap}
+            goParticipation={GoParticipation}
           />
         </Container>
         <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />

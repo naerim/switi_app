@@ -7,6 +7,7 @@ interface Props {
   goUserInfo: () => void;
   goReport: () => void;
   goScrap: () => void;
+  goParticipation: () => void;
 }
 
 const MoveScreen: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const MoveScreen: React.FC<Props> = ({
   goUserInfo,
   goReport,
   goScrap,
+  goParticipation,
 }) => {
   return (
     <Wrap>
@@ -23,7 +25,9 @@ const MoveScreen: React.FC<Props> = ({
         <SubTitleContainer onPress={goScrap}>
           <SubTitle>스크랩</SubTitle>
         </SubTitleContainer>
-        <SubTitle>참여기록</SubTitle>
+        <SubTitleContainer onPress={goParticipation}>
+          <SubTitle>참여 이력</SubTitle>
+        </SubTitleContainer>
       </Container>
       <Line />
       <Container>
