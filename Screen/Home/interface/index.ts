@@ -1,7 +1,5 @@
-import { dataType } from '../../Profile/interface';
-
 export interface DataType {
-  idx: number;
+  id: number;
   username: string;
   online_flag: number;
   title: string;
@@ -14,8 +12,8 @@ export interface DataType {
   period: string;
   contact: string;
   createAt: string;
-  endDate: string;
-  scrap: number;
+  endDate: Date;
+  scrapCount: number;
   flag: number;
 }
 

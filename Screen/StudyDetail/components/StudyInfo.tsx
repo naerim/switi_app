@@ -33,7 +33,7 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '스터디 예정 종료일',
-      value: item?.endDate,
+      value: item?.endDate.toString().split('T')[0],
     },
     {
       name: '문의',
