@@ -1,9 +1,10 @@
 import { persistStore } from 'redux-persist';
 import rootReducer from './index';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 const configureStore = () => {
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer, applyMiddleware(thunk));
   return store;
 };
 
