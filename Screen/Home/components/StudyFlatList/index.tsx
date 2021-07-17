@@ -4,7 +4,10 @@ import { FlatList } from 'react-native';
 import RenderItem from './RenderItem';
 import ListHeader from '../ListHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { studyListRequest } from '../../../../redux/studyReducer';
+import {
+  onlineStudyListRequest,
+  offlineStudyListRequest,
+} from '../../../../redux/studyReducer';
 import { rootState } from '../../../../redux';
 
 interface Props {
@@ -16,8 +19,11 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
-  const fetchStudyList = () => dispatch(studyListRequest(idx));
-  const { studyList } = useSelector((state: rootState) => state.studyReducer);
+  const fetchOnlineStudyList = () => dispatch(onlineStudyListRequest());
+  const fetchOfflineStudyList = () => dispatch(offlineStudyListRequest());
+  const { onlineStudyList, offlineStudyList } = useSelector(
+    (state: rootState) => state.studyReducer
+  );
 
   const [content, setContent] = useState([]);
 
@@ -29,8 +35,11 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
     //     console.log('hi');
     //     console.log(content);
     //   });
-    fetchStudyList();
-    setContent(studyList);
+
+    fetchOnlineStudyList();
+    fetchOfflineStudyList();
+    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+    //setContent(studyList);
   }, []);
 
   // 0 : 온라인, 1 : 오프라인
@@ -42,7 +51,7 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
 
   return (
     <Container>
-      <ListHeader num={content.length} check={{ checked, setChecked }} />
+      <ListHeader num={2} check={{ checked, setChecked }} />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         data={content}
@@ -60,10 +69,6 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
 
 const Container = styled.View`
   margin: 0 24px;
-`;
-
-const Test = styled.Text`
-  font-size: 40px;
 `;
 
 const SeparatorLine = styled.View`

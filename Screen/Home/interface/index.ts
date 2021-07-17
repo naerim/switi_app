@@ -11,7 +11,7 @@ export interface DataType {
   detail_address: string;
   period: string;
   contact: string;
-  createAt: string;
+  createdAt: string;
   endDate: Date;
   scrapCount: number;
   flag: number;
