@@ -1,3 +1,4 @@
 // action types
 export const GET_ONLINE_STUDY_LIST = 'GET_ONLINE_STUDY_LIST';
 export const GET_OFFLINE_STUDY_LIST = 'GET_OFFLINE_STUDY_LIST';
+export const GET_STUDY_LIST = 'GET_STUDY_LIST';

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   onlineStudyListRequest,
   offlineStudyListRequest,
+  studyListRequest,
 } from '../../../../redux/studyReducer';
 import { rootState } from '../../../../redux';
 
@@ -15,12 +16,15 @@ interface Props {
 }
 
 const StudyFlatList: React.FC<Props> = ({ idx }) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
-  const fetchOnlineStudyList = () => dispatch(onlineStudyListRequest());
-  const fetchOfflineStudyList = () => dispatch(offlineStudyListRequest());
+  const fetchOnlineStudyList = (order: boolean) =>
+    dispatch(onlineStudyListRequest(order));
+  const fetchOfflineStudyList = (order: boolean) =>
+    dispatch(offlineStudyListRequest(order));
+
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
   );
@@ -28,19 +32,10 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
-    // axios
-    //   .get('http://localhost:4000/study/studyList/1?order=update')
-    //   .then((response) => {
-    //     setContent(response.data.study);
-    //     console.log('hi');
-    //     console.log(content);
-    //   });
-
-    fetchOnlineStudyList();
-    fetchOfflineStudyList();
+    fetchOnlineStudyList(checked);
+    fetchOfflineStudyList(checked);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-    //setContent(studyList);
-  }, []);
+  }, [checked]);
 
   // 0 : 온라인, 1 : 오프라인
   // const OnOffStudy = StudyList.filter((i) => i.online_flag === idx);
@@ -51,7 +46,7 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
 
   return (
     <Container>
-      <ListHeader num={2} check={{ checked, setChecked }} />
+      <ListHeader num={content.length} check={{ checked, setChecked }} />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         data={content}
