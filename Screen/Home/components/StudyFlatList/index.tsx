@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   onlineStudyListRequest,
   offlineStudyListRequest,
-  studyListRequest,
 } from '../../../../redux/studyReducer';
 import { rootState } from '../../../../redux';
+import { DataType } from '../../interface';
 
 interface Props {
   idx: number;
@@ -51,16 +51,16 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
         ItemSeparatorComponent={FlatListItemSeparator}
         data={content}
         renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item: DataType) => item.id.toString()}
         extraData={content}
         contentContainerStyle={{ paddingBottom: 80 }}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
+        showsVerticalScrollIndicator={false}
       />
     </Container>
   );
 };
-// showsVerticalScrollIndicator={false}
 
 const Container = styled.View`
   margin: 0 24px;

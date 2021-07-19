@@ -1,9 +1,5 @@
 import produce from 'immer';
-import {
-  GET_ONLINE_STUDY_LIST,
-  GET_OFFLINE_STUDY_LIST,
-  GET_STUDY_LIST,
-} from './action';
+import { GET_ONLINE_STUDY_LIST, GET_OFFLINE_STUDY_LIST } from './action';
 import axios from 'axios';
 
 // 온라인,오프라인,최신순,인기순 정렬 추가하기
@@ -41,23 +37,6 @@ export const offlineStudyListRequest = (order: boolean) => {
   };
 };
 
-export const studyListRequest = (idx, order) => {
-  const orderValue = order ? 'update' : 'count';
-  return async (dispatch: any) => {
-    const response = await axios.get(
-      `http://localhost:4000/study/studyList/${idx}?order=${orderValue}`
-    );
-    if (response.data) {
-      dispatch({
-        type: GET_STUDY_LIST,
-        payload: response.data.study,
-      });
-    } else {
-      console.log('Unable to fetch data');
-    }
-  };
-};
-
 const initialSate = {
   onlineStudyList: null,
   offlineStudyList: null,
@@ -81,7 +60,6 @@ function studyReducer(state = initialSate, action: any) {
           ...state,
           offlineStudyList: action.payload,
         };
-
       default:
         break;
     }
