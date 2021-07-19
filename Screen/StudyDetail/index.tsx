@@ -8,6 +8,7 @@ import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import { DataType } from '../Home/interface';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -15,10 +16,13 @@ const StudyDetail = ({ route }: any) => {
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
   );
+
   useEffect(() => {
     setContent(onlineStudyList.concat(offlineStudyList));
   }, []);
-  const item = content.find((i) => i.id === idx);
+
+  // @ts-ignore
+  const item: DataType = content.find((i) => i.id === idx);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,16 +31,15 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyImage done={true} onPress={goHome} />
-      {/*<StudyImage done={item.flag === 0} onPress={goHome} />*/}
+      <StudyImage done={item && item.flag === 0} onPress={goHome} />
       <Content>
-        <Title>{item.title}</Title>
+        <Title>{item && item.title}</Title>
         <OtherInfo
-          username={item.username}
-          createAt={item.createdAt.toString().split('T')[0]}
-          scrap={item.scrapCount}
+          username={item && item.username}
+          createAt={item && item.createdAt.toString().split('T')[0]}
+          scrap={item && item.scrapCount}
         />
-        <Desc>{item.desc}</Desc>
+        <Desc>{item && item.desc}</Desc>
       </Content>
       <StudyInfo item={item} />
       <BottomButton onPress={showModal} />
