@@ -3,13 +3,13 @@ import styled from 'styled-components/native';
 import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 
 interface Props {
-  done: number;
+  done: boolean;
 }
 
 const StudyImage: React.FC<Props> = ({ done }) => {
   return (
     <Container>
-      <RecruitIcon done={done === 0} />
+      <RecruitIcon done={!done} />
     </Container>
   );
 };

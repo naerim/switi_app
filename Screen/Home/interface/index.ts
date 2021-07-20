@@ -1,4 +1,5 @@
 export interface DataType {
+  gu: string;
   id: number;
   username: string;
   online_flag: number;
@@ -14,7 +15,7 @@ export interface DataType {
   createdAt: string;
   endDate: Date;
   scrapCount: number;
-  flag: number;
+  flag: boolean;
 }
 
 export interface ItemType {

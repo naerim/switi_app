@@ -35,6 +35,7 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
     fetchOnlineStudyList(checked);
     fetchOfflineStudyList(checked);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+    console.log(onlineStudyList);
   }, [checked]);
 
   // 0 : 온라인, 1 : 오프라인
