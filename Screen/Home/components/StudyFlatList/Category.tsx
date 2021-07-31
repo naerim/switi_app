@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  address: string;
+  address: any[];
   category: string;
   target: string;
 }
@@ -10,7 +10,7 @@ interface Props {
 const Category: React.FC<Props> = ({ address, category, target }) => {
   return (
     <Container>
-      <Item>{address}</Item>
+      <Item>{address[0]?.Region.city}</Item>
       <Item>{category}</Item>
       <Item>{target}</Item>
     </Container>
