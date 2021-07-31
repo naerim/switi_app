@@ -45,7 +45,7 @@ const MyPage_profile = () => {
   ];
   return (
     <BasicContainer headerTitle="내 프로필" display onPress={goMyPage}>
-      <MarginContainer>
+      <MarginContainer2>
         <ContentContainer>
           <SmallSizeContainer>
             <Title>연령</Title>
@@ -78,18 +78,14 @@ const MyPage_profile = () => {
           </BigSizeContainer>
         </ContentContainer>
         <ButtonContainer>
-          <ColorButton
-            text="수정하기"
-            onPress={onPress}
-            loading={isLoading}
-          />
+          <ColorButton text="수정하기" onPress={onPress} loading={isLoading} />
         </ButtonContainer>
-      </MarginContainer>
+      </MarginContainer2>
     </BasicContainer>
   );
 };
 
-const MarginContainer = styled.View`
+const MarginContainer2 = styled.View`
   margin-left: 24px;
   margin-right: 24px;
   flex: 1;
