@@ -7,7 +7,7 @@ import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
 
 const RenderItem: React.FC<ItemType> = ({ item }) => {
-  const goStudyDetail = useGoStudyDetail(item.idx);
+  const goStudyDetail = useGoStudyDetail(item.id);
 
   // 글자수 제한
   const limitTitle = (title: string) =>
@@ -27,7 +27,7 @@ const RenderItem: React.FC<ItemType> = ({ item }) => {
             category={item.category}
             target={item.target}
           />
-          <Scrap scrap={item.scrap} />
+          <Scrap scrap={item.scrapCount} />
         </Bottom>
       </Content>
     </Container>

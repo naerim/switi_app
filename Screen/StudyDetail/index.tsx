@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { StudyList } from '../../Data';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
@@ -8,10 +7,22 @@ import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
-  const item = StudyList.find((i) => i.idx === idx);
+  const [content, setContent] = useState([]);
+  const { onlineStudyList, offlineStudyList } = useSelector(
+    (state: rootState) => state.studyReducer
+  );
+
+  useEffect(() => {
+    setContent(onlineStudyList.concat(offlineStudyList));
+  }, []);
+
+  const item: any = content.find((i) => i.id === idx);
+
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
   const showModal = () => setModalVisible(true);
@@ -26,15 +37,15 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyImage done={item?.flag === 0} onPress={goHome} />
+      <StudyImage done={item && item.flag === 0} onPress={goHome} />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
-          username={item?.username}
-          createAt={item?.createAt}
-          scrap={item?.scrap}
+          username={item && item.username}
+          createAt={item && item.createdAt.toString().split('T')[0]}
+          scrap={item && item.scrapCount}
         />
-        <Desc>{item?.desc}</Desc>
+        <Desc>{item && item.desc}</Desc>
       </Content>
       <StudyInfo item={item} />
       <BottomButton onPress={onClick} />
