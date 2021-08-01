@@ -6,6 +6,7 @@ interface Props {
   item?: DataType;
 }
 const StudyInfo: React.FC<Props> = ({ item }) => {
+  console.log(item);
   const studyInfoList = [
     {
       name: '카테고리',
@@ -13,7 +14,9 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '지역',
-      value: item?.address,
+      value: item?.Gus.map(
+        (guObj: any) => `${guObj.Region.city} ${guObj.gu}`
+      ).join(', '),
     },
     {
       name: '모집대상',

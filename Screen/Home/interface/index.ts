@@ -16,6 +16,7 @@ export interface DataType {
   endDate: Date;
   scrapCount: number;
   flag: boolean;
+  Gus: any;
 }
 
 export interface ItemType {

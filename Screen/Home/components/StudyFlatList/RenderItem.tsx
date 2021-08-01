@@ -23,7 +23,7 @@ const RenderItem: React.FC<ItemType> = ({ item }) => {
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
           <Category
-            address={item.address}
+            address={item.Gus}
             category={item.category}
             target={item.target}
           />
