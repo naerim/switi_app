@@ -23,12 +23,21 @@ export const useGoSecondProfile = () => {
 
 export const useGoMyPageProfile = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_profile'), [navigation]);
+  return useCallback(() => navigation.navigate('MyPage_Profile'), [navigation]);
+};
+
+export const useGoMypageProfileFix = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_Profile_Fix'), [
+    navigation,
+  ]);
 };
 
 export const useGoMyPageUserInfo = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('UserInfo'), [navigation]);
+  return useCallback(() => navigation.navigate('MyPage_UserInfo'), [
+    navigation,
+  ]);
 };
 
 export const useGoMyPage = () => {
@@ -60,9 +69,16 @@ export const UseGoNotice = () => {
   return useCallback(() => navigation.navigate('Notice'), [navigation]);
 };
 
-export const UseGoReport = () => {
+export const UseGoScrap = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('Report'), [navigation]);
+  return useCallback(() => navigation.navigate('MyPage_Scrap'), [navigation]);
+};
+
+export const UseGoParticipation = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_Participation'), [
+    navigation,
+  ]);
 };
 
 export const useGoTerms = (idx: number) => {

@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
-//설명 : 제가 만든 screen의 header입니다!
-
-const imagePath = require('../Img/btn_back.png');
+const imagePath = require('../../Img/btn_back.png');
 
 interface DisplayProps {
   display: boolean;
@@ -12,14 +10,14 @@ interface DisplayProps {
 
 interface Props {
   title: string;
+  count?: number;
   display: boolean;
   onPress?: () => void;
 }
 
-const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
+const ScrapHeader: React.FC<Props> = ({ title, onPress, display, count }) => {
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 0 }}>
-      {/*container 에서 위 조건을 주어야 글씨가 안밀려서 이렇게 만들었습니다. */}
       <BackButton
         activeOpacity={0.8}
         onPress={onPress}
@@ -30,6 +28,7 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
         <BackButtonImg source={imagePath} />
       </BackButton>
       <Title>{title}</Title>
+      <Number>{count}</Number>
     </Wrap>
   );
 };
@@ -60,4 +59,11 @@ const Title = styled.Text`
   align-items: center;
 `;
 
-export default BasicHeader;
+const Number = styled.Text`
+  font-size: 14px;
+  color: #fa897b;
+  text-align: center;
+  align-items: center;
+`;
+
+export default ScrapHeader;

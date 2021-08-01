@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
-import BasicModal from '../../../Component/BasicModal';
-import StudyRadioButton from '../details/studyRadioButton';
-import PersonRadioButton from '../details/personRadioButton';
-import ReasonText from '../details/reportReason';
-import useInput from '../../../util/useInput';
-import check from '../../../Img/icon_filter.png';
-import TwoModalButton from '../../SignIn/components/EmailAuthModal/twoModalButton';
-
+import BasicModal from '../../Component/BasicModal';
+import StudyRadioButton from './details/studyRadioButton';
+import PersonRadioButton from './details/personRadioButton';
+import ReasonText from './details/reportReason';
+import useInput from '../../util/useInput';
+import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
+import TitleContainer from './details/titleContainer';
 interface MyPageModalProps {
   modalVisible: boolean;
   closeModal: () => void;
+  confirmButton: () => void;
 }
 
 const MyPageModal: React.FC<MyPageModalProps> = ({
   modalVisible,
   closeModal,
+  confirmButton,
 }) => {
   const [study, setStudy] = useState(0);
   const [person, setPerson] = useState(0);
@@ -41,42 +42,41 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   };
 
   return (
-    <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
+    <BasicModal
+      modalVisible={modalVisible}
+      closeModal={closeModal}
+      // scroll={scroll}
+    >
       <StyledModalContainer
         showsVerticalScrollIndicator={false}
         style={{
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
       >
-        <TitleContainer onPress={onPressStudy} activeOpacity={0.8}>
-          <Title>스터디 선택</Title>
-          <Check source={check} />
-        </TitleContainer>
+        <TitleContainer onPress={onPressStudy} titleText="스터디 선택" />
         {studyVisible ? (
           <StudyRadioButton input={{ reason: study, setReason: setStudy }} />
         ) : (
           <Nothing />
         )}
         <Line />
-        <TitleContainer onPress={onPressPerson} activeOpacity={0.8}>
-          <Title>신고 대상자 선택</Title>
-          <Check source={check} />
-        </TitleContainer>
+        <TitleContainer onPress={onPressPerson} titleText="신고 대상자 선택" />
         {personVisible ? (
           <PersonRadioButton input={{ reason: person, setReason: setPerson }} />
         ) : (
           <Nothing />
         )}
         <Line />
-        <TitleContainer onPress={onPressReason} activeOpacity={0.8}>
-          <Title>신고사유</Title>
-          <Check source={check} />
-        </TitleContainer>
+        <TitleContainer onPress={onPressReason} titleText="신고사유" />
         {reasonVisible ? <ReasonText input={reasonInput} /> : <Nothing />}
       </StyledModalContainer>
       <ModalButtonContainer>
         <TwoModalButton text="취소" onPress={closeModal} />
-        <TwoModalButton text="신고하기" onPress={closeModal} color="#86E3C3" />
+        <TwoModalButton
+          text="신고하기"
+          onPress={confirmButton}
+          color="#86E3C3"
+        />
       </ModalButtonContainer>
     </BasicModal>
   );
@@ -86,25 +86,8 @@ const StyledModalContainer = styled.ScrollView`
   /* 모달창 크기 조절 */
   height: 450px;
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 30px;
   text-align: left;
   margin-bottom: 40px;
-`;
-
-const TitleContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const Title = styled.Text`
-  font-size: 14px;
-`;
-
-const Check = styled.Image`
-  height: 13px;
-  width: 13px;
 `;
 
 const Line = styled.View`

@@ -12,7 +12,7 @@ import {
 } from '../../util/navigationHooks';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 
-const UserInfo = () => {
+const MyPage_UserInfo = () => {
   const goMyPage = useGoMyPage();
   const goWithdrawal = UseGoWithdrawal();
   const goFixUserInfo = UseGoFixUserInfo();
@@ -132,4 +132,4 @@ const ModalButtonContainer = styled.View`
   justify-content: space-between;
 `;
 
-export default UserInfo;
+export default MyPage_UserInfo;

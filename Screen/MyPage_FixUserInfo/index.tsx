@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import BasicContainer from '../../Component/MypageContainer';
+import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
 import NicknameContainer from './Nickname';
 import EmailInput from './input/emailInput';
@@ -16,6 +16,7 @@ import IsEmail from './input/inputConfirm/isEmail';
 import IsPassword from './input/inputConfirm/isPassword';
 import IsSamePassword from './input/inputConfirm/isSamePassword';
 import IsBeforePassword from './input/inputConfirm/isBeforePassword';
+import useScroll from '../../util/useScroll';
 
 const MyPage_FixUserInfo = () => {
   const goMyPageUserInfo = useGoMyPageUserInfo();
@@ -25,6 +26,7 @@ const MyPage_FixUserInfo = () => {
   const passwordCheckInput = useInput('');
   const BeforePasswordInput = useInput('');
   const [confirm, setConfirm] = useState(false);
+  const { scroll, scrollOn } = useScroll();
 
   const FixButtonOnPress = () => {
     if (success) {
@@ -72,7 +74,8 @@ const MyPage_FixUserInfo = () => {
     confirm &&
     IsEmail(emailInput.value).status === Status.SUCCESS &&
     IsPassword(passwordInput.value).status === Status.SUCCESS &&
-    IsSamePassword(passwordInput, passwordCheckInput).status === Status.SUCCESS;
+    IsSamePassword(passwordInput.value, passwordCheckInput.value).status ===
+      Status.SUCCESS;
   // 회원정보 넘길 input 값
   const input = {
     nickname: nicknameInput.value,
@@ -85,8 +88,9 @@ const MyPage_FixUserInfo = () => {
       headerTitle="회원정보 수정"
       display
       onPress={goMyPageUserInfo}
+      scroll={scroll}
     >
-      <MarginContainer>
+      <MarginContainer onScroll={scrollOn}>
         <PictureContainer>
           <ImagePickerContainer />
         </PictureContainer>
@@ -112,7 +116,7 @@ const MyPage_FixUserInfo = () => {
   );
 };
 
-const MarginContainer = styled.View`
+const MarginContainer = styled.ScrollView`
   margin-left: 24px;
   margin-right: 24px;
   flex: 1;

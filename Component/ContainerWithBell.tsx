@@ -6,13 +6,19 @@ import { Platform } from 'react-native';
 interface Props {
   onPress?: () => void;
   title: string;
+  scroll?: boolean;
 }
 
-const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
+const ContainerWithBell: React.FC<Props> = ({
+  title,
+  children,
+  onPress,
+  scroll,
+}) => {
   return (
     <Container
       style={{
-        paddingTop: Platform.OS === 'ios' ? 20 : 50,
+        paddingTop: Platform.OS === 'ios' ? 20 : 70,
       }}
     >
       {/*40->50수정 알람버튼 윗부분 클릭 시 안드로이드에서 상단 바 내려와서 수정했습니다. */}
@@ -22,6 +28,7 @@ const SearchContainer: React.FC<Props> = ({ title, children, onPress }) => {
           <AlarmIcon source={Alarm} />
         </AlarmButton>
       </HeaderContainer>
+      {scroll ? <Line /> : <Nothing />}
       {children}
     </Container>
   );
@@ -43,6 +50,7 @@ const Title = styled.Text`
   color: #2b2b2b;
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const AlarmIcon = styled.Image`
@@ -52,4 +60,10 @@ const AlarmIcon = styled.Image`
 
 const AlarmButton = styled.TouchableOpacity``;
 
-export default SearchContainer;
+const Line = styled.View`
+  height: 1px;
+  background-color: #d8d8d8;
+`;
+const Nothing = styled.View``;
+
+export default ContainerWithBell;

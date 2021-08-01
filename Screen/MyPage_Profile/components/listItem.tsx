@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 const ListItem = ({ list }) => {
-  const { text } = list;
+  const { name } = list;
   return (
     <View>
       <Tag>
-        <Text>{text}</Text>
+        <Text>{name}</Text>
       </Tag>
     </View>
   );
