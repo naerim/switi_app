@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import DeleteIcon from '../../../Img/btn_x_black.png';
+import { ContentFonts } from '../../../Component/Font';
 
 interface searchArrayProps {
   id: number;
@@ -19,7 +20,7 @@ const SearchStoryItem: React.FC<SearchStoryItemProps> = ({
   const { id, text } = search;
   return (
     <Tag>
-      <Text>{text}</Text>
+      <ContentFonts>{text}</ContentFonts>
       <IconContainer onPress={() => onPressX(id)}>
         <Icon source={DeleteIcon} />
       </IconContainer>
@@ -36,7 +37,9 @@ const Tag = styled.View`
   align-items: center;
 `;
 
-const IconContainer = styled.TouchableOpacity``;
+const IconContainer = styled.TouchableOpacity`
+  margin-left: 8px;
+`;
 
 const Icon = styled.Image`
   width: 10px;
@@ -47,6 +50,7 @@ const Text = styled.Text`
   color: #2b2b2b;
   font-size: 12px;
   margin-right: 8px;
+  font-family: NotoSans-Bold;
 `;
 
 export default SearchStoryItem;

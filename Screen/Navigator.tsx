@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './SignIn';
@@ -37,6 +37,8 @@ import Notice from './Notice';
 import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 import MyPage_Scrap from './MyPage_Scrap';
 import MyPage_Participation from './MyPage_Participation';
+import Report from './Report/spare';
+import Splash from './Splash';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -192,9 +194,13 @@ const MainNavigation = () => (
 
 const RootNavigator = () => {
   const user = true;
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000);
+  }, []);
   return (
     <NavigationContainer>
-      {user ? <MainNavigation /> : <LoginNavigation />}
+      {loading ? <Splash /> : user ? <MainNavigation /> : <LoginNavigation />}
     </NavigationContainer>
   );
 };
