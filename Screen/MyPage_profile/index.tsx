@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import BasicContainer from '../../Component/MypageContainer';
-import PrintList from './printList';
+import BasicContainer from '../../Component/BasicContainer';
+import PrintList from './components/printList';
 import ColorButton from '../../Component/BasicButton';
 import { useGoMyPage } from '../../util/navigationHooks';
 
@@ -13,34 +13,34 @@ const MyPage_profile = () => {
 
   const myCharacter = [
     {
-      id: 1,
-      text: '체계적이고 계획적인 사람이에요',
+      key: 1,
+      name: '체계적이고 계획적인 사람이에요',
     },
     {
-      id: 2,
-      text: '솔직하고 시원시원해요',
+      key: 2,
+      name: '솔직하고 시원시원해요',
     },
     {
-      id: 3,
-      text: '시간을 잘 지켜요',
+      key: 3,
+      name: '시간을 잘 지켜요',
     },
   ];
 
   const interestedState = [
     {
-      id: 1,
-      text: '서울 전체',
+      key: 1,
+      name: '서울 전체',
     },
   ];
 
   const interestedParts = [
     {
-      id: 1,
-      text: '취업',
+      key: 1,
+      name: '취업',
     },
     {
-      id: 2,
-      text: '어학',
+      key: 2,
+      name: '어학',
     },
   ];
   return (
@@ -53,11 +53,11 @@ const MyPage_profile = () => {
           </SmallSizeContainer>
           <PrintListContainer>
             <Title>관심지역</Title>
-            <PrintList lists={interestedState}></PrintList>
+            <PrintList lists={interestedState} />
           </PrintListContainer>
           <PrintListContainer>
             <Title>관심분야</Title>
-            <PrintList lists={interestedParts}></PrintList>
+            <PrintList lists={interestedParts} />
           </PrintListContainer>
           <SmallSizeContainer>
             <Title>나의 상황</Title>
@@ -65,7 +65,7 @@ const MyPage_profile = () => {
           </SmallSizeContainer>
           <BigPrintListContainer>
             <Title>나의 성격</Title>
-            <PrintList lists={myCharacter} flexDirection="column"></PrintList>
+            <PrintList lists={myCharacter} flexDirection="column" />
           </BigPrintListContainer>
           <BigSizeContainer>
             <Title>자기소개</Title>
