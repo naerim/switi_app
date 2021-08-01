@@ -11,7 +11,7 @@ import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
-import MyPage_Profile from './MyPage_Profile';
+import MyPage_Profile from './MyPage_profile';
 import MyPage_UserInfo from './MyPage_UserInfo';
 import MyPage_Withdrawal from './MyPage_Withdrawal';
 import Terms from './Terms';
