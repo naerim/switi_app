@@ -66,7 +66,7 @@ export const UseGoAlarm = () => {
 
 export const UseGoNotice = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('Notice'), [navigation]);
+  return useCallback(() => navigation.navigate('MyPage_Notice'), [navigation]);
 };
 
 export const UseGoScrap = () => {

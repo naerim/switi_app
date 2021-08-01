@@ -13,7 +13,7 @@ const MyPage_profile = () => {
   const goMyPage = useGoMyPage();
   const goProfileFix = useGoMypageProfileFix();
 
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const myCharacter = User[0].myCharacter;
 

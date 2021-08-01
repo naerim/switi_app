@@ -33,7 +33,7 @@ import { SafeAreaView } from 'react-native';
 import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
-import Notice from './Notice';
+import MyPage_Notice from './MyPage_Notice';
 import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 import MyPage_Scrap from './MyPage_Scrap';
 import MyPage_Participation from './MyPage_Participation';
@@ -65,7 +65,7 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
       <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
       <Stack.Screen name="Alarm" component={Alarm} />
-      <Stack.Screen name="Notice" component={Notice} />
+      <Stack.Screen name="MyPage_Notice" component={MyPage_Notice} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
       <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />
