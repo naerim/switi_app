@@ -38,6 +38,8 @@ import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 import MyPage_Scrap from './MyPage_Scrap';
 import MyPage_Participation from './MyPage_Participation';
 import Splash from './Splash';
+import ContainerWithBell from '../Component/ContainerWithBell';
+import { UseGoAlarm } from '../util/navigationHooks';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -123,6 +125,32 @@ const HomeNavigation = () => (
   </HomeContainer>
 );
 
+const ManagementNavigation = () => {
+  const goAlarm = UseGoAlarm;
+  return (
+    <ContainerWithBell title="스터디 관리" onPress={goAlarm()}>
+      <MaterialTopTab.Navigator
+        tabBarOptions={{
+          indicatorStyle: {
+            backgroundColor: '#86E3C3',
+          },
+        }}
+      >
+        <MaterialTopTab.Screen
+          name="진행중"
+          component={Management}
+          initialParams={{ idx: 0 }}
+        />
+        <MaterialTopTab.Screen
+          name="모집글"
+          component={Management}
+          initialParams={{ idx: 1 }}
+        />
+      </MaterialTopTab.Navigator>
+    </ContainerWithBell>
+  );
+};
+
 const TabNavigation = () => (
   <SafeAreaView
     style={{
@@ -160,7 +188,7 @@ const TabNavigation = () => (
       />
       <Tab.Screen
         name="Management"
-        component={Management}
+        component={ManagementNavigation}
         options={{
           tabBarLabel: '스터디 관리',
           tabBarIcon: ({ focused }) => (
