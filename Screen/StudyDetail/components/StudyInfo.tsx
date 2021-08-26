@@ -20,7 +20,9 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '모집대상',
-      value: item?.target,
+      value: item?.States.map((stateObj: any) => `${stateObj.category}`).join(
+        ', '
+      ),
     },
     {
       name: '모집인원',

@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 interface Props {
   address: any[];
   category: string;
-  target: string;
+  target: any[];
 }
 
 const Category: React.FC<Props> = ({ address, category, target }) => {
@@ -12,7 +12,7 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
     <Container>
       <Item>{address[0]?.Region.city}</Item>
       <Item>{category}</Item>
-      <Item>{target}</Item>
+      <Item>{target[0]?.category}</Item>
     </Container>
   );
 };

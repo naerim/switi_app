@@ -1,4 +1,5 @@
 export interface DataType {
+  States: any;
   gu: string;
   id: number;
   username: string;
