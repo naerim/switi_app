@@ -17,6 +17,7 @@ interface Props {
 
 const StudyFlatList: React.FC<Props> = ({ idx }) => {
   const [checked, setChecked] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
@@ -38,8 +39,14 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
     console.log(onlineStudyList);
   }, [checked]);
 
-  // 0 : 온라인, 1 : 오프라인
-  // const OnOffStudy = StudyList.filter((i) => i.online_flag === idx);
+  const fetchItem = () => {
+    setIsRefreshing(true);
+    fetchOnlineStudyList(checked);
+    fetchOfflineStudyList(checked);
+    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+    console.log(onlineStudyList);
+    setIsRefreshing(false);
+  };
 
   const handleLoadMore = () => {
     console.log('reached');
@@ -50,6 +57,8 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
       <ListHeader num={content.length} check={{ checked, setChecked }} />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
+        onRefresh={fetchItem}
+        refreshing={isRefreshing}
         data={content}
         renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
         keyExtractor={(item: DataType) => item.id.toString()}
