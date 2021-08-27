@@ -17,7 +17,7 @@ const RenderItem: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImage done={item.flag} />
+      <StudyImage done={item.flag} img={item.Images[0]?.imgPath} />
       <Content>
         <Title>{limitTitle(item.title)}</Title>
         <Desc>{limitDesc(item.desc)}</Desc>

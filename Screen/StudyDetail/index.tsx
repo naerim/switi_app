@@ -37,7 +37,11 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyImage done={item && item.flag === 0} onPress={goHome} />
+      <StudyImage
+        done={item && item.flag === 0}
+        onPress={goHome}
+        img={item && item.Images[0]?.imgPath}
+      />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo

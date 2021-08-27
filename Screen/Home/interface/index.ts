@@ -1,4 +1,5 @@
 export interface DataType {
+  Images: any;
   Interests: any;
   States: any;
   gu: string;
