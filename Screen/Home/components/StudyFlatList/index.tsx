@@ -13,18 +13,23 @@ import { DataType } from '../../interface';
 
 interface Props {
   idx: number;
+  tagList: { key: number; name: string; category: string }[];
 }
 
-const StudyFlatList: React.FC<Props> = ({ idx }) => {
+const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [checked, setChecked] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
-  const fetchOnlineStudyList = (order: boolean) =>
-    dispatch(onlineStudyListRequest(order));
-  const fetchOfflineStudyList = (order: boolean) =>
-    dispatch(offlineStudyListRequest(order));
+  const fetchOnlineStudyList = (
+    order: boolean,
+    tagList: { key: number; name: string; category: string }[]
+  ) => dispatch(onlineStudyListRequest(order, tagList));
+  const fetchOfflineStudyList = (
+    order: boolean,
+    tagList: { key: number; name: string; category: string }[]
+  ) => dispatch(offlineStudyListRequest(order, tagList));
 
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
@@ -33,16 +38,16 @@ const StudyFlatList: React.FC<Props> = ({ idx }) => {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
-    fetchOnlineStudyList(checked);
-    fetchOfflineStudyList(checked);
+    fetchOnlineStudyList(checked, tagList);
+    fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-    console.log(onlineStudyList);
-  }, [checked]);
+    //console.log(tagList);
+  }, [checked, tagList]);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    fetchOnlineStudyList(checked);
-    fetchOfflineStudyList(checked);
+    fetchOnlineStudyList(checked, tagList);
+    fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
     console.log(onlineStudyList);
     setIsRefreshing(false);
