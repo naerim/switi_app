@@ -2,7 +2,7 @@ import produce from 'immer';
 import { GET_ONLINE_STUDY_LIST, GET_OFFLINE_STUDY_LIST } from './action';
 import axios from 'axios';
 
-// 온라인,오프라인,최신순,인기순 정렬 추가하기
+// 온라인 스터디
 export const onlineStudyListRequest = (order: boolean) => {
   const orderValue = order ? 'update' : 'count';
   return async (dispatch: any) => {
@@ -20,6 +20,7 @@ export const onlineStudyListRequest = (order: boolean) => {
   };
 };
 
+// 오프라인 스터디
 export const offlineStudyListRequest = (order: boolean) => {
   const orderValue = order ? 'update' : 'count';
   return async (dispatch: any) => {
