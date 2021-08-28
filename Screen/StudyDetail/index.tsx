@@ -21,11 +21,11 @@ const StudyDetail = ({ route }: any) => {
     setContent(onlineStudyList.concat(offlineStudyList));
   }, []);
 
-  const item: any = content.find((i) => i.id === idx);
+  const item: any = content.find((i: any) => i.id === idx);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
-  const showModal = () => setModalVisible(true);
+  // const showModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
