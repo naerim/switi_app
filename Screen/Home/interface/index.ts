@@ -32,4 +32,10 @@ export interface TagType {
   setSelectCategory: (prev: (prev: number[]) => number[]) => void;
   setSelectArea: (prev: (prev: number[]) => number[]) => void;
   setSelectTarget: (prev: (prev: number[]) => number[]) => void;
+  tagList: { key: number; name: string }[];
+  setTagList: (
+    prev: (
+      prev: { key: number; name: string }[]
+    ) => { key: number; name: string }[]
+  ) => void;
 }
