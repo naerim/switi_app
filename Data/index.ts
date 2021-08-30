@@ -1,15 +1,15 @@
 export const TargetList = [
-  { key: 1, name: '무관', category: 'state' },
-  { key: 2, name: '대학생', category: 'state' },
-  { key: 3, name: '취준생', category: 'state' },
-  { key: 4, name: '직장인', category: 'state' },
+  { key: 0, name: '무관', category: 'state' },
+  { key: 1, name: '대학생', category: 'state' },
+  { key: 2, name: '취준생', category: 'state' },
+  { key: 3, name: '직장인', category: 'state' },
 ];
 
 export const InterestList = [
-  { key: 1, name: '어학', category: 'interest' },
-  { key: 2, name: 'IT', category: 'interest' },
-  { key: 3, name: '취미', category: 'interest' },
-  { key: 4, name: '자격증/시험', category: 'interest' },
+  { key: 0, name: '어학', category: 'interest' },
+  { key: 1, name: 'IT', category: 'interest' },
+  { key: 2, name: '취미', category: 'interest' },
+  { key: 3, name: '자격증/시험', category: 'interest' },
   // { key: 0, category: 'all', name: '전체' },
   // { key: 1, category: 'job', name: '취업' },
   // { key: 2, category: 'language', name: '어학' },
@@ -22,8 +22,8 @@ export const InterestList = [
 ];
 
 export const Area = [
-  { key: 1, name: '서울', category: 'region' },
-  { key: 2, name: '경기', category: 'region' },
+  { key: 0, name: '서울', category: 'region' },
+  { key: 1, name: '경기', category: 'region' },
   // { key: 1, name: '경기도' },
   // { key: 2, name: '강원도' },
   // { key: 3, name: '대전광역시' },
