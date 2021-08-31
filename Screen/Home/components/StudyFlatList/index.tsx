@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import RenderItem from './RenderItem';
@@ -12,20 +12,27 @@ import { rootState } from '../../../../redux';
 import { DataType } from '../../interface';
 
 interface Props {
+  tagChange: boolean;
+  setTagChange: (prev: boolean) => void;
   idx: number;
   tagList: { key: number; name: string; category: string }[];
 }
 
-const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
-  const [checked, setChecked] = useState(false);
+const StudyFlatList: React.FC<Props> = ({
+  idx,
+  tagList,
+  tagChange,
+  setTagChange,
+}) => {
+  const [checked, setChecked] = useState(true);
+  const [query, setQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
-  const fetchOnlineStudyList = (
-    order: boolean,
-    tagList: { key: number; name: string; category: string }[]
-  ) => dispatch(onlineStudyListRequest(order, tagList));
+
+  const fetchOnlineStudyList = (query: string) =>
+    dispatch(onlineStudyListRequest(query));
   const fetchOfflineStudyList = (
     order: boolean,
     tagList: { key: number; name: string; category: string }[]
@@ -37,19 +44,39 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   const [content, setContent] = useState([]);
 
+  const getFetchUrl = useCallback(() => {
+    var tag = '';
+    tagList.forEach(({ key, name, category }) => {
+      if (category == 'interest') {
+        tag += (key + 1).toString();
+      }
+    });
+
+    const orderValue = checked ? 'update' : 'count';
+    setQuery(orderValue + '&category=' + tag);
+
+    console.log('Q', query);
+  }, [tagList]);
+
   useEffect(() => {
-    fetchOnlineStudyList(checked, tagList);
+    fetchOnlineStudyList(query);
     fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-    //console.log(tagList);
-  }, [checked, tagList]);
+  }, [getFetchUrl]);
+
+  // useEffect(() => {
+  //   fetchOnlineStudyList(checked, tagList);
+  //   fetchOfflineStudyList(checked, tagList);
+  //   idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+  //   //console.log(tagList);
+  // }, []);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    fetchOnlineStudyList(checked, tagList);
+    // fetchOnlineStudyList(checked, tagList);
     fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-    console.log(onlineStudyList);
+    // console.log(onlineStudyList);
     setIsRefreshing(false);
   };
 
@@ -72,6 +99,11 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
         showsVerticalScrollIndicator={false}
+        // ListEmptyComponent={() => (
+        //   <Container>
+        //     <Text>데이터 없음</Text>
+        //   </Container>
+        // )}
       />
     </Container>
   );
