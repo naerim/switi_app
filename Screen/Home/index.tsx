@@ -4,7 +4,6 @@ import StudyFlatList from './components/StudyFlatList';
 import TopCategory from './components/TopCategory';
 
 const Home = ({ route }: any) => {
-  const [tagChange, setTagChange] = useState(false);
   const [tagList, setTagList] = useState<
     { key: number; name: string; category: string }[]
   >([]);
@@ -13,18 +12,8 @@ const Home = ({ route }: any) => {
 
   return (
     <Container>
-      <TopCategory
-        tagList={tagList}
-        setTagList={setTagList}
-        tagChange={tagChange}
-        setTagChange={setTagChange}
-      />
-      <StudyFlatList
-        idx={idx}
-        tagList={tagList}
-        tagChange={tagChange}
-        setTagChange={setTagChange}
-      />
+      <TopCategory tagList={tagList} setTagList={setTagList} />
+      <StudyFlatList idx={idx} tagList={tagList} />
     </Container>
   );
 };

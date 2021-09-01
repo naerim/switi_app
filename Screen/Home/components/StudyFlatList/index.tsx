@@ -12,18 +12,11 @@ import { rootState } from '../../../../redux';
 import { DataType } from '../../interface';
 
 interface Props {
-  tagChange: boolean;
-  setTagChange: (prev: boolean) => void;
   idx: number;
   tagList: { key: number; name: string; category: string }[];
 }
 
-const StudyFlatList: React.FC<Props> = ({
-  idx,
-  tagList,
-  tagChange,
-  setTagChange,
-}) => {
+const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [checked, setChecked] = useState(true);
   const [query, setQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩

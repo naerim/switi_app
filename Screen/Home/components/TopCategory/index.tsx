@@ -7,11 +7,11 @@ import TagContainer from './TagContainer';
 import { dataType } from '../../../Profile/interface';
 
 interface Props {
-  tagList: { key: number; name: string }[];
+  tagList: { key: number; name: string; category: string }[];
   setTagList: (
     prev: (
-      prev: { key: number; name: string }[]
-    ) => { key: number; name: string }[]
+      prev: { key: number; name: string; category: string }[]
+    ) => { key: number; name: string; category: string }[]
   ) => void;
 }
 
@@ -19,13 +19,15 @@ const TopCategory: React.FC<Props> = ({ tagList, setTagList }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // 카테고리 선택했을 때
-  const onPress = (dataList: { key: number; name: string }[]) => {
+  const onPress = (
+    dataList: { key: number; name: string; category: string }[]
+  ) => {
     setModalVisible(true);
     setData(dataList);
   };
+
   const closeModal = () => {
     setModalVisible(false);
-    console.log(tagList);
   };
 
   const [selectCategory, setSelectCategory] = useState<number[]>([]);
