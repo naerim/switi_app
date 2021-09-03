@@ -13,10 +13,7 @@ interface Props {
 const StudyImage: React.FC<Props> = ({ img, done, onPress }) => {
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
-      <MainImage
-        source={{ uri: 'http://localhost:4000/images/481623090516092.png' }}
-        style={{ width: 40, height: 40 }}
-      />
+      <MainImage source={{ uri: img }} />
       <DetailHeader onPress={onPress} />
       <RecruitIcon done={done} use="StudyDetail" />
     </Container>

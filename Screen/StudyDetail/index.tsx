@@ -37,19 +37,17 @@ const StudyDetail = ({ route }: any) => {
     setCancelModalVisible(true);
   };
 
-  // const fetchImg = (url: string) => {
-  //   return async () => {
-  //     const response = await axios.get(`http://localhost:4000/images/${url}`);
-  //     return response;
-  //   };
-  // };
+  // 이미지 불러오기
+  const loadImg = (url: string) => {
+    return 'http://localhost:4000/images/' + url;
+  };
 
   return (
     <Container>
       <StudyImage
         done={item && item.flag === 0}
         onPress={goHome}
-        img={item && item.Images[0]?.imgPath}
+        img={item && loadImg(item.Images[0]?.imgPath)}
       />
       <Content>
         <Title>{item && item.title}</Title>
