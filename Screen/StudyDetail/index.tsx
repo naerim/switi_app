@@ -9,8 +9,6 @@ import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import axios from 'axios';
-import { GET_ONLINE_STUDY_LIST } from '../../redux/action';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -52,7 +50,7 @@ const StudyDetail = ({ route }: any) => {
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
-          username={item && item.username}
+          username={item && item.User.nickname}
           createAt={item && item.createdAt.toString().split('T')[0]}
           scrap={item && item.scrapCount}
         />
