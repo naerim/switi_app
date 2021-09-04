@@ -37,36 +37,41 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   const [content, setContent] = useState([]);
 
-  const getFetchUrl = useCallback(() => {
+  // useEffect(() => {
+  //   var tag = '';
+  //   console.log(tagList);
+  //   tagList.forEach(({ key, name, category }) => {
+  //     const orderValue = checked ? 'update' : 'count';
+  //     if (category == 'interest') {
+  //       tag += (key + 1).toString();
+  //       setQuery(orderValue + '&category=' + tag);
+  //     } else setQuery(orderValue + '');
+  //   });
+  // }, [query]);
+
+  const handleTag = (tagList: { key: any; name: any; category: any; }[]) => {
     var tag = '';
+    const orderValue = checked ? 'update' : 'count';
+    console.log(tagList);
     tagList.forEach(({ key, name, category }) => {
       if (category == 'interest') {
         tag += (key + 1).toString();
-      }
+        setQuery(orderValue + '&category=' + tag);
+      } else setQuery(orderValue + '');
     });
-
-    const orderValue = checked ? 'update' : 'count';
-    setQuery(orderValue + '&category=' + tag);
-
-    console.log('Q', query);
-  }, [tagList]);
+  };
 
   useEffect(() => {
     fetchOnlineStudyList(query);
     fetchOfflineStudyList(checked, tagList);
+    console.log('query', query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  }, [getFetchUrl]);
-
-  // useEffect(() => {
-  //   fetchOnlineStudyList(checked, tagList);
-  //   fetchOfflineStudyList(checked, tagList);
-  //   idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  //   //console.log(tagList);
-  // }, []);
+  }, [dispatch]);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    // fetchOnlineStudyList(checked, tagList);
+    handleTag(tagList);
+    fetchOnlineStudyList(query);
     fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
     // console.log(onlineStudyList);
@@ -85,18 +90,25 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         onRefresh={fetchItem}
         refreshing={isRefreshing}
         data={content}
-        renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
+        renderItem={useCallback(
+          ({ item }) => (
+            <RenderItem index={item.id} item={item} />
+          ),
+          []
+        )}
         keyExtractor={(item: DataType) => item.id.toString()}
         extraData={content}
         contentContainerStyle={{ paddingBottom: 80 }}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
         showsVerticalScrollIndicator={false}
+
         // ListEmptyComponent={() => (
         //   <Container>
         //     <Text>데이터 없음</Text>
         //   </Container>
         // )}
+        //   ListFooterComponent={}
       />
     </Container>
   );

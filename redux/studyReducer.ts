@@ -65,11 +65,13 @@ function studyReducer(state = initialSate, action: any) {
           ...state,
           onlineStudyList: action.payload,
         };
+        break;
       case GET_OFFLINE_STUDY_LIST:
         return {
           ...state,
           offlineStudyList: action.payload,
         };
+        break;
       default:
         break;
     }
