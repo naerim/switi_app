@@ -6,15 +6,29 @@ import BasicModal from '../../../../Component/BasicModal';
 import TagContainer from './TagContainer';
 import { dataType } from '../../../Profile/interface';
 
-const TopCategory = () => {
+interface Props {
+  tagList: { key: number; name: string; category: string }[];
+  setTagList: (
+    prev: (
+      prev: { key: number; name: string; category: string }[]
+    ) => { key: number; name: string; category: string }[]
+  ) => void;
+}
+
+const TopCategory: React.FC<Props> = ({ tagList, setTagList }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // 카테고리 선택했을 때
-  const onPress = (dataList: { key: number; name: string }[]) => {
+  const onPress = (
+    dataList: { key: number; name: string; category: string }[]
+  ) => {
     setModalVisible(true);
     setData(dataList);
   };
-  const closeModal = () => setModalVisible(false);
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   const [selectCategory, setSelectCategory] = useState<number[]>([]);
   const [selectArea, setSelectArea] = useState<number[]>([]);
@@ -55,6 +69,8 @@ const TopCategory = () => {
         ))}
       </SelectContainer>
       <TagContainer
+        tagList={tagList}
+        setTagList={setTagList}
         nameList={nameList()}
         setSelectCategory={setSelectCategory}
         setSelectArea={setSelectArea}
@@ -62,6 +78,8 @@ const TopCategory = () => {
       />
       <BasicModal modalVisible={modalVisible}>
         <SelectFlatList
+          tagList={tagList}
+          setTagList={setTagList}
           data={data}
           select={determine(data).select}
           setSelect={determine(data).setSelect}

@@ -5,6 +5,7 @@ import { TagType } from '../../interface';
 import { Area, InterestList, TargetList } from '../../../../Data';
 
 const TagContainer: React.FC<TagType> = ({
+  setTagList,
   nameList,
   setSelectCategory,
   setSelectArea,
@@ -16,6 +17,9 @@ const TagContainer: React.FC<TagType> = ({
       if (name === current.name) {
         const idx = i;
         setSelectArea((prev: number[]) => prev.filter((i) => i !== idx));
+        setTagList((prev: { key: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.key !== idx)
+        );
       }
     });
 
@@ -23,6 +27,9 @@ const TagContainer: React.FC<TagType> = ({
       if (name === current.name) {
         const idx = i;
         setSelectCategory((prev: number[]) => prev.filter((i) => i !== idx));
+        setTagList((prev: { key: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.key !== idx)
+        );
         return;
       }
     });
@@ -31,6 +38,9 @@ const TagContainer: React.FC<TagType> = ({
       if (name === current.name) {
         const idx = i;
         setSelectTarget((prev: number[]) => prev.filter((i) => i !== idx));
+        setTagList((prev: { key: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.key !== idx)
+        );
         return;
       }
     });

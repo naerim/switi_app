@@ -21,11 +21,11 @@ const StudyDetail = ({ route }: any) => {
     setContent(onlineStudyList.concat(offlineStudyList));
   }, []);
 
-  const item: any = content.find((i) => i.id === idx);
+  const item: any = content.find((i: any) => i.id === idx);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
-  const showModal = () => setModalVisible(true);
+  // const showModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
@@ -35,13 +35,22 @@ const StudyDetail = ({ route }: any) => {
     setCancelModalVisible(true);
   };
 
+  // 이미지 불러오기
+  const loadImg = (url: string) => {
+    return 'http://localhost:4000/images/' + url;
+  };
+
   return (
     <Container>
-      <StudyImage done={item && item.flag === 0} onPress={goHome} />
+      <StudyImage
+        done={item && item.flag === 0}
+        onPress={goHome}
+        img={item && loadImg(item.Images[0]?.imgPath)}
+      />
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
-          username={item && item.username}
+          username={item && item.User.nickname}
           createAt={item && item.createdAt.toString().split('T')[0]}
           scrap={item && item.scrapCount}
         />

@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import styled from 'styled-components/native';
+import ContentList from './components/ContentList';
 
-const Management = () => {
+const Management = ({ route }: any) => {
+  // 0 : 진행중, 1 : 모집글
+  const idx = route.params.idx;
+
   return (
-    <View style={styles.container}>
-      <Text>Management Screen</Text>
-    </View>
+    <Container>
+      <ContentList idx={idx}>sdf</ContentList>
+    </Container>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Container = styled.SafeAreaView`
+  background-color: white;
+`;
 
 export default Management;

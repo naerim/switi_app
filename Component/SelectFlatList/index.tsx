@@ -11,6 +11,12 @@ interface FlatListProps {
   setSelect: (prev: (prev: number[]) => number[]) => void;
   closeModal: () => void;
   limit?: number;
+  tagList: { key: number; name: string; category: string }[];
+  setTagList: (
+    prev: (
+      prev: { key: number; name: string; category: string }[]
+    ) => { key: number; name: string; category: string }[]
+  ) => void;
 }
 
 interface Props {
@@ -23,17 +29,28 @@ const SelectFlatList: React.FC<FlatListProps> = ({
   setSelect,
   closeModal,
   limit,
+  setTagList,
 }) => {
   const FlatListItemSeparator = () => <Line />;
 
-  const itemClick = (isChecked: boolean, index: number): void => {
+  const itemClick = (
+    isChecked: boolean,
+    index: number,
+    name: string,
+    category: string
+  ): void => {
     const limitNum = limit ? limit : 3; // 선택 제한 갯수
     if (!isChecked && select.length !== limitNum) {
       setSelect((prev) => [...prev, index]);
+      setTagList((prev) => [
+        ...prev,
+        { key: index, name: name, category: category },
+      ]);
       return;
     }
 
     setSelect((prev) => prev.filter((i) => i !== index));
+    setTagList((prev) => prev.filter((i) => i.key !== index));
   };
 
   const renderItem = (data: itemType) => {
@@ -42,7 +59,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
       <Container
         activeOpacity={0.8}
         onPress={() => {
-          itemClick(isChecked, data.index);
+          itemClick(isChecked, data.index, data.item.name, data.item.category);
         }}
       >
         <Category check={isChecked}>{data.item.name}</Category>

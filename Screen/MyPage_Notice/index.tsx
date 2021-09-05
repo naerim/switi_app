@@ -6,7 +6,7 @@ import { NoticeData } from '../../Data/NoticeData';
 import OneNoticeContainer from './OneNoticeContainer';
 import useScroll from '../../util/useScroll';
 
-const Notice = () => {
+const MyPage_Notice = () => {
   const goMyPage = useGoMyPage();
   const { scroll, scrollOn } = useScroll();
   return (
@@ -34,4 +34,4 @@ const AllNoticeContainer = styled.ScrollView`
   flex: 1;
 `;
 
-export default Notice;
+export default MyPage_Notice;

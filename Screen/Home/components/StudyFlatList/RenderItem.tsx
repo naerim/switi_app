@@ -17,15 +17,15 @@ const RenderItem: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImage done={item.flag} />
+      <StudyImage done={item.flag} img={item.Images[0]?.imgPath} />
       <Content>
         <Title>{limitTitle(item.title)}</Title>
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
           <Category
             address={item.Gus}
-            category={item.category}
-            target={item.target}
+            category={item.Interests}
+            target={item.States}
           />
           <Scrap scrap={item.scrapCount} />
         </Bottom>

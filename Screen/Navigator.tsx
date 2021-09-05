@@ -11,7 +11,7 @@ import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
 import SecondProfile from './Profile/secondProfile';
-import MyPage_Profile from './MyPage_profile';
+import MyPage_Profile from './MyPage_Profile';
 import MyPage_UserInfo from './MyPage_UserInfo';
 import MyPage_Withdrawal from './MyPage_Withdrawal';
 import Terms from './Terms';
@@ -33,11 +33,13 @@ import { SafeAreaView } from 'react-native';
 import HomeContainer from '../Component/HomeContainer';
 import StudyDetail from './StudyDetail';
 import AddStudy from './AddStudy';
-import Notice from './Notice';
+import MyPage_Notice from './MyPage_Notice';
 import MyPage_Profile_Fix from './MyPage_Profile_Fix';
 import MyPage_Scrap from './MyPage_Scrap';
 import MyPage_Participation from './MyPage_Participation';
 import Splash from './Splash';
+import ContainerWithBell from '../Component/ContainerWithBell';
+import { UseGoAlarm } from '../util/navigationHooks';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,7 +67,7 @@ function MyPageNavigator() {
       <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
       <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
       <Stack.Screen name="Alarm" component={Alarm} />
-      <Stack.Screen name="Notice" component={Notice} />
+      <Stack.Screen name="MyPage_Notice" component={MyPage_Notice} />
       <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
       <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
       <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />
@@ -123,6 +125,32 @@ const HomeNavigation = () => (
   </HomeContainer>
 );
 
+const ManagementNavigation = () => {
+  const goAlarm = UseGoAlarm;
+  return (
+    <ContainerWithBell title="스터디 관리" onPress={goAlarm()}>
+      <MaterialTopTab.Navigator
+        tabBarOptions={{
+          indicatorStyle: {
+            backgroundColor: '#86E3C3',
+          },
+        }}
+      >
+        <MaterialTopTab.Screen
+          name="진행중"
+          component={Management}
+          initialParams={{ idx: 0 }}
+        />
+        <MaterialTopTab.Screen
+          name="모집글"
+          component={Management}
+          initialParams={{ idx: 1 }}
+        />
+      </MaterialTopTab.Navigator>
+    </ContainerWithBell>
+  );
+};
+
 const TabNavigation = () => (
   <SafeAreaView
     style={{
@@ -160,7 +188,7 @@ const TabNavigation = () => (
       />
       <Tab.Screen
         name="Management"
-        component={Management}
+        component={ManagementNavigation}
         options={{
           tabBarLabel: '스터디 관리',
           tabBarIcon: ({ focused }) => (

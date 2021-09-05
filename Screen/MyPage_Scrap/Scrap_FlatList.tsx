@@ -16,17 +16,17 @@ const Scrap_FlatList = () => {
     <Wrap>
       {scroll ? <Line /> : <Nothing />}
       <MarginContainer>
-        <FlatList
-          ItemSeparatorComponent={FlatListItemSeparator}
-          data={ScrapList}
-          renderItem={({ item }) => <RenderItem index={item.idx} item={item} />}
-          keyExtractor={(item) => item.idx.toString()}
-          extraData={ScrapList}
-          contentContainerStyle={{ paddingBottom: 80 }}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0}
-          onScroll={scrollOn}
-        />
+        {/*<FlatList*/}
+        {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
+        {/*  data={ScrapList}*/}
+        {/*  renderItem={({ item }) => <RenderItem index={item.idx} item={item} />}*/}
+        {/*  keyExtractor={(item) => item.idx.toString()}*/}
+        {/*  extraData={ScrapList}*/}
+        {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
+        {/*  onEndReached={handleLoadMore}*/}
+        {/*  onEndReachedThreshold={0}*/}
+        {/*  onScroll={scrollOn}*/}
+        {/*/>*/}
       </MarginContainer>
     </Wrap>
   );

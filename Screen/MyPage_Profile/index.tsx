@@ -8,7 +8,7 @@ import { User } from '../../Data/User';
 import DetailContainer from './components/detailContainer';
 import useScroll from '../../util/useScroll';
 
-const MyPage_profile = () => {
+const MyPage_Profile = () => {
   const { scroll, scrollOn } = useScroll();
   const goMyPage = useGoMyPage();
   const goProfileFix = useGoMypageProfileFix();
@@ -68,4 +68,4 @@ const ScrollContainer = styled.ScrollView`
 
 const ButtonContainer = styled.View``;
 
-export default MyPage_profile;
+export default MyPage_Profile;

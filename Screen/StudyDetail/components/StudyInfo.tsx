@@ -10,7 +10,9 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
   const studyInfoList = [
     {
       name: '카테고리',
-      value: item?.category,
+      value: item?.Interests.map(
+        (interestObj: any) => `${interestObj.category}`
+      ).join(', '),
     },
     {
       name: '지역',
@@ -20,7 +22,9 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '모집대상',
-      value: item?.target,
+      value: item?.States.map((stateObj: any) => `${stateObj.category}`).join(
+        ', '
+      ),
     },
     {
       name: '모집인원',

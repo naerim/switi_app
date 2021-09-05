@@ -5,6 +5,7 @@ export interface InputProps {
 export interface dataType {
   key: number;
   name: string;
+  category: string;
 }
 
 export interface itemType {

@@ -3,16 +3,16 @@ import styled from 'styled-components/native';
 
 interface Props {
   address: any[];
-  category: string;
-  target: string;
+  category: any[];
+  target: any[];
 }
 
 const Category: React.FC<Props> = ({ address, category, target }) => {
   return (
     <Container>
       <Item>{address[0]?.Region.city}</Item>
-      <Item>{category}</Item>
-      <Item>{target}</Item>
+      <Item>{category[0]?.category}</Item>
+      <Item>{target[0]?.category}</Item>
     </Container>
   );
 };

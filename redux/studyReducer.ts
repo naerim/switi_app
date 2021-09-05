@@ -2,12 +2,18 @@ import produce from 'immer';
 import { GET_ONLINE_STUDY_LIST, GET_OFFLINE_STUDY_LIST } from './action';
 import axios from 'axios';
 
-// 온라인,오프라인,최신순,인기순 정렬 추가하기
-export const onlineStudyListRequest = (order: boolean) => {
-  const orderValue = order ? 'update' : 'count';
+// 온라인 스터디
+export const onlineStudyListRequest = (url: string) => {
+  // var tag = '';
+  // tagList.forEach(({ key, name, category }) => {
+  //   if (category == 'interest') {
+  //     tag += '&category=' + (key + 1).toString();
+  //   }
+  // });
+  //const orderValue = order ? 'update' : 'count';
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/0?order=${orderValue}`
+      `http://localhost:4000/study/studyList/0?order=${url}`
     );
     if (response.data) {
       dispatch({
@@ -20,7 +26,11 @@ export const onlineStudyListRequest = (order: boolean) => {
   };
 };
 
-export const offlineStudyListRequest = (order: boolean) => {
+// 오프라인 스터디
+export const offlineStudyListRequest = (
+  order: boolean,
+  tagList: { key: number; name: string; category: string }[]
+) => {
   const orderValue = order ? 'update' : 'count';
   return async (dispatch: any) => {
     const response = await axios.get(
@@ -55,11 +65,13 @@ function studyReducer(state = initialSate, action: any) {
           ...state,
           onlineStudyList: action.payload,
         };
+        break;
       case GET_OFFLINE_STUDY_LIST:
         return {
           ...state,
           offlineStudyList: action.payload,
         };
+        break;
       default:
         break;
     }
