@@ -49,7 +49,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   //   });
   // }, [query]);
 
-  const handleTag = (tagList: { key: any; name: any; category: any; }[]) => {
+  const handleTag = (tagList: { key: any; name: any; category: any }[]) => {
     var tag = '';
     const orderValue = checked ? 'update' : 'count';
     console.log(tagList);
@@ -102,12 +102,11 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
         showsVerticalScrollIndicator={false}
-
-        // ListEmptyComponent={() => (
-        //   <Container>
-        //     <Text>데이터 없음</Text>
-        //   </Container>
-        // )}
+        ListEmptyComponent={() => (
+          <EmptyContainer>
+            <EmptyFont>데이터 없음</EmptyFont>
+          </EmptyContainer>
+        )}
         //   ListFooterComponent={}
       />
     </Container>
@@ -121,6 +120,14 @@ const Container = styled.View`
 const SeparatorLine = styled.View`
   height: 1px;
   background-color: #f3f3f3;
+`;
+
+const EmptyContainer = styled.View`
+  margin-top: 10px;
+`;
+
+const EmptyFont = styled.Text`
+  font-size: 12px;
 `;
 
 export default StudyFlatList;
