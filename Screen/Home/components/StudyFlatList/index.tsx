@@ -18,14 +18,16 @@ interface Props {
 
 const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [checked, setChecked] = useState(true);
-  const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
   const dispatch = useDispatch();
 
-  const fetchOnlineStudyList = (query: string) =>
-    dispatch(onlineStudyListRequest(query));
+  const fetchOnlineStudyList = (
+    order: boolean,
+    tagList: { key: number; name: string; category: string }[]
+  ) => dispatch(onlineStudyListRequest(order, tagList));
   const fetchOfflineStudyList = (
     order: boolean,
     tagList: { key: number; name: string; category: string }[]
@@ -49,29 +51,28 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   //   });
   // }, [query]);
 
-  const handleTag = (tagList: { key: any; name: any; category: any }[]) => {
-    var tag = '';
-    const orderValue = checked ? 'update' : 'count';
-    console.log(tagList);
-    tagList.forEach(({ key, name, category }) => {
-      if (category == 'interest') {
-        tag += (key + 1).toString();
-        setQuery(orderValue + '&category=' + tag);
-      } else setQuery(orderValue + '');
-    });
-  };
+  // const handleTag = (tagList: { key: any; name: any; category: any }[]) => {
+  //   var tag = '';
+  //   const orderValue = checked ? 'update' : 'count';
+  //   console.log(tagList);
+  //   tagList.forEach(({ key, name, category }) => {
+  //     if (category == 'interest') {
+  //       tag += (key + 1).toString();
+  //       setQuery(orderValue + '&category=' + tag);
+  //     } else setQuery(orderValue + '');
+  //   });
+  // };
 
   useEffect(() => {
-    fetchOnlineStudyList(query);
+    fetchOnlineStudyList(checked, tagList);
     fetchOfflineStudyList(checked, tagList);
-    console.log('query', query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
   }, [dispatch]);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    handleTag(tagList);
-    fetchOnlineStudyList(query);
+    // handleTag(tagList);
+    fetchOnlineStudyList(checked, tagList);
     fetchOfflineStudyList(checked, tagList);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
     // console.log(onlineStudyList);
