@@ -7,12 +7,14 @@ export const onlineStudyListRequest = (
   order: boolean,
   tagList: { key: number; name: string; category: string }[]
 ) => {
-  // var tag = '';
-  // tagList.forEach(({ key, name, category }) => {
-  //   if (category == 'interest') {
-  //     tag += '&category=' + (key + 1).toString();
-  //   }
-  // });
+  var tag = '';
+  tagList.forEach(({ key, name, category }) => {
+    if (category == 'interest') {
+      tag += '&category=' + (key + 1).toString();
+    } else if (category == 'area') {
+      tag += '&area=' + (key + 1).toString();
+    }
+  });
   const orderValue = order ? 'update' : 'count';
   return async (dispatch: any) => {
     const response = await axios.get(
