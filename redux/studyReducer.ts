@@ -52,7 +52,7 @@ export const offlineStudyListRequest = (
   };
 };
 
-const initialSate = {
+const initialState = {
   onlineStudyList: null,
   offlineStudyList: null,
 };
@@ -62,7 +62,7 @@ export interface IStudyState {
   offlineStudyList: [];
 }
 
-function studyReducer(state = initialSate, action: any) {
+function studyReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
       case GET_ONLINE_STUDY_LIST:
