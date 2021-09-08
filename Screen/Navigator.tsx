@@ -220,7 +220,7 @@ const MainNavigation = () => (
 );
 
 const RootNavigator = () => {
-  const user = true;
+  const user = false;
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);

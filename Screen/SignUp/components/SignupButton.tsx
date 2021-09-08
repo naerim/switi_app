@@ -10,7 +10,7 @@ interface Props {
 const SignupButton: React.FC<Props> = ({ success, input }) => {
   const goFirstProfile = useGoFirstProfile();
   return (
-    <Container disabled={success} onPress={goFirstProfile}>
+    <Container disabled={!success} onPress={goFirstProfile}>
       <TextStyle>이메일로 가입</TextStyle>
     </Container>
   );
