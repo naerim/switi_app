@@ -1,6 +1,11 @@
 import produce from 'immer';
-import { CHECK_NICKNAME } from './action';
-// import axios from 'axios';
+import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, CHECK_NICKNAME } from './action';
+import axios from 'axios';
+import createRequestThunk from './lib/createRequestThunk';
+
+// 로그인
+export const loginRequest = (email: string, password: string) =>
+  createRequestThunk(AUTH_LOGIN, login(email, password));
 
 // 닉네임 중복 확인
 export const checkNickNameRequest = (nickname: string) => {
@@ -33,14 +38,25 @@ export const checkNickNameRequest = (nickname: string) => {
   // }
 };
 
+// 로그인 요청
+const login = (email: string, password: string) => {
+  axios({
+    method: 'post',
+    url: 'http://localhost:4000/auth/login',
+    data: { email: email, password: password },
+  });
+};
+
 const initialState = {
   nickname: '',
+  login: null,
   user: null,
 };
 
 export interface IUserState {
   nickname: string;
   user: [];
+  login: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -51,6 +67,9 @@ function userReducer(state = initialState, action: any) {
           ...state,
           nickname: action.payload,
         };
+        break;
+      case AUTH_LOGIN_SUCCESS:
+        draft.login = action.payload;
         break;
       default:
         break;
