@@ -44,9 +44,6 @@ const TagContainer: React.FC<TagType> = ({
         return;
       }
     });
-
-    //const idx = select.find((i: number) => data[i].name === name);
-    //setSelect((prev: number[]) => prev.filter((i) => i !== idx));
   };
 
   return (

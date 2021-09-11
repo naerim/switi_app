@@ -18,7 +18,7 @@ interface Props {
 
 const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [checked, setChecked] = useState(true);
-  // const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
@@ -30,8 +30,9 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   ) => dispatch(onlineStudyListRequest(order, tagList));
   const fetchOfflineStudyList = (
     order: boolean,
-    tagList: { key: number; name: string; category: string }[]
-  ) => dispatch(offlineStudyListRequest(order, tagList));
+    tagList: { key: number; name: string; category: string }[],
+    query: string
+  ) => dispatch(offlineStudyListRequest(order, tagList, query));
 
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
@@ -39,17 +40,15 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   const [content, setContent] = useState([]);
 
-  // useEffect(() => {
-  //   var tag = '';
-  //   console.log(tagList);
-  //   tagList.forEach(({ key, name, category }) => {
-  //     const orderValue = checked ? 'update' : 'count';
-  //     if (category == 'interest') {
-  //       tag += (key + 1).toString();
-  //       setQuery(orderValue + '&category=' + tag);
-  //     } else setQuery(orderValue + '');
-  //   });
-  // }, [query]);
+  useEffect(() => {
+    var tag = '';
+    tagList.forEach(({ key, name, category }) => {
+      if (category == 'interest') {
+        tag += (key + 1).toString();
+        setQuery('&category=' + tag);
+      } else setQuery('');
+    });
+  }, [query]);
 
   // const handleTag = (tagList: { key: any; name: any; category: any }[]) => {
   //   var tag = '';
@@ -64,18 +63,25 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   // };
 
   useEffect(() => {
+    console.log(tagList);
+    var tag = '';
+    tagList.forEach(({ key, name, category }) => {
+      if (category == 'interest') {
+        tag += (key + 1).toString();
+        setQuery('&category=' + tag);
+      } else setQuery('');
+    });
+
     fetchOnlineStudyList(checked, tagList);
-    fetchOfflineStudyList(checked, tagList);
+    fetchOfflineStudyList(checked, tagList, query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  }, [dispatch]);
+  }, [tagList]);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    // handleTag(tagList);
     fetchOnlineStudyList(checked, tagList);
-    fetchOfflineStudyList(checked, tagList);
+    fetchOfflineStudyList(checked, tagList, query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-    // console.log(onlineStudyList);
     setIsRefreshing(false);
   };
 
@@ -83,9 +89,22 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     console.log('reached');
   };
 
+  // 인기순/최신순 정렬
+  const onClickSort = () => {
+    const check = checked;
+    idx === 0
+      ? fetchOnlineStudyList(check, tagList)
+      : fetchOfflineStudyList(check, tagList, query);
+    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+  };
+
   return (
     <Container>
-      <ListHeader num={content.length} check={{ checked, setChecked }} />
+      <ListHeader
+        num={content.length}
+        check={{ checked, setChecked }}
+        onPress={onClickSort}
+      />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         onRefresh={fetchItem}

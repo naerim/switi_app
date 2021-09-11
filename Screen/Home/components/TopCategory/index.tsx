@@ -33,8 +33,11 @@ const TopCategory: React.FC<Props> = ({ tagList, setTagList }) => {
   const [selectCategory, setSelectCategory] = useState<number[]>([]);
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectTarget, setSelectTarget] = useState<number[]>([]);
-  const [data, setData] = useState<{ key: number; name: string }[]>([]);
+  const [data, setData] = useState<
+    { key: number; name: string; category: string }[]
+  >([]);
 
+  // name만 저장하는 함수
   const nameList = () => {
     const category = selectCategory.map((i) => InterestList[i].name);
     const area = selectArea.map((i) => Area[i].name);

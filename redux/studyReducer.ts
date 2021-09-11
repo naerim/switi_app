@@ -15,7 +15,7 @@ export const onlineStudyListRequest = (
       tag += '&area=' + (key + 1).toString();
     }
   });
-  const orderValue = order ? 'update' : 'count';
+  const orderValue = order ? 'count' : 'update';
   return async (dispatch: any) => {
     const response = await axios.get(
       `http://localhost:4000/study/studyList/0?order=${orderValue}`
@@ -34,12 +34,13 @@ export const onlineStudyListRequest = (
 // 오프라인 스터디
 export const offlineStudyListRequest = (
   order: boolean,
-  tagList: { key: number; name: string; category: string }[]
+  tagList: { key: number; name: string; category: string }[],
+  query: string
 ) => {
-  const orderValue = order ? 'update' : 'count';
+  const orderValue = order ? 'count' : 'update';
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/1?order=${orderValue}`
+      `http://localhost:4000/study/studyList/1?order=${orderValue}${query}`
     );
     if (response.data) {
       dispatch({

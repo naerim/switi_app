@@ -5,10 +5,12 @@ import ArrangeIcon from '../../../Img/icon_arrange.png';
 interface Props {
   num: number;
   check: { checked: boolean; setChecked: (b: boolean) => void };
+  onPress: () => void;
 }
 
-const ListHeader: React.FC<Props> = ({ num, check }) => {
+const ListHeader: React.FC<Props> = ({ num, check, onPress }) => {
   const onClick = () => {
+    onPress();
     check.setChecked(!check.checked);
   };
 

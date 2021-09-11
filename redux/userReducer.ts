@@ -102,18 +102,12 @@ function userReducer(state = initialState, action: any) {
           nickname: action.payload,
         };
         break;
-      case AUTH_LOGIN:
-        console.log(action.payload);
-        return {
-          ...state,
-          login: action.payload,
-        };
+      case AUTH_LOGIN_SUCCESS:
+        draft.login = action.payload;
         break;
       case AUTH_SIGNUP_SUCCESS:
-        return {
-          ...state,
-          signupSuccess: action.payload,
-        };
+        draft.signupSuccess = action.payload;
+        break;
       default:
         break;
     }

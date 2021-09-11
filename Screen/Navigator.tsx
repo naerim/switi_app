@@ -225,11 +225,10 @@ const RootNavigator = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+
   const [user, setUser] = useState(true);
-
-  console.log(login);
-
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);
   }, []);

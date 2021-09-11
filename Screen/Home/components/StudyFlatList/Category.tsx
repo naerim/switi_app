@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
@@ -8,10 +8,32 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ address, category, target }) => {
+  const [myCategory, setMyCategory] = useState('');
+
+  useEffect(() => {
+    setCategory();
+  }, []);
+
+  // 카테고리 지정(카테고리가 여러개일수도 있으므로)
+  const setCategory = () => {
+    const num = category.length;
+    // 카테고리가 2개 이상일때 ,로 구분
+    if (num > 1) {
+      let i = 0;
+      let wholeCategory = '';
+      category.forEach(({ category }) => {
+        wholeCategory += category;
+        if (num - 1 !== i) wholeCategory += ',';
+        i++;
+      });
+      setMyCategory(wholeCategory);
+    } else setMyCategory(category[0]?.category);
+  };
+
   return (
     <Container>
       <Item>{address[0]?.Region.city}</Item>
-      <Item>{category[0]?.category}</Item>
+      <Item>{myCategory}</Item>
       <Item>{target[0]?.category}</Item>
     </Container>
   );
