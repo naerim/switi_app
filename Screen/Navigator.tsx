@@ -40,6 +40,8 @@ import MyPage_Participation from './MyPage_Participation';
 import Splash from './Splash';
 import ContainerWithBell from '../Component/ContainerWithBell';
 import { UseGoAlarm } from '../util/navigationHooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../redux';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -220,7 +222,13 @@ const MainNavigation = () => (
 );
 
 const RootNavigator = () => {
-  const user = false;
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  const [user, setUser] = useState(false);
+
+  console.log(login);
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);

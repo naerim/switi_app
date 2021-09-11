@@ -144,7 +144,8 @@ const SignUp = () => {
     checked.info;
   // 회원가입시 넘길 input 값
   const input = {
-    gender: gender === 0 ? '남' : '여',
+    // gender: gender === 0 ? '남' : '여',
+    gender: gender,
     nickname: nicknameInput.value,
     email: emailInput.value,
     password: passwordInput.value,

@@ -1,11 +1,25 @@
 import produce from 'immer';
-import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, CHECK_NICKNAME } from './action';
+import {
+  AUTH_LOGIN,
+  AUTH_LOGIN_SUCCESS,
+  AUTH_SIGNUP,
+  AUTH_SIGNUP_SUCCESS,
+  CHECK_NICKNAME,
+} from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
 
 // 로그인
 export const loginRequest = (email: string, password: string) =>
   createRequestThunk(AUTH_LOGIN, login(email, password));
+
+// 회원가입
+export const signupRequest = (
+  gender: number,
+  nickname: string,
+  email: string,
+  password: string
+) => createRequestThunk(AUTH_SIGNUP, signup(gender, nickname, email, password));
 
 // 닉네임 중복 확인
 export const checkNickNameRequest = (nickname: string) => {
@@ -47,16 +61,36 @@ const login = (email: string, password: string) => {
   });
 };
 
+// 회원가입 요청
+const signup = (
+  gender: number,
+  nickname: string,
+  email: string,
+  password: string
+) => {
+  axios({
+    method: 'post',
+    url: 'http://localhost:4000/auth/signup',
+    data: {
+      gender: gender,
+      nickname: nickname,
+      email: email,
+      password: password,
+    },
+  });
+};
 const initialState = {
   nickname: '',
   login: null,
   user: null,
+  signupSuccess: null,
 };
 
 export interface IUserState {
   nickname: string;
   user: [];
   login: any;
+  signupSuccess: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -68,9 +102,18 @@ function userReducer(state = initialState, action: any) {
           nickname: action.payload,
         };
         break;
-      case AUTH_LOGIN_SUCCESS:
-        draft.login = action.payload;
+      case AUTH_LOGIN:
+        console.log(action.payload);
+        return {
+          ...state,
+          login: action.payload,
+        };
         break;
+      case AUTH_SIGNUP_SUCCESS:
+        return {
+          ...state,
+          signupSuccess: action.payload,
+        };
       default:
         break;
     }
