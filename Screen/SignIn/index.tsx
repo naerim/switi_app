@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
@@ -11,9 +11,8 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
-import { rootState } from '../../redux';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -52,6 +51,7 @@ const SignIn: React.FC = () => {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
     } else {
       onLogin(email.value, password.value);
+      setModalVisible(true);
     }
   };
 
