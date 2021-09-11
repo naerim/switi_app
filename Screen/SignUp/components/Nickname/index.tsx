@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
 import { InputProps, Status, WarningProps } from '../../inteface';
+import { useDispatch } from 'react-redux';
+import { checkNickNameRequest } from '../../../../redux/userReducer';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -17,6 +19,12 @@ const getColor = ({ status }: { status: Status }) => {
 };
 
 const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
+  const dispatch = useDispatch();
+
+  const checkNickname = (nickname: string) => {
+    dispatch(checkNickNameRequest(nickname));
+  };
+
   const [message, setMessage] = useState(' ');
   const onChange = (state: boolean) => {
     confirm?.setConfirm(state);
@@ -38,6 +46,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
         <NicknameButton
           disabled={message === '멋진 닉네임이네요!'}
           check={() => {
+            // checkNickname(input.value);
             onChange(true);
             setMessage(error.text);
           }}

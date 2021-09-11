@@ -11,8 +11,8 @@ interface FlatListProps {
   setSelect: (prev: (prev: number[]) => number[]) => void;
   closeModal: () => void;
   limit?: number;
-  tagList: { key: number; name: string; category: string }[];
-  setTagList: (
+  tagList?: { key: number; name: string; category: string }[];
+  setTagList?: (
     prev: (
       prev: { key: number; name: string; category: string }[]
     ) => { key: number; name: string; category: string }[]
@@ -42,15 +42,19 @@ const SelectFlatList: React.FC<FlatListProps> = ({
     const limitNum = limit ? limit : 3; // 선택 제한 갯수
     if (!isChecked && select.length !== limitNum) {
       setSelect((prev) => [...prev, index]);
-      setTagList((prev) => [
-        ...prev,
-        { key: index, name: name, category: category },
-      ]);
+      if (setTagList) {
+        setTagList((prev) => [
+          ...prev,
+          { key: index, name: name, category: category },
+        ]);
+      }
       return;
     }
 
     setSelect((prev) => prev.filter((i) => i !== index));
-    setTagList((prev) => prev.filter((i) => i.key !== index));
+    if (setTagList) {
+      setTagList((prev) => prev.filter((i) => i.key !== index));
+    }
   };
 
   const renderItem = (data: itemType) => {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import useInput from './util/useInput';
-import AuthButton from '../../Component/BasicButton';
+import BasicButton from '../../Component/BasicButton';
 import SocialLogin from './components/SocialLogin';
 import Division from './components/Division';
 import SignInForm from './components/SignInForm';
@@ -11,18 +11,27 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
+import { useDispatch } from 'react-redux';
+import { loginRequest } from '../../redux/userReducer';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
   const passwordInput = useInput('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState<boolean>(true);
+  // 이메일 인증 모달창
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [doneModalVisible, setDoneModalVisible] = useState(false);
   const doneCloseModal = () => setDoneModalVisible(false);
 
   const toggleChecked = () => setChecked(!checked);
   const closeModal = () => setModalVisible(false);
+
+  const dispatch = useDispatch();
+  const onLogin = useCallback(
+    (email, password) => dispatch(loginRequest(email, password)),
+    [dispatch]
+  );
 
   const handleLogin = () => {
     const email = emailInput;
@@ -40,6 +49,9 @@ const SignIn: React.FC = () => {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
     } else if (password.value.length < 8) {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+    } else {
+      onLogin(email.value, password.value);
+      setModalVisible(true);
     }
   };
 
@@ -65,7 +77,11 @@ const SignIn: React.FC = () => {
           />
         </CheckBoxContainer>
         <AuthButtonContainer>
-          <AuthButton onPress={handleLogin} loading={isLoading} text="로그인" />
+          <BasicButton
+            onPress={handleLogin}
+            loading={isLoading}
+            text="로그인"
+          />
         </AuthButtonContainer>
         <OptionContainer>
           <OptionMenu />

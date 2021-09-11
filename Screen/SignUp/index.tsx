@@ -11,6 +11,7 @@ import PasswordInput from './components/PasswordInput';
 import OptionMenu from './components/OptionMenu';
 import NicknameContainer from './components/Nickname';
 import { Status } from './inteface';
+import axios from 'axios';
 
 const SignUp = () => {
   const [gender, setGender] = useState(0);
@@ -23,18 +24,45 @@ const SignUp = () => {
     service: false,
     info: false,
   });
+  const [userNickName, setUserNickName] = useState(false);
 
-  const isNickname = (nickname: string) => {
+  const isNickname = (nicknameInput: string) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
-    if (nickname == '' || nickname == null) {
+
+    if (nicknameInput == '' || nicknameInput == null) {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
-    } else if (special.test(nickname) || nickname.search(/\s/) != -1) {
+    } else if (
+      special.test(nicknameInput) ||
+      nicknameInput.search(/\s/) != -1
+    ) {
       return {
         status: Status.ERROR,
         text: '공백, 특수문자는 사용 불가합니다.',
       };
     } else {
-      return { status: Status.SUCCESS, text: '멋진 닉네임이네요!' };
+      // 닉네임 중복 확인
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/checkNickname',
+        data: { nickname: nicknameInput },
+      })
+        .then((res) => {
+          if (res.data !== null) {
+            setUserNickName(true);
+          } else {
+            setUserNickName(false);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setUserNickName(false);
+        });
+      return {
+        status: userNickName ? Status.SUCCESS : Status.ERROR,
+        text: userNickName
+          ? '멋진 닉네임이네요!'
+          : '이미 사용중이거나 탈퇴한 닉네임입니다.',
+      };
     }
   };
   const isEmail = (email: string) => {
@@ -116,7 +144,8 @@ const SignUp = () => {
     checked.info;
   // 회원가입시 넘길 input 값
   const input = {
-    gender: gender === 0 ? '남' : '여',
+    // gender: gender === 0 ? '남' : '여',
+    gender: gender,
     nickname: nicknameInput.value,
     email: emailInput.value,
     password: passwordInput.value,
