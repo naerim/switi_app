@@ -34,7 +34,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   );
 
   useEffect(() => {
-    console.log(tagList);
     let tag = '';
     tagList.forEach(({ key, name, category }) => {
       if (category == 'interest') {
@@ -55,7 +54,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   }, [tagList]);
 
   useEffect(() => {
-    console.log(query);
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
   }, [checked, query]);
