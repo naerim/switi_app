@@ -52,6 +52,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         else tag += '&state=' + (key + 1).toString();
       }
     });
+    console.log('category test ......', tag);
     setQuery(tag);
   }, [tagList]);
 
@@ -59,8 +60,13 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     console.log(query);
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
-    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
   }, [query]);
+
+  useEffect(() => {
+    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
+  }, [idx, onlineStudyList, offlineStudyList]);
+  //비동기적 처리 -> 동기적 처리 순서로 결과가 화면에 출력되지 않음
+  //동기적 처리로 해결
 
   const fetchItem = () => {
     setIsRefreshing(true);
@@ -120,6 +126,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
 const Container = styled.View`
   margin: 0 24px;
+  background-color: pink;
 `;
 
 const SeparatorLine = styled.View`
