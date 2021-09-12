@@ -3,7 +3,7 @@ export default function createRequestThunk(type: string, request: any) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
-  return (...params) => async (
+  return (...params: any) => async (
     dispatch: (arg0: { type: string; payload?: any; error?: boolean }) => void
   ) => {
     dispatch({ type });
@@ -19,10 +19,10 @@ export default function createRequestThunk(type: string, request: any) {
       console.log('test error', e.message);
       dispatch({
         type: FAILURE, // 실패
-        payload: e,
+        payload: e.message,
         error: true,
       });
-      throw e;
+      // throw e;
     }
   };
 }

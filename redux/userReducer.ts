@@ -1,10 +1,11 @@
 import produce from 'immer';
 import {
-  AUTH_LOGIN, AUTH_LOGIN_FAILURE,
+  AUTH_LOGIN,
+  AUTH_LOGIN_FAILURE,
   AUTH_LOGIN_SUCCESS,
   AUTH_SIGNUP,
+  AUTH_SIGNUP_FAILURE,
   AUTH_SIGNUP_SUCCESS,
-  CHECK_NICKNAME,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -24,56 +25,14 @@ const login = async (email: string, password: string) => {
   return response;
 };
 
-// 로그인
-export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
-
-// 회원가입
-export const signupRequest = (
-  gender: number,
-  nickname: string,
-  email: string,
-  password: string
-) => createRequestThunk(AUTH_SIGNUP, signup(gender, nickname, email, password));
-
-// 닉네임 중복 확인
-export const checkNickNameRequest = (nickname: string) => {
-  // const response = axios
-  //   .post(`http://localhost:4000/auth/checkNickname`, { nickname: nickname })
-  //   .then((response) => response.data)
-  //   .then((response) => console.log(response.data));
-  //
-  // return {
-  //   type: CHECK_NICKNAME,
-  //   payload: response,
-  // };
-  // try {
-  // return async (dispatch: any) => {
-  //   const response = await axios.post(
-  //     `http://localhost:4000/auth/checkNickname`,
-  //     nickname
-  //   );
-  //   if (response.data) {
-  //     dispatch({
-  //       type: CHECK_NICKNAME,
-  //       payload: response.data,
-  //     });
-  //   } else {
-  //     console.log('Unable to check user nickName');
-  //   }
-  // };
-  // } catch (e) {
-  //   console.log(e);
-  // }
-};
-
 // 회원가입 요청
-const signup = (
+const signup = async (
   gender: number,
   nickname: string,
   email: string,
   password: string
 ) => {
-  axios({
+  const response = await axios({
     method: 'post',
     url: 'http://localhost:4000/auth/signup',
     data: {
@@ -83,40 +42,44 @@ const signup = (
       password: password,
     },
   });
+  return response;
 };
+
+// 로그인
+export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
+// 회원가입
+export const signupRequest = createRequestThunk(AUTH_SIGNUP, signup);
+
 const initialState = {
-  nickname: '',
   login: null,
   user: null,
-  signupSuccess: null,
   loginError: null,
+  signup: null,
+  signupError: null,
 };
 
 export interface IUserState {
-  nickname: string;
   user: [];
   login: any;
-  signupSuccess: any;
   loginError: any;
+  signup: any;
+  signupError: null;
 }
 
 function userReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case CHECK_NICKNAME:
-        return {
-          ...state,
-          nickname: action.payload,
-        };
-        break;
       case AUTH_LOGIN_SUCCESS:
         draft.login = action.payload;
         break;
-      case AUTH_SIGNUP_SUCCESS:
-        draft.signupSuccess = action.payload;
-        break;
       case AUTH_LOGIN_FAILURE:
         draft.loginError = action.payload;
+        break;
+      case AUTH_SIGNUP_SUCCESS:
+        draft.signup = action.payload;
+        break;
+      case AUTH_SIGNUP_FAILURE:
+        draft.signupError = action.payload;
         break;
       default:
         break;
