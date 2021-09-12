@@ -226,7 +226,10 @@ const RootNavigator = () => {
     login: userReducer.login,
   }));
 
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
+
+  console.log(login);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

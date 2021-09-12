@@ -54,6 +54,10 @@ export const checkNickNameRequest = (nickname: string) => {
 
 // 로그인 요청
 const login = (email: string, password: string) => {
+  console.log(email, password);
+  // 여기 콘솔은 잘 찍히는데,
+  //[Unhandled promise rejection: Error: Request failed with status code 500]
+  //백엔드 에러발생
   axios({
     method: 'post',
     url: 'http://localhost:4000/auth/login',

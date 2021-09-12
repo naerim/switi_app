@@ -9,6 +9,7 @@ export default function createRequestThunk(type: string, request: any) {
     dispatch({ type });
     try {
       const response = await request(params);
+      console.log(response.data);
       dispatch({
         type: SUCCESS, // 성공
         payload: response.data,
