@@ -33,9 +33,8 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     (state: rootState) => state.studyReducer
   );
 
-  const [content, setContent] = useState([]);
-
   useEffect(() => {
+    console.log(tagList);
     let tag = '';
     tagList.forEach(({ key, name, category }) => {
       if (category == 'interest') {
@@ -52,7 +51,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         else tag += '&state=' + (key + 1).toString();
       }
     });
-    console.log('category test ......', tag);
     setQuery(tag);
   }, [tagList]);
 
@@ -60,11 +58,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     console.log(query);
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
-  }, [query]);
-
-  useEffect(() => {
-    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  }, [idx, onlineStudyList, offlineStudyList]);
+  }, [checked, query]);
   //비동기적 처리 -> 동기적 처리 순서로 결과가 화면에 출력되지 않음
   //동기적 처리로 해결
 
@@ -72,7 +66,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     setIsRefreshing(true);
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
-    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
     setIsRefreshing(false);
   };
 
@@ -80,27 +73,17 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     console.log('reached');
   };
 
-  // 인기순/최신순 정렬
-  const onClickSort = () => {
-    const check = checked;
-    idx === 0
-      ? fetchOnlineStudyList(check, query)
-      : fetchOfflineStudyList(check, query);
-    idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  };
-
   return (
     <Container>
       <ListHeader
-        num={content.length}
+        num={idx === 0 ? onlineStudyList.length : offlineStudyList.length}
         check={{ checked, setChecked }}
-        onPress={onClickSort}
       />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         onRefresh={fetchItem}
         refreshing={isRefreshing}
-        data={content}
+        data={idx === 0 ? onlineStudyList : offlineStudyList}
         renderItem={useCallback(
           ({ item }) => (
             <RenderItem index={item.id} item={item} />
@@ -108,7 +91,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
           []
         )}
         keyExtractor={(item: DataType) => item.id.toString()}
-        extraData={content}
+        extraData={idx === 0 ? onlineStudyList : offlineStudyList}
         contentContainerStyle={{ paddingBottom: 80 }}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
@@ -118,7 +101,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
             <EmptyFont>데이터 없음</EmptyFont>
           </EmptyContainer>
         )}
-        //   ListFooterComponent={}
       />
     </Container>
   );
@@ -126,7 +108,6 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
 const Container = styled.View`
   margin: 0 24px;
-  background-color: pink;
 `;
 
 const SeparatorLine = styled.View`
