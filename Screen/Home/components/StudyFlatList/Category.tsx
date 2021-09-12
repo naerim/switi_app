@@ -9,9 +9,11 @@ interface Props {
 
 const Category: React.FC<Props> = ({ address, category, target }) => {
   const [myCategory, setMyCategory] = useState('');
+  const [myTarget, setMyTarget] = useState('');
 
   useEffect(() => {
     setCategory();
+    setTarget();
   }, []);
 
   // 카테고리 지정(카테고리가 여러개일수도 있으므로)
@@ -30,11 +32,26 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
     } else setMyCategory(category[0]?.category);
   };
 
+  const setTarget = () => {
+    const num = target.length;
+    // 모집대상이 2개 이상일때 ,로 구분
+    if (num > 1) {
+      let i = 0;
+      let wholeTarget = '';
+      target.forEach(({ category }) => {
+        wholeTarget += category;
+        if (num - 1 !== i) wholeTarget += ',';
+        i++;
+      });
+      setMyTarget(wholeTarget);
+    } else setMyTarget(target[0]?.category);
+  };
+
   return (
     <Container>
       <Item>{address[0]?.Region.city}</Item>
       <Item>{myCategory}</Item>
-      <Item>{target[0]?.category}</Item>
+      <Item>{myTarget}</Item>
     </Container>
   );
 };
