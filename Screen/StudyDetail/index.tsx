@@ -76,8 +76,8 @@ const Title = styled.Text`
   margin-top: 15px;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'NotoSans-Bold';
 `;
+//font-family: 'NotoSans-Bold';
 
 const Content = styled.View`
   padding: 0 24px;

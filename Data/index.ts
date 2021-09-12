@@ -1,8 +1,8 @@
 export const TargetList = [
-  { key: 0, name: '무관', category: 'state' },
-  { key: 1, name: '대학생', category: 'state' },
+  { key: 0, name: '대학생', category: 'state' },
+  { key: 1, name: '직장인', category: 'state' },
   { key: 2, name: '취준생', category: 'state' },
-  { key: 3, name: '직장인', category: 'state' },
+  { key: 3, name: '무관', category: 'state' },
 ];
 
 export const InterestList = [

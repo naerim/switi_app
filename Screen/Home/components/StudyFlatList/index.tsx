@@ -24,15 +24,10 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   const dispatch = useDispatch();
 
-  const fetchOnlineStudyList = (
-    order: boolean,
-    tagList: { key: number; name: string; category: string }[]
-  ) => dispatch(onlineStudyListRequest(order, tagList));
-  const fetchOfflineStudyList = (
-    order: boolean,
-    tagList: { key: number; name: string; category: string }[],
-    query: string
-  ) => dispatch(offlineStudyListRequest(order, tagList, query));
+  const fetchOnlineStudyList = (order: boolean, query: string) =>
+    dispatch(onlineStudyListRequest(order, query));
+  const fetchOfflineStudyList = (order: boolean, query: string) =>
+    dispatch(offlineStudyListRequest(order, query));
 
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
@@ -41,46 +36,36 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
-    var tag = '';
+    let tag = '';
     tagList.forEach(({ key, name, category }) => {
       if (category == 'interest') {
-        tag += (key + 1).toString();
-        setQuery('&category=' + tag);
-      } else setQuery('');
+        // 카테고리
+        if (tag.includes('category')) tag += ':' + (key + 1).toString();
+        else tag += '&category=' + (key + 1).toString();
+      } else if (category == 'region') {
+        // 지역
+        if (tag.includes('region')) tag += ':' + (key + 1).toString();
+        else tag += '&region=' + (key + 1).toString();
+      } else {
+        // 모집대상
+        if (tag.includes('state')) tag += ':' + (key + 1).toString();
+        else tag += '&state=' + (key + 1).toString();
+      }
     });
-  }, [query]);
-
-  // const handleTag = (tagList: { key: any; name: any; category: any }[]) => {
-  //   var tag = '';
-  //   const orderValue = checked ? 'update' : 'count';
-  //   console.log(tagList);
-  //   tagList.forEach(({ key, name, category }) => {
-  //     if (category == 'interest') {
-  //       tag += (key + 1).toString();
-  //       setQuery(orderValue + '&category=' + tag);
-  //     } else setQuery(orderValue + '');
-  //   });
-  // };
+    setQuery(tag);
+  }, [tagList]);
 
   useEffect(() => {
-    console.log(tagList);
-    var tag = '';
-    tagList.forEach(({ key, name, category }) => {
-      if (category == 'interest') {
-        tag += (key + 1).toString();
-        setQuery('&category=' + tag);
-      } else setQuery('');
-    });
-
-    fetchOnlineStudyList(checked, tagList);
-    fetchOfflineStudyList(checked, tagList, query);
+    console.log(query);
+    fetchOnlineStudyList(checked, query);
+    fetchOfflineStudyList(checked, query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
-  }, [tagList]);
+  }, [query]);
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    fetchOnlineStudyList(checked, tagList);
-    fetchOfflineStudyList(checked, tagList, query);
+    fetchOnlineStudyList(checked, query);
+    fetchOfflineStudyList(checked, query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
     setIsRefreshing(false);
   };
@@ -93,8 +78,8 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const onClickSort = () => {
     const check = checked;
     idx === 0
-      ? fetchOnlineStudyList(check, tagList)
-      : fetchOfflineStudyList(check, tagList, query);
+      ? fetchOnlineStudyList(check, query)
+      : fetchOfflineStudyList(check, query);
     idx === 0 ? setContent(onlineStudyList) : setContent(offlineStudyList);
   };
 
