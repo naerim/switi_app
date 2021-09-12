@@ -9,12 +9,13 @@ export default function createRequestThunk(type: string, request: any) {
     dispatch({ type });
     try {
       const response = await request(params);
-      console.log(response.data);
+      console.log('test', response);
       dispatch({
         type: SUCCESS, // 성공
         payload: response.data,
       });
     } catch (e) {
+      console.log('test error', e.message);
       dispatch({
         type: FAILURE, // 실패
         payload: e,

@@ -222,9 +222,12 @@ const MainNavigation = () => (
 );
 
 const RootNavigator = () => {
-  const { login } = useSelector(({ userReducer }: rootState) => ({
+  const { login, loginError } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
+    loginError: userReducer.loginError,
   }));
+
+  console.log('확인', loginError);
 
   const [user, setUser] = useState(false);
 

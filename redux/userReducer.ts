@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {
-  AUTH_LOGIN,
+  AUTH_LOGIN, AUTH_LOGIN_FAILURE,
   AUTH_LOGIN_SUCCESS,
   AUTH_SIGNUP,
   AUTH_SIGNUP_SUCCESS,
@@ -9,9 +9,22 @@ import {
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
 
+// 로그인 요청
+const login = async (email: string, password: string) => {
+  // 여기 콘솔은 잘 찍히는데,
+  //[Unhandled promise rejection: Error: Request failed with status cde 500]
+  //백엔드 에러발생
+  const response = await axios({
+    method: 'post',
+    url: 'http://localhost:4000/auth/login',
+    data: { email: email, password: password },
+  });
+
+  return response;
+};
+
 // 로그인
-export const loginRequest = (email: string, password: string) =>
-  createRequestThunk(AUTH_LOGIN, login(email, password));
+export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
 
 // 회원가입
 export const signupRequest = (
@@ -52,19 +65,6 @@ export const checkNickNameRequest = (nickname: string) => {
   // }
 };
 
-// 로그인 요청
-const login = (email: string, password: string) => {
-  console.log(email, password);
-  // 여기 콘솔은 잘 찍히는데,
-  //[Unhandled promise rejection: Error: Request failed with status code 500]
-  //백엔드 에러발생
-  axios({
-    method: 'post',
-    url: 'http://localhost:4000/auth/login',
-    data: { email: email, password: password },
-  });
-};
-
 // 회원가입 요청
 const signup = (
   gender: number,
@@ -88,6 +88,7 @@ const initialState = {
   login: null,
   user: null,
   signupSuccess: null,
+  loginError: null,
 };
 
 export interface IUserState {
@@ -95,6 +96,7 @@ export interface IUserState {
   user: [];
   login: any;
   signupSuccess: any;
+  loginError: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -111,6 +113,9 @@ function userReducer(state = initialState, action: any) {
         break;
       case AUTH_SIGNUP_SUCCESS:
         draft.signupSuccess = action.payload;
+        break;
+      case AUTH_LOGIN_FAILURE:
+        draft.loginError = action.payload;
         break;
       default:
         break;
