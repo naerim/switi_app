@@ -3,12 +3,13 @@ export default function createRequestThunk(type: string, request: any) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
-  return (params: any) => async (
+  return (...params) => async (
     dispatch: (arg0: { type: string; payload?: any; error?: boolean }) => void
   ) => {
     dispatch({ type });
+    console.log('params', params);
     try {
-      const response = await request(params);
+      const response = await request(...params);
       console.log('test', response);
       dispatch({
         type: SUCCESS, // 성공

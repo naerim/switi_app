@@ -14,6 +14,7 @@ const login = async (email: string, password: string) => {
   // 여기 콘솔은 잘 찍히는데,
   //[Unhandled promise rejection: Error: Request failed with status cde 500]
   //백엔드 에러발생
+  console.log(email, password);
   const response = await axios({
     method: 'post',
     url: 'http://localhost:4000/auth/login',
