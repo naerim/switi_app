@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
 import { useGoFirstProfile } from '../../../util/navigationHooks';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signupRequest } from '../../../redux/userReducer';
+import { rootState } from '../../../redux';
 
 interface Props {
   success: boolean;
@@ -11,16 +12,20 @@ interface Props {
 
 const SignupButton: React.FC<Props> = ({ success, input }) => {
   const goFirstProfile = useGoFirstProfile();
-  const dispatch = useDispatch();
-  // 회원가입
-  const onSignup = useCallback(
-    (gender, nickname, email, password) =>
-      dispatch(signupRequest(gender, nickname, email, password)),
-    [dispatch]
+  const { signup, signupError } = useSelector(
+    (state: rootState) => state.userReducer
   );
+  const dispatch = useDispatch();
 
+  // 회원가입
   const onPress = () => {
-    onSignup(input.gender, input.nickname, input.email, input.password);
+    dispatch(
+      signupRequest(input.gender, input.nickname, input.email, input.password)
+    );
+    console.log(signupError);
+    if (signupError) alert('이미 존재하는 이메일입니다.');
+    else if (signup) goFirstProfile();
+    // 에러 생김
   };
 
   return (

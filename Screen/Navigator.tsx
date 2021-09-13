@@ -227,11 +227,12 @@ const RootNavigator = () => {
     loginError: userReducer.loginError,
   }));
 
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   //위 코드 없애기 login상태 이미 가져오니까
 
-  // console.log(login);
-  // console.log('확인', loginError);
+  // 로그인 에러
+  //console.log(login);
+  //console.log('확인', loginError);
 
   const [loading, setLoading] = useState(true);
 
