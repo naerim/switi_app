@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { useGoStudyDetail } from '../../../util/navigationHooks';
 import { ItemType } from '../../Home/interface';
 import RecruitIcon from '../../../Component/Icon/RecruitIcon';
-import StudyImage from './StudyImage';
+import StudyImageManage from './StudyImageManage';
 import ManageIcon from '../../../Img/icon_memberManage.png';
 
 const RenderItemManagement: React.FC<ItemType> = ({ item }) => {
@@ -15,7 +15,7 @@ const RenderItemManagement: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImage />
+      <StudyImageManage />
       <Content>
         <IconWrap>
           <RecruitIcon done={!item.flag} />

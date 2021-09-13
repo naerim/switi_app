@@ -20,7 +20,7 @@ import styled from 'styled-components/native';
 // );
 // };
 
-const StudyImage = () => {
+const StudyImageManage = () => {
   return (
     <Container>
       <Images source={{ uri: 'imgPath' }} resizeMode="stretch" />
@@ -43,4 +43,4 @@ const Images = styled.Image`
   border-radius: 9px;
 `;
 
-export default StudyImage;
+export default StudyImageManage;
