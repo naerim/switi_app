@@ -74,7 +74,11 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   return (
     <Container>
       <ListHeader
-        num={idx === 0 ? onlineStudyList.length : offlineStudyList.length}
+        num={
+          idx === 0
+            ? onlineStudyList && onlineStudyList.length
+            : offlineStudyList && offlineStudyList.length
+        }
         check={{ checked, setChecked }}
       />
       <FlatList
