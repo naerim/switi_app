@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
-import RenderItemManagement from './RenderItemManagement';
 import { FlatList } from 'react-native';
+import Proceeding from './RenderItem/Proceeding';
+import Recruitment from './RenderItem/Recruitment';
 
 interface Props {
   idx: number;
@@ -54,11 +55,16 @@ const ContentList: React.FC<Props> = ({ idx }) => {
       <FlatList
         data={study}
         renderItem={useCallback(
-          ({ item }) => (
-            <RenderItemManagement index={item.idx} item={item} />
-          ),
+          ({ item }) =>
+            // 0: 진행중, 1: 모집글
+            idx == 0 ? (
+              <Proceeding index={item.idx} item={item} />
+            ) : (
+              <Recruitment index={item.idx} item={item} />
+            ),
           []
         )}
+        keyExtractor={(item: any) => item.idx.toString()}
       />
     </Container>
   );

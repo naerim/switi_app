@@ -8,7 +8,7 @@ const Management = ({ route }: any) => {
 
   return (
     <Container>
-      <ContentList idx={idx}>sdf</ContentList>
+      <ContentList idx={idx} />
     </Container>
   );
 };
