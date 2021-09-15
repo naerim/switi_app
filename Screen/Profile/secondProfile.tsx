@@ -27,6 +27,7 @@ const SecondProfile = () => {
       desc={desc}
       onClick={goLogin}
       onPress={goFirstProfile}
+      display={true}
     >
       <MyState check={{ checked, setChecked }} />
       <FlatListModal

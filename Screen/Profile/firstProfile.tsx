@@ -27,6 +27,7 @@ const FirstProfile = () => {
       desc={desc}
       onClick={clickNextButton}
       onPress={goSignIn}
+      display={false}
     >
       <Age input={ageInput} />
       <FlatListModal

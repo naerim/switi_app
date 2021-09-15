@@ -9,6 +9,7 @@ interface Props {
   buttonText: string;
   onClick: () => void;
   onPress: () => void;
+  display: boolean;
 }
 
 const ProfileContainer: React.FC<Props> = ({
@@ -17,9 +18,14 @@ const ProfileContainer: React.FC<Props> = ({
   buttonText,
   onClick,
   onPress,
+  display,
 }) => {
   return (
-    <BasicContainer headerTitle="프로필 설정" display={true} onPress={onPress}>
+    <BasicContainer
+      headerTitle="프로필 설정"
+      display={display}
+      onPress={onPress}
+    >
       <Description desc={desc} />
       <Container>{children}</Container>
       <NextButton buttonText={buttonText} onClick={onClick} />
