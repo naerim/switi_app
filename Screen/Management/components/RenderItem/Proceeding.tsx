@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useGoStudyDetail } from '../../../util/navigationHooks';
-import { ItemType } from '../../Home/interface';
-import RecruitIcon from '../../../Component/Icon/RecruitIcon';
-import StudyImageManage from './StudyImageManage';
-import ManageIcon from '../../../Img/icon_memberManage.png';
+import { ItemType } from '../../../Home/interface';
+import { useGoStudyDetail } from '../../../../util/navigationHooks';
+import StudyImageManage from '../StudyImageManage';
+import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
+import ManageIcon from '../../../../Img/icon_memberManage.png';
 
-const RenderItemManagement: React.FC<ItemType> = ({ item }) => {
+const Proceeding: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
 
   // 글자수 제한
@@ -63,4 +63,4 @@ const ButtonImage = styled.Image`
   height: 16px;
 `;
 
-export default RenderItemManagement;
+export default Proceeding;
