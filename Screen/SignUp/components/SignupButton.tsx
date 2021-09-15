@@ -1,9 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { useGoFirstProfile } from '../../../util/navigationHooks';
-import { useDispatch, useSelector } from 'react-redux';
-import { signupRequest } from '../../../redux/userReducer';
-import { rootState } from '../../../redux';
+import axios from 'axios';
 
 interface Props {
   success: boolean;
@@ -12,20 +10,28 @@ interface Props {
 
 const SignupButton: React.FC<Props> = ({ success, input }) => {
   const goFirstProfile = useGoFirstProfile();
-  const { signup, signupError } = useSelector(
-    (state: rootState) => state.userReducer
-  );
-  const dispatch = useDispatch();
 
   // 회원가입
   const onPress = () => {
-    dispatch(
-      signupRequest(input.gender, input.nickname, input.email, input.password)
-    );
-    console.log(signupError);
-    if (signupError) alert('이미 존재하는 이메일입니다.');
-    else if (signup) goFirstProfile();
-    // 에러 생김
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/signup',
+      data: {
+        gender: input.gender,
+        nickname: input.nickname,
+        email: input.email,
+        password: input.password,
+      },
+    })
+      .then((res) => {
+        console.log('회원가입 성공');
+        goFirstProfile();
+      })
+      .catch((err) => {
+        if (err.message == 'Request failed with status code 400')
+          alert('이미 존재하는 이메일입니다.');
+        else alert('회원가입 실패');
+      });
   };
 
   return (
