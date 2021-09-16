@@ -222,17 +222,12 @@ const MainNavigation = () => (
 );
 
 const RootNavigator = () => {
-  const { login, loginError } = useSelector(({ userReducer }: rootState) => ({
+  const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
-    loginError: userReducer.loginError,
   }));
 
-  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState(false);
   //위 코드 없애기 login상태 이미 가져오니까
-
-  // 로그인 에러
-  // console.log(login);
-  // console.log('확인', loginError);
 
   const [loading, setLoading] = useState(true);
 
@@ -241,7 +236,7 @@ const RootNavigator = () => {
   }, []);
   return (
     <NavigationContainer>
-      {loading ? <Splash /> : user ? <MainNavigation /> : <LoginNavigation />}
+      {loading ? <Splash /> : login ? <MainNavigation /> : <LoginNavigation />}
     </NavigationContainer>
   );
 };

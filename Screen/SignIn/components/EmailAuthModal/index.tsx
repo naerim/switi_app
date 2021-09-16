@@ -12,12 +12,14 @@ interface Props {
   setModalVisible: any;
   closeModal: () => void;
   setDoneModalVisible: any;
+  email: string;
 }
 const EmailAuthModal: React.FC<Props> = ({
   modalVisible,
   setModalVisible,
   closeModal,
   setDoneModalVisible,
+  email,
 }) => {
   const certificationNumber = useInput('');
 
@@ -40,7 +42,7 @@ const EmailAuthModal: React.FC<Props> = ({
             '아래의 메일주소로 인증번호를 발송했습니다.\n인증번호를 입력해 주세요.'
           }
         </SmallText>
-        <SmallText>switi@purplecode.com</SmallText>
+        <SmallText>{email}</SmallText>
         <ModalForm emailInput={certificationNumber} />
         <ModalOption />
         <BasicButton text="이메일 인증하기" onPress={handleNum} />

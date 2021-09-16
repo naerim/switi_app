@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
@@ -11,8 +11,9 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
+import { rootState } from '../../redux';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('');
@@ -26,6 +27,13 @@ const SignIn: React.FC = () => {
 
   const toggleChecked = () => setChecked(!checked);
   const closeModal = () => setModalVisible(false);
+
+  // 로그인된 이메일
+  const myEmail = useInput('');
+
+  const { loginError } = useSelector(({ userReducer }: rootState) => ({
+    loginError: userReducer.loginError,
+  }));
 
   const dispatch = useDispatch();
   const onLogin = useCallback(
@@ -51,9 +59,21 @@ const SignIn: React.FC = () => {
       Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
     } else {
       onLogin(email.value, password.value);
-      setModalVisible(true);
     }
   };
+
+  // 로그인에 실패하면 실행
+  // 문제점: 같은 문제로 로그인에 실패하면 실행이 안됨
+  useEffect(() => {
+    if (loginError == 'Request failed with status code 500')
+      Alert.alert('가입된 이메일 계정이 없습니다.');
+    else if (loginError == 'Request failed with status code 404')
+      Alert.alert('비밀번호가 일치하지 않습니다.');
+    else if (loginError == 'Request failed with status code 400') {
+      myEmail.onChange(emailInput.value);
+      setModalVisible(true);
+    }
+  }, [loginError]);
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>
@@ -91,6 +111,7 @@ const SignIn: React.FC = () => {
           setModalVisible={setModalVisible}
           closeModal={closeModal}
           setDoneModalVisible={setDoneModalVisible}
+          email={myEmail.value}
         />
         <EmailAuthDoneModal
           modalVisible={doneModalVisible}
