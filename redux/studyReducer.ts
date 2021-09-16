@@ -52,16 +52,10 @@ function studyReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
       case GET_ONLINE_STUDY_LIST:
-        return {
-          ...state,
-          onlineStudyList: action.payload,
-        };
+        draft.onlineStudyList = action.payload;
         break;
       case GET_OFFLINE_STUDY_LIST:
-        return {
-          ...state,
-          offlineStudyList: action.payload,
-        };
+        draft.offlineStudyList = action.payload;
         break;
       default:
         break;
