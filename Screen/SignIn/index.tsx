@@ -31,7 +31,8 @@ const SignIn: React.FC = () => {
   // 로그인된 이메일
   const myEmail = useInput('');
 
-  const { loginError } = useSelector(({ userReducer }: rootState) => ({
+  const { login, loginError } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
     loginError: userReducer.loginError,
   }));
 
@@ -73,7 +74,7 @@ const SignIn: React.FC = () => {
       myEmail.onChange(emailInput.value);
       setModalVisible(true);
     }
-  }, [loginError]);
+  }, [login, loginError]);
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>

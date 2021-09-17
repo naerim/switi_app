@@ -230,6 +230,7 @@ const RootNavigator = () => {
   //위 코드 없애기 login상태 이미 가져오니까
 
   const [loading, setLoading] = useState(true);
+  console.log(login);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);

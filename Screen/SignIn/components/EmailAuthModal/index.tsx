@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../../Component/BasicModal';
 import useInput from '../../util/useInput';
@@ -6,6 +6,7 @@ import { Alert } from 'react-native';
 import ModalForm from './ModalForm';
 import BasicButton from '../../../../Component/BasicButton';
 import ModalOption from './ModalOption';
+import axios from 'axios';
 
 interface Props {
   modalVisible: boolean;
@@ -26,11 +27,24 @@ const EmailAuthModal: React.FC<Props> = ({
   const handleNum = () => {
     if (!certificationNumber.value) {
       Alert.alert('인증번호를 입력해주세요.');
+    } else {
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/compareCode',
+        data: { email: email, inputCode: certificationNumber.value },
+      })
+        .then((res) => {
+          setModalVisible(false);
+          setTimeout(() => {
+            setDoneModalVisible(true);
+          }, 500);
+        })
+        .catch((err) => {
+          if (err.toString() == 'Error: Request failed with status code 404')
+            Alert.alert('인증번호가 일치하지 않습니다.');
+          else Alert.alert('이메일 인증 오류 :(');
+        });
     }
-    setModalVisible(false);
-    setTimeout(() => {
-      setDoneModalVisible(true);
-    }, 500);
   };
 
   return (
