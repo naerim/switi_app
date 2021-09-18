@@ -7,8 +7,8 @@ import RadioForm, {
 import styled from 'styled-components/native';
 
 interface InputProps {
-  gender: number;
-  setGender: (value: number) => void;
+  onlineFlag: number;
+  setOnlineFlag: (value: number) => void;
 }
 
 interface Props {
@@ -16,11 +16,12 @@ interface Props {
   input: InputProps;
 }
 
-const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
+const FlagRadioButton: React.FC<Props> = ({ title, input }) => {
   const radio_props = [
-    { label: '남', value: 0 },
-    { label: '여', value: 1 },
+    { label: '온라인', value: 0 },
+    { label: '오프라인', value: 1 },
   ];
+
   return (
     <Container>
       <Title>{title}</Title>
@@ -30,22 +31,22 @@ const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
             <RadioButtonInput
               obj={obj}
               index={i}
-              isSelected={input.gender === i}
+              isSelected={input.onlineFlag === i}
               buttonInnerColor={'#86E3C3'}
-              buttonOuterColor={input.gender === i ? '#86E3C3' : '#D1D1D1'}
-              buttonSize={10}
-              buttonWrapStyle={{ marginRight: 5 }}
+              buttonOuterColor={input.onlineFlag === i ? '#86E3C3' : '#D1D1D1'}
+              buttonSize={8}
+              buttonWrapStyle={{ marginRight: 5, marginTop: 1 }}
               onPress={(v) => {
-                input.setGender(v);
+                input.setOnlineFlag(v);
               }}
             />
             <RadioButtonLabel
               obj={obj}
               index={i}
-              labelStyle={{ fontSize: 12, color: '#2B2B2B' }}
+              labelStyle={{ fontSize: 11, color: '#2B2B2B' }}
               labelWrapStyle={{ marginRight: 25 }}
               onPress={(v) => {
-                input.setGender(v);
+                input.setOnlineFlag(v);
               }}
             />
           </RadioButton>
@@ -57,6 +58,7 @@ const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
 
 const Container = styled.View`
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.Text`
@@ -65,4 +67,4 @@ const Title = styled.Text`
   padding-bottom: 2%;
 `;
 
-export default GenderRadioButton;
+export default FlagRadioButton;

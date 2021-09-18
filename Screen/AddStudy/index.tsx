@@ -14,6 +14,7 @@ import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
 import { InterestList, Area } from '../../Data';
 import EnrollModal from './components/EnrollModal';
+import FlagRadioButton from './components/FlagRadioButton';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,6 +33,7 @@ const AddStudy = () => {
     day: '',
   });
   const image = useInput('');
+  const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
 
   const EnrollButton = () => {
     goHome();
@@ -50,6 +52,10 @@ const AddStudy = () => {
       >
         <AddImage image={image.value} setImage={image.onChange} />
         <Content>
+          <FlagRadioButton
+            title="스터디 형식"
+            input={{ onlineFlag, setOnlineFlag }}
+          />
           <SelectOne title="카테고리" data={InterestList} />
           <SelectOne title="지역" data={Area} />
           <Target select={selectTarget} />
