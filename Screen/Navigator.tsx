@@ -40,7 +40,7 @@ import MyPage_Participation from './MyPage_Participation';
 import Splash from './Splash';
 import ContainerWithBell from '../Component/ContainerWithBell';
 import { UseGoAlarm } from '../util/navigationHooks';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { rootState } from '../redux';
 
 const Stack = createStackNavigator();

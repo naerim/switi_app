@@ -31,6 +31,7 @@ const AddStudy = () => {
     month: '',
     day: '',
   });
+  const image = useInput('');
 
   const EnrollButton = () => {
     goHome();
@@ -47,7 +48,7 @@ const AddStudy = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        <AddImage />
+        <AddImage image={image.value} setImage={image.onChange} />
         <Content>
           <SelectOne title="카테고리" data={InterestList} />
           <SelectOne title="지역" data={Area} />

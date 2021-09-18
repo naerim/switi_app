@@ -52,6 +52,21 @@ const MyPage = () => {
     }, 500);
   };
 
+  // const { login } = useSelector(({ userReducer }: rootState) => ({
+  //   login: userReducer.login,
+  // }));
+
+  // useEffect(() => {
+  //   console.log(login.token);
+  //   axios({
+  //     method: 'get',
+  //     url: `http://localhost:4000/user/myPage`,
+  //     headers: { Authorization: login.token },
+  //   }).then((res) => {
+  //     console.log(res.data.myPage.nickname);
+  //   });
+  // }, []);
+
   return (
     <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
       <ScrollContainer onScroll={scrollOn}>
