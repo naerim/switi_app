@@ -3,11 +3,17 @@ import { GET_ONLINE_STUDY_LIST, GET_OFFLINE_STUDY_LIST } from './action';
 import axios from 'axios';
 
 // 온라인 스터디
-export const onlineStudyListRequest = (order: boolean, query: string) => {
+export const onlineStudyListRequest = (
+  token: string,
+  order: boolean,
+  query: string
+) => {
   const orderValue = order ? 'count' : 'update';
+  console.log(token);
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/0?order=${orderValue}${query}`
+      `http://localhost:4000/study/studyList/0?order=${orderValue}${query}`,
+      { headers: { Authorization: `${token}` } }
     );
     if (response.data) {
       dispatch({
@@ -21,11 +27,16 @@ export const onlineStudyListRequest = (order: boolean, query: string) => {
 };
 
 // 오프라인 스터디
-export const offlineStudyListRequest = (order: boolean, query: string) => {
+export const offlineStudyListRequest = (
+  token: string,
+  order: boolean,
+  query: string
+) => {
   const orderValue = order ? 'count' : 'update';
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/1?order=${orderValue}${query}`
+      `http://localhost:4000/study/studyList/1?order=${orderValue}${query}`,
+      { headers: { Authorization: `${token}` } }
     );
     if (response.data) {
       dispatch({

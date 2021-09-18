@@ -24,10 +24,14 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   const dispatch = useDispatch();
 
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
   const fetchOnlineStudyList = (order: boolean, query: string) =>
-    dispatch(onlineStudyListRequest(order, query));
+    dispatch(onlineStudyListRequest(login.token, order, query));
   const fetchOfflineStudyList = (order: boolean, query: string) =>
-    dispatch(offlineStudyListRequest(order, query));
+    dispatch(offlineStudyListRequest(login.token, order, query));
 
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
