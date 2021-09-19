@@ -128,7 +128,7 @@ const HomeNavigation = () => (
   </HomeContainer>
 );
 
-const ManagementTabNavigation = () => {
+const ManagementNavigation = () => {
   const goAlarm = UseGoAlarm;
   return (
     <ContainerWithBell title="스터디 관리" onPress={goAlarm()}>
@@ -153,13 +153,6 @@ const ManagementTabNavigation = () => {
     </ContainerWithBell>
   );
 };
-
-const ManagementNavigation = () => (
-  <Stack.Navigator headerMode="none">
-    <Stack.Screen name="Management" component={ManagementTabNavigation} />
-    <Stack.Screen name="ManageDetail" component={ManageDetail} />
-  </Stack.Navigator>
-);
 
 const TabNavigation = () => (
   <SafeAreaView
@@ -226,6 +219,7 @@ const MainNavigation = () => (
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
+    <Stack.Screen name="ManageDetail" component={ManageDetail} />
   </Stack.Navigator>
 );
 
