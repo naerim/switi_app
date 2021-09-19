@@ -7,6 +7,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Home from './Home';
 import Search from './Search';
 import Management from './Management';
+import ManageDetail from './ManageDetail';
 import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
@@ -127,7 +128,7 @@ const HomeNavigation = () => (
   </HomeContainer>
 );
 
-const ManagementNavigation = () => {
+const ManagementTabNavigation = () => {
   const goAlarm = UseGoAlarm;
   return (
     <ContainerWithBell title="스터디 관리" onPress={goAlarm()}>
@@ -152,6 +153,13 @@ const ManagementNavigation = () => {
     </ContainerWithBell>
   );
 };
+
+const ManagementNavigation = () => (
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name="Management" component={ManagementTabNavigation} />
+    <Stack.Screen name="ManageDetail" component={ManageDetail} />
+  </Stack.Navigator>
+);
 
 const TabNavigation = () => (
   <SafeAreaView
@@ -230,7 +238,7 @@ const RootNavigator = () => {
   //위 코드 없애기 login상태 이미 가져오니까
 
   const [loading, setLoading] = useState(true);
-  console.log(login);
+  //console.log(login);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);

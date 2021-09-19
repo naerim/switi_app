@@ -119,3 +119,15 @@ export const useGoAddStudy = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('AddStudy'), [navigation]);
 };
+
+export const useGoManagement = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('Management'), [navigation]);
+};
+
+export const useGoManageDetail = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('ManageDetail', { idx: idx }), [
+    navigation,
+  ]);
+};

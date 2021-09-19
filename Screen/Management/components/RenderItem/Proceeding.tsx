@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../../../Home/interface';
-import { useGoStudyDetail } from '../../../../util/navigationHooks';
+import {
+  useGoManageDetail,
+  useGoStudyDetail,
+} from '../../../../util/navigationHooks';
 import StudyImageManage from '../StudyImageManage';
 import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 import ManageIcon from '../../../../Img/icon_memberManage.png';
 
 const Proceeding: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
+  const goManageDetail = useGoManageDetail(item.id);
 
   // 글자수 제한
   const limitTitle = (title: string) =>
@@ -22,7 +26,7 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
         </IconWrap>
         <Title>{limitTitle(item.title)}</Title>
       </Content>
-      <ManageMember>
+      <ManageMember onPress={goManageDetail}>
         <ButtonImage source={ManageIcon} />
       </ManageMember>
     </Container>
