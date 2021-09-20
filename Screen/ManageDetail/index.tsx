@@ -1,26 +1,44 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import BasicContainer from '../../Component/BasicContainer';
+import React, { useCallback } from 'react';
 import { useGoManagement } from '../../util/navigationHooks';
-import { useSelector } from 'react-redux';
-import { rootState } from '../../redux';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { FlatList } from 'react-native';
-import RenderItem from '../Home/components/StudyFlatList/RenderItem';
-import { DataType } from '../Home/interface';
 import { ManageType } from './interface';
 import RecruitRenderItem from './components/RenderItem/RecruitRenderItem';
+import WaitRenderItem from './components/RenderItem/WaitRenderItem';
 
 const member = [
   {
-    studyId: 10,
-    UserId: 2,
+    id: 0,
+    apply: 0,
+    idStudy: 10,
+    idUser: 2,
     contact: '01012345',
+    apply_detail: '안녕하세요',
   },
   {
-    studyId: 10,
-    UserId: 1,
+    id: 1,
+    apply: 1,
+    idStudy: 10,
+    idUser: 1,
     contact: '0101234522',
+    apply_detail: '스터디 신청합니다',
+  },
+  {
+    id: 3,
+    apply: 1,
+    idStudy: 10,
+    idUser: 3,
+    contact: '0101234522',
+    apply_detail: '스터디 신청합니다',
+  },
+  {
+    id: 3,
+    apply: 4,
+    idStudy: 10,
+    idUser: 4,
+    contact: '0101234522',
+    apply_detail: '스터디 신청합니다',
   },
 ];
 
@@ -57,13 +75,12 @@ const ManageDetail = ({ route }: any) => {
             data={member}
             renderItem={useCallback(
               ({ item }) => (
-                <RecruitRenderItem index={item.UserId} item={item} />
+                <RecruitRenderItem index={item.idUser} item={item} />
               ),
               []
             )}
-            keyExtractor={(item: ManageType) => item.UserId.toString()}
+            keyExtractor={(item: ManageType) => item.idUser.toString()}
             extraData={member}
-            contentContainerStyle={{ paddingBottom: 80 }}
             onEndReachedThreshold={0}
             showsVerticalScrollIndicator={false}
           />
@@ -71,6 +88,21 @@ const ManageDetail = ({ route }: any) => {
         <Box />
         <Content>
           <Title>수락대기인원 (5명)</Title>
+          <FlatList
+            ItemSeparatorComponent={FlatListItemSeparator}
+            data={member}
+            renderItem={useCallback(
+              ({ item }) => (
+                <WaitRenderItem index={item.idUser} item={item} />
+              ),
+              []
+            )}
+            keyExtractor={(item: ManageType) => item.idUser.toString()}
+            extraData={member}
+            onEndReachedThreshold={0}
+            contentContainerStyle={{ paddingBottom: 0 }}
+            showsVerticalScrollIndicator={false}
+          />
         </Content>
       </Container>
     </Wrap>
@@ -92,6 +124,7 @@ const Title = styled.Text`
 `;
 
 const Content = styled.View`
+  flex: 1;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 26px;
