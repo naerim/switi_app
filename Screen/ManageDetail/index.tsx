@@ -30,7 +30,7 @@ const member = [
     idStudy: 10,
     idUser: 3,
     contact: '0101234522',
-    apply_detail: '스터디 신청합니다',
+    apply_detail: '스터디 신청합니다. 스터디 신청합니다. 스터디 신청합니다.',
   },
   {
     id: 3,

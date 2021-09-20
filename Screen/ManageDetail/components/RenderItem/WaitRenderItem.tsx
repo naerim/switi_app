@@ -2,15 +2,19 @@ import React from 'react';
 import { ItemType } from '../../interface';
 import styled from 'styled-components/native';
 import MemberImage from '../MemberImage';
+import AcceptButton from '../AcceptButton';
 
-const RecruitRenderItem: React.FC<ItemType> = ({ item }) => {
+const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
+  const limitTitle = (title: string) =>
+    title.length > 17 ? title.substr(0, 17) + '...' : title;
   return (
     <Container activeOpacity={0.8}>
       <MemberImage img={'imgPath'} />
       <Content>
-        <Title>스터디원</Title>
-        <Desc>naerim1119@gmail.com / {item.contact}</Desc>
+        <Title>대기인원</Title>
+        <Desc>{limitTitle(item.apply_detail)}</Desc>
       </Content>
+      <AcceptButton title="처리하기" />
     </Container>
   );
 };
@@ -41,4 +45,4 @@ const Desc = styled.Text`
   margin: 5px 0;
 `;
 
-export default RecruitRenderItem;
+export default WaitRenderItem;
