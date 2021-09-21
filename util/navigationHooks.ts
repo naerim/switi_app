@@ -1,6 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { useCallback } from 'react';
 
+// 뒤로가기
+export const useGoBack = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.goBack(), [navigation]);
+};
+
 export const useGoSignIn = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('SignIn'), [navigation]);
@@ -128,6 +134,13 @@ export const useGoManagement = () => {
 export const useGoManageDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('ManageDetail', { idx: idx }), [
+    navigation,
+  ]);
+};
+
+export const useGoProfileDetail = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('ProfileDetail', { idx: idx }), [
     navigation,
   ]);
 };
