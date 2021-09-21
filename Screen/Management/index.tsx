@@ -14,7 +14,8 @@ const Management = ({ route }: any) => {
 };
 
 const Container = styled.SafeAreaView`
-  background-color: white;
+  flex: 1;
+  background-color: #fff;
 `;
 
 export default Management;

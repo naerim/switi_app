@@ -2,14 +2,16 @@ import React from 'react';
 import styled from 'styled-components/native';
 import UserIcon from '../../../../Img/icon_user_default.png';
 import ClickIcon from '../../../../Img/btn_back.png';
+import { useGoProfileDetail } from '../../../../util/navigationHooks';
 
 interface Props {
   username?: string;
 }
 
 const WriterInfo: React.FC<Props> = ({ username }) => {
+  const goProfileDetail = useGoProfileDetail(0);
   return (
-    <Container activeOpacity={0.8}>
+    <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <UserImage source={UserIcon} />
       <Username>{username}</Username>
       <Icon source={ClickIcon} />

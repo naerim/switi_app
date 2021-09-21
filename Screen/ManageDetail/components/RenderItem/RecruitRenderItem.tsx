@@ -2,10 +2,12 @@ import React from 'react';
 import { ItemType } from '../../interface';
 import styled from 'styled-components/native';
 import MemberImage from '../MemberImage';
+import { useGoProfileDetail } from '../../../../util/navigationHooks';
 
 const RecruitRenderItem: React.FC<ItemType> = ({ item }) => {
+  const goProfileDetail = useGoProfileDetail(0);
   return (
-    <Container activeOpacity={0.8}>
+    <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <MemberImage img={'imgPath'} />
       <Content>
         <Title>스터디원</Title>

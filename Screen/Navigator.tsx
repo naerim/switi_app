@@ -43,6 +43,7 @@ import ContainerWithBell from '../Component/ContainerWithBell';
 import { UseGoAlarm } from '../util/navigationHooks';
 import { useSelector } from 'react-redux';
 import { rootState } from '../redux';
+import ProfileDetail from './ProfileDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -220,6 +221,7 @@ const MainNavigation = () => (
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
     <Stack.Screen name="ManageDetail" component={ManageDetail} />
+    <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
   </Stack.Navigator>
 );
 
