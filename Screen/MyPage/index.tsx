@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import UserInfo from './profile/userInfo';
 import SugarContainer from './profile/sugarContent/sugarContainer';
@@ -16,6 +16,10 @@ import {
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
 import useScroll from '../../util/useScroll';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import axios from 'axios';
+import { getMyPageRequest, loginRequest } from '../../redux/userReducer';
 
 const MyPage = () => {
   const { scroll, scrollOn } = useScroll();
@@ -52,26 +56,32 @@ const MyPage = () => {
     }, 500);
   };
 
-  // const { login } = useSelector(({ userReducer }: rootState) => ({
-  //   login: userReducer.login,
-  // }));
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
+  }));
 
-  // useEffect(() => {
-  //   console.log(login.token);
-  //   axios({
-  //     method: 'get',
-  //     url: `http://localhost:4000/user/myPage`,
-  //     headers: { Authorization: login.token },
-  //   }).then((res) => {
-  //     console.log(res.data.myPage.nickname);
-  //   });
-  // }, []);
+  const dispatch = useDispatch();
+  const onGetMyPage = useCallback(
+    (token) => dispatch(getMyPageRequest(token)),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    onGetMyPage(login.token);
+  }, []);
+
+  useEffect(() => {
+    console.log('token', myPage);
+  }, [myPage]);
 
   return (
     <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
       <ScrollContainer onScroll={scrollOn}>
         <Container>
-          <UserInfo title="사용자" />
+          <UserInfo title={myPage.myPage.nickname} />
           <SugarContainer />
           <Line />
           <MoveScreen

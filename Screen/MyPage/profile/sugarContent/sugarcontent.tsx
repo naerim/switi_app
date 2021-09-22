@@ -8,9 +8,15 @@ import switi3 from '../../../../Img/profile_switi_step3.png';
 import switi4 from '../../../../Img/profile_switi_step4.png';
 import switi5 from '../../../../Img/profile_switi_step5.png';
 import switi6 from '../../../../Img/profile_switi_step6.png';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../../redux';
 
 const SugarContent = () => {
-  const sugar = 50;
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
+  }));
+
+  const sugar = myPage.myPage.sugar;
   const sugarData = [
     {
       grade: 1,

@@ -6,3 +6,8 @@ export const GET_OFFLINE_STUDY_LIST = 'GET_OFFLINE_STUDY_LIST';
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE';
+
+// myPage (당도, 스크랩수, 닉네임, 프로필사진)
+export const GET_MY_PAGE = 'GET_MY_PAGE';
+export const GET_MY_PAGE_SUCCESS = 'GET_MY_PAGE_SUCCESS';
+export const GET_MY_PAGE_FAILURE = 'GET_MY_PAGE_FAILURE';

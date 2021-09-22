@@ -7,7 +7,7 @@ export default function createRequestThunk(type: string, request: any) {
     dispatch: (arg0: { type: string; payload?: any; error?: boolean }) => void
   ) => {
     dispatch({ type });
-    console.log('params', params);
+    // console.log('params', params);
     try {
       const response = await request(...params);
       console.log('test', response);
