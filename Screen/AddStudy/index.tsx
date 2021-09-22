@@ -15,6 +15,9 @@ import BasicButton from '../../Component/BasicButton';
 import { InterestList, Area } from '../../Data';
 import EnrollModal from './components/EnrollModal';
 import FlagRadioButton from './components/FlagRadioButton';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,11 +35,46 @@ const AddStudy = () => {
     month: '',
     day: '',
   });
-  const image = useInput('');
+  const [image, setImage] = useState('');
   const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
+  const [area, setArea] = useState<number[]>([]);
+  const [category, setCategory] = useState<number[]>([]);
+  const detailAddressInput = useInput('');
 
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  // 최종 등록 버튼
   const EnrollButton = () => {
-    goHome();
+    // const formData = new FormData();
+    //
+    // formData.append('image', file);
+    // console.log(file);
+    // console.log(image);
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:4000/study/addStudy',
+    //   headers: { Authorization: login.token },
+    //   data: {
+    //     online_flag: onlineFlag,
+    //     state: selectTarget.value,
+    //     category: category,
+    //     address: area,
+    //     recruit_num: recruitNumInput.value,
+    //     detail_address: detailAddressInput.value,
+    //     period: periodInput.value,
+    //     endDate: EndDateInput,
+    //     contact: contentInput.value,
+    //     title: titleInput.value,
+    //     desc: contentInput.value,
+    //     // img: image.filename,
+    //   },
+    // })
+    //   .then(() => {
+    //     goHome();
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const onClick = () => {
@@ -50,18 +88,28 @@ const AddStudy = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        <AddImage image={image.value} setImage={image.onChange} />
+        <AddImage image={image} setImage={setImage} />
         <Content>
           <FlagRadioButton
             title="스터디 형식"
             input={{ onlineFlag, setOnlineFlag }}
           />
-          <SelectOne title="카테고리" data={InterestList} />
-          <SelectOne title="지역" data={Area} />
+          <SelectOne
+            title="카테고리"
+            data={InterestList}
+            input={category}
+            setInput={setCategory}
+          />
+          <SelectOne title="지역" data={Area} input={area} setInput={setArea} />
           <Target select={selectTarget} />
           <RecruitNum
             input={recruitNumInput}
             select={{ recruitSelect, setRecruitSelect }}
+          />
+          <Input
+            title="모임장소"
+            input={detailAddressInput}
+            placeholder="모입장소를 입력해주세요"
           />
           <Input
             title="활동기간"

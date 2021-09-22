@@ -5,6 +5,8 @@ import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 interface Props {
+  //image: null;
+  //setImage: (file: { fieldname: string | undefined; filename: string | undefined; destination: string; encoding: string; uri: string }) => void;
   image: string;
   setImage: (text: string) => void;
 }
@@ -24,14 +26,24 @@ const AddImage: React.FC<Props> = ({ image, setImage }) => {
   }, []);
 
   // 이미지 선택하는 함수
+  // mediaTypes: ImagePicker.MediaTypeOptions.All,
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
     if (!result.cancelled) {
+      // const file = {
+      //   uri: result.uri,
+      //   filename: result.uri.split('/').pop(),
+      //   fieldname: result.uri.split('.').pop(),
+      //   encoding: '7bit',
+      //   destination: 'images/',
+      // };
+      // console.log(file);
+      // setImage(file);
       setImage(result.uri);
     }
   };

@@ -9,19 +9,21 @@ import { dataType } from '../../Profile/interface';
 interface Props {
   title: string;
   data: dataType[];
+  input: number[];
+  setInput: (prev: (prev: number[]) => number[]) => void;
 }
 
-const SelectOne: React.FC<Props> = ({ title, data }) => {
+const SelectOne: React.FC<Props> = ({ title, data, input, setInput }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const onPress = () => setModalVisible(true);
   const closeModal = () => {
     setModalVisible(false);
     findName();
   };
-  const [select, setSelect] = useState<number[]>([]);
+  //const [select, setSelect] = useState<number[]>([]);
   const name = useInput('선택해주세요');
   const findName = () =>
-    select.forEach((i) => {
+    input.forEach((i) => {
       name.onChange(data[i].name);
     });
   return (
@@ -30,8 +32,8 @@ const SelectOne: React.FC<Props> = ({ title, data }) => {
       <BasicModal modalVisible={modalVisible}>
         <SelectFlatList
           data={data}
-          select={select}
-          setSelect={setSelect}
+          select={input}
+          setSelect={setInput}
           closeModal={closeModal}
           limit={1}
         />
