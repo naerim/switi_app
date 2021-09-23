@@ -1,24 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import SugarContent from './sugarcontent';
-import Icon_info from '../../../../Img/icon_info.png';
+import Icon_info from '../../../Img/icon_info.png';
+import Sugar from '../Sugar';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
-const SugarContainer = () => (
-  <Container>
-    <TitleContainer>
-      <TitleHelpContainer>
+const SugarContainer = () => {
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
+  }));
+
+  const sugar: number = myPage ? myPage.myPage.sugar : 0;
+
+  return (
+    <Container>
+      <TitleContainer>
         <Text>나의 당도</Text>
-      </TitleHelpContainer>
-      <TitleHelpContainer>
         <InfoIcon source={Icon_info} />
-      </TitleHelpContainer>
-    </TitleContainer>
-    <SugarContentContainer>
-      <SugarContent />
-    </SugarContentContainer>
-    <EmptyContainer />
-  </Container>
-);
+      </TitleContainer>
+      <Sugar num={sugar} />
+      <EmptyContainer />
+    </Container>
+  );
+};
 
 const Container = styled.View`
   margin-left: 24px;
@@ -30,10 +34,6 @@ const TitleContainer = styled.View`
   flex-direction: row;
   flex: 2;
   align-items: center;
-`;
-
-const TitleHelpContainer = styled.View`
-  text-align: center;
 `;
 
 const Text = styled.Text`
@@ -48,10 +48,7 @@ const InfoIcon = styled.Image`
   height: 12px;
   width: 12px;
 `;
-const SugarContentContainer = styled.View`
-  margin-bottom: 24px;
-  margin-top: 12px;
-`;
+
 const EmptyContainer = styled.View`
   flex-direction: row;
   flex: 1;

@@ -2,21 +2,19 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import * as Progress from 'react-native-progress';
 import SugarExpression from './sugarExpression';
-import switi1 from '../../../../Img/profile_switi_step1.png';
-import switi2 from '../../../../Img/profile_switi_step2.png';
-import switi3 from '../../../../Img/profile_switi_step3.png';
-import switi4 from '../../../../Img/profile_switi_step4.png';
-import switi5 from '../../../../Img/profile_switi_step5.png';
-import switi6 from '../../../../Img/profile_switi_step6.png';
-import { useSelector } from 'react-redux';
-import { rootState } from '../../../../redux';
+import switi1 from '../../../Img/profile_switi_step1.png';
+import switi2 from '../../../Img/profile_switi_step2.png';
+import switi3 from '../../../Img/profile_switi_step3.png';
+import switi4 from '../../../Img/profile_switi_step4.png';
+import switi5 from '../../../Img/profile_switi_step5.png';
+import switi6 from '../../../Img/profile_switi_step6.png';
 
-const SugarContent = () => {
-  const { myPage } = useSelector(({ userReducer }: rootState) => ({
-    myPage: userReducer.myPage,
-  }));
+interface Props {
+  num: number;
+}
 
-  const sugar = myPage ? myPage.myPage.sugar : 0;
+const SugarContent: React.FC<Props> = ({ num }) => {
+  const sugar = num;
   const sugarData = [
     {
       grade: 1,
@@ -48,24 +46,18 @@ const SugarContent = () => {
   const switiChoice = (switi: number) => {
     let grade = 0;
     console.log(switi);
-    if (0 <= switi && switi <= 10) {
+    if (switi < 0 || (0 <= switi && switi <= 10)) {
       grade = 1;
-      console.log(grade);
     } else if (10 < switi && switi <= 40) {
       grade = 2;
-      console.log(grade);
     } else if (40 < switi && switi <= 55) {
       grade = 3;
-      console.log(grade);
     } else if (55 < switi && switi <= 80) {
       grade = 4;
-      console.log(grade);
     } else if (80 < switi && switi <= 90) {
       grade = 5;
-      console.log(grade);
     } else if (90 < switi && switi <= 100) {
       grade = 6;
-      console.log(grade);
     } else console.log('오류');
     return grade;
   };

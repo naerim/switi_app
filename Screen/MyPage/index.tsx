@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import UserInfo from './profile/userInfo';
-import SugarContainer from './profile/sugarContent/sugarContainer';
 import MoveScreen from './moveScreen';
 import MyPageModal from './myPageModal';
 import ContainerWithBell from '../../Component/ContainerWithBell';
@@ -23,6 +22,7 @@ import {
   getScrapListRequest,
   getStudyHistoryRequest,
 } from '../../redux/userReducer';
+import SugarContainer from './profile/sugarContainer';
 
 const MyPage = () => {
   const { scroll, scrollOn } = useScroll();
