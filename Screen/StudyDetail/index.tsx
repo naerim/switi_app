@@ -43,7 +43,7 @@ const StudyDetail = ({ route }: any) => {
   return (
     <Container>
       <StudyImage
-        done={item && item.flag === 0}
+        done={item && item.flag === false}
         onPress={goHome}
         img={item && loadImg(item.Images[0]?.imgPath)}
       />

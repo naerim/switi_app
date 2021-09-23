@@ -9,7 +9,6 @@ export const onlineStudyListRequest = (
   query: string
 ) => {
   const orderValue = order ? 'count' : 'update';
-  console.log(token);
   return async (dispatch: any) => {
     const response = await axios.get(
       `http://localhost:4000/study/studyList/0?order=${orderValue}${query}`,
