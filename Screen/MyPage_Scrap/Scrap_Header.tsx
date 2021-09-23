@@ -17,7 +17,7 @@ interface Props {
 
 const ScrapHeader: React.FC<Props> = ({ title, onPress, display, count }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 0 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <BackButton
         activeOpacity={0.8}
         onPress={onPress}
@@ -57,6 +57,7 @@ const Title = styled.Text`
   font-size: 14px;
   text-align: center;
   align-items: center;
+  justify-content: center;
 `;
 
 const Number = styled.Text`

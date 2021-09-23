@@ -32,7 +32,7 @@ const ScrapContainer: React.FC<Props> = ({
   );
 };
 
-const Wrap = styled.View`
+const Wrap = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
 `;
