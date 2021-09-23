@@ -18,8 +18,7 @@ import FinalModal from '../Report/details/finalModal';
 import useScroll from '../../util/useScroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import axios from 'axios';
-import { getMyPageRequest, loginRequest } from '../../redux/userReducer';
+import { getMyPageRequest, getScrapListRequest } from '../../redux/userReducer';
 
 const MyPage = () => {
   const { scroll, scrollOn } = useScroll();
@@ -65,23 +64,26 @@ const MyPage = () => {
 
   const dispatch = useDispatch();
   const onGetMyPage = useCallback(
+    // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
     (token) => dispatch(getMyPageRequest(token)),
+    [dispatch]
+  );
+  const onGetScrapList = useCallback(
+    // 스크랩리스트 불러오기
+    (token) => dispatch(getScrapListRequest(token)),
     [dispatch]
   );
 
   useEffect(() => {
     onGetMyPage(login.token);
+    onGetScrapList(login.token);
   }, []);
-
-  useEffect(() => {
-    console.log('token', myPage);
-  }, [myPage]);
 
   return (
     <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
       <ScrollContainer onScroll={scrollOn}>
         <Container>
-          <UserInfo title={myPage.myPage.nickname} />
+          <UserInfo title={myPage ? myPage.myPage.nickname : 's'} />
           <SugarContainer />
           <Line />
           <MoveScreen

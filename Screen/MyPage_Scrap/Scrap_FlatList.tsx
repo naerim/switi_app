@@ -2,31 +2,32 @@ import React from 'react';
 import styled from 'styled-components/native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { FlatList } from 'react-native';
-import { ScrapList } from '../../Data/Scrap';
 import useScroll from '../../util/useScroll';
+import { DataType } from '../Home/interface';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const Scrap_FlatList = () => {
   const { scroll, scrollOn } = useScroll();
-
   const FlatListItemSeparator = () => <SeparatorLine />;
-  const handleLoadMore = () => {
-    console.log('reached');
-  };
+
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
+
   return (
     <Wrap>
       {scroll ? <Line /> : <Nothing />}
       <MarginContainer>
-        {/*<FlatList*/}
-        {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
-        {/*  data={ScrapList}*/}
-        {/*  renderItem={({ item }) => <RenderItem index={item.idx} item={item} />}*/}
-        {/*  keyExtractor={(item) => item.idx.toString()}*/}
-        {/*  extraData={ScrapList}*/}
-        {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
-        {/*  onEndReached={handleLoadMore}*/}
-        {/*  onEndReachedThreshold={0}*/}
-        {/*  onScroll={scrollOn}*/}
-        {/*/>*/}
+        <FlatList
+          ItemSeparatorComponent={FlatListItemSeparator}
+          data={scrapList && scrapList.scrapList}
+          renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
+          keyExtractor={(item: DataType) => item.id.toString()}
+          extraData={scrapList && scrapList.scrapList}
+          contentContainerStyle={{ paddingBottom: 80 }}
+          onScroll={scrollOn}
+        />
       </MarginContainer>
     </Wrap>
   );
