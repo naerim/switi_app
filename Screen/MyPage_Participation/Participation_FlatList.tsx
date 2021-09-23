@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Participation_RenderItem from './Participation_RenderItem';
 import { FlatList } from 'react-native';
-import { ParticipationList } from '../../Data/Participation';
 import useScroll from '../../util/useScroll';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 
 const Participation_FlatList = () => {
   const { scroll, scrollOn } = useScroll();
@@ -12,18 +13,21 @@ const Participation_FlatList = () => {
   const handleLoadMore = () => {
     console.log('reached');
   };
+
+  const { studyHistory } = useSelector(({ userReducer }: rootState) => ({
+    studyHistory: userReducer.studyHistory,
+  }));
+
   return (
     <Wrap>
       {scroll ? <Line /> : <Nothing />}
       <MarginContainer>
         <FlatList
           ItemSeparatorComponent={FlatListItemSeparator}
-          data={ParticipationList}
-          renderItem={({ item }) => (
-            <Participation_RenderItem index={item.idx} item={item} />
-          )}
-          keyExtractor={(item) => item.idx.toString()}
-          extraData={ParticipationList}
+          data={studyHistory && studyHistory.studyList}
+          renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          extraData={studyHistory && studyHistory.studyList}
           contentContainerStyle={{ paddingBottom: 80 }}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0}

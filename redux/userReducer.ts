@@ -7,7 +7,11 @@ import {
   GET_MY_PAGE_FAILURE,
   GET_MY_PAGE_SUCCESS,
   GET_SCRAP_LIST,
+  GET_SCRAP_LIST_FAILURE,
   GET_SCRAP_LIST_SUCCESS,
+  GET_STUDY_HISTORY,
+  GET_STUDY_HISTORY_FAILURE,
+  GET_STUDY_HISTORY_SUCCESS,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -44,12 +48,25 @@ const getScrapList = async (token: string) => {
     url: `http://localhost:4000/user/scrapList`,
     headers: { Authorization: token },
   });
-
   return response;
 };
 export const getScrapListRequest = createRequestThunk(
   GET_SCRAP_LIST,
   getScrapList
+);
+
+// 스터디 참여이력 불러오기
+const getStudyHistory = async (token: string) => {
+  const response = axios({
+    method: 'get',
+    url: `http://localhost:4000/user/studyHistory`,
+    headers: { Authorization: token },
+  });
+  return response;
+};
+export const getStudyHistoryRequest = createRequestThunk(
+  GET_STUDY_HISTORY,
+  getStudyHistory
 );
 
 const initialState = {
@@ -58,6 +75,9 @@ const initialState = {
   myPage: null,
   myPageError: null,
   scrapList: null,
+  scrapListError: null,
+  studyHistory: null,
+  studyHistoryError: null,
 };
 
 export interface IUserState {
@@ -66,6 +86,9 @@ export interface IUserState {
   myPage: any;
   myPageError: any;
   scrapList: any;
+  scrapListError: any;
+  studyHistory: any;
+  studyHistoryError: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -85,6 +108,15 @@ function userReducer(state = initialState, action: any) {
         break;
       case GET_SCRAP_LIST_SUCCESS:
         draft.scrapList = action.payload;
+        break;
+      case GET_SCRAP_LIST_FAILURE:
+        draft.scrapListError = action.payload;
+        break;
+      case GET_STUDY_HISTORY_SUCCESS:
+        draft.studyHistory = action.payload;
+        break;
+      case GET_STUDY_HISTORY_FAILURE:
+        draft.studyHistoryError = action.payload;
         break;
       default:
         break;

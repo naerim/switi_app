@@ -18,7 +18,11 @@ import FinalModal from '../Report/details/finalModal';
 import useScroll from '../../util/useScroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { getMyPageRequest, getScrapListRequest } from '../../redux/userReducer';
+import {
+  getMyPageRequest,
+  getScrapListRequest,
+  getStudyHistoryRequest,
+} from '../../redux/userReducer';
 
 const MyPage = () => {
   const { scroll, scrollOn } = useScroll();
@@ -73,17 +77,23 @@ const MyPage = () => {
     (token) => dispatch(getScrapListRequest(token)),
     [dispatch]
   );
+  const onGetStudyHistory = useCallback(
+    // 참여이력 불러오기
+    (token) => dispatch(getStudyHistoryRequest(token)),
+    [dispatch]
+  );
 
   useEffect(() => {
     onGetMyPage(login.token);
     onGetScrapList(login.token);
+    onGetStudyHistory(login.token);
   }, []);
 
   return (
     <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
       <ScrollContainer onScroll={scrollOn}>
         <Container>
-          <UserInfo title={myPage ? myPage.myPage.nickname : 's'} />
+          <UserInfo title={myPage ? myPage.myPage.nickname : ' '} />
           <SugarContainer />
           <Line />
           <MoveScreen

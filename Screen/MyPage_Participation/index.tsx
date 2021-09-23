@@ -3,18 +3,24 @@ import ScrapContainer from '../MyPage_Scrap/Scrap_Container';
 import { useGoMyPage } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
 import Participation_FlatList from './Participation_FlatList';
-import { ScrapList } from '../../Data/Scrap';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const MyPage_Participation = () => {
   const goMyPage = useGoMyPage();
-  const ScrapListLength = ScrapList.length;
+
+  const { studyHistory } = useSelector(({ userReducer }: rootState) => ({
+    studyHistory: userReducer.studyHistory,
+  }));
+
+  const studyHistoryLength = studyHistory ? studyHistory.studyList.length : 0;
   const title = '참여 이력 ';
   return (
     <ScrapContainer
       onPress={goMyPage}
       display
       headerTitle={title}
-      count={ScrapListLength}
+      count={studyHistoryLength}
     >
       <MarginContainer>
         <Participation_FlatList />
