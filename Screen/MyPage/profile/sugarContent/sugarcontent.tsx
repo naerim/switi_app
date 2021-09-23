@@ -16,7 +16,7 @@ const SugarContent = () => {
     myPage: userReducer.myPage,
   }));
 
-  const sugar = myPage.myPage.sugar;
+  const sugar = myPage ? myPage.myPage.sugar : 0;
   const sugarData = [
     {
       grade: 1,
