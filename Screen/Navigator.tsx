@@ -63,26 +63,6 @@ const LoginNavigation = () => (
   </Stack.Navigator>
 );
 
-function MyPageNavigator() {
-  return (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="MyPage" component={MyPage} />
-      <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
-      <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
-      <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
-      <Stack.Screen name="Alarm" component={Alarm} />
-      <Stack.Screen name="MyPage_Notice" component={MyPage_Notice} />
-      <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
-      <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
-      <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />
-      <Stack.Screen
-        name="MyPage_Participation"
-        component={MyPage_Participation}
-      />
-    </Stack.Navigator>
-  );
-}
-
 const ProfileNavigation = () => (
   <Stack.Navigator
     mode="modal"
@@ -202,7 +182,7 @@ const TabNavigation = () => (
       />
       <Tab.Screen
         name="MyPage"
-        component={MyPageNavigator}
+        component={MyPage}
         options={{
           tabBarLabel: '마이페이지',
           tabBarIcon: ({ focused }) => (
@@ -222,6 +202,17 @@ const MainNavigation = () => (
     <Stack.Screen name="Alarm" component={Alarm} />
     <Stack.Screen name="ManageDetail" component={ManageDetail} />
     <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
+    <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
+    <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
+    <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
+    <Stack.Screen name="MyPage_Notice" component={MyPage_Notice} />
+    <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
+    <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
+    <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />
+    <Stack.Screen
+      name="MyPage_Participation"
+      component={MyPage_Participation}
+    />
   </Stack.Navigator>
 );
 
