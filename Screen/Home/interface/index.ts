@@ -20,6 +20,7 @@ export interface DataType {
   scrapCount: number;
   flag: boolean;
   Gus: any;
+  idUser: number;
 }
 
 export interface ItemType {

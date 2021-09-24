@@ -9,6 +9,7 @@ import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import axios from 'axios';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -17,7 +18,24 @@ const StudyDetail = ({ route }: any) => {
     (state: rootState) => state.studyReducer
   );
 
+  // /studyDetail/:id'
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
   useEffect(() => {
+    axios({
+      method: 'get',
+      url: `http://localhost:4000/study/studyDetail/${idx}`,
+      headers: { Authorization: login.token },
+    })
+      .then((res) => {
+        console.log(res.data);
+        // setContent(res.data.study);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
     setContent(onlineStudyList.concat(offlineStudyList));
   }, []);
 
@@ -50,6 +68,7 @@ const StudyDetail = ({ route }: any) => {
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
+          idUser={item && item.idUser}
           username={item && item.User.nickname}
           createAt={item && item.createdAt.toString().split('T')[0]}
           scrap={item && item.scrapCount}

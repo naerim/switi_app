@@ -7,12 +7,13 @@ interface Props {
   username?: string;
   createAt?: string;
   scrap?: number;
+  idUser: number;
 }
 
-const OtherInfo: React.FC<Props> = ({ username, createAt, scrap }) => {
+const OtherInfo: React.FC<Props> = ({ idUser, username, createAt, scrap }) => {
   return (
     <Container>
-      <WriterInfo username={username} />
+      <WriterInfo username={username} idUser={idUser} />
       <Content>
         <StartDate>{createAt}</StartDate>
         <Scrap scrap={scrap} />
