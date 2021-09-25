@@ -5,11 +5,13 @@ import ClickIcon from '../../../../Img/btn_back.png';
 import { useGoProfileDetail } from '../../../../util/navigationHooks';
 
 interface Props {
+  idUser: number;
   username?: string;
 }
 
-const WriterInfo: React.FC<Props> = ({ username }) => {
-  const goProfileDetail = useGoProfileDetail(0);
+const WriterInfo: React.FC<Props> = ({ idUser, username }) => {
+  const goProfileDetail = useGoProfileDetail(idUser);
+
   return (
     <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <UserImage source={UserIcon} />

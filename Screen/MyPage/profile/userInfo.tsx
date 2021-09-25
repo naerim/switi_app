@@ -19,8 +19,8 @@ const UserInfo: React.FC<Props> = ({ title }) => {
         </UserName>
       </LeftWrap>
 
-      <ProfileButton>
-        <MyProFileText onPress={() => goProfile()}>내 프로필</MyProFileText>
+      <ProfileButton onPress={goProfile}>
+        <MyProFileText>내 프로필</MyProFileText>
       </ProfileButton>
     </Container>
   );

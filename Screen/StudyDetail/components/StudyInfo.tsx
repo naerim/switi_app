@@ -6,7 +6,7 @@ interface Props {
   item?: DataType;
 }
 const StudyInfo: React.FC<Props> = ({ item }) => {
-  console.log(item);
+  // console.log(item);
   const studyInfoList = [
     {
       name: '카테고리',
