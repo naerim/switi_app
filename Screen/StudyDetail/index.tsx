@@ -10,15 +10,12 @@ import CancelModal from './components/CancelModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import axios from 'axios';
+import { DataType } from '../Home/interface';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
-  const [content, setContent] = useState([]);
-  const { onlineStudyList, offlineStudyList } = useSelector(
-    (state: rootState) => state.studyReducer
-  );
+  const [item, setItem] = useState<DataType>(undefined);
 
-  // /studyDetail/:id'
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
@@ -31,15 +28,12 @@ const StudyDetail = ({ route }: any) => {
     })
       .then((res) => {
         console.log(res.data);
-        // setContent(res.data.study);
+        setItem(res.data.study);
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
-    setContent(onlineStudyList.concat(offlineStudyList));
   }, []);
-
-  const item: any = content.find((i: any) => i.id === idx);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
@@ -61,9 +55,9 @@ const StudyDetail = ({ route }: any) => {
   return (
     <Container>
       <StudyImage
-        done={item && item.flag === false}
+        done={item && !item.flag}
         onPress={goHome}
-        img={item && loadImg(item.Images[0]?.imgPath)}
+        img={item && loadImg(item.Images[0].imgPath)}
       />
       <Content>
         <Title>{item && item.title}</Title>

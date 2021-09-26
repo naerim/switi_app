@@ -5,7 +5,7 @@ import MemberImage from '../MemberImage';
 import { useGoProfileDetail } from '../../../../util/navigationHooks';
 
 const RecruitRenderItem: React.FC<ItemType> = ({ item }) => {
-  const goProfileDetail = useGoProfileDetail(0);
+  const goProfileDetail = useGoProfileDetail(item.id);
   return (
     <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <MemberImage img={'imgPath'} />

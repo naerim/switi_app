@@ -6,8 +6,8 @@ import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
 
-const RenderItem: React.FC<ItemType> = ({ item }) => {
-  const goStudyDetail = useGoStudyDetail(item.id);
+const RenderItem: React.FC<ItemType> = ({ index, item }) => {
+  const goStudyDetail = useGoStudyDetail(index);
 
   // 글자수 제한
   const limitTitle = (title: string) =>
