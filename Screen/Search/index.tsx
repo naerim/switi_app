@@ -9,6 +9,8 @@ import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 
+//1. search api 가져오기! -> postman & useEffect..
+
 const Search = () => {
   const [searches, setSearches] = useState([
     {
