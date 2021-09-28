@@ -1,22 +1,23 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { AsyncStorage } from 'react-native';
-import styled from 'styled-components/native';
-import useInput from '../SignIn/util/useInput';
-import OptionMenu from './components/optionMenu';
-import RecommendContainer from './components/Recommend/RecommendContainer';
-import SearchStoryList from './record/searchStoryList';
-import ContainerWithBell from '../../Component/ContainerWithBell';
-import SearchForm from './components/SearchForm';
-import { UseGoAlarm } from '../../util/navigationHooks';
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { AsyncStorage } from "react-native";
+import styled from "styled-components/native";
+import useInput from "../SignIn/util/useInput";
+import OptionMenu from "./components/optionMenu";
+import RecommendContainer from "./components/Recommend/RecommendContainer";
+import SearchStoryList from "./record/searchStoryList";
+import ContainerWithBell from "../../Component/ContainerWithBell";
+import SearchForm from "./components/SearchForm";
+import { UseGoAlarm } from "../../util/navigationHooks";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { rootState } from '../../redux';
-import { searchRequest } from '../../redux/searchReducer';
+import { useDispatch, useSelector } from "react-redux";
+import { rootState } from "../../redux";
+import { searchRequest } from "../../redux/searchReducer";
+import StudyFlatList from "../Home/components/StudyFlatList";
 //1. search api 가져오기! -> postman & useEffect..
 
-const Search = () => {
+const Search = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
-    login: userReducer.login,
+    login: userReducer.login
   }));
 
   const dispatch = useDispatch();
@@ -32,16 +33,16 @@ const Search = () => {
   const [searches, setSearches] = useState([
     {
       id: 1,
-      text: '토익공부',
+      text: "토익공부"
     },
     {
       id: 2,
-      text: '파이썬공부',
+      text: "파이썬공부"
     },
     {
       id: 3,
-      text: '코딩테스트',
-    },
+      text: "코딩테스트"
+    }
   ]);
   const nextId = useRef(4);
 
@@ -54,7 +55,7 @@ const Search = () => {
     (text) => {
       const search = {
         id: nextId.current,
-        text,
+        text
       };
       setSearches(searches.concat(search));
       nextId.current += 1;
@@ -69,22 +70,22 @@ const Search = () => {
     [searches]
   );
 
-  const searchInput = useInput('');
+  const searchInput = useInput("");
 
   const searchSomething = () => {
     const searchVoca = searchInput.value;
     AsyncStorage.setItem(
-      'beforeSearch',
+      "beforeSearch",
       JSON.stringify({ id: nextId.current, text: searchVoca }),
       () => {
-        console.log(searchVoca, '저장 완료');
+        // console.log(searchVoca, '저장 완료');
       }
     );
 
-    AsyncStorage.getItem('beforeSearch', (err, result) => {
-      if (typeof result === 'string') {
+    AsyncStorage.getItem("beforeSearch", (err, result) => {
+      if (typeof result === "string") {
         const BeforeSearch = JSON.parse(result);
-        console.log(BeforeSearch, '가져옴');
+        // console.log(BeforeSearch, '가져옴');
         onInsert(BeforeSearch.text);
         onSearch(login.token, searchVoca);
       }
@@ -92,18 +93,33 @@ const Search = () => {
   };
 
   const goAlarm = UseGoAlarm;
+  const [tagList, setTagList] = useState<
+    { key: number; name: string; category: string }[]
+    >([]);
+  // 0 : 온라인, 1 : 오프라인
+  const idx = 0;
+
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
-      <ListContainer>
-        <SearchStoryList searches={searches} onPressX={onRemove} />
-      </ListContainer>
-      <Line />
-      <RecommendContainer />
+      { (false) ? (
+        <Container>
+          <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
+          <ListContainer>
+            <SearchStoryList searches={searches} onPressX={onRemove} />
+          </ListContainer>
+          <Line />
+          <RecommendContainer />
+        </Container>
+      ) : (
+        <StudyFlatList idx={idx} tagList={tagList} />
+      )}
     </ContainerWithBell>
   );
 };
+
+const Container = styled.TouchableOpacity`
+`;
 
 const ListContainer = styled.View`
   margin: 20px 0;
@@ -114,6 +130,10 @@ const Line = styled.Text`
   background-color: #f3f3f3;
   margin-top: 8px;
   margin-bottom: 10px;
+`;
+
+const ImcyComponent = styled.Text`
+  font-size: 10px;
 `;
 
 export default Search;

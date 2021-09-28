@@ -16,7 +16,6 @@ const search = async (token: string, keyword: string) => {
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
-
   return response;
 };
 export const searchRequest = createRequestThunk(POST_STUDY_LIST, search);
