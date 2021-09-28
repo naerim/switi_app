@@ -29,7 +29,7 @@ const Search = () => {
 
   const nextId = useRef(4);
 
-  const RealonPressSearchDelete = useCallback(() => {
+  const RealOnPressSearchDelete = useCallback(() => {
     setSearches([]);
   }, [searches]);
   // 이게 맞을까? 배열 초기화
@@ -74,12 +74,21 @@ const Search = () => {
       //setSearches(BeforeSearch.searchVoca);
     });
   };
+  //
+  // const Search = query => {
+  //   let requestOptions = {
+  //     method: 'GET',
+  //     redirect: 'follow'
+  //   };
+  //
+  //   fetch(`http://localhost:4000/search/getSearch?`)
+  // }
 
   const goAlarm = UseGoAlarm;
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      <OptionMenu onPressSearchDelete={RealonPressSearchDelete} />
+      <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
       <ListContainer>
         <SearchStoryList searches={searches} onPressX={onRemove} />
       </ListContainer>
