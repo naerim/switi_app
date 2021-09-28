@@ -28,7 +28,9 @@ const SearchInput: React.FC<TextInputInterface> = ({
   onPress,
 }) => (
   <Container>
-    <SearchIcon source={Icon} />
+    <SearchIconButton onPress={onPress}>
+      <SearchIcon source={Icon} />
+    </SearchIconButton>
     <TextInput
       value={value}
       onChangeText={onChangeText}
@@ -49,6 +51,10 @@ const Container = styled.View`
   flex-direction: row;
   padding-left: 10px;
   height: 30px;
+`;
+
+const SearchIconButton = styled.TouchableOpacity`
+  opacity: 0.8;
 `;
 
 const SearchIcon = styled.Image`
