@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import useInput from '../SignIn/util/useInput';
@@ -9,9 +9,26 @@ import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import { searchRequest } from '../../redux/searchReducer';
 //1. search api 가져오기! -> postman & useEffect..
 
 const Search = () => {
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  const dispatch = useDispatch();
+  const onSearch = useCallback(
+    (token, keyword) => dispatch(searchRequest(token, keyword)),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    onSearch(login.token, searchInput);
+  }, []);
+
   const [searches, setSearches] = useState([
     {
       id: 1,
@@ -26,7 +43,6 @@ const Search = () => {
       text: '코딩테스트',
     },
   ]);
-
   const nextId = useRef(4);
 
   const RealOnPressSearchDelete = useCallback(() => {
@@ -70,19 +86,10 @@ const Search = () => {
         const BeforeSearch = JSON.parse(result);
         console.log(BeforeSearch, '가져옴');
         onInsert(BeforeSearch.text);
+        onSearch(login.token, searchVoca);
       }
-      //setSearches(BeforeSearch.searchVoca);
     });
   };
-  //
-  // const Search = query => {
-  //   let requestOptions = {
-  //     method: 'GET',
-  //     redirect: 'follow'
-  //   };
-  //
-  //   fetch(`http://localhost:4000/search/getSearch?`)
-  // }
 
   const goAlarm = UseGoAlarm;
   return (
