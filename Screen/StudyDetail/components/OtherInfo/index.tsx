@@ -10,7 +10,12 @@ interface Props {
   idUser: number;
 }
 
-const OtherInfo: React.FC<Props> = ({ idUser, username, createAt, scrap }) => {
+const OtherInfo: React.FC<Props> = ({
+  idUser,
+  username,
+  createAt,
+  scrap,
+}) => {
   return (
     <Container>
       <WriterInfo username={username} idUser={idUser} />

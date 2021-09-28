@@ -58,7 +58,7 @@ export const offlineStudyListRequest = (
 export const getStudyDetail = (token: string, id: number) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/study/studyDetail${id}`,
+    url: `http://localhost:4000/study/studyDetail/${id}`,
     headers: { Authorization: token },
   });
   return response;

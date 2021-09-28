@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
 import StudyImage from './components/StudyImage';
-import { useGoHome } from '../../util/navigationHooks';
+import { useGoHome, useGoProfileDetail } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import axios from 'axios';
 import { DataType } from '../Home/interface';
+import { getStudyDetailRequest } from '../../redux/studyReducer';
+import axios from 'axios';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -19,16 +20,31 @@ const StudyDetail = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
+    studyDetail: studyReducer.studyDetail,
+  }));
+
+  const dispatch = useDispatch();
+  const onGetStudyDetail = useCallback(
+    // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
+    (token, id) => dispatch(getStudyDetailRequest(token, id)),
+    [dispatch]
+  );
 
   useEffect(() => {
+    onGetStudyDetail(login.token, idx);
+    // setItem(studyDetail)
+    // console.log(studyDetail.study);
+    // setItem(studyDetail.study);
     axios({
       method: 'get',
       url: `http://localhost:4000/study/studyDetail/${idx}`,
       headers: { Authorization: login.token },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setItem(res.data.study);
+        // setUserId(res.data.study.idUser);
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +68,8 @@ const StudyDetail = ({ route }: any) => {
     return 'http://localhost:4000/images/' + url;
   };
 
+  const goProfileDetail = useGoProfileDetail(item && item.id);
+
   return (
     <Container>
       <StudyImage
@@ -60,6 +78,7 @@ const StudyDetail = ({ route }: any) => {
         img={item && loadImg(item.Images[0].imgPath)}
       />
       <Content>
+        <Title>{item && item.idUser}</Title>
         <Title>{item && item.title}</Title>
         <OtherInfo
           idUser={item && item.idUser}

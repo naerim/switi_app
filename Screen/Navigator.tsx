@@ -197,11 +197,12 @@ const TabNavigation = () => (
 const MainNavigation = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Switi" component={TabNavigation} />
-    <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
-    <Stack.Screen name="ManageDetail" component={ManageDetail} />
+
     <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
+    <Stack.Screen name="StudyDetail" component={StudyDetail} />
+    <Stack.Screen name="ManageDetail" component={ManageDetail} />
     <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
     <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
     <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
