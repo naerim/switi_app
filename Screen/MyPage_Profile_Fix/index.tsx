@@ -30,6 +30,13 @@ const MyPage_Profile_Fix = () => {
   });
 
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
+  // const { interest } = useSelector(({ dataReducer }: rootState) => ({
+  //   interest: dataReducer.interest,
+  // }));
+  // const { character } = useSelector(({ dataReducer }: rootState) => ({
+  //   character: dataReducer.character,
+  // }));
+
   return (
     <BasicContainer
       headerTitle="프로필 수정"

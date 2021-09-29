@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import studyReducer, { IStudyState } from './studyReducer';
 import userReducer, { IUserState } from './userReducer';
+import dataReducer, { IDataState } from './dataReducer';
 
 export interface rootState {
   studyReducer: IStudyState;
   userReducer: IUserState;
+  dataReducer: IDataState;
 }
 
 const persistConfig = {
@@ -14,6 +16,6 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-const rootReducer = combineReducers({ studyReducer, userReducer });
+const rootReducer = combineReducers({ studyReducer, userReducer, dataReducer });
 
 export default persistReducer(persistConfig, rootReducer);
