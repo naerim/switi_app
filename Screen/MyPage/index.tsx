@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   getMyPageRequest,
+  getMyProfileRequest,
   getScrapListRequest,
   getStudyHistoryRequest,
 } from '../../redux/userReducer';
@@ -82,11 +83,17 @@ const MyPage = () => {
     (token) => dispatch(getStudyHistoryRequest(token)),
     [dispatch]
   );
+  const onGetMyProfile = useCallback(
+    // 나의 프로필 가져오기
+    (token) => dispatch(getMyProfileRequest(token)),
+    [dispatch]
+  );
 
   useEffect(() => {
     onGetMyPage(login.token);
     onGetScrapList(login.token);
     onGetStudyHistory(login.token);
+    onGetMyProfile(login.token);
   }, []);
 
   return (
