@@ -1,6 +1,6 @@
 export const ScrapList = [
   {
-    idx: 0,
+    idx: '1',
     username: '작성자1',
     online_flag: 0,
     title: '파이썬 스터디 같이 하실 분',
@@ -19,7 +19,7 @@ export const ScrapList = [
     flag: 1,
   },
   {
-    idx: 1,
+    idx: '2',
     username: '작성자2',
     online_flag: 0,
     title: '알고리즘 스터디 같이 하실 분',
@@ -38,7 +38,7 @@ export const ScrapList = [
     flag: 1,
   },
   {
-    idx: 2,
+    idx: '3',
     username: '작성자3',
     online_flag: 1,
     title: '스터디 같이 하실 분',

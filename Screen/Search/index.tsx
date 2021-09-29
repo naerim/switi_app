@@ -1,45 +1,31 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  useReducer,
-} from 'react';
-import { Alert, AsyncStorage } from 'react-native';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import useInput from '../SignIn/util/useInput';
-import OptionMenu from './components/optionMenu';
-import RecommendContainer from './components/Recommend/RecommendContainer';
-import SearchStoryList from './record/searchStoryList';
 import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { searchRequest } from '../../redux/searchReducer';
-import StudyFlatList from '../Home/components/StudyFlatList';
+import { FlatList } from 'react-native';
+import RenderItem from '../Home/components/StudyFlatList/RenderItem';
+import { DataType } from '../Home/interface';
 
 const Search = ({ route }: any) => {
+  const dispatch = useDispatch();
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const onSearch = (token: any, keyword: string) =>
+    dispatch(searchRequest(token, keyword));
 
-  const { search, searchError } = useSelector(
-    ({ searchReducer }: rootState) => ({
-      search: searchReducer.search,
-      searchError: searchReducer.searchError,
-    })
-  );
-
-  const dispatch = useDispatch();
-  const onSearch = useCallback(
-    (token, keyword) => dispatch(searchRequest(token, keyword)),
-    [dispatch]
-  );
-
+  const { searchStudyList } = useSelector((state: rootState) => ({
+    searchStudyList: state.searchReducer,
+  }));
   useEffect(() => {
-    onSearch(login.token, searchInput);
-  }, []);
+    onSearch(login.token, searchInput.value);
+  }, [dispatch]);
 
   const [searches, setSearches] = useState([
     {
@@ -103,54 +89,71 @@ const Search = ({ route }: any) => {
     });
   };
 
-  useEffect(() => {
-    if (searchError == 'Request failed with status code 500')
-      Alert.alert('검색오류 발생.');
-    else if (searchError == 'Request failed with status code 200')
-      Alert.alert('검색 성공');
-  }, [search, searchError]);
-
   const goAlarm = UseGoAlarm;
-  const [tagList, setTagList] = useState<
-    { key: number; name: string; category: string }[]
-  >([]);
-  // 0 : 온라인, 1 : 오프라인
-  const idx = 0;
+
+  const FlatListItemSeparator = () => <SeparatorLine />;
+  const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
+
+  const fetchItem = () => {
+    setIsRefreshing(true);
+    onSearch(login.token, searchInput.value);
+    setIsRefreshing(false);
+  };
+
+  const handleLoadMore = () => {
+    console.log('검색 완료');
+  };
 
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      {true ? (
-        <Container>
-          <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
-          <ListContainer>
-            <SearchStoryList searches={searches} onPressX={onRemove} />
-          </ListContainer>
-          <Line />
-          <RecommendContainer />
-        </Container>
-      ) : (
-        <StudyFlatList idx={idx} tagList={tagList} />
-      )}
+      {/*<Container>*/}
+      {/*  <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />*/}
+      {/*  <ListContainer>*/}
+      {/*    <SearchStoryList searches={searches} onPressX={onRemove} />*/}
+      {/*  </ListContainer>*/}
+      {/*  <Line />*/}
+      {/*  <RecommendContainer />*/}
+      {/*</Container>*/}
+      <FlatList
+        ItemSeparatorComponent={FlatListItemSeparator}
+        onRefresh={fetchItem}
+        refreshing={isRefreshing}
+        // data = {searchRequest}
+        data={searchStudyList ? [] : searchStudyList}
+        renderItem={useCallback(
+          ({ item }) => (
+            <RenderItem index={item.id} item={item} />
+          ),
+          []
+        )}
+        keyExtractor={(item: DataType) => item.id.toString()}
+        extraData={searchStudyList}
+        contentContainerStyle={{ paddingBottom: 80 }}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => (
+          <EmptyContainer>
+            <EmptyFont>데이터 없음</EmptyFont>
+          </EmptyContainer>
+        )}
+      />
     </ContainerWithBell>
   );
 };
 
-const Container = styled.TouchableOpacity``;
-
-const ListContainer = styled.View`
-  margin: 20px 0;
+const EmptyContainer = styled.View`
+  margin-top: 10px;
 `;
 
-const Line = styled.Text`
-  height: 10px;
+const EmptyFont = styled.Text`
+  font-size: 12px;
+`;
+
+const SeparatorLine = styled.View`
+  height: 1px;
   background-color: #f3f3f3;
-  margin-top: 8px;
-  margin-bottom: 10px;
-`;
-
-const ImcyComponent = styled.Text`
-  font-size: 10px;
 `;
 
 export default Search;

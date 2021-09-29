@@ -8,8 +8,7 @@ import axios from "axios";
 import createRequestThunk from "./lib/createRequestThunk";
 
 export interface ISearchState {
-  search: any;
-  searchError: any;
+  searchStudyList: [];
 }
 
 // 검색
