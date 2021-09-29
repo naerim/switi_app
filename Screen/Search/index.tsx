@@ -14,17 +14,18 @@ import { DataType } from '../Home/interface';
 
 const Search = () => {
   //
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); //action 받아서 Stroe의 Reducer에서 넘김
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
-  }));
+  }));//리덕스 상태값 조회
   const fetchOnSearch = (token: any, keyword: string) =>
-    dispatch(searchRequest(token, keyword));
-
-  const { searchStudyList } = useSelector((state: rootState) => state.searchReducer);
+    dispatch(searchRequest(token, keyword)); //dispatch 사용
+  const { searchStudyList } = useSelector(
+    (state: rootState) => state.searchReducer
+  ); //리덕스 상태값 조회
   useEffect(() => {
     fetchOnSearch(login.token, searchInput.value);
-  }, [dispatch]);
+  }, [dispatch]); //dispatch 일어나면 다시 실행
 
   const [searches, setSearches] = useState([
     {
@@ -83,7 +84,7 @@ const Search = () => {
         const BeforeSearch = JSON.parse(result);
         // console.log(BeforeSearch, '가져옴');
         onInsert(BeforeSearch.text);
-        fetchOnSearch(login.token, searchVoca);
+        fetchOnSearch(login.token, searchVoca);//사용
       }
     });
   };
