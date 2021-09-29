@@ -27,6 +27,7 @@ const Search = () => {
     fetchOnSearch(login.token, searchInput.value);
   }, [dispatch]); //dispatch 일어나면 다시 실행
 
+  //기본 state
   const [searches, setSearches] = useState([
     {
       id: 1,
@@ -103,7 +104,6 @@ const Search = () => {
   const handleLoadMore = () => {
     console.log('검색 완료');
   };
-
   console.log(`왜 안나오는가 ? ${searchStudyList}`);
 
   return (
@@ -121,7 +121,6 @@ const Search = () => {
         ItemSeparatorComponent={FlatListItemSeparator}
         onRefresh={fetchItem}
         refreshing={isRefreshing}
-        // data = {searchRequest}
         data={searchStudyList}
         renderItem={useCallback(
           ({ item }) => (
