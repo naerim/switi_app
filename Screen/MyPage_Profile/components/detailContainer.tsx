@@ -19,8 +19,7 @@ const DetailContainer: React.FC<Props> = ({ title, content, children }) => {
 const Wrap = styled.View``;
 
 const Nothing = styled.View``;
-const Container = styled.View`
-`;
+const Container = styled.View``;
 
 const Title = styled.Text`
   font-size: 12px;

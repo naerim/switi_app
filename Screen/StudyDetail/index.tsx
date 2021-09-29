@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
@@ -7,10 +7,9 @@ import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { DataType } from '../Home/interface';
-import { getStudyDetailRequest } from '../../redux/studyReducer';
 import axios from 'axios';
 
 const StudyDetail = ({ route }: any) => {
@@ -22,15 +21,7 @@ const StudyDetail = ({ route }: any) => {
     login: userReducer.login,
   }));
 
-  const dispatch = useDispatch();
-  const onGetStudyDetail = useCallback(
-    // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
-    (token, id) => dispatch(getStudyDetailRequest(token, id)),
-    [dispatch]
-  );
-
   useEffect(() => {
-    onGetStudyDetail(login.token, idx);
     // setItem(studyDetail)
     // console.log(studyDetail.study);
     // setItem(studyDetail.study);
