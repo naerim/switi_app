@@ -1,4 +1,5 @@
 export interface DataType {
+  User: { nickname: string };
   Images: any;
   Interests: any;
   States: any;

@@ -4,7 +4,7 @@ import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
 import StudyImage from './components/StudyImage';
-import { useGoHome, useGoProfileDetail } from '../../util/navigationHooks';
+import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,13 +15,11 @@ import axios from 'axios';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
+  // @ts-ignore
   const [item, setItem] = useState<DataType>(undefined);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
-  }));
-  const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
-    studyDetail: studyReducer.studyDetail,
   }));
 
   const dispatch = useDispatch();
@@ -68,7 +66,7 @@ const StudyDetail = ({ route }: any) => {
     return 'http://localhost:4000/images/' + url;
   };
 
-  const goProfileDetail = useGoProfileDetail(item && item.id);
+  // const goProfileDetail = useGoProfileDetail(item && item.id);
 
   return (
     <Container>
@@ -78,7 +76,6 @@ const StudyDetail = ({ route }: any) => {
         img={item && loadImg(item.Images[0].imgPath)}
       />
       <Content>
-        <Title>{item && item.idUser}</Title>
         <Title>{item && item.title}</Title>
         <OtherInfo
           idUser={item && item.idUser}
