@@ -12,19 +12,18 @@ import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
 
-const Search = ({ route }: any) => {
+const Search = () => {
+  //
   const dispatch = useDispatch();
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const onSearch = (token: any, keyword: string) =>
+  const fetchOnSearch = (token: any, keyword: string) =>
     dispatch(searchRequest(token, keyword));
 
-  const { searchStudyList } = useSelector((state: rootState) => ({
-    searchStudyList: state.searchReducer,
-  }));
+  const { searchStudyList } = useSelector((state: rootState) => state.searchReducer);
   useEffect(() => {
-    onSearch(login.token, searchInput.value);
+    fetchOnSearch(login.token, searchInput.value);
   }, [dispatch]);
 
   const [searches, setSearches] = useState([
@@ -84,7 +83,7 @@ const Search = ({ route }: any) => {
         const BeforeSearch = JSON.parse(result);
         // console.log(BeforeSearch, '가져옴');
         onInsert(BeforeSearch.text);
-        onSearch(login.token, searchVoca);
+        fetchOnSearch(login.token, searchVoca);
       }
     });
   };
@@ -96,13 +95,15 @@ const Search = ({ route }: any) => {
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    onSearch(login.token, searchInput.value);
+    fetchOnSearch(login.token, searchInput.value);
     setIsRefreshing(false);
   };
 
   const handleLoadMore = () => {
     console.log('검색 완료');
   };
+
+  console.log(`왜 안나오는가 ? ${searchStudyList}`);
 
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
@@ -120,7 +121,7 @@ const Search = ({ route }: any) => {
         onRefresh={fetchItem}
         refreshing={isRefreshing}
         // data = {searchRequest}
-        data={searchStudyList ? [] : searchStudyList}
+        data={searchStudyList}
         renderItem={useCallback(
           ({ item }) => (
             <RenderItem index={item.id} item={item} />
@@ -135,7 +136,7 @@ const Search = ({ route }: any) => {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => (
           <EmptyContainer>
-            <EmptyFont>데이터 없음</EmptyFont>
+            <EmptyFont>데이터 랜더링 실패 </EmptyFont>
           </EmptyContainer>
         )}
       />

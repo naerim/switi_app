@@ -6,12 +6,13 @@ import {
 } from "./action";
 import axios from "axios";
 import createRequestThunk from "./lib/createRequestThunk";
+import { Alert } from "react-native";
 
 export interface ISearchState {
   searchStudyList: [];
 }
 
-// 검색
+// 검색 api -> 확인
 const search = async (token: string, keyword: string) => {
   console.log("검색", token, keyword);
 
@@ -21,21 +22,18 @@ const search = async (token: string, keyword: string) => {
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
-  console.log(`검색결과1 : ${response}`);
-  console.log(`검색결과2 : ${response.data}`);
-  console.log(`검색결과3 : ${response.data.study}`);
-
+  console.log(`검색결과3 : ${JSON.stringify(response.data.study)}`);
   return response.data.study;
 };
 
 export const searchRequest = createRequestThunk(POST_STUDY_LIST, search);
 
 const initialState = {
-  search: null
+  search: null,
 };
 
 export interface ISearchState {
-  search: any;
+  searchList: [];
 }
 
 function searchReducer(state = initialState, action: any) {
