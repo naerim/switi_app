@@ -44,6 +44,7 @@ const AddImage: React.FC<Props> = ({ image, setImage }) => {
       // };
       // console.log(file);
       // setImage(file);
+      console.log(result);
       setImage(result.uri);
     }
   };

@@ -48,33 +48,33 @@ const AddStudy = () => {
   // 최종 등록 버튼
   const EnrollButton = () => {
     // const formData = new FormData();
-    //
+
     // formData.append('image', file);
     // console.log(file);
-    // console.log(image);
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:4000/study/addStudy',
-    //   headers: { Authorization: login.token },
-    //   data: {
-    //     online_flag: onlineFlag,
-    //     state: selectTarget.value,
-    //     category: category,
-    //     address: area,
-    //     recruit_num: recruitNumInput.value,
-    //     detail_address: detailAddressInput.value,
-    //     period: periodInput.value,
-    //     endDate: EndDateInput,
-    //     contact: contentInput.value,
-    //     title: titleInput.value,
-    //     desc: contentInput.value,
-    //     // img: image.filename,
-    //   },
-    // })
-    //   .then(() => {
-    //     goHome();
-    //   })
-    //   .catch((err) => console.log(err));
+    console.log(image);
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/study/addStudy',
+      headers: { Authorization: login.token },
+      data: {
+        online_flag: onlineFlag,
+        state: selectTarget.value,
+        category: category,
+        address: area,
+        recruit_num: recruitNumInput.value,
+        detail_address: detailAddressInput.value,
+        period: periodInput.value,
+        endDate: EndDateInput,
+        contact: contentInput.value,
+        title: titleInput.value,
+        desc: contentInput.value,
+        img: image,
+      },
+    })
+      .then(() => {
+        goHome();
+      })
+      .catch((err) => console.log(err));
   };
 
   const onClick = () => {
