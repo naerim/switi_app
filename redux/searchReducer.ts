@@ -2,11 +2,10 @@ import produce from "immer";
 import {
   POST_STUDY_LIST,
   POST_STUDY_LIST_SUCCESS,
-  POST_STUDY_LIST_FAILURE
+  POST_STUDY_LIST_FAILURE //에러는 나중에 추가..
 } from "./action";
 import axios from "axios";
 import createRequestThunk from "./lib/createRequestThunk";
-import { Alert } from "react-native";
 
 export interface ISearchState {
   searchStudyList: [];
