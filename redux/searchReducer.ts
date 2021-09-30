@@ -23,24 +23,24 @@ const search = async (token: string, keyword: string) => {
     data: { keyword: keyword },
   });
   console.log(`검색결과3 : ${JSON.stringify(response.data.study)}`);
-  return response.data.study;
+  return response; //
 };
 
 export const searchRequest = createRequestThunk(POST_STUDY_LIST, search);
 
 const initialState = {
-  search: null,
+  searchStudyList: null,
 };
 
 export interface ISearchState {
-  searchList: [];
+  searchStudyList: [];
 }
 
 function searchReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case POST_STUDY_LIST:
-        draft.search = action.payload;
+      case POST_STUDY_LIST_SUCCESS:
+        draft.searchStudyList = action.payload.study;
         break;
       default:
         break;
