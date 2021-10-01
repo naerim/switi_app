@@ -62,7 +62,7 @@ const StudyDetail = ({ route }: any) => {
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
-          idUser={item && item.scrapCount == 2 ? 54 : 1}
+          idUser={item && item.idUser}
           username={item && item.User.nickname}
           createAt={item && item.createdAt.toString().split('T')[0]}
           scrap={item && item.scrapCount}

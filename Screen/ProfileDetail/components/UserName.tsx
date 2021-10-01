@@ -15,7 +15,7 @@ const UserName: React.FC<Props> = ({ name, img }) => {
       <LeftWrap>
         <Icon
           source={
-            img != null || img != '' ? { uri: loadImg(img) } : ProfileIcon
+            img != null && img != '' ? { uri: loadImg(img) } : ProfileIcon
           }
         />
         <Title>{name}</Title>
@@ -44,6 +44,7 @@ const Icon = styled.Image`
   width: 50px;
   height: 50px;
   margin-right: 10px;
+  border-radius: 40px;
 `;
 
 export default UserName;

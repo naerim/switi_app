@@ -113,7 +113,7 @@ const initialState = {
   studyHistoryError: null,
   myProfile: null,
   myProfileError: null,
-  userProfile: [],
+  userProfile: null,
 };
 
 export interface IUserState {
