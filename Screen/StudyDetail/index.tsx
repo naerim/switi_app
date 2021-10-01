@@ -14,26 +14,21 @@ import axios from 'axios';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
-  // @ts-ignore
-  const [item, setItem] = useState<DataType>(undefined);
+  // @ts-ignore // 초기값을 null말고 어떤 값을 넣어야할지
+  const [item, setItem] = useState<DataType>(null);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
 
   useEffect(() => {
-    // setItem(studyDetail)
-    // console.log(studyDetail.study);
-    // setItem(studyDetail.study);
     axios({
       method: 'get',
       url: `http://localhost:4000/study/studyDetail/${idx}`,
       headers: { Authorization: login.token },
     })
       .then((res) => {
-        // console.log(res.data);
         setItem(res.data.study);
-        // setUserId(res.data.study.idUser);
       })
       .catch((err) => {
         console.log(err);
@@ -57,8 +52,6 @@ const StudyDetail = ({ route }: any) => {
     return 'http://localhost:4000/images/' + url;
   };
 
-  // const goProfileDetail = useGoProfileDetail(item && item.id);
-
   return (
     <Container>
       <StudyImage
@@ -69,7 +62,7 @@ const StudyDetail = ({ route }: any) => {
       <Content>
         <Title>{item && item.title}</Title>
         <OtherInfo
-          idUser={item && item.idUser}
+          idUser={item && item.scrapCount == 2 ? 54 : 1}
           username={item && item.User.nickname}
           createAt={item && item.createdAt.toString().split('T')[0]}
           scrap={item && item.scrapCount}

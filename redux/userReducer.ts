@@ -15,6 +15,8 @@ import {
   GET_STUDY_HISTORY,
   GET_STUDY_HISTORY_FAILURE,
   GET_STUDY_HISTORY_SUCCESS,
+  GET_USER_PROFILE,
+  GET_USER_PROFILE_SUCCESS,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -86,6 +88,20 @@ export const getMyProfileRequest = createRequestThunk(
   getMyProfile
 );
 
+// 내 프로필
+const getUserProfile = async (token: string, id: number) => {
+  const response = axios({
+    method: 'get',
+    url: `http://localhost:4000/user/userProfile/${id}`,
+    headers: { Authorization: token },
+  });
+  return response;
+};
+export const getUserProfileRequest = createRequestThunk(
+  GET_USER_PROFILE,
+  getUserProfile
+);
+
 const initialState = {
   login: null,
   loginError: null,
@@ -97,6 +113,7 @@ const initialState = {
   studyHistoryError: null,
   myProfile: null,
   myProfileError: null,
+  userProfile: [],
 };
 
 export interface IUserState {
@@ -110,6 +127,7 @@ export interface IUserState {
   studyHistoryError: any;
   myProfile: any;
   myProfileError: any;
+  userProfile: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -144,6 +162,9 @@ function userReducer(state = initialState, action: any) {
         break;
       case GET_MY_PROFILE_FAILURE:
         draft.myProfileError = action.payload;
+        break;
+      case GET_USER_PROFILE_SUCCESS:
+        draft.userProfile = action.payload.userProfile;
         break;
       default:
         break;

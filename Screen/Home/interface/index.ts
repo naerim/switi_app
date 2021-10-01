@@ -1,5 +1,6 @@
 export interface DataType {
   User: { nickname: string };
+  idUser: number;
   Images: any;
   Interests: any;
   States: any;
@@ -21,7 +22,6 @@ export interface DataType {
   scrapCount: number;
   flag: boolean;
   Gus: any;
-  idUser: number;
 }
 
 export interface ItemType {

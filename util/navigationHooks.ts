@@ -113,6 +113,7 @@ export const useGoStudyDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('StudyDetail', { idx: idx }), [
     navigation,
+    idx,
   ]);
 };
 
@@ -135,6 +136,7 @@ export const useGoManageDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('ManageDetail', { idx: idx }), [
     navigation,
+    idx,
   ]);
 };
 
@@ -142,5 +144,6 @@ export const useGoProfileDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('ProfileDetail', { idx: idx }), [
     navigation,
+    idx,
   ]);
 };
