@@ -1,10 +1,11 @@
 export interface ManageType {
   id: number;
   apply: number;
-  idStudy: number;
-  idUser: number;
-  contact: string;
+  nickname: string;
+  email: string;
   apply_detail: string;
+  profilepath: string;
+  studyMember: { contact: string };
 }
 
 export interface ItemType {
