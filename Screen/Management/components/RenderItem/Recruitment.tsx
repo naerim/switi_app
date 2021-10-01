@@ -18,7 +18,7 @@ const Recruitment: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImageManage />
+      <StudyImageManage img={item.Images[0].imgPath} />
       <Title>{limitTitle(item.title)}</Title>
       <ManageMember onPress={goManageDetail}>
         <ButtonImage source={ManageIcon} />

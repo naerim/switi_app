@@ -19,7 +19,7 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImageManage />
+      <StudyImageManage img={item.Images[0].imgPath} />
       <Content>
         <IconWrap>
           <RecruitIcon done={!item.flag} />

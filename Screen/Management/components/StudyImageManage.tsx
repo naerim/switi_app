@@ -1,29 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-// interface Props {
-//   img: any;
-//   done: boolean;
-// }
+interface Props {
+  img: string;
+}
 
-// const StudyImage: React.FC<Props> = ({ img, done }) => {
-//     // 이미지 불러오기
-//     const loadImg = (url: string) => {
-//         return 'http://localhost:4000/images/' + url;
-//     };
-//
-//     return (
-//         <Container>
-//             <Images source={{ uri: loadImg(img) }} resizeMode="stretch" />
-//     <RecruitIcon done={!done} />
-//     </Container>
-// );
-// };
-
-const StudyImageManage = () => {
+const StudyImageManage: React.FC<Props> = ({ img }) => {
+  const loadImg = (url: string) => {
+    return 'http://localhost:4000/images/' + url;
+  };
   return (
     <Container>
-      <Images source={{ uri: 'imgPath' }} resizeMode="stretch" />
+      <Images source={{ uri: loadImg(img) }} resizeMode="stretch" />
     </Container>
   );
 };
