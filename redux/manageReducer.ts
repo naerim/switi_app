@@ -4,6 +4,8 @@ import {
   GET_MY_APPLY_LIST_SUCCESS,
   GET_MY_STUDY_LIST,
   GET_MY_STUDY_LIST_SUCCESS,
+  GET_STUDY_MEM_LIST,
+  GET_STUDY_MEM_LIST_SUCCESS,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -36,14 +38,30 @@ export const getMyApplyListRequest = createRequestThunk(
   getMyApplyList
 );
 
+// 스터디원 관리
+const getStudyMember = async (token: string, id: number) => {
+  const response = axios({
+    method: 'get',
+    url: `http://localhost:4000/manage/studyMemList/${id}`,
+    headers: { Authorization: token },
+  });
+  return response;
+};
+export const getStudyMemberRequest = createRequestThunk(
+  GET_STUDY_MEM_LIST,
+  getStudyMember
+);
+
 const initialState = {
   myStudyList: null,
   myApplyList: null,
+  studyMember: null,
 };
 
 export interface IManageState {
   myStudyList: [];
   myApplyList: [];
+  studyMember: any;
 }
 
 function manageReducer(state = initialState, action: any) {
@@ -54,6 +72,9 @@ function manageReducer(state = initialState, action: any) {
         break;
       case GET_MY_APPLY_LIST_SUCCESS:
         draft.myApplyList = action.payload.study;
+        break;
+      case GET_STUDY_MEM_LIST_SUCCESS:
+        draft.studyMember = action.payload;
         break;
       default:
         break;

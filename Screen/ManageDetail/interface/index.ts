@@ -6,6 +6,7 @@ export interface ManageType {
   apply_detail: string;
   profilepath: string;
   studyMember: { contact: string };
+  User: any;
 }
 
 export interface ItemType {

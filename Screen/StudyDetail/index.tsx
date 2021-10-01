@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
@@ -7,33 +7,29 @@ import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { DataType } from '../Home/interface';
-import axios from 'axios';
+import { getStudyDetailRequest } from '../../redux/studyReducer';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
-  // @ts-ignore // 초기값을 null말고 어떤 값을 넣어야할지
-  const [item, setItem] = useState<DataType>(null);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
+    studyDetail: studyReducer.studyDetail,
+  }));
+
+  const dispatch = useDispatch();
+  const onGetStudyDetail = useCallback(
+    (token, id) => dispatch(getStudyDetailRequest(token, id)),
+    [dispatch]
+  );
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: `http://localhost:4000/study/studyDetail/${idx}`,
-      headers: { Authorization: login.token },
-    })
-      .then((res) => {
-        setItem(res.data.study);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    onGetStudyDetail(login.token, idx);
+  }, [idx]);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
@@ -52,24 +48,26 @@ const StudyDetail = ({ route }: any) => {
     return 'http://localhost:4000/images/' + url;
   };
 
+  if (!studyDetail) return null;
+
   return (
     <Container>
       <StudyImage
-        done={item && !item.flag}
+        done={!studyDetail.flag}
         onPress={goHome}
-        img={item && loadImg(item.Images[0].imgPath)}
+        img={loadImg(studyDetail.Images[0].imgPath)}
       />
       <Content>
-        <Title>{item && item.title}</Title>
+        <Title>{studyDetail.title}</Title>
         <OtherInfo
-          idUser={item && item.idUser}
-          username={item && item.User.nickname}
-          createAt={item && item.createdAt.toString().split('T')[0]}
-          scrap={item && item.scrapCount}
+          idUser={studyDetail.idUser}
+          username={studyDetail.User.nickname}
+          createAt={studyDetail.createdAt.toString().split('T')[0]}
+          scrap={studyDetail.scrapCount}
         />
-        <Desc>{item && item.desc}</Desc>
+        <Desc>{studyDetail.desc}</Desc>
       </Content>
-      <StudyInfo item={item} />
+      <StudyInfo item={studyDetail} />
       <BottomButton onPress={onClick} />
       <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
       <CancelModal

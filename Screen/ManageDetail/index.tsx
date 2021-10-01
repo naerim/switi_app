@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useGoManagement } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
@@ -6,60 +6,47 @@ import { FlatList } from 'react-native';
 import { ManageType } from './interface';
 import RecruitRenderItem from './components/RenderItem/RecruitRenderItem';
 import WaitRenderItem from './components/RenderItem/WaitRenderItem';
-
-const member = [
-  {
-    id: 0,
-    apply: 0,
-    idStudy: 10,
-    idUser: 2,
-    contact: '01012345',
-    apply_detail: '안녕하세요',
-  },
-  {
-    id: 1,
-    apply: 1,
-    idStudy: 10,
-    idUser: 1,
-    contact: '0101234522',
-    apply_detail: '스터디 신청합니다',
-  },
-  {
-    id: 3,
-    apply: 1,
-    idStudy: 10,
-    idUser: 3,
-    contact: '0101234522',
-    apply_detail: '스터디 신청합니다. 스터디 신청합니다. 스터디 신청합니다.',
-  },
-  {
-    id: 3,
-    apply: 4,
-    idStudy: 10,
-    idUser: 4,
-    contact: '0101234522',
-    apply_detail: '스터디 신청합니다',
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import { getStudyMemberRequest } from '../../redux/manageReducer';
+import { getMyPageRequest } from '../../redux/userReducer';
 
 const ManageDetail = ({ route }: any) => {
   const idx = route.params.idx;
   const goStudyManagement = useGoManagement();
   const FlatListItemSeparator = () => <SeparatorLine />;
 
-  // 데이터 연결 후 헤더 변경하기
-  // const [content, setContent] = useState([]);
-  // const { onlineStudyList, offlineStudyList } = useSelector(
-  //   (state: rootState) => state.studyReducer
-  // );
-  //
-  // useEffect(() => {
-  //   setContent(onlineStudyList.concat(offlineStudyList));
-  // }, []);
-  //
-  // const item: any = content.find((i: any) => i.id === idx);
+  const [loading, setLoading] = useState(false);
 
-  // headerTitle={item && item.title}
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  const { studyMember } = useSelector(({ manageReducer }: rootState) => ({
+    studyMember: manageReducer.studyMember,
+  }));
+  const dispatch = useDispatch();
+  const onGetStudyMember = useCallback(
+    // 사용자 프로필 가져오기
+    (token, id) => dispatch(getStudyMemberRequest(token, id)),
+    [dispatch]
+  );
+  const onGetMyPage = useCallback(
+    // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
+    (token) => dispatch(getMyPageRequest(token)),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    setLoading(true);
+    onGetStudyMember(login.token, idx);
+    onGetMyPage(login.token);
+    console.log(studyMember);
+    setLoading(false);
+  }, [idx]);
+
+  if (loading) return <div>로딩중..</div>;
+  if (!studyMember) return null;
+
   return (
     <Wrap>
       <BasicHeader
@@ -69,36 +56,38 @@ const ManageDetail = ({ route }: any) => {
       />
       <Container>
         <Content style={{ marginBottom: 50 }}>
-          <Title>스티디원 (4명)</Title>
+          <Title>
+            스티디원 (
+            {studyMember.member && studyMember.member.studyMembers.length}명)
+          </Title>
           <FlatList
             ItemSeparatorComponent={FlatListItemSeparator}
-            data={member}
-            renderItem={useCallback(
-              ({ item }) => (
-                <RecruitRenderItem index={item.idUser} item={item} />
-              ),
-              []
+            data={studyMember.member && studyMember.member.studyMembers}
+            renderItem={({ item }) => (
+              <RecruitRenderItem index={item.id} item={item} />
             )}
-            keyExtractor={(item: ManageType) => item.idUser.toString()}
-            extraData={member}
+            keyExtractor={(item: ManageType) => item.id.toString()}
+            extraData={studyMember.member && studyMember.member.studyMembers}
             onEndReachedThreshold={0}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => (
+              <EmptyContainer>
+                <EmptyFont>데이터 없음</EmptyFont>
+              </EmptyContainer>
+            )}
           />
         </Content>
         <Box />
         <Content>
-          <Title>수락대기인원 (5명)</Title>
+          <Title>수락대기인원 ({studyMember.applyUser.length}명)</Title>
           <FlatList
             ItemSeparatorComponent={FlatListItemSeparator}
-            data={member}
-            renderItem={useCallback(
-              ({ item }) => (
-                <WaitRenderItem index={item.idUser} item={item} />
-              ),
-              []
+            data={studyMember.applyUser}
+            renderItem={({ item }) => (
+              <WaitRenderItem index={item.id} item={item} />
             )}
-            keyExtractor={(item: ManageType) => item.idUser.toString()}
-            extraData={member}
+            keyExtractor={(item: ManageType) => item.id.toString()}
+            extraData={studyMember.applyUser}
             onEndReachedThreshold={0}
             contentContainerStyle={{ paddingBottom: 0 }}
             showsVerticalScrollIndicator={false}
@@ -138,6 +127,14 @@ const Box = styled.View`
 const SeparatorLine = styled.View`
   height: 1px;
   background-color: #f3f3f3;
+`;
+
+const EmptyContainer = styled.View`
+  margin-top: 10px;
+`;
+
+const EmptyFont = styled.Text`
+  font-size: 12px;
 `;
 
 export default ManageDetail;

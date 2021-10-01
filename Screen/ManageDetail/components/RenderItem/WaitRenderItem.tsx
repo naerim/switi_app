@@ -11,7 +11,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
     <Container activeOpacity={0.8}>
       <MemberImage img={'imgPath'} />
       <Content>
-        <Title>대기인원</Title>
+        <Title>{item.User.nickname}</Title>
         <Desc>{limitTitle(item.apply_detail)}</Desc>
       </Content>
       <AcceptButton title="처리하기" />

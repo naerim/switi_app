@@ -10,8 +10,10 @@ const RecruitRenderItem: React.FC<ItemType> = ({ item }) => {
     <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <MemberImage img={'imgPath'} />
       <Content>
-        <Title>스터디원</Title>
-        <Desc>naerim1119@gmail.com / {item.contact}</Desc>
+        <Title>{item.nickname}</Title>
+        <Desc>
+          {item.email} / {item.studyMember.contact}
+        </Desc>
       </Content>
     </Container>
   );
