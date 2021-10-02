@@ -140,6 +140,22 @@ export const useGoManageDetail = (idx: number) => {
   ]);
 };
 
+export const useGoManageProceeding = (idx: number, title: string) => {
+  const navigation = useNavigation();
+  return useCallback(
+    () => navigation.navigate('ManageProceeding', { idx: idx, title: title }),
+    [navigation, idx, title]
+  );
+};
+
+export const useGoManageRecruit = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('ManageRecruit', { idx: idx }), [
+    navigation,
+    idx,
+  ]);
+};
+
 export const useGoProfileDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('ProfileDetail', { idx: idx }), [

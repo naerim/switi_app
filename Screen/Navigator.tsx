@@ -44,6 +44,8 @@ import { UseGoAlarm } from '../util/navigationHooks';
 import { useSelector } from 'react-redux';
 import { rootState } from '../redux';
 import ProfileDetail from './ProfileDetail';
+import ManageProceeding from './ManageProceeding';
+import ManageRecruit from './ManageRecruit';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -199,10 +201,11 @@ const MainNavigation = () => (
     <Stack.Screen name="Switi" component={TabNavigation} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
-
     <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="ManageDetail" component={ManageDetail} />
+    <Stack.Screen name="ManageProceeding" component={ManageProceeding} />
+    <Stack.Screen name="ManageRecruit" component={ManageRecruit} />
     <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
     <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
     <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
