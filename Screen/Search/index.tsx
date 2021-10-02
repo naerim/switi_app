@@ -11,6 +11,9 @@ import { searchRequest } from '../../redux/searchReducer';
 import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
+import OptionMenu from "./components/optionMenu";
+import RecommendContainer from "./components/Recommend/RecommendContainer";
+import SearchStoryList from "./record/searchStoryList";
 
 const Search = () => {
   //
@@ -109,37 +112,37 @@ const Search = () => {
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      {/*<Container>*/}
-      {/*  <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />*/}
-      {/*  <ListContainer>*/}
-      {/*    <SearchStoryList searches={searches} onPressX={onRemove} />*/}
-      {/*  </ListContainer>*/}
-      {/*  <Line />*/}
-      {/*  <RecommendContainer />*/}
-      {/*</Container>*/}
-      <FlatList
-        ItemSeparatorComponent={FlatListItemSeparator}
-        onRefresh={fetchItem}
-        refreshing={isRefreshing}
-        data={searchStudyList}
-        renderItem={useCallback(
-          ({ item }) => (
-            <RenderItem index={item.id} item={item} />
-          ),
-          []
-        )}
-        keyExtractor={(item: DataType) => item.id.toString()}
-        extraData={searchStudyList}
-        contentContainerStyle={{ paddingBottom: 80 }}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-          <EmptyContainer>
-            <EmptyFont>데이터 랜더링 실패 </EmptyFont>
-          </EmptyContainer>
-        )}
-      />
+      <Container>
+        <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
+        <ListContainer>
+          <SearchStoryList searches={searches} onPressX={onRemove} />
+        </ListContainer>
+        <Line />
+        <RecommendContainer />
+      </Container>
+      {/*<FlatList*/}
+      {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
+      {/*  onRefresh={fetchItem}*/}
+      {/*  refreshing={isRefreshing}*/}
+      {/*  data={searchStudyList}*/}
+      {/*  renderItem={useCallback(*/}
+      {/*    ({ item }) => (*/}
+      {/*      <RenderItem index={item.id} item={item} />*/}
+      {/*    ),*/}
+      {/*    []*/}
+      {/*  )}*/}
+      {/*  keyExtractor={(item: DataType) => item.id.toString()}*/}
+      {/*  extraData={searchStudyList}*/}
+      {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
+      {/*  onEndReached={handleLoadMore}*/}
+      {/*  onEndReachedThreshold={0}*/}
+      {/*  showsVerticalScrollIndicator={false}*/}
+      {/*  ListEmptyComponent={() => (*/}
+      {/*    <EmptyContainer>*/}
+      {/*      <EmptyFont>데이터 랜더링 실패 </EmptyFont>*/}
+      {/*    </EmptyContainer>*/}
+      {/*  )}*/}
+      {/*/>*/}
     </ContainerWithBell>
   );
 };
@@ -155,6 +158,23 @@ const EmptyFont = styled.Text`
 const SeparatorLine = styled.View`
   height: 1px;
   background-color: #f3f3f3;
+`;
+
+const Container = styled.TouchableOpacity`
+`;
+
+const ListContainer = styled.View`
+  margin: 20px 0;
+`;
+const Line = styled.Text`
+  height: 10px;
+  background-color: #f3f3f3;
+  margin-top: 8px;
+  margin-bottom: 10px;
+`;
+
+const ImcyComponent = styled.Text`
+  font-size: 10px;
 `;
 
 export default Search;

@@ -1,11 +1,11 @@
-import produce from "immer";
+import produce from 'immer';
 import {
   POST_STUDY_LIST,
   POST_STUDY_LIST_SUCCESS,
-  POST_STUDY_LIST_FAILURE //에러는 나중에 추가..
-} from "./action";
-import axios from "axios";
-import createRequestThunk from "./lib/createRequestThunk";
+  POST_STUDY_LIST_FAILURE, //에러는 나중에 추가..
+} from './action';
+import axios from 'axios';
+import createRequestThunk from './lib/createRequestThunk';
 
 export interface ISearchState {
   searchStudyList: [];
@@ -13,7 +13,7 @@ export interface ISearchState {
 
 // 검색 api -> 확인
 const search = async (token: string, keyword: string) => {
-  console.log("검색", token, keyword);
+  console.log('검색', token, keyword);
 
   const response = await axios({
     method: 'post',
