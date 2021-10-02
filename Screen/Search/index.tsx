@@ -7,7 +7,7 @@ import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { searchRequest } from '../../redux/searchReducer';
+import { searchHistoryRequest, searchRequest } from '../../redux/searchReducer';
 import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
@@ -20,30 +20,50 @@ const Search = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   })); //리덕스 상태값 조회
-  //검색 + 검색어 저장
+
+  //검색 + 검색어 저장 post
   const fetchOnSearch = (token: any, keyword: string) =>
     dispatch(searchRequest(token, keyword)); //dispatch 사용
-  const { searchStudyList } = useSelector(
+
+  //검색 기록 get
+  const fetchOnSearchHistory = (token: any) =>
+    dispatch(searchHistoryRequest(token)); //dispatch 사용
+
+  const { searchStudyList, searchHistoryList } = useSelector(
     (state: rootState) => state.searchReducer
   ); //리덕스 상태값 조회
+
   useEffect(() => {
     fetchOnSearch(login.token, searchInput.value);
+    fetchOnSearchHistory(login.token);
+    // console.log(`useEffect ${searchHistoryList}`);
   }, [dispatch]); //dispatch 일어나면 다시 실행
-  //기본 state
-  const [searches, setSearches] = useState([
+
+  const initialSearchHistory = [
     {
       id: 1,
-      text: '토익공부',
+      keyword: '코딩테스트',
+      idUser: 55,
     },
     {
       id: 2,
-      text: '파이썬공부',
+      keyword: '코딩테스트',
+      idUser: 55,
     },
     {
       id: 3,
-      text: '코딩테스트',
+      keyword: '코딩테스트',
+      idUser: 55,
     },
-  ]);
+  ];
+
+  //기본 state
+  const [searches, setSearches] = useState(initialSearchHistory);
+
+  // searchHistoryList
+  //   ? setSearches(searchHistoryList)
+  //   : setSearches(initialSearchHistory);
+
   const nextId = useRef(4);
 
   const RealOnPressSearchDelete = useCallback(() => {
@@ -105,42 +125,52 @@ const Search = () => {
   const handleLoadMore = () => {
     console.log('검색 완료');
   };
-  console.log(`왜 안나오는가 ? ${searchStudyList}`);
+
+  console.log(
+    `검색기록확인해보자 at Search/index 116 ${JSON.stringify(
+      searchHistoryList
+    )}`
+  );
+
+  useEffect(() => {
+    if (searchHistoryList) setSearches(searchHistoryList);
+  }, [searchHistoryList]);
 
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
+      {/*{console.log(searchHistoryList)}*/}
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      {/*<Container>*/}
-      {/*  <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />*/}
-      {/*  <ListContainer>*/}
-      {/*    <SearchStoryList searches={searches} onPressX={onRemove} />*/}
-      {/*  </ListContainer>*/}
-      {/*  <Line />*/}
-      {/*  <RecommendContainer />*/}
-      {/*</Container>*/}
-      <FlatList
-        ItemSeparatorComponent={FlatListItemSeparator}
-        onRefresh={fetchItem}
-        refreshing={isRefreshing}
-        data={searchStudyList}
-        renderItem={useCallback(
-          ({ item }) => (
-            <RenderItem index={item.id} item={item} />
-          ),
-          []
-        )}
-        keyExtractor={(item: DataType) => item.id.toString()}
-        extraData={searchStudyList}
-        contentContainerStyle={{ paddingBottom: 80 }}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-          <EmptyContainer>
-            <EmptyFont>데이터 랜더링 실패 </EmptyFont>
-          </EmptyContainer>
-        )}
-      />
+      <Container>
+        <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
+        <ListContainer>
+          <SearchStoryList searches={searches} onPressX={onRemove} />
+        </ListContainer>
+        <Line />
+        <RecommendContainer />
+      </Container>
+      {/*<FlatList*/}
+      {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
+      {/*  onRefresh={fetchItem}*/}
+      {/*  refreshing={isRefreshing}*/}
+      {/*  data={searchStudyList}*/}
+      {/*  renderItem={useCallback(*/}
+      {/*    ({ item }) => (*/}
+      {/*      <RenderItem index={item.id} item={item} />*/}
+      {/*    ),*/}
+      {/*    []*/}
+      {/*  )}*/}
+      {/*  keyExtractor={(item: DataType) => item.id.toString()}*/}
+      {/*  extraData={searchStudyList}*/}
+      {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
+      {/*  onEndReached={handleLoadMore}*/}
+      {/*  onEndReachedThreshold={0}*/}
+      {/*  showsVerticalScrollIndicator={false}*/}
+      {/*  ListEmptyComponent={() => (*/}
+      {/*    <EmptyContainer>*/}
+      {/*      <EmptyFont>데이터 랜더링 실패 </EmptyFont>*/}
+      {/*    </EmptyContainer>*/}
+      {/*  )}*/}
+      {/*/>*/}
     </ContainerWithBell>
   );
 };
@@ -158,7 +188,7 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
-const Container = styled.TouchableOpacity``;
+const Container = styled.View``;
 
 const ListContainer = styled.View`
   margin: 20px 0;

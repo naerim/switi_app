@@ -5,7 +5,8 @@ import { ContentFonts } from '../../../Component/Font';
 
 interface searchArrayProps {
   id: number;
-  text: string;
+  keyword: string;
+  idUser: number;
 }
 
 interface SearchStoryItemProps {
@@ -17,10 +18,10 @@ const SearchStoryItem: React.FC<SearchStoryItemProps> = ({
   search,
   onPressX,
 }) => {
-  const { id, text } = search;
+  const { id, keyword } = search;
   return (
     <Tag>
-      <ContentFonts>{text}</ContentFonts>
+      <ContentFonts>{keyword}</ContentFonts>
       <IconContainer onPress={() => onPressX(id)}>
         <Icon source={DeleteIcon} />
       </IconContainer>

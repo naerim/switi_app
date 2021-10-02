@@ -4,7 +4,8 @@ import styled from 'styled-components/native';
 
 interface searchArrayProps {
   id: number;
-  text: string;
+  keyword: string;
+  idUser: number;
 }
 
 interface SearchStoryItemProps {
