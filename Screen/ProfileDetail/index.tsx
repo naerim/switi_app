@@ -96,9 +96,7 @@ const ProfileDetail = ({ route }: any) => {
 
   return (
     <BasicContainer headerTitle="" display={true} onPress={goBack}>
-      <UserName name={userProfile.nickname} img={userProfile.profilepath}>
-        상대방 프로필
-      </UserName>
+      <UserName name={userProfile.nickname} img={userProfile.profilepath} />
       <Sugar num={userProfile.sugar} />
       <Container>
         {profileData.map(({ title, content, flexDirection }) => (
