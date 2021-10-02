@@ -51,7 +51,12 @@ const AddStudy = () => {
 
     // formData.append('image', file);
     // console.log(file);
+
+    // endDate
+    const date =
+      EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
     console.log(image);
+
     axios({
       method: 'post',
       url: 'http://localhost:4000/study/addStudy',
@@ -64,7 +69,7 @@ const AddStudy = () => {
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
-        endDate: EndDateInput,
+        endDate: date,
         contact: contentInput.value,
         title: titleInput.value,
         desc: contentInput.value,
