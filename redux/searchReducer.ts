@@ -47,6 +47,9 @@ const searchAllDelete = async (token: string) => {
     url: 'http://localhost:4000/search/deleteAll',
     headers: { Authorization: token },
   });
+  console.log(
+    `검색기록삭제확인해보자 at searhReducer 51 ${JSON.stringify(response)}`
+  );
   return response;
 };
 

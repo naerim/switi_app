@@ -7,7 +7,11 @@ import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { searchHistoryRequest, searchRequest } from '../../redux/searchReducer';
+import {
+  searchAllDeleteRequest,
+  searchHistoryRequest,
+  searchRequest,
+} from '../../redux/searchReducer';
 import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
@@ -28,6 +32,11 @@ const Search = () => {
   //검색 기록 get
   const fetchOnSearchHistory = (token: any) =>
     dispatch(searchHistoryRequest(token)); //dispatch 사용
+
+  //검색 기록 all delete
+  const fetchSearchDelete = (token: any) => {
+    dispatch(searchAllDeleteRequest(token));
+  };
 
   const { searchStudyList, searchHistoryList } = useSelector(
     (state: rootState) => state.searchReducer
@@ -57,13 +66,7 @@ const Search = () => {
     },
   ];
 
-  //기본 state
   const [searches, setSearches] = useState(initialSearchHistory);
-
-  // searchHistoryList
-  //   ? setSearches(searchHistoryList)
-  //   : setSearches(initialSearchHistory);
-
   const nextId = useRef(4);
 
   const RealOnPressSearchDelete = useCallback(() => {
@@ -126,19 +129,12 @@ const Search = () => {
     console.log('검색 완료');
   };
 
-  console.log(
-    `검색기록확인해보자 at Search/index 116 ${JSON.stringify(
-      searchHistoryList
-    )}`
-  );
-
   useEffect(() => {
     if (searchHistoryList) setSearches(searchHistoryList);
   }, [searchHistoryList]);
 
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
-      {/*{console.log(searchHistoryList)}*/}
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
       <Container>
         <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
