@@ -7,7 +7,8 @@ import {
   getInterestRequest,
   getRegionRequest,
 } from '../../redux/dataReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -15,6 +16,14 @@ const Home = ({ route }: any) => {
   >([]);
   // 0 : 온라인, 1 : 오프라인
   const idx = route.params.idx;
+
+  const { character, interest, region } = useSelector(
+    ({ dataReducer }: rootState) => ({
+      character: dataReducer.character,
+      interest: dataReducer.interest,
+      region: dataReducer.region,
+    })
+  );
 
   const dispatch = useDispatch();
   const onGetInterest = useCallback(() => dispatch(getInterestRequest), [

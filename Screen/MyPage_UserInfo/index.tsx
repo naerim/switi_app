@@ -11,6 +11,8 @@ import {
   UseGoWithdrawal,
 } from '../../util/navigationHooks';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const MyPage_UserInfo = () => {
   const goMyPage = useGoMyPage();
@@ -35,6 +37,10 @@ const MyPage_UserInfo = () => {
     }, 500);
   };
 
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
+  }));
+
   return (
     <UserInfoContainer
       headerTitle="회원정보"
@@ -43,7 +49,7 @@ const MyPage_UserInfo = () => {
     >
       <UserImageContainer>
         <UserImage source={ProfileIcon} />
-        <UserName title="사용자" />
+        <UserName title={myPage.myPage.nickname} />
       </UserImageContainer>
       <Line />
       <Text onPress={goFixUserInfo}>회원정보 수정</Text>

@@ -30,7 +30,7 @@ export const getInterestRequest = () => {
     if (response.data) {
       dispatch({
         type: GET_INTEREST,
-        payload: response.data.interest,
+        payload: response.data,
       });
     } else {
       console.log('Unable to fetch data');
@@ -45,7 +45,7 @@ export const getRegionRequest = () => {
     if (response.data) {
       dispatch({
         type: GET_REGION,
-        payload: response.data.region,
+        payload: response.data,
       });
     } else {
       console.log('Unable to fetch data');

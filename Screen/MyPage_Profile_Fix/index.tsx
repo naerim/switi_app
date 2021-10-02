@@ -10,6 +10,8 @@ import MyState from '../Profile/components/MyState';
 import Introduce from '../Profile/components/Introduce';
 import BasicButton from '../../Component/BasicButton';
 import useScroll from '../../util/useScroll';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const MyPage_Profile_Fix = () => {
   const { scroll, scrollOn } = useScroll();
@@ -30,12 +32,12 @@ const MyPage_Profile_Fix = () => {
   });
 
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
-  // const { interest } = useSelector(({ dataReducer }: rootState) => ({
-  //   interest: dataReducer.interest,
-  // }));
-  // const { character } = useSelector(({ dataReducer }: rootState) => ({
-  //   character: dataReducer.character,
-  // }));
+  const { interest } = useSelector(({ dataReducer }: rootState) => ({
+    interest: dataReducer.interest,
+  }));
+  const { character } = useSelector(({ dataReducer }: rootState) => ({
+    character: dataReducer.character,
+  }));
 
   return (
     <BasicContainer
