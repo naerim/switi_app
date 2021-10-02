@@ -22,6 +22,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
+  //
   const dispatch = useDispatch();
 
   const { login } = useSelector(({ userReducer }: rootState) => ({

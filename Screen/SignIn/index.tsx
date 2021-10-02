@@ -16,8 +16,8 @@ import { loginRequest } from '../../redux/userReducer';
 import { rootState } from '../../redux';
 
 const SignIn: React.FC = () => {
-  const emailInput = useInput('naerim1119@gmail.com');
-  const passwordInput = useInput('qwer1234!');
+  const emailInput = useInput('mn0316@naver.com');
+  const passwordInput = useInput('lee000316^^');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // 이메일 인증 모달창
