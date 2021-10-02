@@ -1,8 +1,8 @@
 import React from 'react';
-import { ItemType } from '../../interface';
+import { ItemType } from '../../ManageProceeding/interface';
 import styled from 'styled-components/native';
-import MemberImage from '../MemberImage';
-import AcceptButton from '../AcceptButton';
+import MemberImage from '../../ManageProceeding/components/MemberImage';
+import AcceptButton from '../../ManageProceeding/components/AcceptButton';
 
 const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const limitTitle = (title: string) =>
@@ -14,7 +14,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
         <Title>{item.User.nickname}</Title>
         <Desc>{limitTitle(item.apply_detail)}</Desc>
       </Content>
-      <AcceptButton title="처리하기" />
+      <AcceptButton title="처리하기" display={true} />
     </Container>
   );
 };

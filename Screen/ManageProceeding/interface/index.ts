@@ -12,4 +12,5 @@ export interface ManageType {
 export interface ItemType {
   index: number;
   item: ManageType;
+  desc?: boolean;
 }

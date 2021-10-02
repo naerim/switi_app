@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../../../Home/interface';
 import {
-  useGoManageDetail,
+  useGoManageRecruit,
   useGoStudyDetail,
 } from '../../../../util/navigationHooks';
 import StudyImageManage from '../StudyImageManage';
@@ -10,7 +10,7 @@ import ManageIcon from '../../../../Img/icon_memberManage.png';
 
 const Recruitment: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
-  const goManageDetail = useGoManageDetail(item.id);
+  const goManageRecruit = useGoManageRecruit(item.id, item.title);
 
   // 글자수 제한
   const limitTitle = (title: string) =>
@@ -20,7 +20,7 @@ const Recruitment: React.FC<ItemType> = ({ item }) => {
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
       <StudyImageManage img={item.Images[0].imgPath} />
       <Title>{limitTitle(item.title)}</Title>
-      <ManageMember onPress={goManageDetail}>
+      <ManageMember onPress={goManageRecruit}>
         <ButtonImage source={ManageIcon} />
       </ManageMember>
     </Container>

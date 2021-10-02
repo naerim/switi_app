@@ -7,7 +7,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Home from './Home';
 import Search from './Search';
 import Management from './Management';
-import ManageDetail from './ManageDetail';
 import MyPage from './MyPage';
 import SignUp from './SignUp';
 import FirstProfile from './Profile/firstProfile';
@@ -203,7 +202,6 @@ const MainNavigation = () => (
     <Stack.Screen name="Alarm" component={Alarm} />
     <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
-    <Stack.Screen name="ManageDetail" component={ManageDetail} />
     <Stack.Screen name="ManageProceeding" component={ManageProceeding} />
     <Stack.Screen name="ManageRecruit" component={ManageRecruit} />
     <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />

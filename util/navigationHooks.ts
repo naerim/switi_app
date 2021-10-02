@@ -132,14 +132,6 @@ export const useGoManagement = () => {
   return useCallback(() => navigation.navigate('Management'), [navigation]);
 };
 
-export const useGoManageDetail = (idx: number) => {
-  const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('ManageDetail', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
-};
-
 export const useGoManageProceeding = (idx: number, title: string) => {
   const navigation = useNavigation();
   return useCallback(
@@ -148,12 +140,12 @@ export const useGoManageProceeding = (idx: number, title: string) => {
   );
 };
 
-export const useGoManageRecruit = (idx: number) => {
+export const useGoManageRecruit = (idx: number, title: string) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('ManageRecruit', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
+  return useCallback(
+    () => navigation.navigate('ManageRecruit', { idx: idx, title: title }),
+    [navigation, idx, title]
+  );
 };
 
 export const useGoProfileDetail = (idx: number) => {
