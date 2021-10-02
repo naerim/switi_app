@@ -6,6 +6,9 @@ import {
   GET_SEARCH_HISTORY_LIST,
   GET_SEARCH_HISTORY_LIST_SUCCESS,
   GET_SEARCH_HISTORY_LIST_FAILURE,
+  DELETE_STUDY_ALL_DELETE,
+  DELETE_STUDY_ALL_DELETE_SUCCESS,
+  DELETE_STUDY_ALL_DELETE_FAILURE,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -24,7 +27,6 @@ const search = async (token: string, keyword: string) => {
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
-  // console.log(`검색결과확인: ${JSON.stringify(response.data.study)}`);
   return response;
 };
 
@@ -35,43 +37,33 @@ const searchHistory = async (token: string) => {
     url: 'http://localhost:4000/search/getSearch',
     headers: { Authorization: token },
   });
-  // console.log(
-  //   `검색기록 response.data.search 확인 at searchReducer43 : ${JSON.stringify(
-  //     response.data.search
-  //   )}`
-  // );
   return response;
 };
-// export const SearchHistoryRequest = (token: string) => {
-//   return async (dispatch: any) => {
-//     const response = await axios.get(`http://localhost:4000/search/getSearch`, {
-//       headers: { Authorization: `${token}` },
-//     });
-//     if (response.data) {
-//       dispatch({
-//         type: GET_SEARCH_HISTORY_LIST,
-//         payload: response.data.search,
-//       });
-//       console.log(
-//         `검색기록 response.data.search 확인 at searchReducer43 : ${JSON.stringify(
-//           response.data.search
-//         )}`
-//       );
-//     } else {
-//       console.log('검색기록을 받아오지 못했습니다. ');
-//     }
-//   };
-// };
+
+//검색 기록 모두 삭제
+const searchAllDelete = async (token: string) => {
+  const response = await axios({
+    method: 'delete',
+    url: 'http://localhost:4000/search/deleteAll',
+    headers: { Authorization: token },
+  });
+  return response;
+};
 
 export const searchRequest = createRequestThunk(POST_STUDY_LIST, search);
 export const searchHistoryRequest = createRequestThunk(
   GET_SEARCH_HISTORY_LIST,
   searchHistory
 );
+export const searchAllDeleteRequest = createRequestThunk(
+  DELETE_STUDY_ALL_DELETE,
+  searchAllDelete
+);
 
 const initialState = {
   searchStudyList: null,
   searchHistoryList: null,
+  searchAllDelete: null,
 };
 
 // export interface ISearchState {
@@ -87,6 +79,10 @@ function searchReducer(state = initialState, action: any) {
       case GET_SEARCH_HISTORY_LIST_SUCCESS:
         draft.searchHistoryList = action.payload.search;
         break;
+      case DELETE_STUDY_ALL_DELETE_SUCCESS:
+        draft.searchAllDelete = action.payload.search;
+        break;
+      //삭제는 searchHistoryList 같이 써야 하나..?
       default:
         break;
     }
