@@ -11,16 +11,16 @@ import { searchRequest } from '../../redux/searchReducer';
 import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
-import OptionMenu from "./components/optionMenu";
-import RecommendContainer from "./components/Recommend/RecommendContainer";
-import SearchStoryList from "./record/searchStoryList";
+import OptionMenu from './components/optionMenu';
+import RecommendContainer from './components/Recommend/RecommendContainer';
+import SearchStoryList from './record/searchStoryList';
 
 const Search = () => {
-  //
-  const dispatch = useDispatch(); //action 받아서 Stroe의 Reducer에서 넘김
+  const dispatch = useDispatch(); //action 받아서 store의 Reducer에서 넘김
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
-  }));//리덕스 상태값 조회
+  })); //리덕스 상태값 조회
+  //검색 + 검색어 저장
   const fetchOnSearch = (token: any, keyword: string) =>
     dispatch(searchRequest(token, keyword)); //dispatch 사용
   const { searchStudyList } = useSelector(
@@ -29,7 +29,6 @@ const Search = () => {
   useEffect(() => {
     fetchOnSearch(login.token, searchInput.value);
   }, [dispatch]); //dispatch 일어나면 다시 실행
-
   //기본 state
   const [searches, setSearches] = useState([
     {
@@ -50,7 +49,6 @@ const Search = () => {
   const RealOnPressSearchDelete = useCallback(() => {
     setSearches([]);
   }, [searches]);
-  // 이게 맞을까? 배열 초기화
 
   const onInsert = useCallback(
     (text) => {
@@ -88,7 +86,7 @@ const Search = () => {
         const BeforeSearch = JSON.parse(result);
         // console.log(BeforeSearch, '가져옴');
         onInsert(BeforeSearch.text);
-        fetchOnSearch(login.token, searchVoca);//사용
+        fetchOnSearch(login.token, searchVoca); //사용
       }
     });
   };
@@ -112,37 +110,37 @@ const Search = () => {
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      <Container>
-        <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />
-        <ListContainer>
-          <SearchStoryList searches={searches} onPressX={onRemove} />
-        </ListContainer>
-        <Line />
-        <RecommendContainer />
-      </Container>
-      {/*<FlatList*/}
-      {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
-      {/*  onRefresh={fetchItem}*/}
-      {/*  refreshing={isRefreshing}*/}
-      {/*  data={searchStudyList}*/}
-      {/*  renderItem={useCallback(*/}
-      {/*    ({ item }) => (*/}
-      {/*      <RenderItem index={item.id} item={item} />*/}
-      {/*    ),*/}
-      {/*    []*/}
-      {/*  )}*/}
-      {/*  keyExtractor={(item: DataType) => item.id.toString()}*/}
-      {/*  extraData={searchStudyList}*/}
-      {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
-      {/*  onEndReached={handleLoadMore}*/}
-      {/*  onEndReachedThreshold={0}*/}
-      {/*  showsVerticalScrollIndicator={false}*/}
-      {/*  ListEmptyComponent={() => (*/}
-      {/*    <EmptyContainer>*/}
-      {/*      <EmptyFont>데이터 랜더링 실패 </EmptyFont>*/}
-      {/*    </EmptyContainer>*/}
-      {/*  )}*/}
-      {/*/>*/}
+      {/*<Container>*/}
+      {/*  <OptionMenu onPressSearchDelete={RealOnPressSearchDelete} />*/}
+      {/*  <ListContainer>*/}
+      {/*    <SearchStoryList searches={searches} onPressX={onRemove} />*/}
+      {/*  </ListContainer>*/}
+      {/*  <Line />*/}
+      {/*  <RecommendContainer />*/}
+      {/*</Container>*/}
+      <FlatList
+        ItemSeparatorComponent={FlatListItemSeparator}
+        onRefresh={fetchItem}
+        refreshing={isRefreshing}
+        data={searchStudyList}
+        renderItem={useCallback(
+          ({ item }) => (
+            <RenderItem index={item.id} item={item} />
+          ),
+          []
+        )}
+        keyExtractor={(item: DataType) => item.id.toString()}
+        extraData={searchStudyList}
+        contentContainerStyle={{ paddingBottom: 80 }}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => (
+          <EmptyContainer>
+            <EmptyFont>데이터 랜더링 실패 </EmptyFont>
+          </EmptyContainer>
+        )}
+      />
     </ContainerWithBell>
   );
 };
@@ -160,8 +158,7 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
-const Container = styled.TouchableOpacity`
-`;
+const Container = styled.TouchableOpacity``;
 
 const ListContainer = styled.View`
   margin: 20px 0;
