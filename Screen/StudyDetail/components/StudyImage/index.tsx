@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 import DetailHeader from '../DetailHeader';
+import ScrapHeader from '../ScrapHeader';
 
 interface Props {
   img: any;
@@ -14,7 +15,8 @@ const StudyImage: React.FC<Props> = ({ img, done, onPress }) => {
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <MainImage source={{ uri: img }} />
-      <DetailHeader onPress={onPress} />
+      <ScrapHeader onPress={onPress} />
+      {/*<DetailHeader onPress={onPress} />*/}
       <RecruitIcon done={done} use="StudyDetail" />
     </Container>
   );

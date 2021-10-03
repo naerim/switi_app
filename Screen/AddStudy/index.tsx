@@ -57,15 +57,16 @@ const AddStudy = () => {
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
     console.log(image);
 
+    console.log(selectTarget.value);
     axios({
       method: 'post',
       url: 'http://localhost:4000/study/addStudy',
       headers: { Authorization: login.token },
       data: {
         online_flag: onlineFlag,
-        state: selectTarget.value,
-        category: category,
-        address: area,
+        state: 1,
+        category: 1,
+        address: 1,
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
