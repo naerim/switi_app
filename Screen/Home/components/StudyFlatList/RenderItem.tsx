@@ -27,7 +27,7 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
             category={item.Interests}
             target={item.States}
           />
-          <Scrap scrap={item.scrapCount} />
+          <Scrap scrap={item.scrapCount} id={item.id} />
         </Bottom>
       </Content>
     </Container>
