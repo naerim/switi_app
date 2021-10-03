@@ -9,6 +9,7 @@ import {
 } from '../../redux/dataReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import { getScrapListRequest } from '../../redux/userReducer';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -17,6 +18,9 @@ const Home = ({ route }: any) => {
   // 0 : 온라인, 1 : 오프라인
   const idx = route.params.idx;
 
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
   const { character, interest, region } = useSelector(
     ({ dataReducer }: rootState) => ({
       character: dataReducer.character,
@@ -34,8 +38,15 @@ const Home = ({ route }: any) => {
   ]);
   const onGetRegion = useCallback(() => dispatch(getRegionRequest), [dispatch]);
 
+  const onGetScrapList = useCallback(
+    // 스크랩리스트 불러오기
+    (token) => dispatch(getScrapListRequest(token)),
+    [dispatch]
+  );
+
   useEffect(() => {
     // 관심분야, 성격, 지역
+    onGetScrapList(login.token);
     onGetInterest();
     onGetCharacter();
     onGetRegion();

@@ -56,6 +56,7 @@ const StudyDetail = ({ route }: any) => {
         done={!studyDetail.flag}
         onPress={goHome}
         img={loadImg(studyDetail.Images[0].imgPath)}
+        id={studyDetail.id}
       />
       <Content>
         <Title>{studyDetail.title}</Title>

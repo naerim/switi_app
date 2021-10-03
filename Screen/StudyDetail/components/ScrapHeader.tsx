@@ -1,17 +1,25 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import BackIcon from '../../../Img/btn_back_w.png';
-import ScrapIcon from '../../../Img/icon_scrap.png';
+// import ScrapIcon from '../../../Img/icon_scrap.png';
 import NotScrapIcon from '../../../Img/icon_notScrap.png';
 import { Platform } from 'react-native';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
 interface Props {
   onPress: () => void;
+  id: number;
 }
 
-const ScrapHeader: React.FC<Props> = ({ onPress }) => {
+const ScrapHeader: React.FC<Props> = ({ onPress, id }) => {
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
+
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+      {console.log(scrapList)}
       <Wrap
         onPress={onPress}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -19,7 +27,7 @@ const ScrapHeader: React.FC<Props> = ({ onPress }) => {
         <Icon source={BackIcon} />
       </Wrap>
       <Wrap
-        onPress={() => console.log('scrap')}
+        onPress={() => console.log(id)}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
         <RightIcon source={NotScrapIcon} />
