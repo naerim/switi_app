@@ -17,6 +17,7 @@ const Scrap: React.FC<Props> = ({ scrap, id }) => {
   }));
 
   const confirmScrap = () => {
+    if (!scrapList) return null;
     // some: 배열 요소 중 하나라도 스크랩된 스터디 아이디에 해당하면 true 반환
     const scrap = scrapList.scrapList.some((item: { id: number }) => {
       return item.id == id;

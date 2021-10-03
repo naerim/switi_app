@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getScrapListRequest } from '../../redux/userReducer';
+import { getMyStudyListRequest } from '../../redux/manageReducer';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -28,9 +29,6 @@ const Home = ({ route }: any) => {
       region: dataReducer.region,
     })
   );
-  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
-    scrapList: userReducer.scrapList,
-  }));
 
   const dispatch = useDispatch();
   const onGetInterest = useCallback(() => dispatch(getInterestRequest), [
@@ -46,16 +44,21 @@ const Home = ({ route }: any) => {
     (token) => dispatch(getScrapListRequest(token)),
     [dispatch]
   );
+  const onGetMyStudyList = useCallback(
+    // 사용자 프로필 가져오기
+    (token) => dispatch(getMyStudyListRequest(token)),
+    [dispatch]
+  );
 
   useEffect(() => {
-    // 관심분야, 성격, 지역
     onGetScrapList(login.token);
+    onGetMyStudyList(login.token);
+    // 관심분야, 성격, 지역
     onGetInterest();
     onGetCharacter();
     onGetRegion();
   }, []);
 
-  if (!scrapList) return null;
   return (
     <Container>
       <TopCategory tagList={tagList} setTagList={setTagList} />

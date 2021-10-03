@@ -32,6 +32,7 @@ const ManageProceeding = ({ route }: any) => {
   useEffect(() => {
     setLoading(true);
     onGetStudyMember(login.token, idx);
+    console.log(studyMember);
     setLoading(false);
   }, [idx]);
 
