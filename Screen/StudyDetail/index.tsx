@@ -20,6 +20,9 @@ const StudyDetail = ({ route }: any) => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
     studyDetail: studyReducer.studyDetail,
   }));
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
 
   const dispatch = useDispatch();
   const onGetStudyDetail = useCallback(
@@ -29,7 +32,7 @@ const StudyDetail = ({ route }: any) => {
 
   useEffect(() => {
     onGetStudyDetail(login.token, idx);
-  }, [idx]);
+  }, [idx, scrapList]);
 
   const goHome = useGoHome();
   const [modalVisible, setModalVisible] = useState(false);
@@ -65,6 +68,7 @@ const StudyDetail = ({ route }: any) => {
           username={studyDetail.User.nickname}
           createAt={studyDetail.createdAt.toString().split('T')[0]}
           scrap={studyDetail.scrapCount}
+          id={studyDetail.id}
         />
         <Desc>{studyDetail.desc}</Desc>
       </Content>
