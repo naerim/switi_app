@@ -22,11 +22,13 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
-  //
   const dispatch = useDispatch();
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
+  }));
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
   }));
 
   const fetchOnlineStudyList = (order: boolean, query: string) =>
@@ -66,7 +68,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   useEffect(() => {
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
-  }, [checked, query]);
+  }, [checked, query, scrapList]);
   //비동기적 처리 -> 동기적 처리 순서로 결과가 화면에 출력되지 않음
   //동기적 처리로 해결
 

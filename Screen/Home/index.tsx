@@ -28,6 +28,9 @@ const Home = ({ route }: any) => {
       region: dataReducer.region,
     })
   );
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
 
   const dispatch = useDispatch();
   const onGetInterest = useCallback(() => dispatch(getInterestRequest), [
@@ -52,6 +55,7 @@ const Home = ({ route }: any) => {
     onGetRegion();
   }, []);
 
+  if (!scrapList) return null;
   return (
     <Container>
       <TopCategory tagList={tagList} setTagList={setTagList} />

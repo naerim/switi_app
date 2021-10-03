@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import NotScrapIcon from '../../../../Img/icon_notScrap.png';
 import ScrapIcon from '../../../../Img/icon_scrap.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../../redux';
+import { getScrapListRequest } from '../../../../redux/userReducer';
 
 interface Props {
   scrap?: number;
@@ -26,7 +27,7 @@ const Scrap: React.FC<Props> = ({ scrap, id }) => {
 
   useEffect(() => {
     confirmScrap();
-  }, [id]);
+  }, [id, scrapList]);
 
   return (
     <Container>
