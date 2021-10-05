@@ -57,24 +57,24 @@ const Search = () => {
   const [searches, setSearches] = useState([]);
   // X 검색 상태 변경 : 현재 검색 기록에만 사용중.
 
-  const handleSearchAllDelete = useCallback(() => {
-    setSearches([]); // X 프론트 처리
-    fetchSearchAllDelete(login.token); // X 백엔드 처리
+  const handleSearchAllDelete = useCallback(async () => {
+    await setSearches([]); // X 프론트 처리
+    await fetchSearchAllDelete(login.token); // X 백엔드 처리
   }, [searches]);
   // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
 
-  const handleSearchDelete = (id: number) => {
-    fetchSearchDelete(login.token, id);
-    fetchOnSearchHistory(login.token);
+  const handleSearchDelete = async (id: number) => {
+    await fetchSearchDelete(login.token, id);
+    await fetchOnSearchHistory(login.token);
     console.log(`id!! : ${id}`);
   }; // X 단어 옆 x 누르면 위 콜백 함수 호출
 
   const searchInput = useInput('');
 
-  const searchSomething = () => {
+  const searchSomething = async () => {
     const searchVoca = searchInput.value;
-    fetchOnSearch(login.token, searchVoca); // X 사용
-    fetchOnSearchHistory(login.token);
+    await fetchOnSearch(login.token, searchVoca); // X 사용
+    await fetchOnSearchHistory(login.token);
   };
 
   const goAlarm = UseGoAlarm;
