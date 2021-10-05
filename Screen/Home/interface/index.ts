@@ -1,4 +1,5 @@
 export interface DataType {
+  Applies: { apply_state: number };
   User: { nickname: string };
   idUser: number;
   Images: any;
