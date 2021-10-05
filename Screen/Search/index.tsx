@@ -49,13 +49,15 @@ const Search = () => {
   // X 리덕스 상태값
   // X 검색결과 보일 때, searchStudyList 사용
 
+  const [searches, setSearches] = useState([]);
+  // X 검색 상태 변경 : 현재 검색 기록에만 사용중.
+
+  const searchInput = useInput('');
+
   useEffect(() => {
     fetchOnSearchHistory(login.token);
   }, [dispatch]);
   // X [dispatch] = 맨 처음 한번 실행하는 것과 같은 의미, 페이지 로드 되면, 검색결과 가져오기
-
-  const [searches, setSearches] = useState([]);
-  // X 검색 상태 변경 : 현재 검색 기록에만 사용중.
 
   const handleSearchAllDelete = useCallback(async () => {
     await setSearches([]); // X 프론트 처리
@@ -66,14 +68,11 @@ const Search = () => {
   const handleSearchDelete = async (id: number) => {
     await fetchSearchDelete(login.token, id);
     await fetchOnSearchHistory(login.token);
-    console.log(`id!! : ${id}`);
   }; // X 단어 옆 x 누르면 위 콜백 함수 호출
-
-  const searchInput = useInput('');
 
   const searchSomething = async () => {
     const searchVoca = searchInput.value;
-    await fetchOnSearch(login.token, searchVoca); // X 사용
+    await fetchOnSearch(login.token, searchVoca);
     await fetchOnSearchHistory(login.token);
   };
 
@@ -99,37 +98,39 @@ const Search = () => {
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      <Container>
-        <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
-        <ListContainer>
-          <SearchStoryList searches={searches} onPressX={handleSearchDelete} />
-        </ListContainer>
-        <Line />
-        <RecommendContainer />
-      </Container>
-      {/*<FlatList*/}
-      {/*  ItemSeparatorComponent={FlatListItemSeparator}*/}
-      {/*  onRefresh={fetchItem}*/}
-      {/*  refreshing={isRefreshing}*/}
-      {/*  data={searchStudyList}*/}
-      {/*  renderItem={useCallback(*/}
-      {/*    ({ item }) => (*/}
-      {/*      <RenderItem index={item.id} item={item} />*/}
-      {/*    ),*/}
-      {/*    []*/}
-      {/*  )}*/}
-      {/*  keyExtractor={(item: DataType) => item.id.toString()}*/}
-      {/*  extraData={searchStudyList}*/}
-      {/*  contentContainerStyle={{ paddingBottom: 80 }}*/}
-      {/*  onEndReached={handleLoadMore}*/}
-      {/*  onEndReachedThreshold={0}*/}
-      {/*  showsVerticalScrollIndicator={false}*/}
-      {/*  ListEmptyComponent={() => (*/}
-      {/*    <EmptyContainer>*/}
-      {/*      <EmptyFont>데이터 랜더링 실패 </EmptyFont>*/}
-      {/*    </EmptyContainer>*/}
-      {/*  )}*/}
-      {/*/>*/}
+      {!searchStudyList ? (
+        <Container>
+          <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
+          <ListContainer>
+            <SearchStoryList
+              searches={searches}
+              onPressX={handleSearchDelete}
+            />
+          </ListContainer>
+          <Line />
+          <RecommendContainer />
+        </Container>
+      ) : (
+        <FlatList
+          ItemSeparatorComponent={FlatListItemSeparator}
+          onRefresh={fetchItem}
+          refreshing={isRefreshing}
+          data={searchStudyList}
+          renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
+          keyExtractor={(item: DataType) => item.id.toString()}
+          extraData={searchStudyList}
+          contentContainerStyle={{ paddingBottom: 80 }}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => (
+            <EmptyContainer>
+              <EmptyFont>데이터 랜더링 실패</EmptyFont>
+            </EmptyContainer>
+          )}
+        />
+      )}
+      {console.log(`현재 검색결과 : ${searchStudyList}`)}
     </ContainerWithBell>
   );
 };
