@@ -39,8 +39,8 @@ const Search = () => {
   };
 
   // X 검색 기록 하나 삭제
-  const fetchSearchDelete = (token: any) => {
-    dispatch(searchDeleteRequest(token));
+  const fetchSearchDelete = (token: any, id: number) => {
+    dispatch(searchDeleteRequest(token, id));
   };
 
   const { searchStudyList, searchHistoryList } = useSelector(
@@ -63,9 +63,10 @@ const Search = () => {
   }, [searches]);
   // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
 
-  const handleSearchDelete = () => {
-    fetchSearchDelete(login.token);
+  const handleSearchDelete = (id: number) => {
+    fetchSearchDelete(login.token, id);
     fetchOnSearchHistory(login.token);
+    console.log(`id!! : ${id}`);
   }; // X 단어 옆 x 누르면 위 콜백 함수 호출
 
   const searchInput = useInput('');

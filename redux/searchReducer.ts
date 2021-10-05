@@ -24,7 +24,7 @@ export interface ISearchState {
 const initialState = {
   searchStudyList: null,
   searchHistoryList: null,
-  searchAllDelete: null,
+  // searchAllDelete: null,
 }; // 기본 상태
 
 // 검색하기 + 검색어저장
@@ -62,11 +62,11 @@ const searchAllDelete = async (token: string) => {
 const searchDelete = async (token: string, id: number) => {
   const response = await axios({
     method: 'delete',
-    url: `/deleteOne/${id}`,
+    url: `http://localhost:4000/search//deleteOne/${id}`,
     headers: { Authorization: token },
   });
   console.log(
-    `검색기록하나삭제확인해보자 at searchReducer 51 ${JSON.stringify(response)}`
+    `검색기록하나삭제 id : ${id} 확인해보자 at searchReducer 51 ${JSON.stringify(response)}`
   );
   return response;
 };
@@ -95,10 +95,10 @@ function searchReducer(state = initialState, action: any) {
         draft.searchHistoryList = action.payload.search;
         break;
       case DELETE_STUDY_ALL_DELETE_SUCCESS:
-        draft.searchAllDelete = action.payload.search;
+        draft.searchHistoryList = action.payload.search;
         break;
       case DELETE_STUDY_DELETE_SUCCESS:
-        draft.searchDelete = action.payload.search;
+        draft.searchHistoryList = action.payload.search;
         break;
       default:
         break;
