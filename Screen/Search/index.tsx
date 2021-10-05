@@ -123,7 +123,7 @@ const Search = () => {
             refreshing={isRefreshing}
             data={searchStudyList}
             renderItem={({ item }) => (
-              <RenderItem index={item.id} item={item} />
+              <RenderItem index={item.id} item={item} paddingHorizontal={20} />
             )}
             keyExtractor={(item: DataType) => item.id.toString()}
             extraData={searchStudyList}
