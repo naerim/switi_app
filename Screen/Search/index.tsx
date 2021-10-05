@@ -19,6 +19,11 @@ import OptionMenu from './components/optionMenu';
 import RecommendContainer from './components/Recommend/RecommendContainer';
 import SearchStoryList from './record/searchStoryList';
 
+// X 남은잡업
+// 아무거도 입력안하면 검색하면 본 화면,
+// 검색 누르면 본 화면,
+// 검색 결과 없을 때 화면..
+
 const Search = () => {
   const dispatch = useDispatch(); // X action 받아서 store의 Reducer에서 넘김
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -71,8 +76,8 @@ const Search = () => {
   }; // X 단어 옆 x 누르면 위 콜백 함수 호출
 
   const searchSomething = async () => {
-    const searchVoca = searchInput.value;
-    await fetchOnSearch(login.token, searchVoca);
+    const searchKeyword = searchInput.value;
+    await fetchOnSearch(login.token, searchKeyword);
     await fetchOnSearchHistory(login.token);
   };
 
@@ -111,37 +116,44 @@ const Search = () => {
           <RecommendContainer />
         </Container>
       ) : (
-        <FlatList
-          ItemSeparatorComponent={FlatListItemSeparator}
-          onRefresh={fetchItem}
-          refreshing={isRefreshing}
-          data={searchStudyList}
-          renderItem={({ item }) => <RenderItem index={item.id} item={item} />}
-          keyExtractor={(item: DataType) => item.id.toString()}
-          extraData={searchStudyList}
-          contentContainerStyle={{ paddingBottom: 80 }}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => (
-            <EmptyContainer>
-              <EmptyFont>데이터 랜더링 실패</EmptyFont>
-            </EmptyContainer>
-          )}
-        />
+        <Container>
+          <FlatList
+            ItemSeparatorComponent={FlatListItemSeparator}
+            onRefresh={fetchItem}
+            refreshing={isRefreshing}
+            data={searchStudyList}
+            renderItem={({ item }) => (
+              <RenderItem index={item.id} item={item} />
+            )}
+            keyExtractor={(item: DataType) => item.id.toString()}
+            extraData={searchStudyList}
+            contentContainerStyle={{
+              paddingBottom: 80,
+            }}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => (
+              //검색 결과가 없습니다. 필요하지 않나?
+              <Container>
+                <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
+                <ListContainer>
+                  <SearchStoryList
+                    searches={searches}
+                    onPressX={handleSearchDelete}
+                  />
+                </ListContainer>
+                <Line />
+                <RecommendContainer />
+              </Container>
+            )}
+          />
+        </Container>
       )}
-      {console.log(`현재 검색결과 : ${searchStudyList}`)}
+      {console.log(`현재 검색결과 : ${JSON.stringify(searchStudyList)}`)}
     </ContainerWithBell>
   );
 };
-
-const EmptyContainer = styled.View`
-  margin-top: 10px;
-`;
-
-const EmptyFont = styled.Text`
-  font-size: 12px;
-`;
 
 const SeparatorLine = styled.View`
   height: 1px;
@@ -158,10 +170,6 @@ const Line = styled.Text`
   background-color: #f3f3f3;
   margin-top: 8px;
   margin-bottom: 10px;
-`;
-
-const ImcyComponent = styled.Text`
-  font-size: 10px;
 `;
 
 export default Search;

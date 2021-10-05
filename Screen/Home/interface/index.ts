@@ -27,6 +27,7 @@ export interface DataType {
 export interface ItemType {
   index: number;
   item: DataType;
+  paddingHorizontal?: number;
 }
 
 export interface TagType {

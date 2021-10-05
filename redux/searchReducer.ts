@@ -66,9 +66,6 @@ const searchDelete = async (token: string, id: number) => {
     url: `http://localhost:4000/search//deleteOne/${id}`,
     headers: { Authorization: token },
   });
-  console.log(
-    `검색기록하나삭제 id : ${id} 확인해보자 at searchReducer 51 ${JSON.stringify(response)}`
-  );
   return response;
 };
 

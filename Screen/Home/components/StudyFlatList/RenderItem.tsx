@@ -6,7 +6,7 @@ import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
 
-const RenderItem: React.FC<ItemType> = ({ index, item }) => {
+const RenderItem: React.FC<ItemType> = ({ index, item, paddingHorizontal }) => {
   const goStudyDetail = useGoStudyDetail(index);
 
   // 글자수 제한
@@ -16,7 +16,11 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
     desc.length > 40 ? desc.substr(0, 40) + '...' : desc;
 
   return (
-    <Container activeOpacity={0.8} onPress={goStudyDetail}>
+    <Container
+      activeOpacity={0.8}
+      onPress={goStudyDetail}
+      paddingHorizontal={paddingHorizontal}
+    >
       <StudyImage done={item.flag} img={item.Images[0]?.imgPath} />
       <Content>
         <Title>{limitTitle(item.title)}</Title>
@@ -34,10 +38,17 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
   );
 };
 
+const paddingHorizontal = ({
+  paddingHorizontal,
+}: {
+  paddingHorizontal?: number;
+}) => paddingHorizontal || 0;
+
 const Container = styled.TouchableOpacity`
   flex-direction: row;
   padding-bottom: 16px;
   align-items: center;
+  padding: 0 ${paddingHorizontal}px 16px ${paddingHorizontal}px;
 `;
 
 const Content = styled.View`
