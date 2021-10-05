@@ -37,6 +37,9 @@ const searchHistory = async (token: string) => {
     url: 'http://localhost:4000/search/getSearch',
     headers: { Authorization: token },
   });
+  console.log(
+    `검색기록출력확인해보자 at searchReducer 51 ${JSON.stringify(response)}`
+  );
   return response;
 };
 
@@ -48,7 +51,7 @@ const searchAllDelete = async (token: string) => {
     headers: { Authorization: token },
   });
   console.log(
-    `검색기록삭제확인해보자 at searhReducer 51 ${JSON.stringify(response)}`
+    `검색기록삭제확인해보자 at searchReducer 51 ${JSON.stringify(response)}`
   );
   return response;
 };
