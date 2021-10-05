@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   searchAllDeleteRequest,
+  searchDeleteRequest,
   searchHistoryRequest,
   searchRequest,
 } from '../../redux/searchReducer';
@@ -37,6 +38,11 @@ const Search = () => {
     dispatch(searchAllDeleteRequest(token));
   };
 
+  // X 검색 기록 하나 삭제
+  const fetchSearchDelete = (token: any) => {
+    dispatch(searchDeleteRequest(token));
+  };
+
   const { searchStudyList, searchHistoryList } = useSelector(
     (state: rootState) => state.searchReducer
   );
@@ -57,12 +63,10 @@ const Search = () => {
   }, [searches]);
   // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
 
-  const handleSearchDelete = useCallback(
-    (id) => {
-      setSearches(searches.filter((search) => search.id !== id));
-    },
-    [searches]
-  ); // X 단어 옆 x 누르면 위 콜백 함수 호출
+  const handleSearchDelete = () => {
+    fetchSearchDelete(login.token);
+    fetchOnSearchHistory(login.token);
+  }; // X 단어 옆 x 누르면 위 콜백 함수 호출
 
   const searchInput = useInput('');
 
@@ -70,7 +74,6 @@ const Search = () => {
     const searchVoca = searchInput.value;
     fetchOnSearch(login.token, searchVoca); // X 사용
     fetchOnSearchHistory(login.token);
-    console.log(`로그인 토큰 ${login.token}`);
   };
 
   const goAlarm = UseGoAlarm;

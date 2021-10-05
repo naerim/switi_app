@@ -59,10 +59,10 @@ const searchAllDelete = async (token: string) => {
 };
 
 //검색 기록 하나 삭제
-const searchDelete = async (token: string) => {
+const searchDelete = async (token: string, id: number) => {
   const response = await axios({
     method: 'delete',
-    url: 'http://localhost:4000/search/deleteAll',
+    url: `/deleteOne/${id}`,
     headers: { Authorization: token },
   });
   console.log(
@@ -98,7 +98,7 @@ function searchReducer(state = initialState, action: any) {
         draft.searchAllDelete = action.payload.search;
         break;
       case DELETE_STUDY_DELETE_SUCCESS:
-        draft.searchAllDelete = action.payload.search;
+        draft.searchDelete = action.payload.search;
         break;
       default:
         break;
