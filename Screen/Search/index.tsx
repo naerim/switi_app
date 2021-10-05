@@ -19,7 +19,7 @@ import RecommendContainer from './components/Recommend/RecommendContainer';
 import SearchStoryList from './record/searchStoryList';
 
 const Search = () => {
-  const dispatch = useDispatch(); // Xaction 받아서 store의 Reducer에서 넘김
+  const dispatch = useDispatch(); // X action 받아서 store의 Reducer에서 넘김
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   })); // X 리덕스 상태값 조회
@@ -70,6 +70,7 @@ const Search = () => {
     const searchVoca = searchInput.value;
     fetchOnSearch(login.token, searchVoca); // X 사용
     fetchOnSearchHistory(login.token);
+    console.log(`로그인 토큰 ${login.token}`);
   };
 
   const goAlarm = UseGoAlarm;
