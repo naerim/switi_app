@@ -5,6 +5,7 @@ import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
+import TitleFlag from './TitleFlag';
 
 const RenderItem: React.FC<ItemType> = ({ index, item }) => {
   const goStudyDetail = useGoStudyDetail(index);
@@ -17,9 +18,10 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImage done={item.flag} img={item.Images[0]?.imgPath} />
+      {/*<StudyImage done={item.flag} img={item.Images[0]?.imgPath} />*/}
       <Content>
-        <Title>{limitTitle(item.title)}</Title>
+        {/*<Title>{limitTitle(item.title)}</Title>*/}
+        <TitleFlag title={limitTitle(item.title)} done={item.flag} />
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
           <Category
@@ -46,6 +48,7 @@ const Content = styled.View`
 `;
 
 const Title = styled.Text`
+  font-weight: bold;
   font-size: 14px;
   color: #2b2b2b;
 `;
