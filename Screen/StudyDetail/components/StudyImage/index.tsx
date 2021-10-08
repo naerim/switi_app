@@ -43,7 +43,6 @@ const StudyImage: React.FC<Props> = ({ img, done, onPress, id }) => {
 
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
-      <MainImage source={{ uri: img }} />
       {header}
       <RecruitIcon done={done} use="StudyDetail" />
     </Container>
@@ -51,12 +50,7 @@ const StudyImage: React.FC<Props> = ({ img, done, onPress, id }) => {
 };
 
 const Container = styled.View`
-  flex: 4;
-`;
-
-const MainImage = styled.Image`
   flex: 1;
-  background-color: antiquewhite;
 `;
 
 export default StudyImage;

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import BackIcon from '../../../Img/btn_back_w.png';
+import BackIcon from '../../../Img/btn_back.png';
 import ScrapIcon from '../../../Img/icon_scrap.png';
 import NotScrapIcon from '../../../Img/icon_notScrap.png';
 import { Platform } from 'react-native';

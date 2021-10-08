@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import BackIcon from '../../../Img/btn_back_w.png';
+import BackIcon from '../../../Img/btn_back.png';
 import MenuIcon from '../../../Img/icon_dot3.png';
 import { Platform } from 'react-native';
 import MenuModal from './MenuModal';
