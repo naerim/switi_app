@@ -10,7 +10,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getScrapListRequest } from '../../redux/userReducer';
-import { getMyStudyListRequest } from '../../redux/manageReducer';
+import {
+  getMyApplyListRequest,
+  getMyStudyListRequest,
+} from '../../redux/manageReducer';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -49,10 +52,16 @@ const Home = ({ route }: any) => {
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
   );
+  const onGetMyApplyList = useCallback(
+    // 스터디 신청 리스트 가져오기
+    (token) => dispatch(getMyApplyListRequest(token)),
+    [dispatch]
+  );
 
   useEffect(() => {
     onGetScrapList(login.token);
     onGetMyStudyList(login.token);
+    onGetMyApplyList(login.token);
     // 관심분야, 성격, 지역
     onGetInterest();
     onGetCharacter();

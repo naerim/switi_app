@@ -3,13 +3,16 @@ import styled from 'styled-components/native';
 
 interface Props {
   onPress: () => void;
+  leader: boolean;
+  id: number;
+  btnText: string;
 }
 
-const BottomButton: React.FC<Props> = ({ onPress }) => {
+const BottomButton: React.FC<Props> = ({ onPress, leader, id, btnText }) => {
   return (
     <Container>
       <ColorButton onPress={onPress}>
-        <ButtonText>신청하기</ButtonText>
+        <ButtonText>{btnText}</ButtonText>
       </ColorButton>
     </Container>
   );

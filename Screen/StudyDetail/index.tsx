@@ -24,6 +24,12 @@ const StudyDetail = ({ route }: any) => {
   const { scrapList } = useSelector(({ userReducer }: rootState) => ({
     scrapList: userReducer.scrapList,
   }));
+  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
+    myStudyList: manageReducer.myStudyList,
+  }));
+  const { myApplyList } = useSelector(({ manageReducer }: rootState) => ({
+    myApplyList: manageReducer.myApplyList,
+  }));
 
   const dispatch = useDispatch();
   const onGetStudyDetail = useCallback(
@@ -47,20 +53,30 @@ const StudyDetail = ({ route }: any) => {
     setCancelModalVisible(true);
   };
 
-  // 이미지 불러오기
-  const loadImg = (url: string) => {
-    return 'http://localhost:4000/images/' + url;
+  // 리더인지 확인하는 함수
+  const checkLeader = () => {
+    // 나의 모집글인 경우 true를 반환
+    const leader = myStudyList.some((item: { id: number }) => {
+      return item.id == studyDetail.id;
+    });
+    return leader;
+  };
+
+  // 신청여부 확인하는 함수
+  const checkApply = () => {
+    if (checkLeader()) return '모집 마감하기';
+    // 신청했을 경우 true 아니면 false
+    const apply = myApplyList.some((item: { id: number }) => {
+      return item.id == studyDetail.id;
+    });
+    return apply ? '신청 취소하기' : '신청하기';
   };
 
   if (!studyDetail) return null;
 
   return (
     <Container>
-      <StudyHeader
-        onPress={goHome}
-        img={loadImg(studyDetail.Images[0].imgPath)}
-        id={studyDetail.id}
-      />
+      <StudyHeader onPress={goHome} id={studyDetail.id} />
       <Content>
         <TitleFlag
           title={studyDetail.title}
@@ -77,7 +93,12 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
-      <BottomButton onPress={onClick} />
+      <BottomButton
+        onPress={onClick}
+        leader={checkLeader()}
+        id={studyDetail.id}
+        btnText={checkApply()}
+      />
       <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
       <CancelModal
         modalVisible={cancelModalVisible}

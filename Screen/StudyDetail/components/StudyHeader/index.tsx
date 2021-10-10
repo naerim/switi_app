@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { rootState } from '../../../../redux';
 
 interface Props {
-  img: any;
   onPress: () => void;
   id: number;
 }
@@ -15,7 +14,7 @@ interface Props {
 // 모집글인 경우 DetailHeader
 // 아닌 경우 ScrapHeader
 
-const StudyHeader: React.FC<Props> = ({ img, onPress, id }) => {
+const StudyHeader: React.FC<Props> = ({ onPress, id }) => {
   const [header, setHeader] = useState(
     <ScrapHeader onPress={onPress} id={id} />
   );

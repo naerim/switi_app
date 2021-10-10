@@ -30,12 +30,12 @@ const ContentList: React.FC<Props> = ({ idx }) => {
 
   const dispatch = useDispatch();
   const onGetMyStudyList = useCallback(
-    // 사용자 프로필 가져오기
+    // 내가 만든 스터디 목록 가져오기
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
   );
   const onGetMyApplyList = useCallback(
-    // 사용자 프로필 가져오기
+    // 스터디 신청 리스트 가져오기
     (token) => dispatch(getMyApplyListRequest(token)),
     [dispatch]
   );

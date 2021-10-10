@@ -8,6 +8,10 @@ import {
 import ManageIcon from '../../../../Img/icon_memberManage.png';
 import ApplyIcon from '../../../../Component/Icon/ApplyIcon';
 
+interface VisibleProps {
+  visible: number;
+}
+
 const Proceeding: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
   const goManageProceeding = useGoManageProceeding(item.id, item.title);
@@ -23,7 +27,10 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
         <Title>{limitTitle(item.title)}</Title>
       </Content>
       <ManageMember onPress={goManageProceeding}>
-        <ButtonImage source={ManageIcon} />
+        <ButtonImage
+          source={ManageIcon}
+          visible={item.Applies[0].apply_state}
+        />
       </ManageMember>
     </Container>
   );
@@ -51,8 +58,8 @@ const ManageMember = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const ButtonImage = styled.Image`
-  width: 18px;
+const ButtonImage = styled.Image<VisibleProps>`
+  width: ${(props) => (props.visible === 0 ? 0 : '18px')};
   height: 16px;
 `;
 
