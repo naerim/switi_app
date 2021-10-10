@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../../interface';
-import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
@@ -14,13 +13,11 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
   const limitTitle = (title: string) =>
     title.length > 17 ? title.substr(0, 17) + '...' : title;
   const limitDesc = (desc: string) =>
-    desc.length > 40 ? desc.substr(0, 40) + '...' : desc;
+    desc.length > 50 ? desc.substr(0, 50) + '...' : desc;
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      {/*<StudyImage done={item.flag} img={item.Images[0]?.imgPath} />*/}
       <Content>
-        {/*<Title>{limitTitle(item.title)}</Title>*/}
         <TitleFlag title={limitTitle(item.title)} done={item.flag} />
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
@@ -38,19 +35,13 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-bottom: 16px;
+  padding: 5px 0;
   align-items: center;
 `;
 
 const Content = styled.View`
   flex: 3;
-  padding: 10px;
-`;
-
-const Title = styled.Text`
-  font-weight: bold;
-  font-size: 14px;
-  color: #2b2b2b;
+  padding: 10px 0;
 `;
 
 const Desc = styled.Text`
