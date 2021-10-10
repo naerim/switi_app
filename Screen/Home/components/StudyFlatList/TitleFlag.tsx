@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
+import FlagIcon from "../../../../Component/Icon/FlagIcon";
 
 interface Props {
   title: string;
@@ -11,13 +12,14 @@ const TitleFlag: React.FC<Props> = ({ title, done }) => {
   return (
     <Container>
       <Title>{title}</Title>
-      <RecruitIcon done={!done} />
+      <FlagIcon done={!done} />
     </Container>
   );
 };
 
 const Container = styled.View`
   justify-content: space-between;
+  flex-direction: row;
 `;
 
 const Title = styled.Text`
