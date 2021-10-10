@@ -3,13 +3,14 @@ import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
-import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
 import ApplyModal from './components/ApplyModal';
 import CancelModal from './components/CancelModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getStudyDetailRequest } from '../../redux/studyReducer';
+import TitleFlag from '../Home/components/StudyFlatList/TitleFlag';
+import StudyHeader from './components/StudyHeader';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -55,14 +56,17 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyImage
-        done={!studyDetail.flag}
+      <StudyHeader
         onPress={goHome}
         img={loadImg(studyDetail.Images[0].imgPath)}
         id={studyDetail.id}
       />
       <Content>
-        <Title>{studyDetail.title}</Title>
+        <TitleFlag
+          title={studyDetail.title}
+          done={studyDetail.flag}
+          detail={true}
+        />
         <OtherInfo
           idUser={studyDetail.idUser}
           username={studyDetail.User.nickname}
@@ -86,12 +90,6 @@ const StudyDetail = ({ route }: any) => {
 const Container = styled.SafeAreaView`
   background-color: #fff;
   flex: 1;
-`;
-
-const Title = styled.Text`
-  margin-top: 15px;
-  font-size: 20px;
-  font-weight: bold;
 `;
 //font-family: 'NotoSans-Bold';
 

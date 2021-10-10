@@ -20,9 +20,10 @@ const Container = styled.View<Props>`
   justify-content: center;
   padding: 2px 4px;
   width: ${(props) => (props.done ? '46px' : '38px')};
+  height: 20px;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<Props>`
   color: white;
   font-size: 10px;
 `;

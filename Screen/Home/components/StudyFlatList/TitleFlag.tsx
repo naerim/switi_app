@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
-import FlagIcon from "../../../../Component/Icon/FlagIcon";
+import FlagIcon from '../../../../Component/Icon/FlagIcon';
 
 interface Props {
-  title: string;
-  done: boolean;
+  title?: string;
+  done?: boolean;
+  detail?: boolean;
 }
 
-const TitleFlag: React.FC<Props> = ({ title, done }) => {
+const TitleFlag: React.FC<Props> = ({ title, done, detail }) => {
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title detail={detail}>{title}</Title>
       <FlagIcon done={!done} />
     </Container>
   );
@@ -22,10 +22,12 @@ const Container = styled.View`
   flex-direction: row;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<Props>`
   font-weight: bold;
-  font-size: 14px;
+  font-size: ${(props) => (props.detail ? '20px' : '14px')};
   color: #2b2b2b;
+  flex: 3;
+  padding-right: 5px;
 `;
 
 export default TitleFlag;

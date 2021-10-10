@@ -11,7 +11,7 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
 
   // 글자수 제한
   const limitTitle = (title: string) =>
-    title.length > 17 ? title.substr(0, 17) + '...' : title;
+    title.length > 20 ? title.substr(0, 20) + '...' : title;
   const limitDesc = (desc: string) =>
     desc.length > 50 ? desc.substr(0, 50) + '...' : desc;
 

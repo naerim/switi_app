@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
-import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 import DetailHeader from '../DetailHeader';
 import ScrapHeader from '../ScrapHeader';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,6 @@ import { rootState } from '../../../../redux';
 
 interface Props {
   img: any;
-  done?: boolean;
   onPress: () => void;
   id: number;
 }
@@ -17,7 +15,7 @@ interface Props {
 // 모집글인 경우 DetailHeader
 // 아닌 경우 ScrapHeader
 
-const StudyImage: React.FC<Props> = ({ img, done, onPress, id }) => {
+const StudyHeader: React.FC<Props> = ({ img, onPress, id }) => {
   const [header, setHeader] = useState(
     <ScrapHeader onPress={onPress} id={id} />
   );
@@ -44,7 +42,6 @@ const StudyImage: React.FC<Props> = ({ img, done, onPress, id }) => {
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       {header}
-      <RecruitIcon done={done} use="StudyDetail" />
     </Container>
   );
 };
@@ -53,4 +50,4 @@ const Container = styled.View`
   flex: 1;
 `;
 
-export default StudyImage;
+export default StudyHeader;
