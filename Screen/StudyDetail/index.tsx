@@ -42,16 +42,6 @@ const StudyDetail = ({ route }: any) => {
   }, [idx, scrapList]);
 
   const goHome = useGoHome();
-  const [modalVisible, setModalVisible] = useState(false);
-  // const showModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
-  const [cancelModalVisible, setCancelModalVisible] = useState(false);
-  const closeCancelModal = () => setCancelModalVisible(false);
-
-  const onClick = () => {
-    //showModal();
-    setCancelModalVisible(true);
-  };
 
   // 리더인지 확인하는 함수
   const checkLeader = () => {
@@ -93,17 +83,7 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
-      <BottomButton
-        onPress={onClick}
-        leader={checkLeader()}
-        id={studyDetail.id}
-        btnText={checkApply()}
-      />
-      <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
-      <CancelModal
-        modalVisible={cancelModalVisible}
-        closeModal={closeCancelModal}
-      />
+      <BottomButton id={studyDetail.id} btnText={checkApply()} />
     </Container>
   );
 };
