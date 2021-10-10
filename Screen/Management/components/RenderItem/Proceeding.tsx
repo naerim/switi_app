@@ -5,9 +5,8 @@ import {
   useGoManageProceeding,
   useGoStudyDetail,
 } from '../../../../util/navigationHooks';
-import StudyImageManage from '../StudyImageManage';
-import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 import ManageIcon from '../../../../Img/icon_memberManage.png';
+import ApplyIcon from '../../../../Component/Icon/ApplyIcon';
 
 const Proceeding: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
@@ -19,12 +18,8 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      {console.log(item.Applies.apply_state)}
-      <StudyImageManage img={item.Images[0].imgPath} />
       <Content>
-        <IconWrap>
-          <RecruitIcon done={!item.flag} />
-        </IconWrap>
+        <ApplyIcon done={!item.flag} apply={item.Applies[0].apply_state} />
         <Title>{limitTitle(item.title)}</Title>
       </Content>
       <ManageMember onPress={goManageProceeding}>
@@ -36,26 +31,19 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-bottom: 16px;
   align-items: center;
 `;
 
 const Content = styled.View`
   flex: 3;
-  padding: 0 10px;
+  padding: 10px;
   justify-content: center;
 `;
 
-const IconWrap = styled.View`
-  flex: 2;
-  margin-top: 5px;
-`;
-
 const Title = styled.Text`
-  flex: 1;
   font-size: 14px;
   color: #2b2b2b;
-  padding-left: 5px;
+  margin-top: 8px;
 `;
 
 const ManageMember = styled.TouchableOpacity`

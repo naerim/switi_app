@@ -16,6 +16,7 @@ interface Props {
 
 const ContentList: React.FC<Props> = ({ idx }) => {
   const [loading, setLoading] = useState(false);
+  const FlatListItemSeparator = () => <SeparatorLine />;
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -54,6 +55,7 @@ const ContentList: React.FC<Props> = ({ idx }) => {
     <Container>
       <FlatList
         data={idx == 0 ? myApplyList : myStudyList}
+        ItemSeparatorComponent={FlatListItemSeparator}
         renderItem={({ item }) =>
           // 0: 진행중, 1: 모집글
           idx == 0 ? (
@@ -70,6 +72,11 @@ const ContentList: React.FC<Props> = ({ idx }) => {
 
 const Container = styled.View`
   margin: 24px;
+`;
+
+const SeparatorLine = styled.View`
+  height: 1px;
+  background-color: #f3f3f3;
 `;
 
 export default ContentList;

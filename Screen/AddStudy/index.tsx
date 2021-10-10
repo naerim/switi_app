@@ -94,7 +94,7 @@ const AddStudy = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        <AddImage image={image} setImage={setImage} />
+        {/*<AddImage image={image} setImage={setImage} />*/}
         <Content>
           <FlagRadioButton
             title="스터디 형식"

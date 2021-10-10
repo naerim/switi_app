@@ -41,7 +41,7 @@ const Container = styled.TouchableOpacity`
 
 const Content = styled.View`
   flex: 3;
-  padding: 10px 0;
+  padding: 12px 0;
 `;
 
 const Desc = styled.Text`
