@@ -65,8 +65,13 @@ const Search = () => {
 
   const searchSomething = async () => {
     const searchKeyword = searchInput.value;
-    await fetchOnSearch(login.token, searchKeyword);
-    await fetchOnSearchHistory(login.token);
+    if (searchKeyword === '') {
+      return;
+    } else {
+      searchInput.onChange('');
+      await fetchOnSearch(login.token, searchKeyword);
+      await fetchOnSearchHistory(login.token);
+    }
   };
 
   const goAlarm = UseGoAlarm;
