@@ -113,7 +113,7 @@ const HomeNavigation = () => (
 const ManagementNavigation = () => {
   const goAlarm = UseGoAlarm;
   return (
-    <ContainerWithBell title="스터디 관리" onPress={goAlarm()}>
+    <ContainerWithBell title="스터디 관리" onPressBell={goAlarm()}>
       <MaterialTopTab.Navigator
         tabBarOptions={{
           indicatorStyle: {

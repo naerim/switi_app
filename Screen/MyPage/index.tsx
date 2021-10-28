@@ -98,7 +98,7 @@ const MyPage = () => {
   }, []);
 
   return (
-    <ContainerWithBell title="마이페이지" onPress={goAlarm} scroll={scroll}>
+    <ContainerWithBell title="마이페이지" onPressBell={goAlarm} scroll={scroll}>
       <ScrollContainer onScroll={scrollOn}>
         <Container>
           <UserInfo title={myPage ? myPage.myPage.nickname : ' '} />

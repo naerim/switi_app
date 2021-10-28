@@ -35,7 +35,7 @@ const search = async (token: string, keyword: string) => {
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
-  console.log('검색 완료');
+  console.log(`검색 완료 ${JSON.stringify(response)}`);
   return response;
 };
 

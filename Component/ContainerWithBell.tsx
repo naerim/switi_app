@@ -5,12 +5,18 @@ import { Platform } from 'react-native';
 import useScroll from '../util/useScroll';
 
 interface Props {
-  onPress?: () => void;
+  onPressTitle?: () => void;
+  onPressBell?: () => void;
   title: string;
 }
 
-const ContainerWithBell: React.FC<Props> = ({ title, children, onPress }) => {
-  // const { scroll, scrollOn } = useScroll();
+const ContainerWithBell: React.FC<Props> = ({
+  title,
+  children,
+  onPressBell,
+  onPressTitle,
+}) => {
+  const { scroll, scrollOn } = useScroll();
   return (
     <Container
       style={{
@@ -18,14 +24,16 @@ const ContainerWithBell: React.FC<Props> = ({ title, children, onPress }) => {
       }}
     >
       <HeaderContainer>
-        <Title>{title}</Title>
-        <AlarmButton activeOpacity={0.8} onPress={onPress}>
+        <TitleTouch onPress={onPressTitle}>
+          <Title>{title}</Title>
+        </TitleTouch>
+        <AlarmButton activeOpacity={0.8} onPress={onPressBell}>
           <AlarmIcon source={Alarm} />
         </AlarmButton>
       </HeaderContainer>
+      {/*<ChildrenContainer onScroll={scrollOn}>*/}
       <ChildrenContainer>
-        {/*<ChildrenContainer onScroll={scrollOn}>*/}
-        {/*{scroll ? <Line /> : <Nothing />}*/}
+        {scroll ? <Line /> : <Nothing />}
         {children}
       </ChildrenContainer>
     </Container>
@@ -45,9 +53,15 @@ const HeaderContainer = styled.View`
   justify-content: space-between;
 `;
 
-const ChildrenContainer = styled.ScrollView`
+// const ChildrenContainer = styled.ScrollView`
+//   flex: 16;
+// `;
+
+const ChildrenContainer = styled.View`
   flex: 16;
 `;
+
+const TitleTouch = styled.TouchableOpacity``;
 
 const Title = styled.Text`
   color: #2b2b2b;

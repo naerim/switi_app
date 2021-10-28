@@ -86,13 +86,12 @@ const Search = () => {
   };
 
   const handleLoadMore = () => {
-    console.log('검색 완료');
+    console.log('검색..');
   };
-
   return (
-    <ContainerWithBell title="검색" onPress={goAlarm()}>
+    <ContainerWithBell title="검색" onPressBell={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      {searchStudyList ? (
+      {!searchStudyList && (
         <SearchWordContainer>
           <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
           <SearchStoryList
@@ -102,8 +101,9 @@ const Search = () => {
           <Line />
           <RecommendContainer />
         </SearchWordContainer>
-      ) : (
-        <Container>
+      )}
+      {searchStudyList && (
+        <FlatListContainer>
           <FlatList
             ItemSeparatorComponent={FlatListItemSeparator}
             onRefresh={fetchItem}
@@ -122,7 +122,7 @@ const Search = () => {
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={() => (
               //검색 결과가 없습니다. 필요하지 않나?
-              <Container>
+              <SearchWordContainer>
                 <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
                 <SearchStoryList
                   searches={searchHistory}
@@ -130,10 +130,10 @@ const Search = () => {
                 />
                 <Line />
                 <RecommendContainer />
-              </Container>
+              </SearchWordContainer>
             )}
           />
-        </Container>
+        </FlatListContainer>
       )}
     </ContainerWithBell>
   );
@@ -145,8 +145,7 @@ const SeparatorLine = styled.View`
 `;
 
 const SearchWordContainer = styled.View``;
-
-const Container = styled.View``;
+const FlatListContainer = styled.View``;
 
 const Line = styled.Text`
   height: 10px;
