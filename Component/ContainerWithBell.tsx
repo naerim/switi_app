@@ -2,34 +2,32 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Alarm from '../Img/icon_alarm.png';
 import { Platform } from 'react-native';
+import useScroll from '../util/useScroll';
 
 interface Props {
   onPress?: () => void;
   title: string;
-  scroll?: boolean;
 }
 
-const ContainerWithBell: React.FC<Props> = ({
-  title,
-  children,
-  onPress,
-  scroll,
-}) => {
+const ContainerWithBell: React.FC<Props> = ({ title, children, onPress }) => {
+  // const { scroll, scrollOn } = useScroll();
   return (
     <Container
       style={{
         paddingTop: Platform.OS === 'ios' ? 20 : 70,
       }}
     >
-      {/*40->50수정 알람버튼 윗부분 클릭 시 안드로이드에서 상단 바 내려와서 수정했습니다. */}
       <HeaderContainer>
         <Title>{title}</Title>
         <AlarmButton activeOpacity={0.8} onPress={onPress}>
           <AlarmIcon source={Alarm} />
         </AlarmButton>
       </HeaderContainer>
-      {scroll ? <Line /> : <Nothing />}
-      {children}
+      <ChildrenContainer>
+        {/*<ChildrenContainer onScroll={scrollOn}>*/}
+        {/*{scroll ? <Line /> : <Nothing />}*/}
+        {children}
+      </ChildrenContainer>
     </Container>
   );
 };
@@ -41,9 +39,14 @@ const Container = styled.View`
 `;
 
 const HeaderContainer = styled.View`
+  flex: 1;
   padding: 0 24px;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const ChildrenContainer = styled.ScrollView`
+  flex: 16;
 `;
 
 const Title = styled.Text`

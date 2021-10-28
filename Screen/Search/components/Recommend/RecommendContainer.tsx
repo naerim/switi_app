@@ -31,6 +31,7 @@ const RecommendContainer: React.FC = () => {
 };
 
 const Container = styled.View`
+  flex: 5;
   padding: 0 24px;
 `;
 

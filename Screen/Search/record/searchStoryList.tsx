@@ -35,13 +35,14 @@ const SearchStoryList: React.FC<SearchStoryItemProps> = ({
   );
 };
 
-const Container = styled.View`
+const Scroll = styled.ScrollView`
+  height: 30px;
   flex-direction: row;
+  margin: 15px 0 15px 24px;
 `;
 
-const Scroll = styled.ScrollView`
+const Container = styled.View`
   flex-direction: row;
-  margin-left: 14px;
 `;
 
 export default SearchStoryList;

@@ -87,18 +87,16 @@ const Search = () => {
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
-      {!searchStudyList ? (
-        <Container>
+      {searchStudyList ? (
+        <SearchWordContainer>
           <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
-          <ListContainer>
-            <SearchStoryList
-              searches={searchHistory}
-              onPressX={handleSearchDelete}
-            />
-          </ListContainer>
+          <SearchStoryList
+            searches={searchHistory}
+            onPressX={handleSearchDelete}
+          />
           <Line />
           <RecommendContainer />
-        </Container>
+        </SearchWordContainer>
       ) : (
         <Container>
           <FlatList
@@ -121,12 +119,10 @@ const Search = () => {
               //검색 결과가 없습니다. 필요하지 않나?
               <Container>
                 <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
-                <ListContainer>
-                  <SearchStoryList
-                    searches={searchHistory}
-                    onPressX={handleSearchDelete}
-                  />
-                </ListContainer>
+                <SearchStoryList
+                  searches={searchHistory}
+                  onPressX={handleSearchDelete}
+                />
                 <Line />
                 <RecommendContainer />
               </Container>
@@ -134,7 +130,6 @@ const Search = () => {
           />
         </Container>
       )}
-      {console.log(`현재 검색결과 : ${JSON.stringify(searchStudyList)}`)}
     </ContainerWithBell>
   );
 };
@@ -144,11 +139,10 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
+const SearchWordContainer = styled.View``;
+
 const Container = styled.View``;
 
-const ListContainer = styled.View`
-  margin: 20px 0;
-`;
 const Line = styled.Text`
   height: 10px;
   background-color: #f3f3f3;
