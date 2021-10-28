@@ -19,55 +19,43 @@ import OptionMenu from './components/optionMenu';
 import RecommendContainer from './components/Recommend/RecommendContainer';
 import SearchStoryList from './record/searchStoryList';
 
-// X 남은잡업
-// 아무거도 입력안하면 검색하면 본 화면,
-// 검색 누르면 본 화면,
-// 검색 결과 없을 때 화면..
-
 const Search = () => {
   const dispatch = useDispatch(); // X action 받아서 store의 Reducer에서 넘김
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
-  })); // X 리덕스 상태값 조회
+  }));
+  const { searchStudyList, searchHistoryList } = useSelector(
+    (state: rootState) => state.searchReducer
+  );
+  const [searchHistory, setSearchHistory] = useState([]);
+  const searchInput = useInput('');
 
-  // X 검색 + 검색어 저장 post
   const fetchOnSearch = (token: any, keyword: string) =>
     dispatch(searchRequest(token, keyword));
 
-  // X 검색 기록 get
   const fetchOnSearchHistory = (token: any) =>
     dispatch(searchHistoryRequest(token));
 
-  // X 검색 기록 all delete
   const fetchSearchAllDelete = (token: any) => {
     dispatch(searchAllDeleteRequest(token));
   };
 
-  // X 검색 기록 하나 삭제
   const fetchSearchDelete = (token: any, id: number) => {
     dispatch(searchDeleteRequest(token, id));
   };
 
-  const { searchStudyList, searchHistoryList } = useSelector(
-    (state: rootState) => state.searchReducer
-  );
-  // X 리덕스 상태값
-  // X 검색결과 보일 때, searchStudyList 사용
-
-  const [searches, setSearches] = useState([]);
-  // X 검색 상태 변경 : 현재 검색 기록에만 사용중.
-
-  const searchInput = useInput('');
-
   useEffect(() => {
     fetchOnSearchHistory(login.token);
   }, [dispatch]);
-  // X [dispatch] = 맨 처음 한번 실행하는 것과 같은 의미, 페이지 로드 되면, 검색결과 가져오기
+
+  useEffect(() => {
+    if (searchHistoryList) setSearchHistory(searchHistoryList);
+  }, [searchHistoryList]);
 
   const handleSearchAllDelete = useCallback(async () => {
-    await setSearches([]); // X 프론트 처리
+    await setSearchHistory([]); // X 프론트 처리
     await fetchSearchAllDelete(login.token); // X 백엔드 처리
-  }, [searches]);
+  }, [searchHistory]);
   // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
 
   const handleSearchDelete = async (id: number) => {
@@ -96,10 +84,6 @@ const Search = () => {
     console.log('검색 완료');
   };
 
-  useEffect(() => {
-    if (searchHistoryList) setSearches(searchHistoryList);
-  }, [searchHistoryList]);
-
   return (
     <ContainerWithBell title="검색" onPress={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
@@ -108,7 +92,7 @@ const Search = () => {
           <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
           <ListContainer>
             <SearchStoryList
-              searches={searches}
+              searches={searchHistory}
               onPressX={handleSearchDelete}
             />
           </ListContainer>
@@ -139,7 +123,7 @@ const Search = () => {
                 <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
                 <ListContainer>
                   <SearchStoryList
-                    searches={searches}
+                    searches={searchHistory}
                     onPressX={handleSearchDelete}
                   />
                 </ListContainer>

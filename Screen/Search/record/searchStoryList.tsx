@@ -10,7 +10,7 @@ interface searchArrayProps {
 
 interface SearchStoryItemProps {
   searches: searchArrayProps[];
-  onPressX: (id: number) => void;
+  onPressX: any;
 }
 
 const SearchStoryList: React.FC<SearchStoryItemProps> = ({
