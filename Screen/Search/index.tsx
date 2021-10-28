@@ -15,9 +15,7 @@ import {
 import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
-import OptionMenu from './components/optionMenu';
-import RecommendContainer from './components/Recommend/RecommendContainer';
-import SearchStoryList from './record/searchStoryList';
+import SearchWord from './components/searchWord';
 
 const Search = () => {
   const dispatch = useDispatch(); // X action 받아서 store의 Reducer에서 넘김
@@ -92,15 +90,11 @@ const Search = () => {
     <ContainerWithBell title="검색" onPressBell={goAlarm()}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
       {!searchStudyList && (
-        <SearchWordContainer>
-          <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
-          <SearchStoryList
-            searches={searchHistory}
-            onPressX={handleSearchDelete}
-          />
-          <Line />
-          <RecommendContainer />
-        </SearchWordContainer>
+        <SearchWord
+          searches={searchHistory}
+          onPressSearchDelete={handleSearchAllDelete}
+          onPressX={handleSearchDelete}
+        />
       )}
       {searchStudyList && (
         <FlatListContainer>
@@ -122,15 +116,11 @@ const Search = () => {
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={() => (
               //검색 결과가 없습니다. 필요하지 않나?
-              <SearchWordContainer>
-                <OptionMenu onPressSearchDelete={handleSearchAllDelete} />
-                <SearchStoryList
-                  searches={searchHistory}
-                  onPressX={handleSearchDelete}
-                />
-                <Line />
-                <RecommendContainer />
-              </SearchWordContainer>
+              <SearchWord
+                searches={searchHistory}
+                onPressSearchDelete={handleSearchAllDelete}
+                onPressX={handleSearchDelete}
+              />
             )}
           />
         </FlatListContainer>
@@ -144,14 +134,5 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
-const SearchWordContainer = styled.View``;
 const FlatListContainer = styled.View``;
-
-const Line = styled.Text`
-  height: 10px;
-  background-color: #f3f3f3;
-  margin-top: 8px;
-  margin-bottom: 10px;
-`;
-
 export default Search;
