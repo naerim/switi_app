@@ -11,11 +11,13 @@ interface searchArrayProps {
 interface SearchStoryItemProps {
   searches: searchArrayProps[];
   onPressX: any;
+  onPressWord: any;
 }
 
 const SearchStoryList: React.FC<SearchStoryItemProps> = ({
   searches,
   onPressX,
+  onPressWord,
 }) => {
   return (
     <Scroll
@@ -25,6 +27,7 @@ const SearchStoryList: React.FC<SearchStoryItemProps> = ({
       <Container>
         {searches.map((search) => (
           <SearchStoryItem
+            onPressWord={onPressWord}
             search={search}
             key={search.id}
             onPressX={onPressX}

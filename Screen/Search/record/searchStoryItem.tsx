@@ -12,16 +12,18 @@ interface searchArrayProps {
 interface SearchStoryItemProps {
   search: searchArrayProps;
   onPressX: any;
+  onPressWord: any;
 }
 
 const SearchStoryItem: React.FC<SearchStoryItemProps> = ({
   search,
   onPressX,
+  onPressWord,
 }) => {
   const { id, keyword } = search;
   return (
     <Tag>
-      <TouchContainer>
+      <TouchContainer onPress={() => onPressWord(keyword)}>
         <Text>{keyword}</Text>
       </TouchContainer>
       <TouchContainer onPress={() => onPressX(id)}>

@@ -64,7 +64,13 @@ const Search = () => {
     await fetchOnSearchHistory(login.token);
   }; // X 단어 옆 x 누르면 위 콜백 함수 호출
 
-  const searchSomething = async () => {
+  const onPressWord = async (searchKeyword: string) => {
+    searchInput.onChange('');
+    await fetchOnSearch(login.token, searchKeyword);
+    await fetchOnSearchHistory(login.token);
+  };
+
+  const handleSearch = async () => {
     const searchKeyword = searchInput.value;
     if (searchKeyword.trim() === '') {
       searchInput.onChange('');
@@ -96,12 +102,13 @@ const Search = () => {
       onPressBell={goAlarm()}
       onPressTitle={refreshScreen}
     >
-      <SearchForm searchInput={searchInput} onPress={searchSomething} />
+      <SearchForm searchInput={searchInput} onPress={handleSearch} />
       {!searchStudyList && (
         <SearchWord
           searches={searchHistory}
           onPressSearchDelete={handleSearchAllDelete}
           onPressX={handleSearchDelete}
+          onPressWord={onPressWord}
         />
       )}
       {searchStudyList && (
@@ -128,6 +135,7 @@ const Search = () => {
                 searches={searchHistory}
                 onPressSearchDelete={handleSearchAllDelete}
                 onPressX={handleSearchDelete}
+                onPressWord={onPressWord}
               />
             )}
           />

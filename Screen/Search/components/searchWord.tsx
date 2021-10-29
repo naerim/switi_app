@@ -14,17 +14,23 @@ interface Props {
   searches: searchArrayProps[];
   onPressSearchDelete: () => void;
   onPressX: (id: number) => void;
+  onPressWord: any;
 }
 
 const SearchWord: React.FC<Props> = ({
   searches,
   onPressSearchDelete,
   onPressX,
+  onPressWord,
 }) => {
   return (
     <SearchWordContainer>
       <OptionMenu onPressSearchDelete={onPressSearchDelete} />
-      <SearchStoryList searches={searches} onPressX={onPressX} />
+      <SearchStoryList
+        onPressWord={onPressWord}
+        searches={searches}
+        onPressX={onPressX}
+      />
       <Line />
       <RecommendContainer />
     </SearchWordContainer>
