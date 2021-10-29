@@ -18,7 +18,7 @@ const SearchFlatList: React.FC<Props> = ({
 }) => {
   const FlatListItemSeparator = () => <SeparatorLine />;
   const handleLoadMore = () => {
-    console.log('검색..');
+    console.log('검색완료..');
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import styled from 'styled-components/native';
 import useInput from '../SignIn/util/useInput';
 import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
@@ -12,12 +11,8 @@ import {
   searchHistoryRequest,
   searchRequest,
 } from '../../redux/searchReducer';
-import { FlatList } from 'react-native';
-import RenderItem from '../Home/components/StudyFlatList/RenderItem';
-import { DataType } from '../Home/interface';
 import SearchWord from './components/searchWord';
 import { REFRESH_STUDY_LIST_SUCCESS } from '../../redux/action';
-import SearchError from './components/searchError';
 import SearchFlatList from './searchFlatList';
 
 const Search = () => {
@@ -86,7 +81,6 @@ const Search = () => {
 
   const goAlarm = UseGoAlarm;
 
-  const FlatListItemSeparator = () => <SeparatorLine />;
   const [isRefreshing, setIsRefreshing] = useState(false); // X flatList 내부의 로딩
 
   const refreshScreen = () => {
@@ -121,10 +115,5 @@ const Search = () => {
     </ContainerWithBell>
   );
 };
-
-const SeparatorLine = styled.View`
-  height: 1px;
-  background-color: #f3f3f3;
-`;
 
 export default Search;

@@ -27,7 +27,6 @@ export interface ISearchState {
 const initialState = {
   searchStudyList: null,
   searchHistoryList: null,
-  // searchAllDelete: null,
 }; // 기본 상태
 
 // 검색하기 + 검색어저장
@@ -38,23 +37,10 @@ const search = async (token: string, keyword: string) => {
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
-  console.log(`검색 완료 ${JSON.stringify(response)}`);
+  // console.log(`검색 완료 ${JSON.stringify(response)}`);
   return response;
 };
 
-// 검색 리로딩
-// const refreshSearch = async (token: string, keyword: string) => {
-//   const response = await axios({
-//     method: 'post',
-//     url: 'http://localhost:4000/search/searchStudy',
-//     headers: { Authorization: token },
-//     data: { keyword: keyword },
-//   });
-//   console.log(`검색 완료 ${JSON.stringify(response)}`);
-//   return response;
-// };
-
-//검색 기록 출력
 const searchHistory = async (token: string) => {
   const response = await axios({
     method: 'get',
