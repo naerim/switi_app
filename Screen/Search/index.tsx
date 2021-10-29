@@ -6,7 +6,7 @@ import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import searchReducer, {
+import {
   searchAllDeleteRequest,
   searchDeleteRequest,
   searchHistoryRequest,
@@ -66,7 +66,8 @@ const Search = () => {
 
   const searchSomething = async () => {
     const searchKeyword = searchInput.value;
-    if (searchKeyword === '') {
+    if (searchKeyword.trim() === '') {
+      searchInput.onChange('');
       return;
     } else {
       searchInput.onChange('');
@@ -90,7 +91,11 @@ const Search = () => {
     console.log('검색..');
   };
   return (
-    <ContainerWithBell title="검색" onPressBell={goAlarm()} onPressTitle={refreshScreen}>
+    <ContainerWithBell
+      title="검색"
+      onPressBell={goAlarm()}
+      onPressTitle={refreshScreen}
+    >
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
       {!searchStudyList && (
         <SearchWord
