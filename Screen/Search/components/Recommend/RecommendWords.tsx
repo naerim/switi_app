@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  term: string;
+  word: string;
+  onRecommendWord: (word: string) => void;
 }
 
-const RecommendTerm: React.FC<Props> = ({ term }) => {
+const RecommendWords: React.FC<Props> = ({ word, onRecommendWord }) => {
   return (
     <Container>
-      <Text>{term}</Text>
+      <TouchContainer onPress={() => onRecommendWord(word)}>
+        <Text>{word}</Text>
+      </TouchContainer>
       <Line />
     </Container>
   );
@@ -25,10 +28,12 @@ const Line = styled.Text`
   background-color: #e3e3e3;
 `;
 
+const TouchContainer = styled.TouchableOpacity``;
+
 const Text = styled.Text`
   font-size: 12px;
   color: #2b2b2b;
   padding: 14px 0;
 `;
 
-export default RecommendTerm;
+export default RecommendWords;

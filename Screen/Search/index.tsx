@@ -109,6 +109,7 @@ const Search = () => {
           onPressSearchDelete={handleSearchAllDelete}
           onPressX={handleSearchDelete}
           onPressWord={onPressWord}
+          onRecommendWord={onPressWord}
         />
       )}
       {searchStudyList && (
@@ -136,6 +137,7 @@ const Search = () => {
                 onPressSearchDelete={handleSearchAllDelete}
                 onPressX={handleSearchDelete}
                 onPressWord={onPressWord}
+                onRecommendWord={onPressWord}
               />
             )}
           />

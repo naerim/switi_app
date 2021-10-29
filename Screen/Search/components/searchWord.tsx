@@ -15,6 +15,7 @@ interface Props {
   onPressSearchDelete: () => void;
   onPressX: (id: number) => void;
   onPressWord: any;
+  onRecommendWord: (word: string) => void;
 }
 
 const SearchWord: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const SearchWord: React.FC<Props> = ({
   onPressSearchDelete,
   onPressX,
   onPressWord,
+  onRecommendWord,
 }) => {
   return (
     <SearchWordContainer>
@@ -32,7 +34,7 @@ const SearchWord: React.FC<Props> = ({
         onPressX={onPressX}
       />
       <Line />
-      <RecommendContainer />
+      <RecommendContainer onRecommendWord={onRecommendWord} />
     </SearchWordContainer>
   );
 };

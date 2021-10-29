@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import RecommendTerm from './RecommendTerm';
+import RecommendWords from './RecommendWords';
 
-const RecommendContainer: React.FC = () => {
+interface Props {
+  onRecommendWord: (word: string) => void;
+}
+
+const RecommendContainer: React.FC<Props> = ({ onRecommendWord }) => {
   const recommendData = [
     {
       text: 'NCS',
@@ -17,14 +21,18 @@ const RecommendContainer: React.FC = () => {
       text: '스페인어 취미',
     },
     {
-      text: '가상 인증',
+      text: '중국어',
     },
   ];
   return (
     <Container>
       <Title>추천 검색어</Title>
       {recommendData.map(({ text }) => (
-        <RecommendTerm key={text} term={text} />
+        <RecommendWords
+          key={text}
+          word={text}
+          onRecommendWord={onRecommendWord}
+        />
       ))}
     </Container>
   );
