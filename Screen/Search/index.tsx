@@ -17,6 +17,7 @@ import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
 import SearchWord from './components/searchWord';
 import { REFRESH_STUDY_LIST_SUCCESS } from '../../redux/action';
+import SearchError from './components/searchError';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -132,13 +133,7 @@ const Search = () => {
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={() => (
               //검색 결과가 없습니다. 필요하지 않나?
-              <SearchWord
-                searches={searchHistory}
-                onPressSearchDelete={handleSearchAllDelete}
-                onPressX={handleSearchDelete}
-                onPressWord={onPressWord}
-                onRecommendWord={onPressWord}
-              />
+              <SearchError />
             )}
           />
         </FlatListContainer>
@@ -152,5 +147,7 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
-const FlatListContainer = styled.View``;
+const FlatListContainer = styled.View`
+  flex: 1;
+`;
 export default Search;
