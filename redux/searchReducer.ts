@@ -12,6 +12,9 @@ import {
   DELETE_STUDY_DELETE,
   DELETE_STUDY_DELETE_SUCCESS,
   DELETE_STUDY_DELETE_FAILURE,
+  RELOAD_STUDY_LIST_SUCCESS,
+  REFRESH_STUDY_LIST_SUCCESS,
+  REFRESH_STUDY_LIST,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -38,6 +41,18 @@ const search = async (token: string, keyword: string) => {
   console.log(`검색 완료 ${JSON.stringify(response)}`);
   return response;
 };
+
+// 검색 리로딩
+// const refreshSearch = async (token: string, keyword: string) => {
+//   const response = await axios({
+//     method: 'post',
+//     url: 'http://localhost:4000/search/searchStudy',
+//     headers: { Authorization: token },
+//     data: { keyword: keyword },
+//   });
+//   console.log(`검색 완료 ${JSON.stringify(response)}`);
+//   return response;
+// };
 
 //검색 기록 출력
 const searchHistory = async (token: string) => {
@@ -88,6 +103,9 @@ function searchReducer(state = initialState, action: any) {
     switch (action.type) {
       case POST_STUDY_LIST_SUCCESS:
         draft.searchStudyList = action.payload.study;
+        break;
+      case REFRESH_STUDY_LIST_SUCCESS:
+        draft.searchStudyList = initialState.searchStudyList;
         break;
       case GET_SEARCH_HISTORY_LIST_SUCCESS:
         draft.searchHistoryList = action.payload.search;

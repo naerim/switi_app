@@ -6,7 +6,7 @@ import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import {
+import searchReducer, {
   searchAllDeleteRequest,
   searchDeleteRequest,
   searchHistoryRequest,
@@ -16,9 +16,10 @@ import { FlatList } from 'react-native';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { DataType } from '../Home/interface';
 import SearchWord from './components/searchWord';
+import { REFRESH_STUDY_LIST_SUCCESS } from '../../redux/action';
 
 const Search = () => {
-  const dispatch = useDispatch(); // X action 받아서 store의 Reducer에서 넘김
+  const dispatch = useDispatch();
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
@@ -30,6 +31,8 @@ const Search = () => {
 
   const fetchOnSearch = (token: any, keyword: string) =>
     dispatch(searchRequest(token, keyword));
+
+  const refreshSearch = () => dispatch({ type: REFRESH_STUDY_LIST_SUCCESS });
 
   const fetchOnSearchHistory = (token: any) =>
     dispatch(searchHistoryRequest(token));
@@ -79,7 +82,7 @@ const Search = () => {
 
   const fetchItem = () => {
     setIsRefreshing(true);
-    fetchOnSearch(login.token, searchInput.value);
+    refreshSearch();
     setIsRefreshing(false);
   };
 

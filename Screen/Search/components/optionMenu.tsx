@@ -19,7 +19,6 @@ const OptionMenu: React.FC<Props> = ({ onPressSearchDelete }) => {
 };
 
 const Container = styled.View`
-  flex: 1;
   flex-direction: column;
   padding: 0 24px;
   margin-top: 10px;
