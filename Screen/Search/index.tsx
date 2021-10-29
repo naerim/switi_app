@@ -18,6 +18,7 @@ import { DataType } from '../Home/interface';
 import SearchWord from './components/searchWord';
 import { REFRESH_STUDY_LIST_SUCCESS } from '../../redux/action';
 import SearchError from './components/searchError';
+import SearchFlatList from './searchFlatList';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -94,9 +95,6 @@ const Search = () => {
     setIsRefreshing(false);
   };
 
-  const handleLoadMore = () => {
-    console.log('검색..');
-  };
   return (
     <ContainerWithBell
       title="검색"
@@ -114,29 +112,11 @@ const Search = () => {
         />
       )}
       {searchStudyList && (
-        <FlatListContainer>
-          <FlatList
-            ItemSeparatorComponent={FlatListItemSeparator}
-            onRefresh={refreshScreen}
-            refreshing={isRefreshing}
-            data={searchStudyList}
-            renderItem={({ item }) => (
-              <RenderItem index={item.id} item={item} paddingHorizontal={20} />
-            )}
-            keyExtractor={(item: DataType) => item.id.toString()}
-            extraData={searchStudyList}
-            contentContainerStyle={{
-              paddingBottom: 80,
-            }}
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={() => (
-              //검색 결과가 없습니다. 필요하지 않나?
-              <SearchError />
-            )}
-          />
-        </FlatListContainer>
+        <SearchFlatList
+          refreshScreen={refreshScreen}
+          isRefreshing={isRefreshing}
+          searchStudyList={searchStudyList}
+        />
       )}
     </ContainerWithBell>
   );
@@ -147,7 +127,4 @@ const SeparatorLine = styled.View`
   background-color: #f3f3f3;
 `;
 
-const FlatListContainer = styled.View`
-  flex: 1;
-`;
 export default Search;
