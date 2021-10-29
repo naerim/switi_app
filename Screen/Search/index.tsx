@@ -80,7 +80,7 @@ const Search = () => {
   const FlatListItemSeparator = () => <SeparatorLine />;
   const [isRefreshing, setIsRefreshing] = useState(false); // X flatList 내부의 로딩
 
-  const fetchItem = () => {
+  const refreshScreen = () => {
     setIsRefreshing(true);
     refreshSearch();
     setIsRefreshing(false);
@@ -90,7 +90,7 @@ const Search = () => {
     console.log('검색..');
   };
   return (
-    <ContainerWithBell title="검색" onPressBell={goAlarm()}>
+    <ContainerWithBell title="검색" onPressBell={goAlarm()} onPressTitle={refreshScreen}>
       <SearchForm searchInput={searchInput} onPress={searchSomething} />
       {!searchStudyList && (
         <SearchWord
@@ -103,7 +103,7 @@ const Search = () => {
         <FlatListContainer>
           <FlatList
             ItemSeparatorComponent={FlatListItemSeparator}
-            onRefresh={fetchItem}
+            onRefresh={refreshScreen}
             refreshing={isRefreshing}
             data={searchStudyList}
             renderItem={({ item }) => (
