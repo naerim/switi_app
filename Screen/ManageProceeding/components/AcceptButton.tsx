@@ -4,15 +4,16 @@ import styled from 'styled-components/native';
 interface Props {
   title: string;
   display: boolean;
+  onPress?: () => void;
 }
 
 interface ButtonProps {
   display: boolean;
 }
 
-const AcceptButton: React.FC<Props> = ({ title, display }) => {
+const AcceptButton: React.FC<Props> = ({ title, display, onPress }) => {
   return (
-    <Container activeOpacity={0.8} display={display}>
+    <Container activeOpacity={0.8} display={display} onPress={onPress}>
       <Title>{title}</Title>
     </Container>
   );
