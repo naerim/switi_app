@@ -43,14 +43,18 @@ const Container = styled.TouchableOpacity`
 
 const Content = styled.View`
   flex: 3;
-  padding: 10px;
-  justify-content: center;
+  padding: 12px 0;
+  flex-direction: row;
 `;
 
 const Title = styled.Text`
   font-size: 14px;
+  margin-left: 10px;
+  margin-top: 1px;
+  font-weight: bold;
   color: #2b2b2b;
-  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ManageMember = styled.TouchableOpacity`
