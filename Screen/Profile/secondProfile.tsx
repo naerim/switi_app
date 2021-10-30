@@ -6,6 +6,8 @@ import Introduce from './components/Introduce';
 import useInput from '../../util/useInput';
 import FlatListModal from './components/FlatListModal';
 import { CharacterList } from '../../Data';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const SecondProfile = () => {
   const introduceInput = useInput('');
@@ -21,6 +23,10 @@ const SecondProfile = () => {
 
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
 
+  const { character } = useSelector(({ dataReducer }: rootState) => ({
+    character: dataReducer.character,
+  }));
+
   return (
     <ProfileContainer
       buttonText="프로필 설정 완료"
@@ -32,7 +38,7 @@ const SecondProfile = () => {
       <MyState check={{ checked, setChecked }} />
       <FlatListModal
         title="나의 성격 (3개 이하 선택)"
-        data={CharacterList}
+        data={character}
         select={selectCharacter}
         setSelect={setSelectCharacter}
         column

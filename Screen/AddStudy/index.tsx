@@ -132,7 +132,7 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={onClick} />
+          <BasicButton text="등록하기" onPress={onClick} disabled={false} />
         </Content>
       </ScrollView>
       <EnrollModal
