@@ -4,7 +4,8 @@ export interface ContentProps {
 }
 
 export interface TargetProps {
-  select: { value: string; onChange: (value: string) => void };
+  target: number;
+  setTarget: (prev: number) => void;
 }
 
 export interface InputProps {

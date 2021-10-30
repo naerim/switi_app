@@ -20,7 +20,6 @@ const SelectOne: React.FC<Props> = ({ title, data, input, setInput }) => {
     setModalVisible(false);
     findName();
   };
-  //const [select, setSelect] = useState<number[]>([]);
   const name = useInput('선택해주세요');
   const findName = () =>
     input.forEach((i) => {

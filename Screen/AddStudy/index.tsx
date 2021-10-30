@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
 import { Platform, ScrollView } from 'react-native';
-import AddImage from './components/AddImage';
 import SelectOne from './components/SelectOne';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
@@ -12,7 +11,6 @@ import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
-import { InterestList, Area } from '../../Data';
 import EnrollModal from './components/EnrollModal';
 import FlagRadioButton from './components/FlagRadioButton';
 import axios from 'axios';
@@ -22,7 +20,7 @@ import { rootState } from '../../redux';
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const selectTarget = useInput('');
+  const [target, setTarget] = useState<number>(0);
   const periodInput = useInput('');
   const recruitNumInput = useInput('');
   const [recruitSelect, setRecruitSelect] = useState(false);
@@ -35,7 +33,6 @@ const AddStudy = () => {
     month: '',
     day: '',
   });
-  const [image, setImage] = useState('');
   const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
   const [area, setArea] = useState<number[]>([]);
   const [category, setCategory] = useState<number[]>([]);
@@ -45,28 +42,25 @@ const AddStudy = () => {
     login: userReducer.login,
   }));
 
+  const { interest, region } = useSelector(({ dataReducer }: rootState) => ({
+    interest: dataReducer.interest,
+    region: dataReducer.region,
+  }));
+
   // 최종 등록 버튼
   const EnrollButton = () => {
-    // const formData = new FormData();
-
-    // formData.append('image', file);
-    // console.log(file);
-
     // endDate
     const date =
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
-    console.log(image);
-
-    console.log(selectTarget.value);
     axios({
       method: 'post',
       url: 'http://localhost:4000/study/addStudy',
       headers: { Authorization: login.token },
       data: {
         online_flag: onlineFlag,
-        state: 1,
-        category: 1,
-        address: 1,
+        state: target,
+        category: category,
+        address: area,
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
@@ -74,7 +68,7 @@ const AddStudy = () => {
         contact: contentInput.value,
         title: titleInput.value,
         desc: contentInput.value,
-        img: image,
+        gu: 1,
       },
     })
       .then(() => {
@@ -94,7 +88,6 @@ const AddStudy = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        {/*<AddImage image={image} setImage={setImage} />*/}
         <Content>
           <FlagRadioButton
             title="스터디 형식"
@@ -102,12 +95,17 @@ const AddStudy = () => {
           />
           <SelectOne
             title="카테고리"
-            data={InterestList}
+            data={interest}
             input={category}
             setInput={setCategory}
           />
-          <SelectOne title="지역" data={Area} input={area} setInput={setArea} />
-          <Target select={selectTarget} />
+          <SelectOne
+            title="지역"
+            data={region}
+            input={area}
+            setInput={setArea}
+          />
+          <Target target={target} setTarget={setTarget} />
           <RecruitNum
             input={recruitNumInput}
             select={{ recruitSelect, setRecruitSelect }}
