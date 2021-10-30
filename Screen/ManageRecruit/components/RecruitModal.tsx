@@ -5,6 +5,7 @@ import BasicModal from '../../../Component/BasicModal';
 import BasicButton from '../../../Component/BasicButton';
 import ApplyInfo from './ApplyInfo';
 import { ManageType } from '../../ManageProceeding/interface';
+import TwoButton from './TwoButton';
 
 interface Props {
   item: ManageType;
@@ -26,11 +27,18 @@ const RecruitModal: React.FC<Props> = ({ item, modalVisible, closeModal }) => {
           nickname={item.User.nickname}
           desc={item.apply_detail}
         />
-        <BasicButton
-          text="신청하기"
-          onPress={() => console.log('신청')}
-          disabled={false}
-        />
+        <ButtonWrap>
+          <TwoButton
+            accept={false}
+            onPress={() => console.log('거절')}
+            title="거절하기"
+          />
+          <TwoButton
+            accept
+            onPress={() => console.log('수락')}
+            title="수락하기"
+          />
+        </ButtonWrap>
       </BasicModal>
     </Container>
   );
@@ -48,6 +56,11 @@ const Title = styled.Text`
   color: #2b2b2b;
   font-size: 16px;
   font-weight: bold;
+`;
+
+const ButtonWrap = styled.View`
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export default RecruitModal;

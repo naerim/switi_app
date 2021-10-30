@@ -36,7 +36,7 @@ const Nickname = styled.Text`
 
 const Desc = styled.View`
   margin-top: 10px;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
   background-color: #f3f3f3;
   border-radius: 4px;
   height: 80px;
