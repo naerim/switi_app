@@ -11,11 +11,11 @@ interface FlatListProps {
   setSelect: (prev: (prev: number[]) => number[]) => void;
   closeModal: () => void;
   limit?: number;
-  tagList?: { key: number; name: string; category: string }[];
+  tagList?: { id: number; name: string; category: string }[];
   setTagList?: (
     prev: (
-      prev: { key: number; name: string; category: string }[]
-    ) => { key: number; name: string; category: string }[]
+      prev: { id: number; name: string; category: string }[]
+    ) => { id: number; name: string; category: string }[]
   ) => void;
 }
 
@@ -45,7 +45,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
       if (setTagList) {
         setTagList((prev) => [
           ...prev,
-          { key: index, name: name, category: category },
+          { id: index, name: name, category: category },
         ]);
       }
       return;
@@ -53,7 +53,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
 
     setSelect((prev) => prev.filter((i) => i !== index));
     if (setTagList) {
-      setTagList((prev) => prev.filter((i) => i.key !== index));
+      setTagList((prev) => prev.filter((i) => i.id !== index));
     }
   };
 
@@ -78,7 +78,7 @@ const SelectFlatList: React.FC<FlatListProps> = ({
         ItemSeparatorComponent={FlatListItemSeparator}
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.key.toString()}
+        keyExtractor={(item) => item.id.toString()}
         extraData={data}
         showsVerticalScrollIndicator={false}
         style={{ marginBottom: 20 }}

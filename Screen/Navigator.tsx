@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './SignIn';
@@ -40,11 +40,17 @@ import MyPage_Participation from './MyPage_Participation';
 import Splash from './Splash';
 import ContainerWithBell from '../Component/ContainerWithBell';
 import { UseGoAlarm } from '../util/navigationHooks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../redux';
 import ProfileDetail from './ProfileDetail';
 import ManageProceeding from './ManageProceeding';
 import ManageRecruit from './ManageRecruit';
+import {
+  getCharacterRequest,
+  getInterestRequest,
+  getRegionRequest,
+  getStateRequest,
+} from '../redux/dataReducer';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -222,14 +228,28 @@ const RootNavigator = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const dispatch = useDispatch();
+  const onGetInterest = useCallback(() => dispatch(getInterestRequest()), [
+    dispatch,
+  ]);
+  const onGetCharacter = useCallback(() => dispatch(getCharacterRequest()), [
+    dispatch,
+  ]);
+  const onGetRegion = useCallback(() => dispatch(getRegionRequest()), [
+    dispatch,
+  ]);
+  const onGetState = useCallback(() => dispatch(getStateRequest()), [dispatch]);
 
   // const [user, setUser] = useState(false);
   //위 코드 없애기 login상태 이미 가져오니까
 
   const [loading, setLoading] = useState(true);
-  //console.log(login);
 
   useEffect(() => {
+    onGetInterest();
+    onGetCharacter();
+    onGetRegion();
+    onGetState();
     setTimeout(() => setLoading(false), 3000);
   }, []);
   return (
