@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
@@ -9,9 +9,12 @@ import { rootState } from '../../redux';
 import { getStudyDetailRequest } from '../../redux/studyReducer';
 import TitleFlag from '../Home/components/StudyFlatList/TitleFlag';
 import StudyHeader from './components/StudyHeader';
+import BlackModal from '../../Component/BlackModal';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupText, setPopupText] = useState('');
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -68,7 +71,12 @@ const StudyDetail = ({ route }: any) => {
 
   return (
     <Container>
-      <StudyHeader onPress={goHome} id={studyDetail.id} />
+      <StudyHeader
+        onPress={goHome}
+        id={studyDetail.id}
+        setPopupVisible={setPopupVisible}
+        setPopupText={setPopupText}
+      />
       <Content>
         <TitleFlag
           title={studyDetail.title}
@@ -85,10 +93,13 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
+      <BlackModal visible={popupVisible} text={popupText} />
       <BottomButton
         id={studyDetail.id}
         btnText={checkApply()}
         token={login.token}
+        setPopupVisible={setPopupVisible}
+        setPopupText={setPopupText}
       />
     </Container>
   );

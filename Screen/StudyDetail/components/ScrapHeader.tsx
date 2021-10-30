@@ -12,9 +12,16 @@ import { getScrapListRequest } from '../../../redux/userReducer';
 interface Props {
   onPress: () => void;
   id: number;
+  setPopupVisible: (v: boolean) => void;
+  setPopupText: (v: string) => void;
 }
 
-const ScrapHeader: React.FC<Props> = ({ onPress, id }) => {
+const ScrapHeader: React.FC<Props> = ({
+  onPress,
+  id,
+  setPopupVisible,
+  setPopupText,
+}) => {
   const [icon, setIcon] = useState(NotScrapIcon);
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -56,6 +63,11 @@ const ScrapHeader: React.FC<Props> = ({ onPress, id }) => {
           url: `http://localhost:4000/study/deleteScrap/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
+          setPopupText('모집글이 스크랩이 취소되었습니다.');
+          setPopupVisible(true);
+          setTimeout(() => {
+            setPopupVisible(false);
+          }, 2000);
           setIcon(NotScrapIcon);
         })
       : axios({
@@ -63,6 +75,11 @@ const ScrapHeader: React.FC<Props> = ({ onPress, id }) => {
           url: `http://localhost:4000/study/scrapStudy/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
+          setPopupText('모집글이 스크랩되었습니다.');
+          setPopupVisible(true);
+          setTimeout(() => {
+            setPopupVisible(false);
+          }, 2000);
           setIcon(ScrapIcon);
         });
   };

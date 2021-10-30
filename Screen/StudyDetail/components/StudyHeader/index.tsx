@@ -9,14 +9,26 @@ import { rootState } from '../../../../redux';
 interface Props {
   onPress: () => void;
   id: number;
+  setPopupVisible: (v: boolean) => void;
+  setPopupText: (v: string) => void;
 }
 
 // 모집글인 경우 DetailHeader
 // 아닌 경우 ScrapHeader
 
-const StudyHeader: React.FC<Props> = ({ onPress, id }) => {
+const StudyHeader: React.FC<Props> = ({
+  onPress,
+  id,
+  setPopupVisible,
+  setPopupText,
+}) => {
   const [header, setHeader] = useState(
-    <ScrapHeader onPress={onPress} id={id} />
+    <ScrapHeader
+      onPress={onPress}
+      id={id}
+      setPopupVisible={setPopupVisible}
+      setPopupText={setPopupText}
+    />
   );
   const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
     myStudyList: manageReducer.myStudyList,
@@ -31,7 +43,14 @@ const StudyHeader: React.FC<Props> = ({ onPress, id }) => {
     // 모집장일 경우 header 다르게
     leader
       ? setHeader(<DetailHeader onPress={onPress} />)
-      : setHeader(<ScrapHeader onPress={onPress} id={id} />);
+      : setHeader(
+          <ScrapHeader
+            onPress={onPress}
+            id={id}
+            setPopupVisible={setPopupVisible}
+            setPopupText={setPopupText}
+          />
+        );
   };
 
   useEffect(() => {

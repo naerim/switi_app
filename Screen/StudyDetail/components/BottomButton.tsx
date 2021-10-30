@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import ApplyModal from './ApplyModal';
 import CancelModal from './CancelModal';
@@ -8,9 +8,17 @@ interface Props {
   id: number;
   btnText: string;
   token: string;
+  setPopupVisible: (v: boolean) => void;
+  setPopupText: (v: string) => void;
 }
 
-const BottomButton: React.FC<Props> = ({ id, btnText, token }) => {
+const BottomButton: React.FC<Props> = ({
+  id,
+  btnText,
+  token,
+  setPopupVisible,
+  setPopupText,
+}) => {
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
   const [applyModalVisible, setApplyModalVisible] = useState(false);
@@ -25,6 +33,16 @@ const BottomButton: React.FC<Props> = ({ id, btnText, token }) => {
     else setDoneModalVisible(true);
   };
 
+  // 팝업창(검정)
+  const confirmPopupText = () => {
+    if (btnText === '신청 취소하기')
+      setPopupText('스터디 신청이 취소되었습니다.');
+  };
+
+  useEffect(() => {
+    confirmPopupText();
+  }, [btnText]);
+
   return (
     <Container>
       <ColorButton onPress={setModal}>
@@ -37,6 +55,9 @@ const BottomButton: React.FC<Props> = ({ id, btnText, token }) => {
         closeModal={closeApplyModal}
       />
       <CancelModal
+        token={token}
+        idStudy={id}
+        setPopupVisible={setPopupVisible}
         modalVisible={cancelModalVisible}
         closeModal={closeCancelModal}
       />
