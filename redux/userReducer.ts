@@ -88,7 +88,7 @@ export const getMyProfileRequest = createRequestThunk(
   getMyProfile
 );
 
-// 내 프로필
+// 상대 프로필
 const getUserProfile = async (token: string, id: number) => {
   const response = axios({
     method: 'get',

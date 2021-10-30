@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
 import { useGoHome } from '../../util/navigationHooks';
-import ApplyModal from './components/ApplyModal';
-import CancelModal from './components/CancelModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getStudyDetailRequest } from '../../redux/studyReducer';
@@ -62,6 +60,10 @@ const StudyDetail = ({ route }: any) => {
     return apply ? '신청 취소하기' : '신청하기';
   };
 
+  useEffect(() => {
+    studyDetail && checkApply();
+  }, [myApplyList]);
+
   if (!studyDetail) return null;
 
   return (
@@ -83,7 +85,11 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
-      <BottomButton id={studyDetail.id} btnText={checkApply()} />
+      <BottomButton
+        id={studyDetail.id}
+        btnText={checkApply()}
+        token={login.token}
+      />
     </Container>
   );
 };

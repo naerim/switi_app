@@ -102,6 +102,7 @@ const SignIn: React.FC = () => {
             onPress={handleLogin}
             loading={isLoading}
             text="로그인"
+            disabled={emailInput.value === '' && passwordInput.value === ''}
           />
         </AuthButtonContainer>
         <OptionContainer>

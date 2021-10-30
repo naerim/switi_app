@@ -7,9 +7,10 @@ import RecruitDoneModal from './RecruitDoneModal';
 interface Props {
   id: number;
   btnText: string;
+  token: string;
 }
 
-const BottomButton: React.FC<Props> = ({ id, btnText }) => {
+const BottomButton: React.FC<Props> = ({ id, btnText, token }) => {
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
   const [applyModalVisible, setApplyModalVisible] = useState(false);
@@ -30,6 +31,8 @@ const BottomButton: React.FC<Props> = ({ id, btnText }) => {
         <ButtonText>{btnText}</ButtonText>
       </ColorButton>
       <ApplyModal
+        token={token}
+        idStudy={id}
         modalVisible={applyModalVisible}
         closeModal={closeApplyModal}
       />
