@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useInput from '../SignIn/util/useInput';
 import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
@@ -29,8 +29,6 @@ const Search = () => {
     }),
     shallowEqual
   );
-  //+ shallowEqual : searchStudyList, searchHistoryList 둘 중 하나가 업데이트 되었을 때, 바뀌면 리랜더링 한다.
-  // 디스트럭쳐링만 하면 searchReducer 안의 어떠한 다른값이 변경되어도 리랜더링
 
   const searchInput = useInput('');
 
@@ -83,20 +81,19 @@ const Search = () => {
       onPressTitle={refreshScreen}
     >
       <SearchForm searchInput={searchInput} onPress={handleSearch} />
-      {!searchStudyList && (
+      {searchStudyList ? (
+        <SearchFlatList
+          refreshScreen={refreshScreen}
+          isRefreshing={isRefreshing}
+          searchStudyList={searchStudyList}
+        />
+      ) : (
         <SearchWord
           searches={searchHistoryList}
           onPressSearchDelete={handleSearchAllDelete}
           onPressX={handleSearchDelete}
           onPressWord={onPressWord}
           onRecommendWord={onPressWord}
-        />
-      )}
-      {searchStudyList && (
-        <SearchFlatList
-          refreshScreen={refreshScreen}
-          isRefreshing={isRefreshing}
-          searchStudyList={searchStudyList}
         />
       )}
     </ContainerWithBell>
