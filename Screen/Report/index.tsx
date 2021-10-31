@@ -58,10 +58,9 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
 
   const [studyChoice, setStudyChoice] = useState(0);
 
-  const handleStudyOnClick = (studyId: number) => {
+  const handleStudyOnClick = (value: number, studyId: number) => {
     handleStudyMember(studyId);
-    console.log('스터디멤버 index:', studyMemberList);
-    setStudyChoice(studyId);
+    setStudyChoice(value);
   };
 
   const [person, setPerson] = useState(0);
@@ -109,7 +108,10 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         <Line />
         <TitleContainer onPress={onPressPerson} titleText="신고 대상자 선택" />
         {personVisible ? (
-          <PersonRadioButton input={{ reason: person, setReason: setPerson }} />
+          <PersonRadioButton
+            input={{ reason: person, setReason: setPerson }}
+            studyMemberList={studyMemberList}
+          />
         ) : (
           <Nothing />
         )}

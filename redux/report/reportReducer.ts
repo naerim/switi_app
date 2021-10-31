@@ -26,12 +26,7 @@ const studyInProgress = async (token: string) => {
     url: 'http://localhost:4000/report/getReportList',
     headers: { Authorization: token },
   });
-  // console.log(`현재 진행중인스터디 `, response);
-  // const result = response.data.study.map((item: any) => ({
-  //   ...item,
-  //   label: item.title,
-  //   value: item.id,
-  // }));
+  // console.log(`reducer 스터디 :  `, response.data.study);
   return response;
 };
 
@@ -45,8 +40,7 @@ const studyMember = async (
     url: `http://localhost:4000/report/getReportInfo/${studyId}${memberId}/`,
     headers: { Authorization: token },
   });
-  console.log(`reducer 스터디 멤버 :  `, response.data);
-  console.log('스터디 멤버 배열 값 확인', response.data.members);
+  // console.log('reducer 스터디 멤버', response.data.member);
   return response;
 };
 
@@ -78,7 +72,7 @@ function reportReducer(state = initialState, action: any) {
         draft.studyInProgressList = action.payload.study;
         break;
       case GET_STUDY_MEMBER_SUCCESS:
-        draft.studyMemberList = action.payload.study.members;
+        draft.studyMemberList = action.payload.member;
         //study.member이 맞을까?
         break;
       case POST_REPORT_SUCCESS:

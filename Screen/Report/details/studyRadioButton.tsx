@@ -7,7 +7,7 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 interface InputProps {
   choice: number;
-  setChoice: (value: number) => void;
+  setChoice: (value: number, studyId: number) => void;
 }
 interface Props {
   input: InputProps;
@@ -20,11 +20,9 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
     ...item,
     label: item.title,
     // value: item.id,
-    // 왜 id 하면 안될까? value 는 꼭 0++이어야 하나..
     value: value++,
+    // 왜 id 하면 안될까? value 는 꼭 0++이어야 하나..
   }));
-  // console.log(`현재 진행중인스터디  Radio`, radioStudyList);
-
   return (
     <Container>
       <RadioForm>
@@ -42,8 +40,9 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
                 }
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
-                onPress={(v) => {
-                  input.setChoice(v);
+                onPress={(value) => {
+                  input.setChoice(value, object.id);
+                  console.log(object.id);
                 }}
               />
               <Imag />
@@ -52,8 +51,8 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
                 index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
-                onPress={(id) => {
-                  input.setChoice(id);
+                onPress={(value) => {
+                  input.setChoice(value, object.id);
                 }}
               />
             </RadioContainer>

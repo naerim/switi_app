@@ -12,32 +12,22 @@ interface InputProps {
 }
 interface Props {
   input: InputProps;
+  studyMemberList: any;
 }
 
-const PersonRadioButton: React.FC<Props> = ({ input }) => {
-  const radio_props = [
-    {
-      label: '스터디원1(모집장)',
-      value: 0,
-    },
-    {
-      label: '스터디원1(모집장)',
-      value: 1,
-    },
-    {
-      label: '스터디원1(모집장)',
-      value: 2,
-    },
-    {
-      label: '스터디원1(모집장)',
-      value: 3,
-    },
-  ];
-
+const PersonRadioButton: React.FC<Props> = ({ input, studyMemberList }) => {
+  let value = 0;
+  let radioStudyMemberList = studyMemberList[0].studyMembers;
+  radioStudyMemberList = radioStudyMemberList?.map((item: any) => ({
+    ...item,
+    label: item.nickname,
+    value: value++,
+  }));
+  // console.log('radio 스터디 멤버', radioStudyMemberList);
   return (
     <Container>
       <RadioForm>
-        {radio_props.map((obj, value) => (
+        {radioStudyMemberList?.map((obj: any, value: number) => (
           <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
               <RadioButtonInput
@@ -50,8 +40,8 @@ const PersonRadioButton: React.FC<Props> = ({ input }) => {
                 }
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
-                onPress={(v) => {
-                  input.setReason(v);
+                onPress={(value) => {
+                  input.setReason(value);
                 }}
               />
               <Imag />
@@ -60,8 +50,8 @@ const PersonRadioButton: React.FC<Props> = ({ input }) => {
                 index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
-                onPress={(id) => {
-                  input.setReason(id);
+                onPress={(value) => {
+                  input.setReason(value);
                 }}
               />
             </RadioContainer>
