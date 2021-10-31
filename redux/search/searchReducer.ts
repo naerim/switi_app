@@ -28,6 +28,7 @@ export interface ISearchState {
 const initialState = {
   searchStudyList: null,
   searchHistoryList: [],
+  //filter 돌리기 위해 null-> []
 }; // 기본 상태
 
 // 검색하기 + 검색어저장
