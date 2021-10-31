@@ -60,8 +60,8 @@ const PersonRadioButton: React.FC<Props> = ({ input }) => {
                 index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
-                onPress={(v) => {
-                  input.setReason(v);
+                onPress={(id) => {
+                  input.setReason(id);
                 }}
               />
             </RadioContainer>

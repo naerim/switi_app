@@ -45,6 +45,8 @@ const studyMember = async (
     url: `http://localhost:4000/report/getReportInfo/${studyId}${memberId}/`,
     headers: { Authorization: token },
   });
+  console.log(`reducer 스터디 멤버 :  `, response.data);
+  console.log('스터디 멤버 배열 값 확인', response.data.members);
   return response;
 };
 

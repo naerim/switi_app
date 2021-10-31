@@ -56,11 +56,18 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   }, []);
   //맨 처음 스터디만 받아오기
 
-  const [study, setStudy] = useState(0);
+  const [studyChoice, setStudyChoice] = useState(0);
+
+  const handleStudyOnClick = (studyId: number) => {
+    handleStudyMember(studyId);
+    console.log('스터디멤버 index:', studyMemberList);
+    setStudyChoice(studyId);
+  };
+
   const [person, setPerson] = useState(0);
   const reasonInput = useInput('');
   const [studyVisible, setStudyVisible] = useState(true);
-  const [personVisible, setPersonVisible] = useState(true);
+  const [personVisible, setPersonVisible] = useState(false);
   const [reasonVisible, setReasonVisible] = useState(false);
 
   const onPressStudy = () => {
@@ -93,7 +100,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         <TitleContainer onPress={onPressStudy} titleText="스터디 선택" />
         {studyVisible ? (
           <StudyRadioButton
-            input={{ reason: study, setReason: setStudy }}
+            input={{ choice: studyChoice, setChoice: handleStudyOnClick }}
             studyInProgressList={studyInProgressList}
           />
         ) : (

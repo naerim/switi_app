@@ -5,11 +5,9 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import { shallowEqual, useSelector } from 'react-redux';
-import { rootState } from '../../../redux';
 interface InputProps {
-  reason: number;
-  setReason: (value: number) => void;
+  choice: number;
+  setChoice: (value: number) => void;
 }
 interface Props {
   input: InputProps;
@@ -17,26 +15,15 @@ interface Props {
 }
 
 const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
-  const radio_props = [
-    {
-      label: '중국어 부수는 모임',
-      value: 0,
-    },
-    {
-      label: '중국어 뿌수는 모임',
-      value: 1,
-    },
-  ];
   let value = 0;
   const radioStudyList = studyInProgressList?.map((item: any) => ({
     ...item,
     label: item.title,
     // value: item.id,
-    // 왜 id 하면 안될까? value는 꼭 0++이어야 하나..
+    // 왜 id 하면 안될까? value 는 꼭 0++이어야 하나..
     value: value++,
   }));
-
-  console.log(`현재 진행중인스터디  Radio`, radioStudyList);
+  // console.log(`현재 진행중인스터디  Radio`, radioStudyList);
 
   return (
     <Container>
@@ -44,19 +31,19 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
         {radioStudyList?.map((object: any, value: number) => (
           <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
-              {console.log('value', value)}
+              {/*{console.log('value', value)}*/}
               <RadioButtonInput
                 obj={object}
                 index={value}
-                isSelected={input.reason === value}
+                isSelected={input.choice === value}
                 buttonInnerColor={'#86E3C3'}
                 buttonOuterColor={
-                  input.reason === value ? '#86E3C3' : '#D1D1D1'
+                  input.choice === value ? '#86E3C3' : '#D1D1D1'
                 }
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
                 onPress={(v) => {
-                  input.setReason(v);
+                  input.setChoice(v);
                 }}
               />
               <Imag />
@@ -65,8 +52,8 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
                 index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
-                onPress={(v) => {
-                  input.setReason(v);
+                onPress={(id) => {
+                  input.setChoice(id);
                 }}
               />
             </RadioContainer>
