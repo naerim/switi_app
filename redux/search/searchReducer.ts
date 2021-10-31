@@ -6,12 +6,12 @@ import {
   GET_SEARCH_HISTORY_LIST,
   GET_SEARCH_HISTORY_LIST_SUCCESS,
   GET_SEARCH_HISTORY_LIST_FAILURE,
-  DELETE_STUDY_ALL_DELETE,
-  DELETE_STUDY_ALL_DELETE_SUCCESS,
-  DELETE_STUDY_ALL_DELETE_FAILURE,
-  DELETE_STUDY_DELETE,
-  DELETE_STUDY_DELETE_SUCCESS,
-  DELETE_STUDY_DELETE_FAILURE,
+  DELETE_ALL_SEARCH_HISTORY,
+  DELETE_ALL_SEARCH_HISTORY_SUCCESS,
+  DELETE_ALL_SEARCH_HISTORY_FAILURE,
+  DELETE_SEARCH_HISTORY,
+  DELETE_SEARCH_HISTORY_SUCCESS,
+  DELETE_SEARCH_HISTORY_FAILURE,
   RELOAD_STUDY_LIST_SUCCESS,
   REFRESH_STUDY_LIST_SUCCESS,
   REFRESH_STUDY_LIST,
@@ -76,16 +76,21 @@ export const searchHistoryRequest = createRequestThunk(
   GET_SEARCH_HISTORY_LIST,
   searchHistory
 );
-export const searchAllDeleteRequest = createRequestThunk(
-  DELETE_STUDY_ALL_DELETE,
-  searchAllDelete
-);
+
 export const searchDeleteThunk = (token: string, historyId: number) => async (
   dispatch: any
 ) => {
   const response = await searchDelete(token, historyId);
   if (response.data.result)
-    dispatch({ type: DELETE_STUDY_DELETE_SUCCESS, meta: { historyId } });
+    dispatch({ type: DELETE_SEARCH_HISTORY_SUCCESS, meta: { historyId } });
+};
+
+export const searchAllDeleteThunk = (token: string) => async (
+  dispatch: any
+) => {
+  const response = await searchAllDelete(token);
+  if (response.data.result)
+    dispatch({ type: DELETE_ALL_SEARCH_HISTORY_SUCCESS });
 };
 
 function searchReducer(state = initialState, action: any) {
@@ -100,10 +105,10 @@ function searchReducer(state = initialState, action: any) {
       case GET_SEARCH_HISTORY_LIST_SUCCESS:
         draft.searchHistoryList = action.payload.search;
         break;
-      case DELETE_STUDY_ALL_DELETE_SUCCESS:
-        draft.searchHistoryList = action.payload.search;
+      case DELETE_ALL_SEARCH_HISTORY_SUCCESS:
+        draft.searchHistoryList = initialState.searchHistoryList;
         break;
-      case DELETE_STUDY_DELETE_SUCCESS:
+      case DELETE_SEARCH_HISTORY_SUCCESS:
         draft.searchHistoryList = state.searchHistoryList.filter(
           (history: any) => history.id !== action.meta.historyId
         );

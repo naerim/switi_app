@@ -6,7 +6,7 @@ import { UseGoAlarm } from '../../util/navigationHooks';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
-  searchAllDeleteRequest,
+  searchAllDeleteThunk,
   searchDeleteThunk,
   searchHistoryRequest,
   searchRequest,
@@ -30,9 +30,8 @@ const Search = () => {
     shallowEqual
   );
   //+ shallowEqual : searchStudyList, searchHistoryList 둘 중 하나가 업데이트 되었을 때, 바뀌면 리랜더링 한다.
-  // 이전코드는 searchReducer 안의 어떠한 다른값이 변경되어도 리랜더링
+  // 디스트럭쳐링만 하면 searchReducer 안의 어떠한 다른값이 변경되어도 리랜더링
 
-  const [searchHistory, setSearchHistory] = useState([]);
   const searchInput = useInput('');
 
   const fetchOnSearch = (token: any, keyword: string) =>
@@ -43,28 +42,17 @@ const Search = () => {
   const fetchOnSearchHistory = (token: any) =>
     dispatch(searchHistoryRequest(token));
 
-  const fetchSearchAllDelete = (token: any) => {
-    dispatch(searchAllDeleteRequest(token));
+  const handleSearchAllDelete = () => {
+    dispatch(searchAllDeleteThunk(login.token));
+  };
+
+  const handleSearchDelete = (id: number) => {
+    dispatch(searchDeleteThunk(login.token, id));
   };
 
   useEffect(() => {
     fetchOnSearchHistory(login.token);
   }, [dispatch]);
-
-  // const handleSearchAllDelete = useCallback(async () => {
-  //   await setSearchHistory([]); // X 프론트 처리
-  //   await fetchSearchAllDelete(login.token); // X 백엔드 처리
-  // }, [searchHistory]);
-  // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
-
-  const handleSearchAllDelete = useCallback(async () => {
-    await fetchSearchAllDelete(login.token);
-    await fetchOnSearchHistory(login.token);
-  }, [searchHistory]);
-
-  const handleSearchDelete = (id: number) => {
-    dispatch(searchDeleteThunk(login.token, id));
-  };
 
   const onPressWord = async (searchKeyword: string) => {
     searchInput.onChange('');
