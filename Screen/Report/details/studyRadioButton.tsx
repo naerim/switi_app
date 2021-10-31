@@ -5,13 +5,15 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import { shallowEqual, useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 interface InputProps {
   reason: number;
   setReason: (value: number) => void;
 }
 interface Props {
   input: InputProps;
-  studyInProgressList: [];
+  studyInProgressList: any;
 }
 
 const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
@@ -21,23 +23,31 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
       value: 0,
     },
     {
-      label: '중국어 부수는 모임',
+      label: '중국어 뿌수는 모임',
       value: 1,
     },
   ];
+  let value = 0;
+  const radioStudyList = studyInProgressList?.map((item: any) => ({
+    ...item,
+    label: item.title,
+    value: value++,
+  }));
+
+  console.log(`현재 진행중인스터디  Radio`, radioStudyList);
 
   return (
     <Container>
       <RadioForm>
-        {studyInProgressList?.map((obj, i) => (
-          <RadioButton labelHorizontal={false} key={i}>
+        {radioStudyList?.map((object: any, id: number) => (
+          <RadioButton labelHorizontal={false} key={id}>
             <RadioContainer>
               <RadioButtonInput
-                obj={obj}
-                index={i}
-                isSelected={input.reason === i}
+                obj={object}
+                index={id}
+                isSelected={input.reason === id}
                 buttonInnerColor={'#86E3C3'}
-                buttonOuterColor={input.reason === i ? '#86E3C3' : '#D1D1D1'}
+                buttonOuterColor={input.reason === id ? '#86E3C3' : '#D1D1D1'}
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
                 onPress={(v) => {
@@ -46,8 +56,8 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
               />
               <Imag />
               <RadioButtonLabel
-                obj={obj}
-                index={i}
+                obj={object}
+                index={id}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
                 onPress={(v) => {

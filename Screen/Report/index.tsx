@@ -92,7 +92,10 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
       >
         <TitleContainer onPress={onPressStudy} titleText="스터디 선택" />
         {studyVisible ? (
-          <StudyRadioButton input={{ reason: study, setReason: setStudy }} />
+          <StudyRadioButton
+            input={{ reason: study, setReason: setStudy }}
+            studyInProgressList={studyInProgressList}
+          />
         ) : (
           <Nothing />
         )}
