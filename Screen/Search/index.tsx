@@ -3,14 +3,14 @@ import useInput from '../SignIn/util/useInput';
 import ContainerWithBell from '../../Component/ContainerWithBell';
 import SearchForm from './components/SearchForm';
 import { UseGoAlarm } from '../../util/navigationHooks';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   searchAllDeleteRequest,
-  searchDeleteRequest,
+  searchDeleteThunk,
   searchHistoryRequest,
   searchRequest,
-} from '../../redux/searchReducer';
+} from '../../redux/search/searchReducer';
 import SearchWord from './components/searchWord';
 import { REFRESH_STUDY_LIST_SUCCESS } from '../../redux/action';
 import SearchFlatList from './searchFlatList';
@@ -20,9 +20,18 @@ const Search = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  //axios default token 검색 -> axios interceptors 사용
+
   const { searchStudyList, searchHistoryList } = useSelector(
-    (state: rootState) => state.searchReducer
+    (state: rootState) => ({
+      searchStudyList: state.searchReducer.searchStudyList,
+      searchHistoryList: state.searchReducer.searchHistoryList,
+    }),
+    shallowEqual
   );
+  //+ shallowEqual : searchStudyList, searchHistoryList 둘 중 하나가 업데이트 되었을 때, 바뀌면 리랜더링 한다.
+  // 이전코드는 searchReducer 안의 어떠한 다른값이 변경되어도 리랜더링
+
   const [searchHistory, setSearchHistory] = useState([]);
   const searchInput = useInput('');
 
@@ -38,28 +47,24 @@ const Search = () => {
     dispatch(searchAllDeleteRequest(token));
   };
 
-  const fetchSearchDelete = (token: any, id: number) => {
-    dispatch(searchDeleteRequest(token, id));
-  };
-
   useEffect(() => {
     fetchOnSearchHistory(login.token);
   }, [dispatch]);
 
-  useEffect(() => {
-    if (searchHistoryList) setSearchHistory(searchHistoryList);
-  }, [searchHistoryList]);
-
-  const handleSearchAllDelete = useCallback(async () => {
-    await setSearchHistory([]); // X 프론트 처리
-    await fetchSearchAllDelete(login.token); // X 백엔드 처리
-  }, [searchHistory]);
+  // const handleSearchAllDelete = useCallback(async () => {
+  //   await setSearchHistory([]); // X 프론트 처리
+  //   await fetchSearchAllDelete(login.token); // X 백엔드 처리
+  // }, [searchHistory]);
   // X 전체 삭제 버튼 누르면 위 콜백 함수 호출
 
-  const handleSearchDelete = async (id: number) => {
-    await fetchSearchDelete(login.token, id);
+  const handleSearchAllDelete = useCallback(async () => {
+    await fetchSearchAllDelete(login.token);
     await fetchOnSearchHistory(login.token);
-  }; // X 단어 옆 x 누르면 위 콜백 함수 호출
+  }, [searchHistory]);
+
+  const handleSearchDelete = (id: number) => {
+    dispatch(searchDeleteThunk(login.token, id));
+  };
 
   const onPressWord = async (searchKeyword: string) => {
     searchInput.onChange('');
@@ -98,7 +103,7 @@ const Search = () => {
       <SearchForm searchInput={searchInput} onPress={handleSearch} />
       {!searchStudyList && (
         <SearchWord
-          searches={searchHistory}
+          searches={searchHistoryList}
           onPressSearchDelete={handleSearchAllDelete}
           onPressX={handleSearchDelete}
           onPressWord={onPressWord}

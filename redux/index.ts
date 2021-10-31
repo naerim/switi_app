@@ -5,7 +5,7 @@ import studyReducer, { IStudyState } from './studyReducer';
 import userReducer, { IUserState } from './userReducer';
 import dataReducer, { IDataState } from './dataReducer';
 import manageReducer, { IManageState } from './manageReducer';
-import searchReducer, {ISearchState} from "./searchReducer";
+import searchReducer, {ISearchState} from "./search/searchReducer";
 
 export interface rootState {
   studyReducer: IStudyState;

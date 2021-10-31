@@ -25,7 +25,7 @@ const SearchStoryList: React.FC<SearchStoryItemProps> = ({
       showsHorizontalScrollIndicator={false}
     >
       <Container>
-        {searches.map((search) => (
+        {searches?.map((search) => (
           <SearchStoryItem
             onPressWord={onPressWord}
             search={search}

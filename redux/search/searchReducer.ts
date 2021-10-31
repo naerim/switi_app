@@ -15,9 +15,9 @@ import {
   RELOAD_STUDY_LIST_SUCCESS,
   REFRESH_STUDY_LIST_SUCCESS,
   REFRESH_STUDY_LIST,
-} from './action';
+} from '../action';
 import axios from 'axios';
-import createRequestThunk from './lib/createRequestThunk';
+import createRequestThunk from '../lib/createRequestThunk';
 
 export interface ISearchState {
   searchStudyList: [];
@@ -26,7 +26,7 @@ export interface ISearchState {
 
 const initialState = {
   searchStudyList: null,
-  searchHistoryList: null,
+  searchHistoryList: [],
 }; // 기본 상태
 
 // 검색하기 + 검색어저장
@@ -67,6 +67,7 @@ const searchDelete = async (token: string, id: number) => {
     url: `http://localhost:4000/search//deleteOne/${id}`,
     headers: { Authorization: token },
   });
+  console.log(`검색 하나 삭제:`, response.data);
   return response;
 };
 
@@ -79,10 +80,13 @@ export const searchAllDeleteRequest = createRequestThunk(
   DELETE_STUDY_ALL_DELETE,
   searchAllDelete
 );
-export const searchDeleteRequest = createRequestThunk(
-  DELETE_STUDY_DELETE,
-  searchDelete
-);
+export const searchDeleteThunk = (token: string, historyId: number) => async (
+  dispatch: any
+) => {
+  const response = await searchDelete(token, historyId);
+  if (response.data.result)
+    dispatch({ type: DELETE_STUDY_DELETE_SUCCESS, meta: { historyId } });
+};
 
 function searchReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
@@ -100,7 +104,9 @@ function searchReducer(state = initialState, action: any) {
         draft.searchHistoryList = action.payload.search;
         break;
       case DELETE_STUDY_DELETE_SUCCESS:
-        draft.searchHistoryList = action.payload.search;
+        draft.searchHistoryList = state.searchHistoryList.filter(
+          (history: any) => history.id !== action.meta.historyId
+        );
         break;
       default:
         break;
