@@ -9,6 +9,7 @@ import {
 } from '../action';
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
+import searchReducer from '../search/searchReducer';
 
 export interface IReportState {
   studyInProgressList: [];
@@ -62,3 +63,25 @@ export const studyMemberRequest = createRequestThunk(
 );
 
 export const reportRequest = createRequestThunk(POST_REPORT, report);
+
+function reportReducer(state = initialState, action: any) {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case GET_STUDY_IN_PROGRESS_SUCCESS:
+        draft.studyInProgressList = action.payload.study;
+        break;
+      case GET_STUDY_MEMBER_SUCCESS:
+        draft.studyMemberList = action.payload.study.members;
+        //study.member이 맞을까?
+        break;
+      case POST_REPORT_SUCCESS:
+        draft.studyMemberList = action.payload;
+        // 어떤 데이터에 변화가 ?
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+export default reportReducer;
