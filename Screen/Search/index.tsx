@@ -46,7 +46,7 @@ const Search = () => {
     dispatch(searchHistoryRequest(login.token));
   }, [dispatch]);
 
-  const onPressWord = async (searchKeyword: string) => {
+  const handleWordPress = async (searchKeyword: string) => {
     searchInput.onChange('');
     await dispatch(searchRequest(login.token, searchKeyword));
     await dispatch(searchHistoryRequest(login.token));
@@ -92,8 +92,8 @@ const Search = () => {
           searches={searchHistoryList}
           onPressSearchDelete={handleSearchAllDelete}
           onPressX={handleSearchDelete}
-          onPressWord={onPressWord}
-          onRecommendWord={onPressWord}
+          onPressWord={handleWordPress}
+          onRecommendWord={handleWordPress}
         />
       )}
     </ContainerWithBell>

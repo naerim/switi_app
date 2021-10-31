@@ -26,6 +26,7 @@ const studyInProgress = async (token: string) => {
     url: 'http://localhost:4000/report/getReportList',
     headers: { Authorization: token },
   });
+  console.log(`현재 진행중인스터디 `, response);
   return response;
 };
 

@@ -11,9 +11,10 @@ interface InputProps {
 }
 interface Props {
   input: InputProps;
+  studyInProgressList: [];
 }
 
-const StudyRadioButton: React.FC<Props> = ({ input }) => {
+const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
   const radio_props = [
     {
       label: '중국어 부수는 모임',
@@ -28,7 +29,7 @@ const StudyRadioButton: React.FC<Props> = ({ input }) => {
   return (
     <Container>
       <RadioForm>
-        {radio_props.map((obj, i) => (
+        {studyInProgressList?.map((obj, i) => (
           <RadioButton labelHorizontal={false} key={i}>
             <RadioContainer>
               <RadioButtonInput

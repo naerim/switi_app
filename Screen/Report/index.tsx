@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import BasicModal from '../../Component/BasicModal';
@@ -47,9 +47,14 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
     dispatch(studyMemberRequest(login.token, studyId));
   };
 
-  const handleStudyInProgress = (studyId: number, memberId: number) => {
+  const handleReport = (studyId: number, memberId: number) => {
     dispatch(reportRequest(login.token, studyId, memberId));
   };
+
+  useEffect(() => {
+    handleStudyInProgress();
+  }, []);
+  //맨 처음 스터디만 받아오기
 
   const [study, setStudy] = useState(0);
   const [person, setPerson] = useState(0);
