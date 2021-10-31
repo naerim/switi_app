@@ -31,6 +31,8 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
   const radioStudyList = studyInProgressList?.map((item: any) => ({
     ...item,
     label: item.title,
+    // value: item.id,
+    // 왜 id 하면 안될까? value는 꼭 0++이어야 하나..
     value: value++,
   }));
 
@@ -39,15 +41,18 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
   return (
     <Container>
       <RadioForm>
-        {radioStudyList?.map((object: any, id: number) => (
-          <RadioButton labelHorizontal={false} key={id}>
+        {radioStudyList?.map((object: any, value: number) => (
+          <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
+              {console.log('value', value)}
               <RadioButtonInput
                 obj={object}
-                index={id}
-                isSelected={input.reason === id}
+                index={value}
+                isSelected={input.reason === value}
                 buttonInnerColor={'#86E3C3'}
-                buttonOuterColor={input.reason === id ? '#86E3C3' : '#D1D1D1'}
+                buttonOuterColor={
+                  input.reason === value ? '#86E3C3' : '#D1D1D1'
+                }
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
                 onPress={(v) => {
@@ -57,7 +62,7 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
               <Imag />
               <RadioButtonLabel
                 obj={object}
-                index={id}
+                index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
                 onPress={(v) => {

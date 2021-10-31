@@ -37,15 +37,17 @@ const PersonRadioButton: React.FC<Props> = ({ input }) => {
   return (
     <Container>
       <RadioForm>
-        {radio_props.map((obj, i) => (
-          <RadioButton labelHorizontal={false} key={i}>
+        {radio_props.map((obj, value) => (
+          <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
               <RadioButtonInput
                 obj={obj}
-                index={i}
-                isSelected={input.reason === i}
+                index={value}
+                isSelected={input.reason === value}
                 buttonInnerColor={'#86E3C3'}
-                buttonOuterColor={input.reason === i ? '#86E3C3' : '#D1D1D1'}
+                buttonOuterColor={
+                  input.reason === value ? '#86E3C3' : '#D1D1D1'
+                }
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
                 onPress={(v) => {
@@ -55,7 +57,7 @@ const PersonRadioButton: React.FC<Props> = ({ input }) => {
               <Imag />
               <RadioButtonLabel
                 obj={obj}
-                index={i}
+                index={value}
                 labelStyle={{ fontSize: 14, color: '#2B2B2B' }}
                 labelWrapStyle={{ marginRight: 25 }}
                 onPress={(v) => {
