@@ -9,7 +9,6 @@ import {
 } from '../action';
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
-import searchReducer from '../search/searchReducer';
 
 export interface IReportState {
   studyInProgressList: [];

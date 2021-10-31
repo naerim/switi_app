@@ -8,6 +8,13 @@ import ReasonText from './details/reportReason';
 import useInput from '../../util/useInput';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import {
+  reportRequest,
+  studyInProgressRequest,
+  studyMemberRequest,
+} from '../../redux/report/reportReducer';
 interface MyPageModalProps {
   modalVisible: boolean;
   closeModal: () => void;
@@ -19,6 +26,31 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   closeModal,
   confirmButton,
 }) => {
+  const dispatch = useDispatch();
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  const { studyInProgressList, studyMemberList } = useSelector(
+    (state: rootState) => ({
+      studyInProgressList: state.reportReducer.studyInProgressList,
+      studyMemberList: state.reportReducer.studyMemberList,
+    }),
+    shallowEqual
+  );
+
+  const handleStudyInProgress = () => {
+    dispatch(studyInProgressRequest(login.token));
+  };
+
+  const handleStudyMember = (studyId: number) => {
+    dispatch(studyMemberRequest(login.token, studyId));
+  };
+
+  const handleStudyInProgress = (studyId: number, memberId: number) => {
+    dispatch(reportRequest(login.token, studyId, memberId));
+  };
+
   const [study, setStudy] = useState(0);
   const [person, setPerson] = useState(0);
   const reasonInput = useInput('');
