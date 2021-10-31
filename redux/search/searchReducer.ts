@@ -18,6 +18,7 @@ import {
 } from '../action';
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
+import { searchAllDelete, searchDelete } from './search.api';
 
 export interface ISearchState {
   searchStudyList: [];
@@ -47,27 +48,6 @@ const searchHistory = async (token: string) => {
     url: 'http://localhost:4000/search/getSearch',
     headers: { Authorization: token },
   });
-  return response;
-};
-
-//검색 기록 모두 삭제
-const searchAllDelete = async (token: string) => {
-  const response = await axios({
-    method: 'delete',
-    url: 'http://localhost:4000/search/deleteAll',
-    headers: { Authorization: token },
-  });
-  return response;
-};
-
-//검색 기록 하나 삭제
-const searchDelete = async (token: string, id: number) => {
-  const response = await axios({
-    method: 'delete',
-    url: `http://localhost:4000/search//deleteOne/${id}`,
-    headers: { Authorization: token },
-  });
-  console.log(`검색 하나 삭제:`, response.data);
   return response;
 };
 
