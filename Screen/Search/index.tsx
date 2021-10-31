@@ -34,13 +34,7 @@ const Search = () => {
 
   const searchInput = useInput('');
 
-  const fetchOnSearch = (token: any, keyword: string) =>
-    dispatch(searchRequest(token, keyword));
-
   const refreshSearch = () => dispatch({ type: REFRESH_STUDY_LIST_SUCCESS });
-
-  const fetchOnSearchHistory = (token: any) =>
-    dispatch(searchHistoryRequest(token));
 
   const handleSearchAllDelete = () => {
     dispatch(searchAllDeleteThunk(login.token));
@@ -51,13 +45,13 @@ const Search = () => {
   };
 
   useEffect(() => {
-    fetchOnSearchHistory(login.token);
+    dispatch(searchHistoryRequest(login.token));
   }, [dispatch]);
 
   const onPressWord = async (searchKeyword: string) => {
     searchInput.onChange('');
-    await fetchOnSearch(login.token, searchKeyword);
-    await fetchOnSearchHistory(login.token);
+    await dispatch(searchRequest(login.token, searchKeyword));
+    await dispatch(searchHistoryRequest(login.token));
   };
 
   const handleSearch = async () => {
@@ -67,8 +61,8 @@ const Search = () => {
       return;
     } else {
       searchInput.onChange('');
-      await fetchOnSearch(login.token, searchKeyword);
-      await fetchOnSearchHistory(login.token);
+      await dispatch(searchRequest(login.token, searchKeyword));
+      await dispatch(searchHistoryRequest(login.token));
     }
   };
 
