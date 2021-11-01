@@ -11,7 +11,11 @@ interface ColorProps {
   color?: string;
 }
 
-const TwoModalButton: React.FC<AuthButtonProps> = ({ text, onPress, color }) => (
+const TwoModalButton: React.FC<AuthButtonProps> = ({
+  text,
+  onPress,
+  color,
+}) => (
   <Container onPress={onPress} color={color}>
     <Text>{text}</Text>
   </Container>

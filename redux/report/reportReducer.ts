@@ -30,26 +30,23 @@ const studyInProgress = async (token: string) => {
   return response;
 };
 
-const studyMember = async (
-  token: string,
-  studyId: number,
-  memberId: number
-) => {
+const studyMember = async (token: string, studyId: number) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/report/getReportInfo/${studyId}${memberId}/`,
+    url: `http://localhost:4000/report/getReportInfo/${studyId}/`,
     headers: { Authorization: token },
   });
   // console.log('reducer 스터디 멤버', response.data.member);
   return response;
 };
 
-const report = async (token: string, studyId: number) => {
+const report = async (token: string, studyId: number, memberId: number) => {
   const response = await axios({
     method: 'post',
-    url: `http://localhost:4000/report/getReportInfo/${studyId}`,
+    url: `http://localhost:4000/report/reportUser/${studyId}/${memberId}`,
     headers: { Authorization: token },
   });
+  console.log('reducer 신고하기', response.data);
   return response;
 };
 

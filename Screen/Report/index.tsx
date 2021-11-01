@@ -43,11 +43,11 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
     dispatch(studyInProgressRequest(login.token));
   };
 
-  const handleStudyMember = (studyId: number) => {
+  const handleStudyMember = (studyId: any) => {
     dispatch(studyMemberRequest(login.token, studyId));
   };
 
-  const handleReport = (studyId: number, memberId: number) => {
+  const handleReport = (studyId: any, memberId: any) => {
     dispatch(reportRequest(login.token, studyId, memberId));
   };
 
