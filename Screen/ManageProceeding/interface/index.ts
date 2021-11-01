@@ -8,6 +8,7 @@ export interface ManageType {
   studyMember: { contact: string };
   User: any;
   idUser: number;
+  idStudy: number;
 }
 
 export interface ItemType {

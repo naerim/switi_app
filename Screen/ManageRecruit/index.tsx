@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { useGoManagement } from '../../util/navigationHooks';
@@ -16,7 +16,6 @@ const ManageRecruit = ({ route }: any) => {
 
   const goStudyManagement = useGoManagement();
   const FlatListItemSeparator = () => <SeparatorLine />;
-  const [loading, setLoading] = useState(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -33,12 +32,18 @@ const ManageRecruit = ({ route }: any) => {
   );
 
   useEffect(() => {
-    setLoading(true);
     onGetStudyMember(login.token, idx);
-    setLoading(false);
-  }, [idx]);
+  }, []);
 
-  if (loading) return <div>로딩중..</div>;
+  useEffect(() => {
+    const abortController = new AbortController();
+    onGetStudyMember(login.token, idx);
+    return () => {
+      abortController.abort();
+    };
+  }, [idx, studyMember]);
+
+  //if (loading) return <div>로딩중..</div>;
   if (!studyMember) return null;
 
   return (

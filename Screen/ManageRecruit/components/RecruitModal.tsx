@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useDispatch } from 'react-redux';
 import BasicModal from '../../../Component/BasicModal';
-import BasicButton from '../../../Component/BasicButton';
 import ApplyInfo from './ApplyInfo';
 import { ManageType } from '../../ManageProceeding/interface';
 import TwoButton from './TwoButton';
@@ -11,11 +9,15 @@ interface Props {
   item: ManageType;
   modalVisible: boolean;
   closeModal: () => void;
+  acceptApply: () => void;
 }
 
-const RecruitModal: React.FC<Props> = ({ item, modalVisible, closeModal }) => {
-  const dispatch = useDispatch();
-
+const RecruitModal: React.FC<Props> = ({
+  item,
+  modalVisible,
+  closeModal,
+  acceptApply,
+}) => {
   return (
     <Container>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
@@ -33,11 +35,7 @@ const RecruitModal: React.FC<Props> = ({ item, modalVisible, closeModal }) => {
             onPress={() => console.log('거절')}
             title="거절하기"
           />
-          <TwoButton
-            accept
-            onPress={() => console.log('수락')}
-            title="수락하기"
-          />
+          <TwoButton accept onPress={acceptApply} title="수락하기" />
         </ButtonWrap>
       </BasicModal>
     </Container>

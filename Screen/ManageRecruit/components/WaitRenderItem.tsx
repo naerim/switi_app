@@ -5,6 +5,9 @@ import MemberImage from '../../ManageProceeding/components/MemberImage';
 import AcceptButton from '../../ManageProceeding/components/AcceptButton';
 import { useGoProfileDetail } from '../../../util/navigationHooks';
 import RecruitModal from './RecruitModal';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
 const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const goProfileDetail = useGoProfileDetail(item.idUser);
@@ -13,8 +16,24 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const [RecruitModalVisible, setRecruitModalVisible] = useState(false);
   const closeRecruitModal = () => setRecruitModalVisible(false);
 
-  const onPress = () => {
-    setRecruitModalVisible(true);
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  const onPress = () => setRecruitModalVisible(true);
+
+  const acceptApply = () => {
+    const abortController = new AbortController();
+    axios({
+      method: 'put',
+      url: `http://localhost:4000/manage/acceptApply/${item.id}`,
+      headers: { Authorization: login.token },
+    })
+      .then(() => {
+        closeRecruitModal();
+      })
+      .catch((err) => console.log(err));
+    return () => abortController.abort();
   };
 
   return (
@@ -28,6 +47,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
       <RecruitModal
         item={item}
         modalVisible={RecruitModalVisible}
+        acceptApply={acceptApply}
         closeModal={closeRecruitModal}
       />
     </Container>
