@@ -40,11 +40,17 @@ const studyMember = async (token: string, studyId: number) => {
   return response;
 };
 
-const report = async (token: string, studyId: number, memberId: number) => {
+const report = async (
+  token: string,
+  studyId: number,
+  memberId: number,
+  content: string
+) => {
   const response = await axios({
     method: 'post',
     url: `http://localhost:4000/report/reportUser/${studyId}/${memberId}`,
     headers: { Authorization: token },
+    data: { content: content },
   });
   console.log('reducer 신고하기', response.data);
   return response;
