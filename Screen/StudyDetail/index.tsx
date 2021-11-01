@@ -15,6 +15,7 @@ const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupText, setPopupText] = useState('');
+  const [done, setDone] = useState(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -93,7 +94,7 @@ const StudyDetail = ({ route }: any) => {
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
-      <BlackModal visible={popupVisible} text={popupText} />
+      <BlackModal visible={popupVisible} text={popupText} done={done} />
       <BottomButton
         id={studyDetail.id}
         btnText={checkApply()}
@@ -101,6 +102,7 @@ const StudyDetail = ({ route }: any) => {
         setPopupVisible={setPopupVisible}
         setPopupText={setPopupText}
         flag={studyDetail.flag}
+        setDone={setDone}
       />
     </Container>
   );

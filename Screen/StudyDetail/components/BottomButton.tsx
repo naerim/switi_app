@@ -11,6 +11,7 @@ interface Props {
   setPopupVisible: (v: boolean) => void;
   setPopupText: (v: string) => void;
   flag: number; // 0 : 모집완료
+  setDone: (v: boolean) => void; // 모집마감하기 버튼일 경우 검정팝업창 위치 변경
 }
 
 interface ButtonProps {
@@ -24,6 +25,7 @@ const BottomButton: React.FC<Props> = ({
   setPopupVisible,
   setPopupText,
   flag,
+  setDone,
 }) => {
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
@@ -41,8 +43,13 @@ const BottomButton: React.FC<Props> = ({
 
   // 팝업창(검정)
   const confirmPopupText = () => {
-    if (btnText === '신청 취소하기')
+    if (btnText === '신청 취소하기') {
       setPopupText('스터디 신청이 취소되었습니다.');
+      setDone(false);
+    } else if (btnText === '모집 마감하기') {
+      setPopupText('스터디 모집이 마감되었습니다.');
+      setDone(true);
+    }
   };
 
   useEffect(() => {
@@ -68,6 +75,9 @@ const BottomButton: React.FC<Props> = ({
         closeModal={closeCancelModal}
       />
       <RecruitDoneModal
+        token={token}
+        idStudy={id}
+        setPopupVisible={setPopupVisible}
         modalVisible={doneModalVisible}
         closeModal={closeDoneModal}
       />
