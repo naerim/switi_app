@@ -24,7 +24,6 @@ const MyPage_Profile_Fix = () => {
 
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectInterest, setSelectInterest] = useState<number[]>([]);
-
   const introduceInput = useInput('');
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     student: false,
@@ -118,7 +117,17 @@ const MyPage_Profile_Fix = () => {
           column
         />
         <Introduce input={introduceInput} />
-        <BasicButton text="저장하기" onPress={onPress} disabled={false} />
+        <BasicButton
+          text="저장하기"
+          onPress={onPress}
+          disabled={
+            !ageInput.value ||
+            !selectArea ||
+            !selectInterest ||
+            !selectCharacter ||
+            !introduceInput
+          }
+        />
       </Wrap>
     </BasicContainer>
   );
