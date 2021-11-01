@@ -103,15 +103,10 @@ const MyPage_FixUserInfo = () => {
             )
           )}
         </InputContainer>
-        <NothingContainer />
-        <ButtonContainer>
-          <FixButton
-            success={success}
-            input={input}
-            onPress={FixButtonOnPress}
-          />
-        </ButtonContainer>
       </MarginContainer>
+      <ButtonContainer>
+        <FixButton success={success} input={input} onPress={FixButtonOnPress} />
+      </ButtonContainer>
     </BasicContainer>
   );
 };
@@ -119,7 +114,7 @@ const MyPage_FixUserInfo = () => {
 const MarginContainer = styled.ScrollView`
   margin-left: 24px;
   margin-right: 24px;
-  flex: 1;
+  flex: 12;
 `;
 
 const PictureContainer = styled.View`
@@ -132,14 +127,11 @@ const InputContainer = styled.View`
   padding-top: 10px;
 `;
 
-const NothingContainer = styled.View`
-  flex: 0.5;
-`;
-
 const ButtonContainer = styled.View`
   flex: 1;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-left: 24px;
+  margin-right: 24px;
 `;
 
 export default MyPage_FixUserInfo;

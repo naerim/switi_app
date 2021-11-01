@@ -89,7 +89,6 @@ const Input = styled.TextInput`
   border-radius: 4px;
   padding: 10px;
   border-color: ${getColor};
-  margin-top: 5px;
 `;
 
 export default NicknameContainer;

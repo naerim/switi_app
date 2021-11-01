@@ -12,7 +12,6 @@ const InputContent: React.FC<Props> = ({ children, title }) => {
         <Title>{title}</Title>
         {children}
       </Content>
-      <Empty />
     </Container>
   );
 };
@@ -20,15 +19,11 @@ const InputContent: React.FC<Props> = ({ children, title }) => {
 const Container = styled.View`
   flex: 1;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const Content = styled.View`
   flex: 5;
-`;
-
-const Empty = styled.View`
-  flex: 1;
 `;
 
 const Title = styled.Text`

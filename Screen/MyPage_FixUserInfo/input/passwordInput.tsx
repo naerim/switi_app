@@ -50,7 +50,7 @@ const Input = styled.TextInput`
 const Warning = styled.Text`
   color: red;
   font-size: 9px;
-  margin-top: 2px;
+  margin-top: 6px;
 `;
 
 export default PasswordInput;
