@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { InputProps, Status } from '../../SignUp/inteface';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -16,12 +18,15 @@ const getColor = ({ status }: { status: Status }) => {
 };
 
 const EmailInput: React.FC<InputProps> = ({ input, error }) => {
+  const { myProfile } = useSelector(({ userReducer }: rootState) => ({
+    myProfile: userReducer.myProfile,
+  }));
   return (
     <Container>
       <Input
         value={input.value}
         onChangeText={input.onChange}
-        placeholder="purplecode@naver.com"
+        placeholder={myProfile.email}
         placeholderTextColor="black"
         editable={false}
         keyboardType="email-address"
