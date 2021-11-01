@@ -8,15 +8,21 @@ import AcceptButton from './AcceptButton';
 interface DescProps {
   //  desc가 true이면 멤버 설명 보임(이메일, 전화번호 등)
   desc?: boolean;
+  leader?: boolean;
 }
 
-const RecruitRenderItem: React.FC<ItemType> = ({ item, desc }) => {
+const RecruitRenderItem: React.FC<ItemType> = ({ item, desc, leader }) => {
   const goProfileDetail = useGoProfileDetail(item.id);
+
+  // 스터디 리더 표시 (로그인한 아이디가 모집장이 아닌 경우)
+  const checkLeader = () =>
+    item.studyMember.leader ? item.nickname + ' (모집장)' : item.nickname;
+
   return (
     <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <MemberImage img={'imgPath'} />
       <Content>
-        <Title>{item.nickname}</Title>
+        <Title>{leader ? '나 (모집장)' : checkLeader()}</Title>
         <Desc desc={desc}>
           {item.email} / {item.studyMember.contact}
         </Desc>

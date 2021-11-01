@@ -4,7 +4,7 @@ import StudyFlatList from './components/StudyFlatList';
 import TopCategory from './components/TopCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { getScrapListRequest } from '../../redux/userReducer';
+import { getMyPageRequest, getScrapListRequest } from '../../redux/userReducer';
 import {
   getMyApplyListRequest,
   getMyStudyListRequest,
@@ -28,7 +28,6 @@ const Home = ({ route }: any) => {
     [dispatch]
   );
   const onGetMyStudyList = useCallback(
-    // 사용자 프로필 가져오기
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
   );
@@ -37,11 +36,17 @@ const Home = ({ route }: any) => {
     (token) => dispatch(getMyApplyListRequest(token)),
     [dispatch]
   );
+  const onGetMyPage = useCallback(
+    // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
+    (token) => dispatch(getMyPageRequest(token)),
+    [dispatch]
+  );
 
   useEffect(() => {
     onGetScrapList(login.token);
     onGetMyStudyList(login.token);
     onGetMyApplyList(login.token);
+    onGetMyPage(login.token);
   }, [dispatch]);
 
   return (

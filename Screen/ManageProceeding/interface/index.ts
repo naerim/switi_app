@@ -5,7 +5,10 @@ export interface ManageType {
   email: string;
   apply_detail: string;
   profilepath: string;
-  studyMember: { contact: string };
+  studyMember: {
+    leader: boolean;
+    contact: string;
+  };
   User: any;
   idUser: number;
   idStudy: number;
@@ -15,4 +18,5 @@ export interface ItemType {
   index: number;
   item: ManageType;
   desc?: boolean;
+  leader?: boolean;
 }
