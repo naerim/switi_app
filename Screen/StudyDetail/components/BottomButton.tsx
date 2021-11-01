@@ -10,6 +10,11 @@ interface Props {
   token: string;
   setPopupVisible: (v: boolean) => void;
   setPopupText: (v: string) => void;
+  flag: number; // 0 : 모집완료
+}
+
+interface ButtonProps {
+  flag: number;
 }
 
 const BottomButton: React.FC<Props> = ({
@@ -18,6 +23,7 @@ const BottomButton: React.FC<Props> = ({
   token,
   setPopupVisible,
   setPopupText,
+  flag,
 }) => {
   const [cancelModalVisible, setCancelModalVisible] = useState(false);
   const closeCancelModal = () => setCancelModalVisible(false);
@@ -45,7 +51,7 @@ const BottomButton: React.FC<Props> = ({
 
   return (
     <Container>
-      <ColorButton onPress={setModal}>
+      <ColorButton onPress={setModal} flag={flag}>
         <ButtonText>{btnText}</ButtonText>
       </ColorButton>
       <ApplyModal
@@ -77,10 +83,10 @@ const Container = styled.View`
   justify-content: flex-end;
 `;
 
-const ColorButton = styled.TouchableOpacity`
+const ColorButton = styled.TouchableOpacity<ButtonProps>`
   background-color: #86e3c3;
   border-radius: 30px;
-  height: 40px;
+  height: ${(props) => (props.flag ? '40px' : '0px')};
   justify-content: center;
 `;
 

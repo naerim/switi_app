@@ -100,6 +100,7 @@ const StudyDetail = ({ route }: any) => {
         token={login.token}
         setPopupVisible={setPopupVisible}
         setPopupText={setPopupText}
+        flag={studyDetail.flag}
       />
     </Container>
   );
