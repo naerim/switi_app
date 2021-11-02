@@ -16,7 +16,8 @@ import {
   studyMemberRequest,
 } from '../../redux/report/reportReducer';
 interface MyPageModalProps {
-  setReportStudyId: (StudyId: number) => void;
+  setReportStudyId: (studyId: number) => void;
+  setReportMemberId: (memberId: number) => void;
   modalVisible: boolean;
   closeModal: () => void;
   confirmButton: () => void;
@@ -24,6 +25,7 @@ interface MyPageModalProps {
 
 const MyPageModal: React.FC<MyPageModalProps> = ({
   setReportStudyId,
+  setReportMemberId,
   modalVisible,
   closeModal,
   confirmButton,
@@ -108,6 +110,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         <TitleContainer onPress={onPressPerson} titleText="신고 대상자 선택" />
         {personVisible ? (
           <PersonRadioButton
+            setReportMemberId={setReportMemberId}
             input={{ reason: person, setReason: setPerson }}
             studyMemberList={studyMemberList}
           />

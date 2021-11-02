@@ -113,7 +113,7 @@ const MyPage = () => {
 
   return (
     <ContainerWithBell title="마이페이지" onPressBell={goAlarm} scroll={scroll}>
-      <ScrollContainer onScroll={scrollOn}>
+      <ScrollContainer>
         <Container>
           <UserInfo title={myPage ? myPage.myPage.nickname : ' '} />
           <SugarContainer />
@@ -131,6 +131,7 @@ const MyPage = () => {
         <BottomBar />
         <ReportModal
           setReportStudyId={setReportStudyId}
+          setReportMemberId={setReportMemberId}
           modalVisible={reportModalVisible}
           closeModal={reportModalClose}
           confirmButton={confirm}
