@@ -62,7 +62,6 @@ const AddStudy = () => {
   const fetchOfflineStudyList = (order: boolean, query: string) =>
     dispatch(offlineStudyListRequest(login.token, order, query));
   const onGetMyStudyList = useCallback(
-    // 스터디 신청 리스트 가져오기
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
   );
@@ -103,7 +102,7 @@ const AddStudy = () => {
           showDoneModal();
         }, 500);
         setTimeout(() => {
-          closeModal();
+          closeDoneModal();
           goHome();
         }, 2000);
       })

@@ -42,7 +42,7 @@ const StudyHeader: React.FC<Props> = ({
     });
     // 모집장일 경우 header 다르게
     leader
-      ? setHeader(<DetailHeader onPress={onPress} />)
+      ? setHeader(<DetailHeader id={id} onPress={onPress} />)
       : setHeader(
           <ScrapHeader
             onPress={onPress}
