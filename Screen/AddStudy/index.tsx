@@ -52,29 +52,29 @@ const AddStudy = () => {
     // endDate
     const date =
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
-    axios({
-      method: 'post',
-      url: 'http://localhost:4000/study/addStudy',
-      headers: { Authorization: login.token },
-      data: {
-        online_flag: onlineFlag,
-        state: target,
-        category: category,
-        address: area,
-        recruit_num: recruitNumInput.value,
-        detail_address: detailAddressInput.value,
-        period: periodInput.value,
-        endDate: date,
-        contact: contentInput.value,
-        title: titleInput.value,
-        desc: contentInput.value,
-        gu: 1,
-      },
-    })
-      .then(() => {
-        goHome();
-      })
-      .catch((err) => console.log(err));
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:4000/study/addStudy',
+    //   headers: { Authorization: login.token },
+    //   data: {
+    //     online_flag: onlineFlag,
+    //     state: target,
+    //     category: category,
+    //     address: area,
+    //     recruit_num: recruitNumInput.value,
+    //     detail_address: detailAddressInput.value,
+    //     period: periodInput.value,
+    //     endDate: date,
+    //     contact: contentInput.value,
+    //     title: titleInput.value,
+    //     desc: contentInput.value,
+    //     gu: 1,
+    //   },
+    // })
+    //   .then(() => {
+    //     goHome();
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const onClick = () => {
@@ -99,12 +99,14 @@ const AddStudy = () => {
             input={category}
             setInput={setCategory}
           />
-          <SelectOne
-            title="지역"
-            data={region}
-            input={area}
-            setInput={setArea}
-          />
+          {onlineFlag === 1 && (
+            <SelectOne
+              title="지역"
+              data={region}
+              input={area}
+              setInput={setArea}
+            />
+          )}
           <Target target={target} setTarget={setTarget} />
           <RecruitNum
             input={recruitNumInput}
@@ -114,6 +116,7 @@ const AddStudy = () => {
             title="모임장소"
             input={detailAddressInput}
             placeholder="모입장소를 입력해주세요"
+            onlineFlag={onlineFlag}
           />
           <Input
             title="활동기간"

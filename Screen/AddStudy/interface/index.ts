@@ -12,6 +12,7 @@ export interface InputProps {
   title: string;
   input: { value: string; onChange: (value: string) => void };
   placeholder: string;
+  onlineFlag?: number;
 }
 
 export interface LongInputProps {

@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import AddStudyContainer from './Layout/AddStudyContainer';
 import { InputProps } from '../interface';
 
-const Input: React.FC<InputProps> = ({ title, input, placeholder }) => {
+const Input: React.FC<InputProps> = ({
+  title,
+  input,
+  placeholder,
+  onlineFlag,
+}) => {
+  const setValue = () => {
+    onlineFlag === 0 && input.onChange('온라인');
+  };
+
+  useEffect(() => {
+    setValue();
+  }, [onlineFlag]);
+
   return (
     <AddStudyContainer title={title}>
       <MyInput
-        value={input.value}
+        value={onlineFlag === 0 ? '온라인' : input.value}
         onChangeText={input.onChange}
         placeholder={placeholder}
         keyboardType="email-address"
         returnKeyType="next"
         secureTextEntry={false}
+        editable={onlineFlag !== 0}
       />
     </AddStudyContainer>
   );
