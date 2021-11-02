@@ -45,7 +45,7 @@ const SugarContent: React.FC<Props> = ({ num }) => {
 
   const switiChoice = (switi: number) => {
     let grade = 0;
-    console.log(switi);
+    // console.log(switi);
     if (switi < 0 || (0 <= switi && switi <= 10)) {
       grade = 1;
     } else if (10 < switi && switi <= 40) {
@@ -58,7 +58,7 @@ const SugarContent: React.FC<Props> = ({ num }) => {
       grade = 5;
     } else if (90 < switi && switi <= 100) {
       grade = 6;
-    } else console.log('오류');
+    } else console.log('sugarContent.tsx : 오류');
     return grade;
   };
   const sugarGrade = switiChoice(sugar);

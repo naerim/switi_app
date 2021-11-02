@@ -29,8 +29,6 @@ import { reportRequest } from '../../redux/report/reportReducer';
 import useInput from '../../util/useInput';
 
 const MyPage = () => {
-  const { scroll, scrollOn } = useScroll();
-
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const [confirmModalVisible, setConfirmModalVisible] = useState<boolean>(
     false
@@ -40,13 +38,9 @@ const MyPage = () => {
   const closeConfirm = () => setConfirmModalVisible(false);
   const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
   const reportModalClose = () => setReportModalVisible(false);
-
-  //1. studyID, memverId, content, name 어떻게 가져올 것인가 ?
-  //2. studyID 는 studyRadioButton 안에서 가져온다. -> useState 또는 (리덕스) -> 마이페이지에서 다루어야 한다.. -> 나중에 컴포넌트 분리
   const [reportStudyId, setReportStudyId] = useState(0);
   const [reportMemberId, setReportMemberId] = useState(0);
   const reportContent = useInput('');
-  // const [reportContent, setReportContent] = useState('테스트');
 
   //신고하기 api
   const handleReport = (studyId: any, memberId: any, content: any) => {

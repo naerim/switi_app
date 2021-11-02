@@ -52,7 +52,7 @@ const report = async (
     headers: { Authorization: token },
     data: { content: content },
   });
-  console.log('reducer 신고하기', response.data);
+  // console.log('reducer 신고하기', response.data);
   return response;
 };
 
@@ -79,7 +79,7 @@ function reportReducer(state = initialState, action: any) {
         //study.member이 맞을까?
         break;
       case POST_REPORT_SUCCESS:
-        console.log('신고하기 성공');
+        console.log('reducer 액션 : 신고하기 성공');
         // draft.studyMemberList = action.payload;
         // 어떤 데이터에 변화가 ?
         break;

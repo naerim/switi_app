@@ -50,7 +50,6 @@ const StudyRadioButton: React.FC<Props> = ({
                 onPress={(value) => {
                   setReportStudyId(object.id);
                   input.setChoice(value, object.id);
-                  console.log(object.id);
                 }}
               />
               <Imag />
