@@ -47,8 +47,8 @@ const MyPage = () => {
 
   //1. studyID, memverId, content, name 어떻게 가져올 것인가 ?
   //2. studyID 는 studyRadioButton 안에서 가져온다. -> useState 또는 (리덕스) -> 마이페이지에서 다루어야 한다.. -> 나중에 컴포넌트 분리
-  const [reportStudyId, setreportStudyId] = useState(10);
-  const [reportMemberId, setreportMemberId] = useState(54);
+  const [reportStudyId, setReportStudyId] = useState(10);
+  const [reportMemberId, setReportMemberId] = useState(54);
   const [reportContent, setReportContent] = useState('테스트');
 
   const final = () => {
@@ -130,6 +130,7 @@ const MyPage = () => {
         <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />
         <BottomBar />
         <ReportModal
+          setReportStudyId={setReportStudyId}
           modalVisible={reportModalVisible}
           closeModal={reportModalClose}
           confirmButton={confirm}
@@ -146,7 +147,7 @@ const MyPage = () => {
   );
 };
 
-const ScrollContainer = styled.ScrollView``;
+const ScrollContainer = styled.View``;
 
 const Line = styled.Text`
   flex: 0.2;

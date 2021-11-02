@@ -16,12 +16,14 @@ import {
   studyMemberRequest,
 } from '../../redux/report/reportReducer';
 interface MyPageModalProps {
+  setReportStudyId: (StudyId: number) => void;
   modalVisible: boolean;
   closeModal: () => void;
   confirmButton: () => void;
 }
 
 const MyPageModal: React.FC<MyPageModalProps> = ({
+  setReportStudyId,
   modalVisible,
   closeModal,
   confirmButton,
@@ -95,6 +97,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         <TitleContainer onPress={onPressStudy} titleText="스터디 선택" />
         {studyVisible ? (
           <StudyRadioButton
+            setReportStudyId={setReportStudyId}
             input={{ choice: studyChoice, setChoice: handleStudyOnClick }}
             studyInProgressList={studyInProgressList}
           />

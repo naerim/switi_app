@@ -5,16 +5,23 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+
 interface InputProps {
   choice: number;
   setChoice: (value: number, studyId: number) => void;
 }
+
 interface Props {
+  setReportStudyId: (StudyId: number) => void;
   input: InputProps;
   studyInProgressList: any;
 }
 
-const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
+const StudyRadioButton: React.FC<Props> = ({
+  setReportStudyId,
+  input,
+  studyInProgressList,
+}) => {
   let value = 0;
   const radioStudyList = studyInProgressList?.map((item: any) => ({
     ...item,
@@ -41,6 +48,7 @@ const StudyRadioButton: React.FC<Props> = ({ input, studyInProgressList }) => {
                 buttonSize={8}
                 buttonWrapStyle={{ marginRight: 5 }}
                 onPress={(value) => {
+                  setReportStudyId(object.id);
                   input.setChoice(value, object.id);
                   console.log(object.id);
                 }}
