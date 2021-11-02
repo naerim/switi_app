@@ -4,8 +4,8 @@ export interface ContentProps {
 }
 
 export interface TargetProps {
-  target: number;
-  setTarget: (prev: number) => void;
+  target: number[];
+  setTarget: (prev: (prev: number[]) => number[]) => void;
 }
 
 export interface InputProps {

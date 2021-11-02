@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageProfile } from '../../util/navigationHooks';
@@ -48,15 +48,6 @@ const MyPage_Profile_Fix = () => {
     (token) => dispatch(getMyProfileRequest(token)),
     [dispatch]
   );
-
-  const setMyState = () => {
-    checked.student ? setState((prev) => [1]) : state.splice(0, 1);
-    checked.jobSeeker ? setState((prev) => [2]) : state.splice(1, 1);
-    checked.worker ? setState((prev) => [3]) : state.splice(2, 1);
-  };
-  useEffect(() => {
-    setMyState();
-  }, [checked]);
 
   const onPress = () => {
     // myInterest, myCharacter 인덱스 1씩 더해줌
@@ -108,7 +99,11 @@ const MyPage_Profile_Fix = () => {
           select={selectInterest}
           setSelect={setSelectInterest}
         />
-        <MyState check={{ checked, setChecked }} />
+        <MyState
+          check={{ checked, setChecked }}
+          state={state}
+          setState={setState}
+        />
         <FlatListModal
           title="나의 성격 (3개 이하 선택)"
           data={character}

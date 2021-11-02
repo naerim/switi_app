@@ -10,7 +10,15 @@ const Target: React.FC<TargetProps> = ({ target, setTarget }) => {
     state: dataReducer.state,
   }));
 
-  const onPress = (id: number) => setTarget(id);
+  const onPress = (id: number) => {
+    target.some((v) => {
+      return v == id;
+    })
+      ? setTarget((prev) => target.filter((v) => v !== id))
+      : setTarget((prev) => [...prev, id]);
+  };
+
+  const setColor = (id: number) => target.some((v) => v === id);
 
   return (
     <AddStudyContainer title="모집대상">
@@ -19,10 +27,10 @@ const Target: React.FC<TargetProps> = ({ target, setTarget }) => {
           <Content
             key={id}
             onPress={() => onPress(id)}
-            color={id === target}
+            color={setColor(id)}
             activeOpacity={0.8}
           >
-            <Title color={id === target}>{name}</Title>
+            <Title color={setColor(id)}>{name}</Title>
           </Content>
         ))}
       </Container>

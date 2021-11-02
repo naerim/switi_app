@@ -3,8 +3,8 @@ import AddStudyContainer from './Layout/AddStudyContainer';
 import SelectButton from '../../../Component/SelectButton';
 import BasicModal from '../../../Component/BasicModal';
 import SelectFlatList from '../../../Component/SelectFlatList';
-import useInput from '../../../util/useInput';
 import { dataType } from '../../Profile/interface';
+import Tag from '../../Profile/components/FlatListModal/Tag';
 
 interface Props {
   title: string;
@@ -18,23 +18,26 @@ const SelectOne: React.FC<Props> = ({ title, data, input, setInput }) => {
   const onPress = () => setModalVisible(true);
   const closeModal = () => {
     setModalVisible(false);
-    findName();
   };
-  const name = useInput('선택해주세요');
-  const findName = () =>
-    input.forEach((i) => {
-      name.onChange(data[i].name);
-    });
+
+  const nameList = () => input.map((i) => data[i].name);
   return (
     <AddStudyContainer title={title}>
-      <SelectButton onPress={onPress} text={name.value} />
+      <SelectButton onPress={onPress} text="선택해주세요" />
+      <Tag
+        nameList={nameList()}
+        select={input}
+        setSelect={setInput}
+        data={data}
+        column={false}
+      />
       <BasicModal modalVisible={modalVisible}>
         <SelectFlatList
           data={data}
           select={input}
           setSelect={setInput}
           closeModal={closeModal}
-          limit={1}
+          limit={3}
         />
       </BasicModal>
     </AddStudyContainer>

@@ -20,7 +20,7 @@ import { rootState } from '../../redux';
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const [target, setTarget] = useState<number>(0);
+  const [target, setTarget] = useState<number[]>([]);
   const periodInput = useInput('');
   const recruitNumInput = useInput('');
   const [recruitSelect, setRecruitSelect] = useState(false);
@@ -52,32 +52,33 @@ const AddStudy = () => {
     // endDate
     const date =
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:4000/study/addStudy',
-    //   headers: { Authorization: login.token },
-    //   data: {
-    //     online_flag: onlineFlag,
-    //     state: target,
-    //     category: category,
-    //     address: area,
-    //     recruit_num: recruitNumInput.value,
-    //     detail_address: detailAddressInput.value,
-    //     period: periodInput.value,
-    //     endDate: date,
-    //     contact: contentInput.value,
-    //     title: titleInput.value,
-    //     desc: contentInput.value,
-    //     gu: 1,
-    //   },
-    // })
-    //   .then(() => {
-    //     goHome();
-    //   })
-    //   .catch((err) => console.log(err));
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/study/addStudy',
+      headers: { Authorization: login.token },
+      data: {
+        online_flag: onlineFlag,
+        state: target,
+        category: category,
+        address: 1,
+        recruit_num: recruitNumInput.value,
+        detail_address: detailAddressInput.value,
+        period: periodInput.value,
+        endDate: date,
+        contact: contactInput.value,
+        title: titleInput.value,
+        desc: contentInput.value,
+        gu: 1,
+      },
+    })
+      .then(() => {
+        goHome();
+      })
+      .catch((err) => console.log(err));
   };
 
   const onClick = () => {
+    console.log(target);
     setModalVisible(true);
   };
 
