@@ -17,6 +17,6 @@ export const searchDelete = async (token: string, id: number) => {
     url: `http://localhost:4000/search//deleteOne/${id}`,
     headers: { Authorization: token },
   });
-  console.log(`검색 하나 삭제:`, response.data);
+  // console.log(`검색 하나 삭제:`, response.data);
   return response;
 };

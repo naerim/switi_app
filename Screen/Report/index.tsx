@@ -5,14 +5,12 @@ import BasicModal from '../../Component/BasicModal';
 import StudyRadioButton from './details/studyRadioButton';
 import PersonRadioButton from './details/personRadioButton';
 import ReasonText from './details/reportReason';
-import useInput from '../../util/useInput';
 import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { InputProps } from '../interface';
+import { InputProps } from './interface';
 import {
-  reportRequest,
   studyInProgressRequest,
   studyMemberRequest,
 } from '../../redux/report/reportReducer';
