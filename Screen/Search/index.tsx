@@ -32,7 +32,10 @@ const Search = () => {
 
   const searchInput = useInput('');
 
-  const refreshSearch = () => dispatch({ type: REFRESH_STUDY_LIST_SUCCESS });
+  const refreshSearch = () => {
+    dispatch(searchHistoryRequest(login.token));
+    dispatch({ type: REFRESH_STUDY_LIST_SUCCESS });
+  };
 
   const handleSearchAllDelete = () => {
     dispatch(searchAllDeleteThunk(login.token));

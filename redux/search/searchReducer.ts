@@ -48,6 +48,7 @@ const searchHistory = async (token: string) => {
     url: 'http://localhost:4000/search/getSearch',
     headers: { Authorization: token },
   });
+  console.log('리듀서 검색 변경', response.data);
   return response;
 };
 
