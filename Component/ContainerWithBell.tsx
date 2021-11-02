@@ -16,7 +16,7 @@ const ContainerWithBell: React.FC<Props> = ({
   onPressBell,
   onPressTitle,
 }) => {
-  const { scroll, scrollOn } = useScroll();
+  // const { scroll, scrollOn } = useScroll();
   return (
     <Container
       style={{
@@ -33,7 +33,7 @@ const ContainerWithBell: React.FC<Props> = ({
       </HeaderContainer>
       {/*<ChildrenContainer onScroll={scrollOn}>*/}
       <ChildrenContainer>
-        {scroll ? <Line /> : <Nothing />}
+        {/*{scroll ? <Line /> : <Nothing />}*/}
         {children}
       </ChildrenContainer>
     </Container>

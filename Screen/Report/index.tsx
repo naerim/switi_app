@@ -10,6 +10,7 @@ import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
 import TitleContainer from './details/titleContainer';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import { InputProps } from '../interface';
 import {
   reportRequest,
   studyInProgressRequest,
@@ -18,6 +19,7 @@ import {
 interface MyPageModalProps {
   setReportStudyId: (studyId: number) => void;
   setReportMemberId: (memberId: number) => void;
+  reportContent: InputProps;
   modalVisible: boolean;
   closeModal: () => void;
   confirmButton: () => void;
@@ -26,6 +28,7 @@ interface MyPageModalProps {
 const MyPageModal: React.FC<MyPageModalProps> = ({
   setReportStudyId,
   setReportMemberId,
+  reportContent,
   modalVisible,
   closeModal,
   confirmButton,
@@ -64,7 +67,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   };
 
   const [person, setPerson] = useState(0);
-  const reasonInput = useInput('');
+  const reasonInput = reportContent;
   const [studyVisible, setStudyVisible] = useState(true);
   const [personVisible, setPersonVisible] = useState(false);
   const [reasonVisible, setReasonVisible] = useState(false);

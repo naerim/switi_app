@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { InputProps } from '../interface';
 
-const ReasonText: React.FC<InputProps> = ({ input }) => {
+interface Props {
+  input: InputProps;
+}
+
+const ReasonText: React.FC<Props> = ({ input }) => {
   return (
     <InputContainer>
       <Input
