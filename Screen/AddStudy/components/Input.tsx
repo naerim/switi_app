@@ -10,7 +10,7 @@ const Input: React.FC<InputProps> = ({
   onlineFlag,
 }) => {
   const setValue = () => {
-    onlineFlag === 0 && input.onChange('온라인');
+    onlineFlag === 0 ? input.onChange('온라인') : input.onChange('');
   };
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <AddStudyContainer title={title}>
       <MyInput
-        value={onlineFlag === 0 ? '온라인' : input.value}
+        value={onlineFlag == 0 ? '온라인' : input.value}
         onChangeText={input.onChange}
         placeholder={placeholder}
         keyboardType="email-address"

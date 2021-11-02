@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
@@ -14,8 +14,14 @@ import BasicButton from '../../Component/BasicButton';
 import EnrollModal from './components/EnrollModal';
 import FlagRadioButton from './components/FlagRadioButton';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import {
+  offlineStudyListRequest,
+  onlineStudyListRequest,
+} from '../../redux/studyReducer';
+import EnrollDoneModal from './components/EnrollDoneModal';
+import { getMyStudyListRequest } from '../../redux/manageReducer';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -37,6 +43,9 @@ const AddStudy = () => {
   const [area, setArea] = useState<number[]>([]);
   const [category, setCategory] = useState<number[]>([]);
   const detailAddressInput = useInput('');
+  const [DoneModalVisible, setDoneModalVisible] = useState(false);
+  const showDoneModal = () => setDoneModalVisible(true);
+  const closeDoneModal = () => setDoneModalVisible(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -46,6 +55,17 @@ const AddStudy = () => {
     interest: dataReducer.interest,
     region: dataReducer.region,
   }));
+
+  const dispatch = useDispatch();
+  const fetchOnlineStudyList = (order: boolean, query: string) =>
+    dispatch(onlineStudyListRequest(login.token, order, query));
+  const fetchOfflineStudyList = (order: boolean, query: string) =>
+    dispatch(offlineStudyListRequest(login.token, order, query));
+  const onGetMyStudyList = useCallback(
+    // 스터디 신청 리스트 가져오기
+    (token) => dispatch(getMyStudyListRequest(token)),
+    [dispatch]
+  );
 
   // 최종 등록 버튼
   const EnrollButton = () => {
@@ -59,7 +79,10 @@ const AddStudy = () => {
       data: {
         online_flag: onlineFlag,
         state: target,
-        category: category,
+        category: category.map((n) => {
+          n += 1;
+          return n;
+        }),
         address: 1,
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
@@ -72,13 +95,22 @@ const AddStudy = () => {
       },
     })
       .then(() => {
-        goHome();
+        closeModal();
+        fetchOnlineStudyList(true, '');
+        fetchOfflineStudyList(true, '');
+        onGetMyStudyList(login.token);
+        setTimeout(() => {
+          showDoneModal();
+        }, 500);
+        setTimeout(() => {
+          closeModal();
+          goHome();
+        }, 2000);
       })
       .catch((err) => console.log(err));
   };
 
   const onClick = () => {
-    console.log(target);
     setModalVisible(true);
   };
 
@@ -143,6 +175,10 @@ const AddStudy = () => {
         modalVisible={modalVisible}
         closeModal={closeModal}
         onPress={EnrollButton}
+      />
+      <EnrollDoneModal
+        closeModal={closeDoneModal}
+        modalVisible={DoneModalVisible}
       />
     </Container>
   );
