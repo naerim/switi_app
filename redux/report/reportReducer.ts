@@ -79,7 +79,8 @@ function reportReducer(state = initialState, action: any) {
         //study.member이 맞을까?
         break;
       case POST_REPORT_SUCCESS:
-        draft.studyMemberList = action.payload;
+        console.log('신고하기 성공');
+        // draft.studyMemberList = action.payload;
         // 어떤 데이터에 변화가 ?
         break;
       default:

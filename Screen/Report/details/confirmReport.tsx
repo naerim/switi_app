@@ -8,7 +8,7 @@ interface Props {
   name: string;
   modalVisible: boolean;
   closeModal: () => void;
-  button: () => void;
+  button: any;
 }
 
 const ConfirmReport: React.FC<Props> = ({

@@ -25,6 +25,7 @@ import {
   getStudyHistoryRequest,
 } from '../../redux/userReducer';
 import SugarContainer from './profile/sugarContainer';
+import { reportRequest } from '../../redux/report/reportReducer';
 
 const MyPage = () => {
   const { scroll, scrollOn } = useScroll();
@@ -38,8 +39,21 @@ const MyPage = () => {
   const closeConfirm = () => setConfirmModalVisible(false);
   const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
   const reportModalClose = () => setReportModalVisible(false);
+
+  //신고하기 api
+  const handleReport = (studyId: any, memberId: any, content: any) => {
+    dispatch(reportRequest(login.token, studyId, memberId, content));
+  };
+
+  //1. studyID, memverId, content, name 어떻게 가져올 것인가 ?
+  //2. studyID 는 studyRadioButton 안에서 가져온다. -> useState 또는 (리덕스) -> 마이페이지에서 다루어야 한다.. -> 나중에 컴포넌트 분리
+  const [reportStudyId, setreportStudyId] = useState(10);
+  const [reportMemberId, setreportMemberId] = useState(54);
+  const [reportContent, setReportContent] = useState('테스트');
+
   const final = () => {
     setConfirmModalVisible(false);
+    handleReport(reportStudyId, reportMemberId, reportContent);
     setTimeout(() => {
       setFinalModalVisible(true);
     }, 500);

@@ -47,10 +47,6 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
     dispatch(studyMemberRequest(login.token, studyId));
   };
 
-  const handleReport = (studyId: any, memberId: any, content: any) => {
-    dispatch(reportRequest(login.token, studyId, memberId, content));
-  };
-
   useEffect(() => {
     handleStudyInProgress();
   }, []);
