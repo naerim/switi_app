@@ -21,7 +21,8 @@ const RenderItem: React.FC<ItemType> = ({ index, item, paddingHorizontal }) => {
       onPress={goStudyDetail}
       paddingHorizontal={paddingHorizontal}
     >
-      <StudyImage done={item.flag} img={item.Images[0]?.imgPath} />
+      <StudyImage done={item.flag} img={'Img/profile_switi_step1.png'} />
+      {/*오류 나서 임시로 작성해둔 코드*/}
       <Content>
         <Title>{limitTitle(item.title)}</Title>
         <Desc>{limitDesc(item.desc)}</Desc>
