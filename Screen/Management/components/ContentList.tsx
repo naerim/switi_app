@@ -1,53 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import Proceeding from './RenderItem/Proceeding';
 import Recruitment from './RenderItem/Recruitment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
-import {
-  getMyApplyListRequest,
-  getMyStudyListRequest,
-} from '../../../redux/manageReducer';
 
 interface Props {
   idx: number;
 }
 
 const ContentList: React.FC<Props> = ({ idx }) => {
-  const [loading, setLoading] = useState(false);
   const FlatListItemSeparator = () => <SeparatorLine />;
-
-  const { login } = useSelector(({ userReducer }: rootState) => ({
-    login: userReducer.login,
+  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
+    myStudyList: manageReducer.myStudyList,
   }));
-  const { myStudyList, myApplyList } = useSelector(
-    ({ manageReducer }: rootState) => ({
-      myStudyList: manageReducer.myStudyList,
-      myApplyList: manageReducer.myApplyList,
-    })
-  );
+  const { myApplyList } = useSelector(({ manageReducer }: rootState) => ({
+    myApplyList: manageReducer.myApplyList,
+  }));
 
-  const dispatch = useDispatch();
-  const onGetMyStudyList = useCallback(
-    // 내가 만든 스터디 목록 가져오기
-    (token) => dispatch(getMyStudyListRequest(token)),
-    [dispatch]
-  );
-  const onGetMyApplyList = useCallback(
-    // 스터디 신청 리스트 가져오기
-    (token) => dispatch(getMyApplyListRequest(token)),
-    [dispatch]
-  );
-
-  useEffect(() => {
-    setLoading(true);
-    onGetMyStudyList(login.token);
-    onGetMyApplyList(login.token);
-    setLoading(false);
-  }, [idx]);
-
-  if (loading) return <div>로딩중..</div>;
   if (!myStudyList) return null;
   if (!myApplyList) return null;
 
