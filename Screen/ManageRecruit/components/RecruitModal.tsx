@@ -10,6 +10,7 @@ interface Props {
   modalVisible: boolean;
   closeModal: () => void;
   acceptApply: () => void;
+  rejectApply: () => void;
 }
 
 const RecruitModal: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const RecruitModal: React.FC<Props> = ({
   modalVisible,
   closeModal,
   acceptApply,
+  rejectApply,
 }) => {
   return (
     <Container>
@@ -30,11 +32,7 @@ const RecruitModal: React.FC<Props> = ({
           desc={item.apply_detail}
         />
         <ButtonWrap>
-          <TwoButton
-            accept={false}
-            onPress={() => console.log('거절')}
-            title="거절하기"
-          />
+          <TwoButton accept={false} onPress={rejectApply} title="거절하기" />
           <TwoButton accept onPress={acceptApply} title="수락하기" />
         </ButtonWrap>
       </BasicModal>

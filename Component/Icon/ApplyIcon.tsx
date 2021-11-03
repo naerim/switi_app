@@ -12,12 +12,14 @@ const ApplyIcon: React.FC<Props> = ({ done, apply }) => {
     // apply: 0이면 수락대기, 1이면 수락완료
     // done이면 모집완료
     if (apply === 0) return '수락대기';
+    else if (apply === 2) return '수락대기';
     else return done ? '모집완료' : '수락완료';
   };
 
   // icon 배경색상 설정
   const setIconColor = () => {
     if (apply === 0) return '#b4b4b4';
+    else if (apply === 2) return '#b4b4b4';
     else return done ? '#707071' : '#4fd5a7';
   };
 

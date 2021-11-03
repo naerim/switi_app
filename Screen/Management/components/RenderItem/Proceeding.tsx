@@ -63,7 +63,7 @@ const ManageMember = styled.TouchableOpacity`
 `;
 
 const ButtonImage = styled.Image<VisibleProps>`
-  width: ${(props) => (props.visible === 0 ? 0 : '18px')};
+  width: ${(props) => (props.visible === 1 ? '18px' : 0)};
   height: 16px;
 `;
 

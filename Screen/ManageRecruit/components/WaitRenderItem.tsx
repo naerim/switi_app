@@ -29,6 +29,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
 
   const onPress = () => setRecruitModalVisible(true);
 
+  // 신청 수락
   const acceptApply = () => {
     const abortController = new AbortController();
     axios({
@@ -40,10 +41,26 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
         closeRecruitModal();
         setTimeout(() => {
           onGetStudyMember(login.token, item.idStudy);
-        }, 200);
+        }, 300);
       })
       .catch((err) => console.log(err));
     return () => abortController.abort();
+  };
+
+  // 신청 거절
+  const rejectApply = () => {
+    axios({
+      method: 'put',
+      url: `http://localhost:4000/manage/rejectApply/${item.id}`,
+      headers: { Authorization: login.token },
+    })
+      .then(() => {
+        closeRecruitModal();
+        setTimeout(() => {
+          onGetStudyMember(login.token, item.idStudy);
+        }, 300);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -57,6 +74,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
       <RecruitModal
         item={item}
         modalVisible={RecruitModalVisible}
+        rejectApply={rejectApply}
         acceptApply={acceptApply}
         closeModal={closeRecruitModal}
       />

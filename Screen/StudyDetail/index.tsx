@@ -62,8 +62,9 @@ const StudyDetail = ({ route }: any) => {
       return item.id == studyDetail.id;
     });
     // 스터디 멤버인지 확인 (0이면 신청 취소, 1이면 탈퇴하기)
+    // apply state = 2이면 신청이 거절된 경우 (버튼 텍스트는 신청 취소로 표시)
     const isMember = myApplyList.some((item: { id: number; Applies: any }) => {
-      return item.id == studyDetail.id && item.Applies[0].apply_state;
+      return item.id == studyDetail.id && item.Applies[0].apply_state == 1;
     });
     const text = isMember ? '탈퇴하기' : '신청 취소하기';
     return apply ? text : '신청하기';
