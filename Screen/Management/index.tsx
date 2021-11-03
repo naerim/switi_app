@@ -15,9 +15,6 @@ const Management = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
-    myStudyList: manageReducer.myStudyList,
-  }));
   const dispatch = useDispatch();
   const onGetMyStudyList = useCallback(
     // 내가 만든 스터디 목록 가져오기
@@ -33,7 +30,6 @@ const Management = ({ route }: any) => {
   useEffect(() => {
     onGetMyStudyList(login.token);
     onGetMyApplyList(login.token);
-    console.log(myStudyList);
   }, [dispatch]);
 
   return (

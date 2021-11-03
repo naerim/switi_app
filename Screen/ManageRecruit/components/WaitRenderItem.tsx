@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ItemType } from '../../ManageProceeding/interface';
 import styled from 'styled-components/native';
 import MemberImage from '../../ManageProceeding/components/MemberImage';
@@ -6,8 +6,9 @@ import AcceptButton from '../../ManageProceeding/components/AcceptButton';
 import { useGoProfileDetail } from '../../../util/navigationHooks';
 import RecruitModal from './RecruitModal';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
+import { getStudyMemberRequest } from '../../../redux/manageReducer';
 
 const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const goProfileDetail = useGoProfileDetail(item.idUser);
@@ -19,6 +20,12 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const dispatch = useDispatch();
+  const onGetStudyMember = useCallback(
+    // 사용자 프로필 가져오기
+    (token, id) => dispatch(getStudyMemberRequest(token, id)),
+    [dispatch]
+  );
 
   const onPress = () => setRecruitModalVisible(true);
 
@@ -31,6 +38,9 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
     })
       .then(() => {
         closeRecruitModal();
+        setTimeout(() => {
+          onGetStudyMember(login.token, item.idStudy);
+        }, 200);
       })
       .catch((err) => console.log(err));
     return () => abortController.abort();

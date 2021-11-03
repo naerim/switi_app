@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import ApplyModal from './ApplyModal';
 import CancelModal from './CancelModal';
 import RecruitDoneModal from './RecruitDoneModal';
+import LeaveModal from './LeaveModal';
 
 interface Props {
   id: number;
@@ -33,11 +34,14 @@ const BottomButton: React.FC<Props> = ({
   const closeApplyModal = () => setApplyModalVisible(false);
   const [doneModalVisible, setDoneModalVisible] = useState(false);
   const closeDoneModal = () => setDoneModalVisible(false);
+  const [leaveModalVisible, setLeaveModalVisible] = useState(false);
+  const closeLeaveModal = () => setLeaveModalVisible(false);
 
   // 버튼 텍스트에 따라 모달창 다르게 설정
   const setModal = () => {
     if (btnText === '신청 취소하기') setCancelModalVisible(true);
     else if (btnText === '신청하기') setApplyModalVisible(true);
+    else if (btnText === '탈퇴하기') setLeaveModalVisible(true);
     else setDoneModalVisible(true);
   };
 
@@ -49,6 +53,9 @@ const BottomButton: React.FC<Props> = ({
     } else if (btnText === '모집 마감하기') {
       setPopupText('스터디 모집이 마감되었습니다.');
       setDone(true);
+    } else if (btnText === '탈퇴하기') {
+      setPopupText('스터디에서 탈퇴되었습니다.');
+      setDone(false);
     }
   };
 
@@ -80,6 +87,13 @@ const BottomButton: React.FC<Props> = ({
         setPopupVisible={setPopupVisible}
         modalVisible={doneModalVisible}
         closeModal={closeDoneModal}
+      />
+      <LeaveModal
+        modalVisible={leaveModalVisible}
+        closeModal={closeLeaveModal}
+        token={token}
+        idStudy={id}
+        setPopupVisible={setPopupVisible}
       />
     </Container>
   );

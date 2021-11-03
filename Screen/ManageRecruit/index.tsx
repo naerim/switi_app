@@ -36,15 +36,7 @@ const ManageRecruit = ({ route }: any) => {
 
   useEffect(() => {
     onGetStudyMember(login.token, idx);
-  }, []);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    onGetStudyMember(login.token, idx);
-    return () => {
-      abortController.abort();
-    };
-  }, [idx, studyMember]);
+  }, [idx]);
 
   // 로그인한 아이디가 모집장인지 찾는 함수 - 나 (모집장)
   const checkLeader = (nickname: string) => myPage.myPage.nickname === nickname;

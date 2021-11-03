@@ -61,7 +61,12 @@ const StudyDetail = ({ route }: any) => {
     const apply = myApplyList.some((item: { id: number }) => {
       return item.id == studyDetail.id;
     });
-    return apply ? '신청 취소하기' : '신청하기';
+    // 스터디 멤버인지 확인 (0이면 신청 취소, 1이면 탈퇴하기)
+    const isMember = myApplyList.some((item: { id: number; Applies: any }) => {
+      return item.id == studyDetail.id && item.Applies[0].apply_state;
+    });
+    const text = isMember ? '탈퇴하기' : '신청 취소하기';
+    return apply ? text : '신청하기';
   };
 
   useEffect(() => {
