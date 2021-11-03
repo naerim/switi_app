@@ -13,7 +13,7 @@ import { DataType } from '../../interface';
 
 interface Props {
   idx: number;
-  tagList: { key: number; name: string; category: string }[];
+  tagList: { id: number; name: string; category: string }[];
 }
 
 const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
@@ -22,11 +22,13 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const [isRefreshing, setIsRefreshing] = useState(false); // flatList 내부의 로딩
   const FlatListItemSeparator = () => <SeparatorLine />;
 
-  //
   const dispatch = useDispatch();
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
+  }));
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
   }));
 
   const fetchOnlineStudyList = (order: boolean, query: string) =>
@@ -45,19 +47,19 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
 
   useEffect(() => {
     let tag = '';
-    tagList.forEach(({ key, name, category }) => {
+    tagList.forEach(({ id, name, category }) => {
       if (category == 'interest') {
         // 카테고리
-        if (tag.includes('category')) tag += ':' + (key + 1).toString();
-        else tag += '&category=' + (key + 1).toString();
+        if (tag.includes('category')) tag += ':' + (id + 1).toString();
+        else tag += '&category=' + (id + 1).toString();
       } else if (category == 'region') {
         // 지역
-        if (tag.includes('region')) tag += ':' + (key + 1).toString();
-        else tag += '&region=' + (key + 1).toString();
+        if (tag.includes('region')) tag += ':' + (id + 1).toString();
+        else tag += '&region=' + (id + 1).toString();
       } else {
         // 모집대상
-        if (tag.includes('state')) tag += ':' + (key + 1).toString();
-        else tag += '&state=' + (key + 1).toString();
+        if (tag.includes('state')) tag += ':' + (id + 1).toString();
+        else tag += '&state=' + (id + 1).toString();
       }
     });
     setQuery(tag);
@@ -66,7 +68,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   useEffect(() => {
     fetchOnlineStudyList(checked, query);
     fetchOfflineStudyList(checked, query);
-  }, [checked, query]);
+  }, [checked, query, scrapList]);
   //비동기적 처리 -> 동기적 처리 순서로 결과가 화면에 출력되지 않음
   //동기적 처리로 해결
 

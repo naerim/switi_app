@@ -4,13 +4,15 @@ export interface ContentProps {
 }
 
 export interface TargetProps {
-  select: { value: string; onChange: (value: string) => void };
+  target: number[];
+  setTarget: (prev: (prev: number[]) => number[]) => void;
 }
 
 export interface InputProps {
   title: string;
   input: { value: string; onChange: (value: string) => void };
   placeholder: string;
+  onlineFlag?: number;
 }
 
 export interface LongInputProps {

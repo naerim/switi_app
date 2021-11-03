@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import XIconBtn from '../../../../Img/btn_x_green.png';
 import { TagType } from '../../interface';
-import { Area, InterestList, TargetList } from '../../../../Data';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../../redux';
 
 const TagContainer: React.FC<TagType> = ({
   setTagList,
@@ -11,35 +12,43 @@ const TagContainer: React.FC<TagType> = ({
   setSelectArea,
   setSelectTarget,
 }) => {
+  const { state, interest, region } = useSelector(
+    ({ dataReducer }: rootState) => ({
+      state: dataReducer.state,
+      interest: dataReducer.interest,
+      region: dataReducer.region,
+    })
+  );
+
   // x 버튼
   const deleteList = (name: string) => {
-    Area.forEach((current, i) => {
+    region.forEach((current: { name: string }, i: any) => {
       if (name === current.name) {
         const idx = i;
         setSelectArea((prev: number[]) => prev.filter((i) => i !== idx));
-        setTagList((prev: { key: number; name: string; category: string }[]) =>
-          prev.filter((i) => i.key !== idx)
+        setTagList((prev: { id: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.id !== idx)
         );
       }
     });
 
-    InterestList.forEach((current, i) => {
+    interest.forEach((current: { name: string }, i: any) => {
       if (name === current.name) {
         const idx = i;
         setSelectCategory((prev: number[]) => prev.filter((i) => i !== idx));
-        setTagList((prev: { key: number; name: string; category: string }[]) =>
-          prev.filter((i) => i.key !== idx)
+        setTagList((prev: { id: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.id !== idx)
         );
         return;
       }
     });
 
-    TargetList.forEach((current, i) => {
+    state.forEach((current: { name: string }, i: any) => {
       if (name === current.name) {
         const idx = i;
         setSelectTarget((prev: number[]) => prev.filter((i) => i !== idx));
-        setTagList((prev: { key: number; name: string; category: string }[]) =>
-          prev.filter((i) => i.key !== idx)
+        setTagList((prev: { id: number; name: string; category: string }[]) =>
+          prev.filter((i) => i.id !== idx)
         );
         return;
       }

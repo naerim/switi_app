@@ -10,32 +10,43 @@ interface Props {
       prev: (prev: { [p: string]: boolean }) => { [p: string]: boolean }
     ) => void;
   };
+  state?: number[];
+  setState?: (p: (prev: number[]) => number[]) => void;
 }
 
-const MyState: React.FC<Props> = ({ check }) => {
-  const itemCheck = (key: string) => {
+const MyState: React.FC<Props> = ({ check, state, setState }) => {
+  const itemCheck = (key: string, id: number) => {
     check &&
       check.setChecked((prev: { [key: string]: boolean }) => ({
         ...prev,
         [key]: !prev[key],
       }));
+    // state에 배열 추가
+    if (setState) {
+      state &&
+      state.some((v) => {
+        return v == id;
+      })
+        ? setState((prev) => state.filter((v) => v !== id))
+        : setState((prev) => [...prev, id]);
+    }
   };
 
   const stateList = [
     {
       title: '대학생',
       checked: check && check.checked.student,
-      onPress: () => itemCheck('student'),
+      onPress: () => itemCheck('student', 1),
     },
     {
       title: '취준생',
       checked: check && check.checked.jobSeeker,
-      onPress: () => itemCheck('jobSeeker'),
+      onPress: () => itemCheck('jobSeeker', 2),
     },
     {
       title: '직장인',
       checked: check && check.checked.worker,
-      onPress: () => itemCheck('worker'),
+      onPress: () => itemCheck('worker', 3),
     },
   ];
 

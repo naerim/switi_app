@@ -5,9 +5,12 @@ import {
   useGoManageProceeding,
   useGoStudyDetail,
 } from '../../../../util/navigationHooks';
-import StudyImageManage from '../StudyImageManage';
-import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
 import ManageIcon from '../../../../Img/icon_memberManage.png';
+import ApplyIcon from '../../../../Component/Icon/ApplyIcon';
+
+interface VisibleProps {
+  visible: number;
+}
 
 const Proceeding: React.FC<ItemType> = ({ item }) => {
   const goStudyDetail = useGoStudyDetail(item.id);
@@ -19,15 +22,15 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImageManage img={item.Images[0].imgPath} />
       <Content>
-        <IconWrap>
-          <RecruitIcon done={!item.flag} />
-        </IconWrap>
+        <ApplyIcon done={!item.flag} apply={item.Applies[0].apply_state} />
         <Title>{limitTitle(item.title)}</Title>
       </Content>
       <ManageMember onPress={goManageProceeding}>
-        <ButtonImage source={ManageIcon} />
+        <ButtonImage
+          source={ManageIcon}
+          visible={item.Applies[0].apply_state}
+        />
       </ManageMember>
     </Container>
   );
@@ -35,26 +38,23 @@ const Proceeding: React.FC<ItemType> = ({ item }) => {
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-bottom: 16px;
   align-items: center;
 `;
 
 const Content = styled.View`
   flex: 3;
-  padding: 0 10px;
-  justify-content: center;
-`;
-
-const IconWrap = styled.View`
-  flex: 2;
-  margin-top: 5px;
+  padding: 12px 0;
+  flex-direction: row;
 `;
 
 const Title = styled.Text`
-  flex: 1;
   font-size: 14px;
+  margin-left: 10px;
+  margin-top: 1px;
+  font-weight: bold;
   color: #2b2b2b;
-  padding-left: 5px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ManageMember = styled.TouchableOpacity`
@@ -62,8 +62,8 @@ const ManageMember = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const ButtonImage = styled.Image`
-  width: 18px;
+const ButtonImage = styled.Image<VisibleProps>`
+  width: ${(props) => (props.visible === 1 ? '18px' : 0)};
   height: 16px;
 `;
 

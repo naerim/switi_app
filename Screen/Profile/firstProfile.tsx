@@ -5,6 +5,8 @@ import Age from './components/Age';
 import useInput from '../../util/useInput';
 import FlatListModal from './components/FlatListModal';
 import { Area, InterestList } from '../../Data';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const FirstProfile = () => {
   const ageInput = useInput('');
@@ -21,6 +23,11 @@ const FirstProfile = () => {
     goSecondProfile();
   };
 
+  const { interest, region } = useSelector(({ dataReducer }: rootState) => ({
+    interest: dataReducer.interest,
+    region: dataReducer.region,
+  }));
+
   return (
     <ProfileContainer
       buttonText="다음"
@@ -32,13 +39,13 @@ const FirstProfile = () => {
       <Age input={ageInput} />
       <FlatListModal
         title="관심지역 (3개 이하 선택)"
-        data={Area}
+        data={region}
         select={selectArea}
         setSelect={setSelectArea}
       />
       <FlatListModal
         title="관심분야 (3개 이하 선택)"
-        data={InterestList}
+        data={interest}
         select={selectInterest}
         setSelect={setSelectInterest}
       />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
@@ -7,11 +7,19 @@ interface Props {
 }
 
 const NumInput: React.FC<Props> = ({ input, select }) => {
-  const setValue = () => (select ? '' : input.value);
+  const setValue = () => {
+    // 무관일때 input value 0으로 변경
+    select && input.onChange('0');
+  };
+
+  useEffect(() => {
+    setValue();
+  }, [select]);
+
   return (
     <Container>
       <Input
-        value={setValue()}
+        value={select ? '0' : input.value}
         onChangeText={input.onChange}
         keyboardType="numeric"
         maxLength={3}

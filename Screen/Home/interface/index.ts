@@ -1,4 +1,5 @@
 export interface DataType {
+  Applies: any;
   User: { nickname: string };
   idUser: number;
   Images: any;
@@ -35,10 +36,10 @@ export interface TagType {
   setSelectCategory: (prev: (prev: number[]) => number[]) => void;
   setSelectArea: (prev: (prev: number[]) => number[]) => void;
   setSelectTarget: (prev: (prev: number[]) => number[]) => void;
-  tagList: { key: number; name: string; category: string }[];
+  tagList: { id: number; name: string; category: string }[];
   setTagList: (
     prev: (
-      prev: { key: number; name: string; category: string }[]
-    ) => { key: number; name: string; category: string }[]
+      prev: { id: number; name: string; category: string }[]
+    ) => { id: number; name: string; category: string }[]
   ) => void;
 }

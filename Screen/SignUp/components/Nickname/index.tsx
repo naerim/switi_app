@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
 import { InputProps, Status, WarningProps } from '../../inteface';
+import axios from 'axios';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -18,8 +19,23 @@ const getColor = ({ status }: { status: Status }) => {
 
 const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
   const [message, setMessage] = useState(' ');
-  const onChange = (state: boolean) => {
-    confirm?.setConfirm(state);
+  const onPress = (state: boolean) => {
+    error.status == 'SUCCESS' &&
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/checkNickname',
+        data: { nickname: input.value },
+      })
+        .then(() => {
+          error.text = '멋진 닉네임이네요!';
+          setMessage(error.text);
+          confirm?.setConfirm(state);
+        })
+        .catch((err) => {
+          error.text = '이미 사용중이거나 탈퇴한 닉네임입니다.';
+          error.status = Status.ERROR;
+          setMessage(error.text);
+        });
   };
 
   return (
@@ -38,7 +54,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
         <NicknameButton
           disabled={message === '멋진 닉네임이네요!'}
           check={() => {
-            onChange(true);
+            onPress(true);
             setMessage(error.text);
           }}
         />

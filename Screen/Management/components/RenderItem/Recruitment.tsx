@@ -5,7 +5,6 @@ import {
   useGoManageRecruit,
   useGoStudyDetail,
 } from '../../../../util/navigationHooks';
-import StudyImageManage from '../StudyImageManage';
 import ManageIcon from '../../../../Img/icon_memberManage.png';
 
 const Recruitment: React.FC<ItemType> = ({ item }) => {
@@ -18,7 +17,6 @@ const Recruitment: React.FC<ItemType> = ({ item }) => {
 
   return (
     <Container activeOpacity={0.8} onPress={goStudyDetail}>
-      <StudyImageManage img={item.Images[0].imgPath} />
       <Title>{limitTitle(item.title)}</Title>
       <ManageMember onPress={goManageRecruit}>
         <ButtonImage source={ManageIcon} />
@@ -29,7 +27,7 @@ const Recruitment: React.FC<ItemType> = ({ item }) => {
 
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-bottom: 16px;
+  padding: 12px 0;
   align-items: center;
 `;
 
@@ -37,7 +35,7 @@ const Title = styled.Text`
   flex: 1;
   font-size: 14px;
   color: #2b2b2b;
-  padding-left: 15px;
+  font-weight: bold;
 `;
 
 const ManageMember = styled.TouchableOpacity`

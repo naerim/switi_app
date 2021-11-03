@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoHome } from '../../util/navigationHooks';
 import Header from './components/Header';
 import { Platform, ScrollView } from 'react-native';
-import AddImage from './components/AddImage';
 import SelectOne from './components/SelectOne';
 import Target from './components/Target';
 import useInput from '../../util/useInput';
@@ -12,17 +11,22 @@ import LongInput from './components/LongInput';
 import EndDate from './components/EndDate';
 import RecruitNum from './components/RecruitNum';
 import BasicButton from '../../Component/BasicButton';
-import { InterestList, Area } from '../../Data';
 import EnrollModal from './components/EnrollModal';
 import FlagRadioButton from './components/FlagRadioButton';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import {
+  offlineStudyListRequest,
+  onlineStudyListRequest,
+} from '../../redux/studyReducer';
+import EnrollDoneModal from './components/EnrollDoneModal';
+import { getMyStudyListRequest } from '../../redux/manageReducer';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const selectTarget = useInput('');
+  const [target, setTarget] = useState<number[]>([]);
   const periodInput = useInput('');
   const recruitNumInput = useInput('');
   const [recruitSelect, setRecruitSelect] = useState(false);
@@ -35,44 +39,72 @@ const AddStudy = () => {
     month: '',
     day: '',
   });
-  const [image, setImage] = useState('');
   const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
   const [area, setArea] = useState<number[]>([]);
   const [category, setCategory] = useState<number[]>([]);
   const detailAddressInput = useInput('');
+  const [DoneModalVisible, setDoneModalVisible] = useState(false);
+  const showDoneModal = () => setDoneModalVisible(true);
+  const closeDoneModal = () => setDoneModalVisible(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
 
+  const { interest, region } = useSelector(({ dataReducer }: rootState) => ({
+    interest: dataReducer.interest,
+    region: dataReducer.region,
+  }));
+
+  const dispatch = useDispatch();
+  const fetchOnlineStudyList = (order: boolean, query: string) =>
+    dispatch(onlineStudyListRequest(login.token, order, query));
+  const fetchOfflineStudyList = (order: boolean, query: string) =>
+    dispatch(offlineStudyListRequest(login.token, order, query));
+  const onGetMyStudyList = useCallback(
+    (token) => dispatch(getMyStudyListRequest(token)),
+    [dispatch]
+  );
+
   // 최종 등록 버튼
   const EnrollButton = () => {
-    // const formData = new FormData();
-
-    // formData.append('image', file);
-    // console.log(file);
-    console.log(image);
+    // endDate
+    const date =
+      EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
     axios({
       method: 'post',
       url: 'http://localhost:4000/study/addStudy',
       headers: { Authorization: login.token },
       data: {
         online_flag: onlineFlag,
-        state: selectTarget.value,
-        category: category,
-        address: area,
+        state: target,
+        category: category.map((n) => {
+          n += 1;
+          return n;
+        }),
+        address: 1,
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
-        endDate: EndDateInput,
-        contact: contentInput.value,
+        endDate: date,
+        contact: contactInput.value,
         title: titleInput.value,
         desc: contentInput.value,
-        img: image,
+        gu: 1,
       },
     })
       .then(() => {
-        goHome();
+        closeModal();
+        fetchOnlineStudyList(true, '');
+        fetchOfflineStudyList(true, '');
+        onGetMyStudyList(login.token);
+        setTimeout(() => {
+          showDoneModal();
+        }, 500);
+        setTimeout(() => {
+          closeDoneModal();
+          goHome();
+        }, 2000);
       })
       .catch((err) => console.log(err));
   };
@@ -88,7 +120,6 @@ const AddStudy = () => {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
       >
-        <AddImage image={image} setImage={setImage} />
         <Content>
           <FlagRadioButton
             title="스터디 형식"
@@ -96,12 +127,19 @@ const AddStudy = () => {
           />
           <SelectOne
             title="카테고리"
-            data={InterestList}
+            data={interest}
             input={category}
             setInput={setCategory}
           />
-          <SelectOne title="지역" data={Area} input={area} setInput={setArea} />
-          <Target select={selectTarget} />
+          {onlineFlag === 1 && (
+            <SelectOne
+              title="지역"
+              data={region}
+              input={area}
+              setInput={setArea}
+            />
+          )}
+          <Target target={target} setTarget={setTarget} />
           <RecruitNum
             input={recruitNumInput}
             select={{ recruitSelect, setRecruitSelect }}
@@ -110,6 +148,7 @@ const AddStudy = () => {
             title="모임장소"
             input={detailAddressInput}
             placeholder="모입장소를 입력해주세요"
+            onlineFlag={onlineFlag}
           />
           <Input
             title="활동기간"
@@ -128,13 +167,17 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={onClick} />
+          <BasicButton text="등록하기" onPress={onClick} disabled={false} />
         </Content>
       </ScrollView>
       <EnrollModal
         modalVisible={modalVisible}
         closeModal={closeModal}
         onPress={EnrollButton}
+      />
+      <EnrollDoneModal
+        closeModal={closeDoneModal}
+        modalVisible={DoneModalVisible}
       />
     </Container>
   );

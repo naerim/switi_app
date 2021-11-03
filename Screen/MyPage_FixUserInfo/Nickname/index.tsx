@@ -3,6 +3,9 @@ import styled from 'styled-components/native';
 import NicknameButton from '../../SignUp/components/Nickname/NicknameButton';
 import { InputProps, Status } from '../../SignUp/inteface';
 import { Alert } from 'react-native';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -19,8 +22,28 @@ const getColor = ({ status }: { status: Status }) => {
 
 const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
   const [message, setMessage] = useState(' ');
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
+  }));
   const onChange = (state: boolean) => {
-    confirm?.setConfirm(state);
+    error.status == 'SUCCESS' &&
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/checkNickname',
+        data: { nickname: input.value },
+      })
+        .then(() => {
+          error.text = '멋진 닉네임이네요!';
+          setMessage(error.text);
+          confirm?.setConfirm(state);
+        })
+        .catch((err) => {
+          console.log(err);
+          error.text = '이미 사용중이거나 탈퇴한 닉네임입니다.';
+          error.status = Status.ERROR;
+          setMessage(error.text);
+          Alert.alert(error.text);
+        });
   };
 
   return (
@@ -29,8 +52,8 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
         <Input
           value={input.value}
           onChangeText={input.onChange}
-          placeholder="사용자"
-          placeholderTextColor="black"
+          placeholder={myPage.myPage.nickname}
+          placeholderTextColor="#B4B4B4"
           keyboardType="default"
           returnKeyType="next"
           secureTextEntry={false}
@@ -38,12 +61,8 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
           editable={message !== '멋진 닉네임이네요!'}
         />
         <NicknameButton
+          check={() => onChange(true)}
           disabled={message === '멋진 닉네임이네요!'}
-          check={() => {
-            onChange(true);
-            setMessage(error.text);
-            Alert.alert(error.text);
-          }}
         />
       </InputContainer>
     </Container>
@@ -70,7 +89,6 @@ const Input = styled.TextInput`
   border-radius: 4px;
   padding: 10px;
   border-color: ${getColor};
-  margin-top: 5px;
 `;
 
 export default NicknameContainer;

@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import NotScrapIcon from '../../../../Img/icon_notScrap.png';
+import ScrapIcon from '../../../../Img/icon_scrap.png';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../../redux';
 
 interface Props {
   scrap?: number;
+  id: number;
 }
 
-const Scrap: React.FC<Props> = ({ scrap }) => {
+const Scrap: React.FC<Props> = ({ scrap, id }) => {
+  const [scrapIcon, setScrapIcon] = useState(NotScrapIcon);
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
+
+  const confirmScrap = () => {
+    if (!scrapList) return null;
+    // some: 배열 요소 중 하나라도 스크랩된 스터디 아이디에 해당하면 true 반환
+    const scrap = scrapList.scrapList.some((item: { id: number }) => {
+      return item.id == id;
+    });
+    scrap ? setScrapIcon(ScrapIcon) : setScrapIcon(NotScrapIcon);
+  };
+
+  useEffect(() => {
+    confirmScrap();
+  }, [id, scrapList]);
+
   return (
     <Container>
-      <Icon source={NotScrapIcon} />
+      <Icon source={scrapIcon} />
       <Item>{scrap}</Item>
     </Container>
   );

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageProfile } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
 import Age from '../Profile/components/Age';
 import FlatListModal from '../Profile/components/FlatListModal';
-import { Area, CharacterList, InterestList } from '../../Data';
 import MyState from '../Profile/components/MyState';
 import Introduce from '../Profile/components/Introduce';
 import BasicButton from '../../Component/BasicButton';
 import useScroll from '../../util/useScroll';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import axios from 'axios';
+import { getMyProfileRequest } from '../../redux/userReducer';
 
 const MyPage_Profile_Fix = () => {
   const { scroll, scrollOn } = useScroll();
@@ -23,21 +24,58 @@ const MyPage_Profile_Fix = () => {
 
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectInterest, setSelectInterest] = useState<number[]>([]);
-
   const introduceInput = useInput('');
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     student: false,
     jobSeeker: false,
     worker: false,
   });
-
+  const [state, setState] = useState<number[]>([]);
   const [selectCharacter, setSelectCharacter] = useState<number[]>([]);
-  const { interest } = useSelector(({ dataReducer }: rootState) => ({
-    interest: dataReducer.interest,
+  const { interest, region, character } = useSelector(
+    ({ dataReducer }: rootState) => ({
+      interest: dataReducer.interest,
+      region: dataReducer.region,
+      character: dataReducer.character,
+    })
+  );
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
   }));
-  const { character } = useSelector(({ dataReducer }: rootState) => ({
-    character: dataReducer.character,
-  }));
+  const dispatch = useDispatch();
+  const onGetMyProfile = useCallback(
+    // 나의 프로필 가져오기
+    (token) => dispatch(getMyProfileRequest(token)),
+    [dispatch]
+  );
+
+  const onPress = () => {
+    // myInterest, myCharacter 인덱스 1씩 더해줌
+    axios({
+      method: 'put',
+      url: 'http://localhost:4000/user/updateProfile',
+      headers: { Authorization: login.token },
+      data: {
+        age: ageInput.value,
+        aboutme: introduceInput.value,
+        myRegion: 1, // 지역 수정(gu 오류남)
+        myInterest: selectInterest.map((n) => {
+          n += 1;
+          return n;
+        }),
+        myCharacter: selectCharacter.map((n) => {
+          n += 1;
+          return n;
+        }),
+        myState: state,
+      },
+    })
+      .then(() => {
+        goMyProfile();
+        onGetMyProfile(login.token);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <BasicContainer
@@ -51,26 +89,40 @@ const MyPage_Profile_Fix = () => {
         <Age input={ageInput} />
         <FlatListModal
           title="관심지역 (3개 이하 선택)"
-          data={Area}
+          data={region}
           select={selectArea}
           setSelect={setSelectArea}
         />
         <FlatListModal
           title="관심분야 (3개 이하 선택)"
-          data={InterestList}
+          data={interest}
           select={selectInterest}
           setSelect={setSelectInterest}
         />
-        <MyState check={{ checked, setChecked }} />
+        <MyState
+          check={{ checked, setChecked }}
+          state={state}
+          setState={setState}
+        />
         <FlatListModal
           title="나의 성격 (3개 이하 선택)"
-          data={CharacterList}
+          data={character}
           select={selectCharacter}
           setSelect={setSelectCharacter}
           column
         />
         <Introduce input={introduceInput} />
-        <BasicButton text="저장하기" onPress={goMyProfile} />
+        <BasicButton
+          text="저장하기"
+          onPress={onPress}
+          disabled={
+            !ageInput.value ||
+            !selectArea ||
+            !selectInterest ||
+            !selectCharacter ||
+            !introduceInput
+          }
+        />
       </Wrap>
     </BasicContainer>
   );

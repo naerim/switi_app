@@ -3,22 +3,34 @@ import styled from 'styled-components/native';
 import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
-import StudyImage from './components/StudyImage';
 import { useGoHome } from '../../util/navigationHooks';
-import ApplyModal from './components/ApplyModal';
-import CancelModal from './components/CancelModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getStudyDetailRequest } from '../../redux/studyReducer';
+import TitleFlag from '../Home/components/StudyFlatList/TitleFlag';
+import StudyHeader from './components/StudyHeader';
+import BlackModal from '../../Component/BlackModal';
 
 const StudyDetail = ({ route }: any) => {
   const idx = route.params.idx;
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupText, setPopupText] = useState('');
+  const [done, setDone] = useState(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
     studyDetail: studyReducer.studyDetail,
+  }));
+  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
+    scrapList: userReducer.scrapList,
+  }));
+  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
+    myStudyList: manageReducer.myStudyList,
+  }));
+  const { myApplyList } = useSelector(({ manageReducer }: rootState) => ({
+    myApplyList: manageReducer.myApplyList,
   }));
 
   const dispatch = useDispatch();
@@ -29,50 +41,74 @@ const StudyDetail = ({ route }: any) => {
 
   useEffect(() => {
     onGetStudyDetail(login.token, idx);
-  }, [idx]);
+  }, [idx, scrapList]);
 
   const goHome = useGoHome();
-  const [modalVisible, setModalVisible] = useState(false);
-  // const showModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
-  const [cancelModalVisible, setCancelModalVisible] = useState(false);
-  const closeCancelModal = () => setCancelModalVisible(false);
 
-  const onClick = () => {
-    //showModal();
-    setCancelModalVisible(true);
+  // 리더인지 확인하는 함수
+  const checkLeader = () => {
+    // 나의 모집글인 경우 true를 반환
+    const leader = myStudyList.some((item: { id: number }) => {
+      return item.id == studyDetail.id;
+    });
+    return leader;
   };
 
-  // 이미지 불러오기
-  const loadImg = (url: string) => {
-    return 'http://localhost:4000/images/' + url;
+  // 신청여부 확인하는 함수
+  const checkApply = () => {
+    if (checkLeader()) return '모집 마감하기';
+    // 신청했을 경우 true 아니면 false
+    const apply = myApplyList.some((item: { id: number }) => {
+      return item.id == studyDetail.id;
+    });
+    // 스터디 멤버인지 확인 (0이면 신청 취소, 1이면 탈퇴하기)
+    // apply state = 2이면 신청이 거절된 경우 (버튼 텍스트는 신청 취소로 표시)
+    const isMember = myApplyList.some((item: { id: number; Applies: any }) => {
+      return item.id == studyDetail.id && item.Applies[0].apply_state == 1;
+    });
+    const text = isMember ? '탈퇴하기' : '신청 취소하기';
+    return apply ? text : '신청하기';
   };
+
+  useEffect(() => {
+    studyDetail && checkApply();
+  }, [myApplyList]);
 
   if (!studyDetail) return null;
 
   return (
     <Container>
-      <StudyImage
-        done={!studyDetail.flag}
+      <StudyHeader
         onPress={goHome}
-        img={loadImg(studyDetail.Images[0].imgPath)}
+        id={studyDetail.id}
+        setPopupVisible={setPopupVisible}
+        setPopupText={setPopupText}
       />
       <Content>
-        <Title>{studyDetail.title}</Title>
+        <TitleFlag
+          title={studyDetail.title}
+          done={studyDetail.flag}
+          detail={true}
+        />
         <OtherInfo
           idUser={studyDetail.idUser}
           username={studyDetail.User.nickname}
           createAt={studyDetail.createdAt.toString().split('T')[0]}
           scrap={studyDetail.scrapCount}
+          id={studyDetail.id}
         />
         <Desc>{studyDetail.desc}</Desc>
       </Content>
       <StudyInfo item={studyDetail} />
-      <BottomButton onPress={onClick} />
-      <ApplyModal modalVisible={modalVisible} closeModal={closeModal} />
-      <CancelModal
-        modalVisible={cancelModalVisible}
-        closeModal={closeCancelModal}
+      <BlackModal visible={popupVisible} text={popupText} done={done} />
+      <BottomButton
+        id={studyDetail.id}
+        btnText={checkApply()}
+        token={login.token}
+        setPopupVisible={setPopupVisible}
+        setPopupText={setPopupText}
+        flag={studyDetail.flag}
+        setDone={setDone}
       />
     </Container>
   );
@@ -81,12 +117,6 @@ const StudyDetail = ({ route }: any) => {
 const Container = styled.SafeAreaView`
   background-color: #fff;
   flex: 1;
-`;
-
-const Title = styled.Text`
-  margin-top: 15px;
-  font-size: 20px;
-  font-weight: bold;
 `;
 //font-family: 'NotoSans-Bold';
 

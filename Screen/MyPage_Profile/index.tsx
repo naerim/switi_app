@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/ContainerWithBack';
 import ColorButton from '../../Component/BasicButton';
@@ -23,7 +23,7 @@ const MyPage_Profile = () => {
     myProfile: userReducer.myProfile,
   }));
 
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
   const myCharacter = myProfile.myProfile.Characters;
   const myRegion = myProfile.myProfile.Gus;
@@ -95,11 +95,7 @@ const MyPage_Profile = () => {
             </ListContent>
           ))}
         </ScrollContainer>
-        <ColorButton
-          text="수정하기"
-          onPress={goProfileFix}
-          loading={isLoading}
-        />
+        <ColorButton text="수정하기" onPress={goProfileFix} disabled={false} />
       </MarginContainer>
     </BasicContainer>
   );

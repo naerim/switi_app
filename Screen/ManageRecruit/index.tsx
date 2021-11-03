@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { useGoManagement } from '../../util/navigationHooks';
@@ -16,13 +16,15 @@ const ManageRecruit = ({ route }: any) => {
 
   const goStudyManagement = useGoManagement();
   const FlatListItemSeparator = () => <SeparatorLine />;
-  const [loading, setLoading] = useState(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
   const { studyMember } = useSelector(({ manageReducer }: rootState) => ({
     studyMember: manageReducer.studyMember,
+  }));
+  const { myPage } = useSelector(({ userReducer }: rootState) => ({
+    myPage: userReducer.myPage,
   }));
 
   const dispatch = useDispatch();
@@ -33,12 +35,13 @@ const ManageRecruit = ({ route }: any) => {
   );
 
   useEffect(() => {
-    setLoading(true);
     onGetStudyMember(login.token, idx);
-    setLoading(false);
   }, [idx]);
 
-  if (loading) return <div>로딩중..</div>;
+  // 로그인한 아이디가 모집장인지 찾는 함수 - 나 (모집장)
+  const checkLeader = (nickname: string) => myPage.myPage.nickname === nickname;
+
+  //if (loading) return <div>로딩중..</div>;
   if (!studyMember) return null;
 
   return (
@@ -53,7 +56,12 @@ const ManageRecruit = ({ route }: any) => {
           ItemSeparatorComponent={FlatListItemSeparator}
           data={studyMember.member && studyMember.member.studyMembers}
           renderItem={({ item }) => (
-            <RecruitRenderItem index={item.id} item={item} desc={true} />
+            <RecruitRenderItem
+              index={item.id}
+              item={item}
+              desc={true}
+              leader={checkLeader(item.nickname)}
+            />
           )}
           keyExtractor={(item: ManageType) => item.id.toString()}
           extraData={studyMember.member && studyMember.member.studyMembers}

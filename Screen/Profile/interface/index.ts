@@ -3,7 +3,7 @@ export interface InputProps {
 }
 
 export interface dataType {
-  key: number;
+  id: number;
   name: string;
   category: string;
 }

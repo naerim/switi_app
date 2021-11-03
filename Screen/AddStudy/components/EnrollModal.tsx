@@ -17,7 +17,7 @@ const EnrollModal: React.FC<Props> = ({
   return (
     <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
       <Title>모집글을 등록하시겠습니까?</Title>
-      <BasicButton text="등록하기" onPress={onPress} />
+      <BasicButton text="등록하기" onPress={onPress} disabled={false} />
     </BasicModal>
   );
 };

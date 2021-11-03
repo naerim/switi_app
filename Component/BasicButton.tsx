@@ -6,14 +6,20 @@ interface Props {
   text: string;
   onPress: () => void;
   loading?: boolean;
+  disabled: boolean;
 }
 
 interface LoadingProps {
   loading?: boolean;
 }
 
-const BasicButton: React.FC<Props> = ({ text, onPress, loading = false }) => (
-  <Container disabled={loading} loading={loading} onPress={onPress}>
+const BasicButton: React.FC<Props> = ({
+  text,
+  onPress,
+  loading = false,
+  disabled,
+}) => (
+  <Container disabled={disabled} loading={loading} onPress={onPress}>
     {loading ? <ActivityIndicator color="white" /> : <Text>{text}</Text>}
   </Container>
 );
@@ -24,7 +30,7 @@ const Container = styled.TouchableOpacity<LoadingProps>`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: ${(props) => (props.loading ? '#b4b4b4' : '#86E3C3')};
+  background-color: ${(props) => (props.disabled ? '#b4b4b4' : '#86E3C3')};
 `;
 
 const Text = styled.Text`

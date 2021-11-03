@@ -4,7 +4,7 @@ import axios from 'axios';
 export const GET_INTEREST = 'GET_INTEREST';
 export const GET_CHARACTER = 'GET_CHARACTER';
 export const GET_REGION = 'GET_REGION';
-export const GET_GU = 'GET_GU';
+export const GET_STATE = 'GET_STATE';
 
 // 성격
 export const getCharacterRequest = () => {
@@ -15,7 +15,21 @@ export const getCharacterRequest = () => {
     if (response.data) {
       dispatch({
         type: GET_CHARACTER,
-        payload: response.data,
+        payload: response.data.category,
+      });
+    } else {
+      console.log('Unable to fetch data');
+    }
+  };
+};
+
+export const getStateRequest = () => {
+  return async (dispatch: any) => {
+    const response = await axios.get(`http://localhost:4000/category/state`);
+    if (response.data) {
+      dispatch({
+        type: GET_STATE,
+        payload: response.data.category,
       });
     } else {
       console.log('Unable to fetch data');
@@ -30,7 +44,7 @@ export const getInterestRequest = () => {
     if (response.data) {
       dispatch({
         type: GET_INTEREST,
-        payload: response.data,
+        payload: response.data.category,
       });
     } else {
       console.log('Unable to fetch data');
@@ -45,7 +59,7 @@ export const getRegionRequest = () => {
     if (response.data) {
       dispatch({
         type: GET_REGION,
-        payload: response.data,
+        payload: response.data.category,
       });
     } else {
       console.log('Unable to fetch data');
@@ -57,14 +71,14 @@ const initialState = {
   interest: null,
   character: null,
   region: null,
-  gu: null,
+  state: null,
 };
 
 export interface IDataState {
   interest: any;
   character: any;
   region: any;
-  gu: any;
+  state: any;
 }
 
 function dataReducer(state = initialState, action: any) {
@@ -79,8 +93,8 @@ function dataReducer(state = initialState, action: any) {
       case GET_REGION:
         draft.region = action.payload;
         break;
-      case GET_GU:
-        draft.gu = action.payload;
+      case GET_STATE:
+        draft.state = action.payload;
         break;
       default:
         break;

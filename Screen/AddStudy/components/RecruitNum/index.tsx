@@ -13,7 +13,9 @@ interface Props {
 }
 
 const RecruitNum: React.FC<Props> = ({ input, select }) => {
-  const onPress = () => select.setRecruitSelect(!select.recruitSelect);
+  const onPress = () => {
+    select.setRecruitSelect(!select.recruitSelect);
+  };
 
   return (
     <AddStudyContainer title="모집인원">

@@ -8,13 +8,7 @@ interface Props {
 
 const NicknameButton: React.FC<Props> = ({ disabled, check }) => {
   return (
-    <Container
-      activeOpacity={0.8}
-      onPress={() => {
-        check();
-      }}
-      disabled={disabled}
-    >
+    <Container activeOpacity={0.8} onPress={check} disabled={disabled}>
       <ButtonText>중복확인</ButtonText>
     </Container>
   );

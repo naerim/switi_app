@@ -8,6 +8,7 @@ interface Props {
   createAt?: string;
   scrap?: number;
   idUser: number;
+  id: number;
 }
 
 const OtherInfo: React.FC<Props> = ({
@@ -15,13 +16,14 @@ const OtherInfo: React.FC<Props> = ({
   username,
   createAt,
   scrap,
+  id,
 }) => {
   return (
     <Container>
       <WriterInfo username={username} idUser={idUser} />
       <Content>
         <StartDate>{createAt}</StartDate>
-        <Scrap scrap={scrap} />
+        <Scrap scrap={scrap} id={id} />
       </Content>
     </Container>
   );

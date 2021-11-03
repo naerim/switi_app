@@ -2,28 +2,35 @@ import React from 'react';
 import styled from 'styled-components/native';
 import AddStudyContainer from './Layout/AddStudyContainer';
 import { ColorProps, TargetProps } from '../interface';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
-const Target: React.FC<TargetProps> = ({ select }) => {
-  const targetList = [
-    { title: '대학생' },
-    { title: '취준생' },
-    { title: '직장인' },
-    { title: '무관' },
-  ];
+const Target: React.FC<TargetProps> = ({ target, setTarget }) => {
+  const { state } = useSelector(({ dataReducer }: rootState) => ({
+    state: dataReducer.state,
+  }));
 
-  const onPress = (title: string) => select.onChange(title);
+  const onPress = (id: number) => {
+    target.some((v) => {
+      return v == id;
+    })
+      ? setTarget((prev) => target.filter((v) => v !== id))
+      : setTarget((prev) => [...prev, id]);
+  };
+
+  const setColor = (id: number) => target.some((v) => v === id);
 
   return (
     <AddStudyContainer title="모집대상">
       <Container>
-        {targetList.map(({ title }) => (
+        {state.map(({ id, name }: { id: number; name: string }) => (
           <Content
-            key={title}
-            onPress={() => onPress(title)}
-            color={title === select.value}
+            key={id}
+            onPress={() => onPress(id)}
+            color={setColor(id)}
             activeOpacity={0.8}
           >
-            <Title color={title === select.value}>{title}</Title>
+            <Title color={setColor(id)}>{name}</Title>
           </Content>
         ))}
       </Container>

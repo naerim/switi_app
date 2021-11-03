@@ -1,30 +1,24 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { ItemType } from '../../interface';
-import StudyImage from './StudyImage';
 import Category from './Category';
 import Scrap from './Scrap';
 import { useGoStudyDetail } from '../../../../util/navigationHooks';
+import TitleFlag from './TitleFlag';
 
-const RenderItem: React.FC<ItemType> = ({ index, item, paddingHorizontal }) => {
+const RenderItem: React.FC<ItemType> = ({ index, item }) => {
   const goStudyDetail = useGoStudyDetail(index);
 
   // 글자수 제한
   const limitTitle = (title: string) =>
-    title.length > 17 ? title.substr(0, 17) + '...' : title;
+    title.length > 20 ? title.substr(0, 20) + '...' : title;
   const limitDesc = (desc: string) =>
-    desc.length > 40 ? desc.substr(0, 40) + '...' : desc;
+    desc.length > 50 ? desc.substr(0, 50) + '...' : desc;
 
   return (
-    <Container
-      activeOpacity={0.8}
-      onPress={goStudyDetail}
-      paddingHorizontal={paddingHorizontal}
-    >
-      <StudyImage done={item.flag} img={'Img/profile_switi_step1.png'} />
-      {/*오류 나서 임시로 작성해둔 코드*/}
+    <Container activeOpacity={0.8} onPress={goStudyDetail}>
       <Content>
-        <Title>{limitTitle(item.title)}</Title>
+        <TitleFlag title={limitTitle(item.title)} done={item.flag} />
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
           <Category
@@ -32,34 +26,22 @@ const RenderItem: React.FC<ItemType> = ({ index, item, paddingHorizontal }) => {
             category={item.Interests}
             target={item.States}
           />
-          <Scrap scrap={item.scrapCount} />
+          <Scrap scrap={item.scrapCount} id={item.id} />
         </Bottom>
       </Content>
     </Container>
   );
 };
 
-const paddingHorizontal = ({
-  paddingHorizontal,
-}: {
-  paddingHorizontal?: number;
-}) => paddingHorizontal || 0;
-
 const Container = styled.TouchableOpacity`
   flex-direction: row;
-  padding-bottom: 16px;
+  padding: 5px 0;
   align-items: center;
-  padding: 0 ${paddingHorizontal}px 16px ${paddingHorizontal}px;
 `;
 
 const Content = styled.View`
   flex: 3;
-  padding: 10px;
-`;
-
-const Title = styled.Text`
-  font-size: 14px;
-  color: #2b2b2b;
+  padding: 12px 0;
 `;
 
 const Desc = styled.Text`

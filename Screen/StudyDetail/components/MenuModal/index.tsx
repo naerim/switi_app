@@ -5,10 +5,18 @@ import Modal from 'react-native-modal';
 interface Props {
   modalVisible: boolean;
   setModalVisible: any;
+  onPressDelete: () => void;
+  onPressAmend: () => void;
 }
 
-const MenuModal: React.FC<Props> = ({ modalVisible, setModalVisible }) => {
+const MenuModal: React.FC<Props> = ({
+  modalVisible,
+  setModalVisible,
+  onPressDelete,
+  onPressAmend,
+}) => {
   const closeModal = () => setModalVisible(!modalVisible);
+
   return (
     <Modal
       useNativeDriver={true}
@@ -17,9 +25,9 @@ const MenuModal: React.FC<Props> = ({ modalVisible, setModalVisible }) => {
     >
       <Container>
         <MenuView>
-          <ModalText onPress={() => console.log('수정')}>모집글 수정</ModalText>
+          <ModalText onPress={onPressAmend}>모집글 수정</ModalText>
           <Line />
-          <ModalText onPress={() => console.log('삭제')}>모집글 삭제</ModalText>
+          <ModalText onPress={onPressDelete}>모집글 삭제</ModalText>
         </MenuView>
         <CancelView onPress={closeModal} activeOpacity={0.8}>
           <CancelText>취소</CancelText>

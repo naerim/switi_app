@@ -11,7 +11,6 @@ import PasswordInput from './components/PasswordInput';
 import OptionMenu from './components/OptionMenu';
 import NicknameContainer from './components/Nickname';
 import { Status } from './inteface';
-import axios from 'axios';
 
 const SignUp = () => {
   const [gender, setGender] = useState(0);
@@ -24,12 +23,10 @@ const SignUp = () => {
     service: false,
     info: false,
   });
-  const [userNickName, setUserNickName] = useState(false);
 
   const isNickname = (nicknameInput: string) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
-
-    if (nicknameInput == '' || nicknameInput == null) {
+    if (nicknameInput == '' || !nicknameInput || nicknameInput == ' ') {
       return { status: Status.NORMARL, text: '필수 정보입니다.' };
     } else if (
       special.test(nicknameInput) ||
@@ -40,29 +37,7 @@ const SignUp = () => {
         text: '공백, 특수문자는 사용 불가합니다.',
       };
     } else {
-      // 닉네임 중복 확인
-      axios({
-        method: 'post',
-        url: 'http://localhost:4000/auth/checkNickname',
-        data: { nickname: nicknameInput },
-      })
-        .then((res) => {
-          if (res.data !== null) {
-            setUserNickName(true);
-          } else {
-            setUserNickName(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          setUserNickName(false);
-        });
-      return {
-        status: userNickName ? Status.SUCCESS : Status.ERROR,
-        text: userNickName
-          ? '멋진 닉네임이네요!'
-          : '이미 사용중이거나 탈퇴한 닉네임입니다.',
-      };
+      return { status: Status.SUCCESS, text: '멋진 닉네임이네요!' };
     }
   };
   const isEmail = (email: string) => {
