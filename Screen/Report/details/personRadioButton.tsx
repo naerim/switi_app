@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import { shallowEqual, useSelector } from 'react-redux';
+import { rootState } from '../../../redux';
 
 interface InputProps {
   reason: number;
@@ -13,26 +15,42 @@ interface InputProps {
 interface Props {
   setReportMemberId: (memberId: number) => void;
   input: InputProps;
-  studyMemberList: any;
+  propsStudyMemberList: any;
 }
 
 const PersonRadioButton: React.FC<Props> = ({
   setReportMemberId,
   input,
-  studyMemberList,
+  propsStudyMemberList,
 }) => {
-  let value = 0;
-  let radioStudyMemberList = studyMemberList[0].studyMembers;
-  radioStudyMemberList = radioStudyMemberList?.map((item: any) => ({
-    ...item,
-    label: item.nickname,
-    value: value++,
-  }));
-  // console.log('radio 스터디 멤버', radioStudyMemberList);
+  const [member, setMember] = useState([]);
+  const { studyInProgressList, studyMemberList } = useSelector(
+    (state: rootState) => ({
+      studyInProgressList: state.reportReducer.studyInProgressList,
+      studyMemberList: state.reportReducer.studyMemberList,
+    }),
+    shallowEqual
+  );
+
+  const refreshRadioStudyMember = () => {
+    let value = 0;
+    const radioStudyMemberList = propsStudyMemberList?.map((item: any) => ({
+      ...item,
+      label: item.nickname,
+      value: value++,
+    }));
+    setMember(radioStudyMemberList);
+    // console.log('radio 스터디 멤버', radioStudyMemberList);
+  };
+
+  useEffect(() => {
+    refreshRadioStudyMember();
+  }, [studyMemberList]);
+
   return (
     <Container>
       <RadioForm>
-        {radioStudyMemberList?.map((object: any, value: number) => (
+        {member?.map((object: any, value: number) => (
           <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
               <RadioButtonInput

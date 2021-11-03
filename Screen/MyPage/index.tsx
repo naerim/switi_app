@@ -38,7 +38,7 @@ const MyPage = () => {
   const closeConfirm = () => setConfirmModalVisible(false);
   const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
   const reportModalClose = () => setReportModalVisible(false);
-  const [reportStudyId, setReportStudyId] = useState(0);
+  const [reportStudyId, setReportStudyId] = useState(4);
   const [reportMemberId, setReportMemberId] = useState(0);
   const reportContent = useInput('');
 

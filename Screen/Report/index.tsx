@@ -54,8 +54,20 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
 
   useEffect(() => {
     handleStudyInProgress();
+    // setTimeout(() => {
+    //   studyInProgressList && handleStudyMember(studyInProgressList[0].id);
+    //   studyInProgressList &&
+    //     console.log('report/index', studyInProgressList[0]);
+    // }, 1000);
   }, []);
+
+  useEffect(() => {
+    studyInProgressList && handleStudyMember(studyInProgressList[0].id);
+    studyInProgressList && console.log('report/index', studyInProgressList[0]);
+  }, [studyInProgressList]);
+
   //맨 처음 스터디만 받아오기
+  //setTimeOut
 
   const [studyChoice, setStudyChoice] = useState(0);
 

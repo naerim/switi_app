@@ -11,7 +11,7 @@ import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
 
 export interface IReportState {
-  studyInProgressList: [];
+  studyInProgressList: any;
   studyMemberList: [];
 }
 
@@ -26,7 +26,7 @@ const studyInProgress = async (token: string) => {
     url: 'http://localhost:4000/report/getReportList',
     headers: { Authorization: token },
   });
-  // console.log(`reducer 스터디 :  `, response.data.study);
+  console.log(`reducer 스터디 :  `, response.data.study);
   return response;
 };
 
@@ -36,7 +36,7 @@ const studyMember = async (token: string, studyId: number) => {
     url: `http://localhost:4000/report/getReportInfo/${studyId}/`,
     headers: { Authorization: token },
   });
-  // console.log('reducer 스터디 멤버', response.data.member);
+  console.log('reducer 스터디 멤버', response.data.member);
   return response;
 };
 
