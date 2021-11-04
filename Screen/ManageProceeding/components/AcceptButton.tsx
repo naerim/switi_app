@@ -20,6 +20,7 @@ const AcceptButton: React.FC<Props> = ({ title, display, onPress }) => {
 };
 
 const Container = styled.TouchableOpacity<ButtonProps>`
+  margin-top: 18px;
   background-color: #86e3c3;
   border-radius: 20px;
   align-items: center;

@@ -57,6 +57,7 @@ const ManageRecruit = ({ route }: any) => {
           data={studyMember.member && studyMember.member.studyMembers}
           renderItem={({ item }) => (
             <RecruitRenderItem
+              idStudy={idx}
               index={item.id}
               item={item}
               desc={true}

@@ -32,7 +32,6 @@ const ManageProceeding = ({ route }: any) => {
   useEffect(() => {
     setLoading(true);
     onGetStudyMember(login.token, idx);
-    console.log(studyMember);
     setLoading(false);
   }, [idx]);
 
@@ -51,7 +50,13 @@ const ManageProceeding = ({ route }: any) => {
           ItemSeparatorComponent={FlatListItemSeparator}
           data={studyMember.member && studyMember.member.studyMembers}
           renderItem={({ item }) => (
-            <RecruitRenderItem index={item.id} item={item} desc={false} />
+            <RecruitRenderItem
+              proceeding
+              idStudy={idx}
+              index={item.id}
+              item={item}
+              desc={false}
+            />
           )}
           keyExtractor={(item: ManageType) => item.id.toString()}
           extraData={studyMember.member && studyMember.member.studyMembers}
