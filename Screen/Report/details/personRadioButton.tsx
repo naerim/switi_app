@@ -15,42 +15,26 @@ interface InputProps {
 interface Props {
   setReportMemberId: (memberId: number) => void;
   input: InputProps;
-  propsStudyMemberList: any;
+  studyMemberList: any;
 }
 
 const PersonRadioButton: React.FC<Props> = ({
   setReportMemberId,
   input,
-  propsStudyMemberList,
+  studyMemberList,
 }) => {
-  const [member, setMember] = useState([]);
-  const { studyInProgressList, studyMemberList } = useSelector(
-    (state: rootState) => ({
-      studyInProgressList: state.reportReducer.studyInProgressList,
-      studyMemberList: state.reportReducer.studyMemberList,
-    }),
-    shallowEqual
-  );
-
-  const refreshRadioStudyMember = () => {
-    let value = 0;
-    const radioStudyMemberList = propsStudyMemberList?.map((item: any) => ({
-      ...item,
-      label: item.nickname,
-      value: value++,
-    }));
-    setMember(radioStudyMemberList);
-    // console.log('radio 스터디 멤버', radioStudyMemberList);
-  };
-
-  useEffect(() => {
-    refreshRadioStudyMember();
-  }, [studyMemberList]);
-
+  let value = 0;
+  let radioStudyMemberList = studyMemberList[0].studyMembers;
+  radioStudyMemberList = radioStudyMemberList?.map((item: any) => ({
+    ...item,
+    label: item.nickname,
+    value: value++,
+  }));
+  // console.log('radio 스터디 멤버', radioStudyMemberList);
   return (
     <Container>
       <RadioForm>
-        {member?.map((object: any, value: number) => (
+        {radioStudyMemberList?.map((object: any, value: number) => (
           <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
               <RadioButtonInput

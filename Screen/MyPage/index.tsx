@@ -16,7 +16,7 @@ import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
 import useScroll from '../../util/useScroll';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   getMyPageRequest,
@@ -25,7 +25,11 @@ import {
   getStudyHistoryRequest,
 } from '../../redux/userReducer';
 import SugarContainer from './profile/sugarContainer';
-import { reportRequest } from '../../redux/report/reportReducer';
+import {
+  reportRequest,
+  studyInProgressRequest,
+  studyMemberRequest,
+} from '../../redux/report/reportReducer';
 import useInput from '../../util/useInput';
 
 const MyPage = () => {
@@ -38,9 +42,32 @@ const MyPage = () => {
   const closeConfirm = () => setConfirmModalVisible(false);
   const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
   const reportModalClose = () => setReportModalVisible(false);
-  const [reportStudyId, setReportStudyId] = useState(4);
+  const [reportStudyId, setReportStudyId] = useState(0);
   const [reportMemberId, setReportMemberId] = useState(0);
   const reportContent = useInput('');
+
+  //신고하기 전 현재 진행 중 스터디 목록 조회
+  const handleStudyInProgress = () => {
+    dispatch(studyInProgressRequest(login.token));
+  };
+  useEffect(() => {
+    handleStudyInProgress();
+  }, []);
+
+  const { studyInProgressList } = useSelector(
+    (state: rootState) => ({
+      studyInProgressList: state.reportReducer.studyInProgressList,
+    }),
+    shallowEqual
+  );
+
+  //신고하기 스터디 멤머 조회
+  const handleStudyMember = (studyId: any) => {
+    dispatch(studyMemberRequest(login.token, studyId));
+  };
+  useEffect(() => {
+    studyInProgressList && handleStudyMember(studyInProgressList[0].id);
+  }, [studyInProgressList]);
 
   //신고하기 api
   const handleReport = (studyId: any, memberId: any, content: any) => {

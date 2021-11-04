@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import BasicModal from '../../Component/BasicModal';
@@ -10,10 +10,7 @@ import TitleContainer from './details/titleContainer';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { InputProps } from './interface';
-import {
-  studyInProgressRequest,
-  studyMemberRequest,
-} from '../../redux/report/reportReducer';
+import { studyMemberRequest } from '../../redux/report/reportReducer';
 interface MyPageModalProps {
   setReportStudyId: (studyId: number) => void;
   setReportMemberId: (memberId: number) => void;
@@ -44,30 +41,9 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
     shallowEqual
   );
 
-  const handleStudyInProgress = () => {
-    dispatch(studyInProgressRequest(login.token));
-  };
-
   const handleStudyMember = (studyId: any) => {
     dispatch(studyMemberRequest(login.token, studyId));
   };
-
-  useEffect(() => {
-    handleStudyInProgress();
-    // setTimeout(() => {
-    //   studyInProgressList && handleStudyMember(studyInProgressList[0].id);
-    //   studyInProgressList &&
-    //     console.log('report/index', studyInProgressList[0]);
-    // }, 1000);
-  }, []);
-
-  useEffect(() => {
-    studyInProgressList && handleStudyMember(studyInProgressList[0].id);
-    studyInProgressList && console.log('report/index', studyInProgressList[0]);
-  }, [studyInProgressList]);
-
-  //맨 처음 스터디만 받아오기
-  //setTimeOut
 
   const [studyChoice, setStudyChoice] = useState(0);
 
