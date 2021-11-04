@@ -51,6 +51,7 @@ const SeparatorLine = styled.View`
 `;
 
 const FlatListContainer = styled.View`
+  margin: 0 24px;
   flex: 1;
 `;
 
