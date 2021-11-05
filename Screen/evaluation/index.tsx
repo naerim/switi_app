@@ -8,7 +8,7 @@ const Evaluation = ({ route }: any) => {
   const title = route.params.title;
 
   const GoManageRecruit = useGoManageRecruit(idx, title);
-  const [participation, setParticipation] = useState(0);
+  const [participation, setParticipation] = useState(5);
   return (
     <Container>
       <BasicHeader
@@ -28,29 +28,35 @@ const Evaluation = ({ route }: any) => {
         <EvaluationContainer>
           <Text>참여도</Text>
           <Question>@@님은 스터디에 성실히 참여했나요?</Question>
-          <NumberContainer>
-            <Number>1</Number>
-            <Number>2</Number>
-            <Number>3</Number>
-            <Number>4</Number>
-            <Number>5</Number>
-          </NumberContainer>
           <RadioContainer>
-            <RadioButtonCheck>
-              <Check></Check>
-            </RadioButtonCheck>
-            <RadioButton></RadioButton>
-            <RadioButton></RadioButton>
-            <RadioButton></RadioButton>
-            <RadioButton></RadioButton>
+            <RadioItem>
+              <Number>1</Number>
+              <RadioButton></RadioButton>
+              <Number>매우 아니다</Number>
+            </RadioItem>
+            <RadioItem>
+              <Number>2</Number>
+              <RadioButton></RadioButton>
+              <Number>아니다</Number>
+            </RadioItem>
+            <RadioItem>
+              <Number>3</Number>
+              <RadioButton></RadioButton>
+              <Number>보통이다</Number>
+            </RadioItem>
+            <RadioItem>
+              <Number>4</Number>
+              <RadioButton></RadioButton>
+              <Number>그렇다</Number>
+            </RadioItem>
+            <RadioItem>
+              <Number>5</Number>
+              <RadioButtonCheck>
+                <Check></Check>
+              </RadioButtonCheck>
+              <Number>매우 그렇다</Number>
+            </RadioItem>
           </RadioContainer>
-          <NumberContainer>
-            <Number>매우 아니다</Number>
-            <Number>아니다</Number>
-            <Number>보통이다</Number>
-            <Number>그렇다</Number>
-            <Number>매우그렇다</Number>
-          </NumberContainer>
         </EvaluationContainer>
       </Content>
     </Container>
@@ -102,9 +108,14 @@ const Question = styled.Text`
 `;
 
 const RadioContainer = styled.View`
+  margin: 15px 0;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 5px;
+`;
+
+const RadioItem = styled.View`
+  flex-direction: column;
+  align-items: center;
 `;
 
 const RadioButton = styled.View`
@@ -112,7 +123,7 @@ const RadioButton = styled.View`
   width: 12px;
   height: 12px;
   border-radius: 50px;
-  z-index: 1;
+  margin-bottom: 10px;
 `;
 
 const RadioButtonCheck = styled.TouchableOpacity`
@@ -122,7 +133,14 @@ const RadioButtonCheck = styled.TouchableOpacity`
   border-radius: 50px;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  margin-bottom: 10px;
+`;
+
+const Check = styled.TouchableOpacity`
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  border: 1px solid white;
 `;
 
 const NumberContainer = styled.View`
@@ -132,19 +150,12 @@ const NumberContainer = styled.View`
 `;
 
 const Number = styled.Text`
-  width: 12px;
+  width: 60px;
   height: 12px;
   color: #b4b4b4;
   font-size: 10px;
   text-align: center;
-`;
-
-const Check = styled.TouchableOpacity`
-  width: 10px;
-  height: 10px;
-  border-radius: 50px;
-  border: 1px solid white;
-  z-index: 1;
+  margin-bottom: 8px;
 `;
 
 export default Evaluation;
