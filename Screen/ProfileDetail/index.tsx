@@ -15,6 +15,7 @@ import {
 } from '../MyPage_Profile/interface';
 import ListContent from '../MyPage_Profile/components/ListCotent';
 import UserName from './components/UserName';
+import WithdrawButton from './components/WithdrawButton';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -96,7 +97,10 @@ const ProfileDetail = ({ route }: any) => {
 
   return (
     <BasicContainer headerTitle="" display={true} onPress={goBack}>
-      <UserName name={userProfile.nickname} img={userProfile.profilepath} />
+      <TopWrap>
+        <UserName name={userProfile.nickname} img={userProfile.profilepath} />
+        <WithdrawButton />
+      </TopWrap>
       <Sugar num={userProfile.sugar} />
       <Container>
         {profileData.map(({ title, content, flexDirection }) => (
@@ -126,6 +130,12 @@ const Text = styled.Text`
 const ContentText = styled.Text`
   font-size: 12px;
   margin-top: 7px;
+`;
+
+const TopWrap = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default ProfileDetail;
