@@ -14,18 +14,23 @@ const Input: React.FC<InputProps> = ({
   onlineFlag,
 }) => {
   const setValue = () => {
-    onlineFlag === 0 ? input.onChange('온라인') : input.onChange('');
+    if (onlineFlag) return onlineFlag == 0 ? '온라인' : input.value;
+    return input.value;
+  };
+
+  const checkValue = () => {
+    onlineFlag === 0 ? input.onChange('온라인') : input.onChange(input.value);
   };
 
   useEffect(() => {
-    setValue();
+    checkValue();
   }, [onlineFlag]);
 
   return (
     <AddStudyContainer title={title}>
       <MyInput
         onlineFlag={onlineFlag}
-        value={onlineFlag == 0 ? '온라인' : input.value}
+        value={setValue()}
         onChangeText={input.onChange}
         placeholder={placeholder}
         keyboardType="email-address"
