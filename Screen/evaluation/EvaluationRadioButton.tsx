@@ -1,39 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 
 const EvaluationRadioButton = () => {
+  const [radios, setRadios] = useState([
+    { number: 1, text: '매우 아니다', on: 0 },
+    { number: 2, text: '아니다', on: 0 },
+    { number: 3, text: '보통이다', on: 0 },
+    { number: 4, text: '그렇다', on: 0 },
+    { number: 5, text: '매우 그렇다', on: 1 },
+  ]);
+
   return (
     <EvaluationContainer>
       <Text>참여도</Text>
       <Question>@@님은 스터디에 성실히 참여했나요?</Question>
       <RadioContainer>
-        <RadioItem>
-          <Number>1</Number>
-          <RadioButton></RadioButton>
-          <Number>매우 아니다</Number>
-        </RadioItem>
-        <RadioItem>
-          <Number>2</Number>
-          <RadioButton></RadioButton>
-          <Number>아니다</Number>
-        </RadioItem>
-        <RadioItem>
-          <Number>3</Number>
-          <RadioButton></RadioButton>
-          <Number>보통이다</Number>
-        </RadioItem>
-        <RadioItem>
-          <Number>4</Number>
-          <RadioButton></RadioButton>
-          <Number>그렇다</Number>
-        </RadioItem>
-        <RadioItem>
-          <Number>5</Number>
-          <RadioButtonCheck>
-            <Check></Check>
-          </RadioButtonCheck>
-          <Number>매우 그렇다</Number>
-        </RadioItem>
+        {radios.map((radio) => (
+          <RadioItem>
+            <Number>{radio.number}</Number>
+            {radio.on ? (
+              <RadioButtonCheck>
+                <Check></Check>
+              </RadioButtonCheck>
+            ) : (
+              <RadioButton></RadioButton>
+            )}
+            <Number>{radio.text}</Number>
+          </RadioItem>
+        ))}
       </RadioContainer>
     </EvaluationContainer>
   );
@@ -64,7 +58,7 @@ const RadioItem = styled.View`
   align-items: center;
 `;
 
-const RadioButton = styled.View`
+const RadioButton = styled.TouchableOpacity`
   border: 1px solid #b4b4b4;
   width: 12px;
   height: 12px;
