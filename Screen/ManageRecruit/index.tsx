@@ -10,6 +10,7 @@ import RecruitRenderItem from '../ManageProceeding/components/RecruitRenderItem'
 import { ManageType } from '../ManageProceeding/interface';
 import WaitRenderItem from './components/WaitRenderItem';
 
+//인적성 공부해요
 const ManageRecruit = ({ route }: any) => {
   const idx = route.params.idx;
   const title = route.params.title;
@@ -58,6 +59,7 @@ const ManageRecruit = ({ route }: any) => {
           renderItem={({ item }) => (
             <RecruitRenderItem
               idStudy={idx}
+              titleStudy={title}
               index={item.id}
               item={item}
               desc={true}

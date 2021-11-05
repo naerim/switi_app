@@ -53,6 +53,7 @@ const ManageProceeding = ({ route }: any) => {
             <RecruitRenderItem
               proceeding
               idStudy={idx}
+              titleStudy={title}
               index={item.id}
               item={item}
               desc={false}

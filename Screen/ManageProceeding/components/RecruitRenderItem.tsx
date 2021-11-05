@@ -2,7 +2,10 @@ import React from 'react';
 import { ItemType } from '../interface';
 import styled from 'styled-components/native';
 import MemberImage from './MemberImage';
-import { useGoProfileDetail } from '../../../util/navigationHooks';
+import {
+  useGoEvaluation,
+  useGoProfileDetail,
+} from '../../../util/navigationHooks';
 import AcceptButton from './AcceptButton';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
@@ -15,12 +18,14 @@ interface DescProps {
 
 const RecruitRenderItem: React.FC<ItemType> = ({
   idStudy,
+  titleStudy,
   item,
   desc,
   leader,
   proceeding,
 }) => {
   const goProfileDetail = useGoProfileDetail(item.id);
+  const goEvaluation = useGoEvaluation(idStudy, titleStudy);
   const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
     myStudyList: manageReducer.myStudyList,
   }));
@@ -63,7 +68,11 @@ const RecruitRenderItem: React.FC<ItemType> = ({
           {item.email} / {item.studyMember.contact}
         </Desc>
       </Content>
-      <AcceptButton title="평가하기" display={checkDone()} />
+      <AcceptButton
+        title="평가하기"
+        display={checkDone()}
+        onPress={goEvaluation}
+      />
     </Container>
   );
 };

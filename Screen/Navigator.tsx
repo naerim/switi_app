@@ -51,6 +51,7 @@ import {
   getRegionRequest,
   getStateRequest,
 } from '../redux/dataReducer';
+import Evaluation from './evaluation';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -210,6 +211,7 @@ const MainNavigation = () => (
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="ManageProceeding" component={ManageProceeding} />
     <Stack.Screen name="ManageRecruit" component={ManageRecruit} />
+    <Stack.Screen name="Evaluation" component={Evaluation} />
     <Stack.Screen name="MyPage_Profile" component={MyPage_Profile} />
     <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
     <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
