@@ -3,13 +3,14 @@ import styled from 'styled-components/native';
 import BtnXIcon from '../../../../Img/btn_x_black.png';
 
 interface Props {
+  title: string;
   onPress: () => void;
 }
 
-const Header: React.FC<Props> = ({ onPress }) => {
+const Header: React.FC<Props> = ({ title, onPress }) => {
   return (
     <Container>
-      <Title>모집글 작성</Title>
+      <Title>{title}</Title>
       <PrevButton
         activeOpacity={0.8}
         onPress={onPress}

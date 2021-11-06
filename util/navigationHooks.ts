@@ -117,6 +117,14 @@ export const useGoStudyDetail = (idx: number) => {
   ]);
 };
 
+export const useGoAmendStudy = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('AmendStudy', { idx: idx }), [
+    navigation,
+    idx,
+  ]);
+};
+
 export const useGoHome = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('Switi'), [navigation]);
