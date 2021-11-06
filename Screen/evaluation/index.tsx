@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { useGoManageRecruit } from '../../util/navigationHooks';
-import EvaluationRadioButton from './EvaluationRadioButton';
+import EvaluationRadio from './EvaluationRadio';
 
 const Evaluation = ({ route }: any) => {
   const idx = route.params.idx;
   const title = route.params.title;
 
   const GoManageRecruit = useGoManageRecruit(idx, title);
-  const [participation, setParticipation] = useState(5);
+  const [checked, setChecked] = useState({ participation: null });
   return (
     <Container>
       <BasicHeader
@@ -26,7 +26,11 @@ const Evaluation = ({ route }: any) => {
           <OpponentImg></OpponentImg>
           <OpponentText>상대 닉네임</OpponentText>
         </OpponentContainer>
-        <EvaluationRadioButton></EvaluationRadioButton>
+        <EvaluationRadio
+          title="participation"
+          checkedValue={checked['participation']}
+          setChecked={setChecked}
+        />
       </Content>
     </Container>
   );
@@ -65,6 +69,6 @@ const OpponentImg = styled.View`
 
 const OpponentText = styled.Text`
   font-size: 16px;
-`
+`;
 
 export default Evaluation;
