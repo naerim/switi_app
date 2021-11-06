@@ -54,19 +54,17 @@ const MyPage = () => {
     handleStudyInProgress();
   }, []);
 
-  const { studyInProgressList } = useSelector(
-    (state: rootState) => ({
-      studyInProgressList: state.reportReducer.studyInProgressList,
-    }),
-    shallowEqual
-  );
+  const { studyInProgressList } = useSelector((state: rootState) => ({
+    studyInProgressList: state.reportReducer.studyInProgressList,
+  }));
+  //하나일 때
 
   //신고하기 스터디 멤머 조회
   const handleStudyMember = (studyId: any) => {
     dispatch(studyMemberRequest(login.token, studyId));
   };
   useEffect(() => {
-    studyInProgressList && handleStudyMember(studyInProgressList[0].id);
+    studyInProgressList && handleStudyMember(studyInProgressList[0]?.id);
   }, [studyInProgressList]);
 
   //신고하기 api

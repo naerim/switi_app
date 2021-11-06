@@ -24,7 +24,7 @@ const PersonRadioButton: React.FC<Props> = ({
   studyMemberList,
 }) => {
   let value = 0;
-  let radioStudyMemberList = studyMemberList[0].studyMembers;
+  let radioStudyMemberList = studyMemberList[0]?.studyMembers;
   radioStudyMemberList = radioStudyMemberList?.map((item: any) => ({
     ...item,
     label: item.nickname,
