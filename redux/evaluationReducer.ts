@@ -6,7 +6,7 @@ import {
   GET_EVALUATE_SUCCESS,
 } from './action';
 import axios from 'axios';
-import createRequestThunk from '../lib/createRequestThunk';
+import createRequestThunk from './lib/createRequestThunk';
 
 export interface IEvaluationState {
   evaluateProfile: any;
@@ -24,35 +24,50 @@ const evaluateProfile = async (
 ) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/evaluate/?idMember=${idMember}&idStudy=${idStudy}`,
+    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${idMember}&idStudy=${idStudy}`,
     headers: { Authorization: token },
   });
   // console.log(`reducer evaluationProfile :  `, response.data);
   return response;
 };
 
-const evaluate = async (token: string, studyId: number) => {
+const evaluate = async (
+  token: string,
+  idMember: number,
+  idStudy: number,
+  score1: number,
+  score2: number,
+  score3: number
+) => {
   const response = await axios({
     method: 'get',
     url: `http://localhost:4000/evaluate/peerEvaluate`,
     headers: { Authorization: token },
+    data: { score1: score1, score2: score2, score3: score3 },
   });
   // console.log(`reducer evaluation :  `, response.data);
   return response;
 };
 
-const report = async (
-  token: string,
-  studyId: number,
-  memberId: number,
-  content: string
-) => {
-  const response = await axios({
-    method: 'post',
-    url: `http://localhost:4000/report/reportUser/${studyId}/${memberId}`,
-    headers: { Authorization: token },
-    data: { content: content },
+export const evaluateProfileRequest = createRequestThunk(
+  GET_EVALUATE_PROFILE,
+  evaluateProfile
+);
+
+export const evaluateRequest = createRequestThunk(GET_EVALUATE, evaluate);
+
+function evaluateReducer(state = initialState, action: any) {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case GET_EVALUATE_PROFILE_SUCCESS:
+        draft.evaluateProfile = action.payload;
+        break;
+      case GET_EVALUATE_SUCCESS:
+        break;
+      default:
+        break;
+    }
   });
-  // console.log('reducer 신고하기', response.data);
-  return response;
-};
+}
+
+export default evaluateReducer;
