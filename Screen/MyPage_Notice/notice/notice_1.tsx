@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 const Notice_1 = () => {
   return (
     <Container>
-      <Title>타이틀 1</Title>
+      <Title>두 번째 공지사항 입니다.</Title>
     </Container>
   );
 };

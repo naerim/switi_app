@@ -4,16 +4,14 @@ import Notice_1 from './notice/notice_1';
 export const NoticeData = [
   {
     key: 0,
-    title: '[공지] 2/14일 스위티 앱 장애 발생',
-    content: '아직 없음',
-    createAt: '2021. 02. 14',
+    title: '[공지] 첫 번째 공지사항',
+    createAt: '2021. 11. 14',
     Component: Notice_0,
   },
   {
     key: 1,
-    title: '[공지] 2/14일 스위티 앱 장애 발생1',
-    content: '아직 없음',
-    createAt: '2021. 02. 14',
+    title: '[공지] 두 번째 공지사항',
+    createAt: '2021. 11. 15',
     Component: Notice_1,
   },
 ];

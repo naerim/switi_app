@@ -18,7 +18,7 @@ const MyPage_Notice = () => {
       scroll={scroll}
     >
       <AllNoticeContainer onScroll={scrollOn}>
-        {NoticeData.map(({ key, title, content, createAt, Component }) => (
+        {NoticeData.map(({ key, title, createAt, Component }) => (
           <OneNoticeContainer
             key={key}
             onPress={goNotice(key)}
