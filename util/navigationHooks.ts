@@ -75,6 +75,13 @@ export const UseGoNotice = () => {
   return useCallback(() => navigation.navigate('MyPage_Notice'), [navigation]);
 };
 
+export const UseGoNoticeDetail = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('NoticeDetail', { idx: idx }), [
+    navigation,
+  ]);
+};
+
 export const UseGoScrap = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('MyPage_Scrap'), [navigation]);

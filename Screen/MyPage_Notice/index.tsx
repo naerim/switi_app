@@ -1,13 +1,14 @@
 import React from 'react';
 import NoticeContainer from '../../Component/ContainerWithBack';
-import { useGoMyPage } from '../../util/navigationHooks';
+import { useGoMyPage, UseGoNoticeDetail } from '../../util/navigationHooks';
 import styled from 'styled-components/native';
-import { NoticeData } from '../../Data/NoticeData';
+import { NoticeData } from './NoticeData';
 import OneNoticeContainer from './OneNoticeContainer';
 import useScroll from '../../util/useScroll';
 
 const MyPage_Notice = () => {
   const goMyPage = useGoMyPage();
+  const goNotice = (key1: number) => UseGoNoticeDetail(key1);
   const { scroll, scrollOn } = useScroll();
   return (
     <NoticeContainer
@@ -17,11 +18,11 @@ const MyPage_Notice = () => {
       scroll={scroll}
     >
       <AllNoticeContainer onScroll={scrollOn}>
-        {NoticeData.map(({ key, title, content, createAt }) => (
+        {NoticeData.map(({ key, title, content, createAt, Component }) => (
           <OneNoticeContainer
             key={key}
+            onPress={goNotice(key)}
             title={title}
-            content={content}
             createAt={createAt}
           />
         ))}

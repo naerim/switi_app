@@ -1,26 +1,28 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { UseGoNoticeDetail } from '../../util/navigationHooks';
 
 interface OneNoticeContainerProps {
   key: number;
   title: string;
-  content: string;
-  //아마도 내용은 나중에 스크린 만들어야 할 듯
   createAt: string;
+  onPress: () => void;
 }
 
 const OneNoticeContainer: React.FC<OneNoticeContainerProps> = ({
   key,
   title,
-  content,
   createAt,
-}) => (
-  <Container activeOpacity={0.8} key={key}>
-    <Title>{title}</Title>
-    <Date>{createAt}</Date>
-    <Line />
-  </Container>
-);
+  onPress,
+}) => {
+  return (
+    <Container activeOpacity={0.8} key={key} onPress={onPress}>
+      <Title>{title}</Title>
+      <Date>{createAt}</Date>
+      <Line />
+    </Container>
+  );
+};
 
 const Container = styled.TouchableOpacity`
   margin-top: 20px;
