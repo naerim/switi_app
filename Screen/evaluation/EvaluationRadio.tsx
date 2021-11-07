@@ -1,10 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 
 interface Props {
   title: string;
   checkedValue: null | number;
-  setChecked: (func: (checked: any) => void) => void;
+  setChecked: (func: any) => void;
 }
 
 const radios = [
