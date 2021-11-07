@@ -5,6 +5,7 @@ interface Props {
   title: string;
   checkedValue: null | number;
   setChecked: (func: any) => void;
+  name: string;
 }
 
 const radios = [
@@ -28,10 +29,11 @@ const EvaluationRadio: React.FC<Props> = ({
   title,
   checkedValue,
   setChecked,
+  name,
 }) => (
   <EvaluationContainer>
     <Text>{titleMapper[title]}</Text>
-    <Question>@@님은 스터디에 성실히 참여했나요?</Question>
+    <Question>{name}님은 스터디에 성실히 참여했나요?</Question>
     <RadioContainer>
       <Line></Line>
       {radios.map(({ id, number, text }) => (
@@ -80,7 +82,7 @@ const Line = styled.View`
   height: 1px;
   width: 100%;
   background-color: #e3e3e3;
-  top: 40%;
+  top: 42%;
 `;
 
 const RadioItem = styled.View`

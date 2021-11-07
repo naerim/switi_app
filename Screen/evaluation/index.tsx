@@ -30,6 +30,7 @@ const Evaluation = ({ route }: any) => {
           title="participation"
           checkedValue={checked['participation']}
           setChecked={setChecked}
+          name={'@@'}
         />
       </Content>
     </Container>
