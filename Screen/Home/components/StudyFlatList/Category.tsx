@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { rootState } from '../../../../redux';
 
 interface Props {
@@ -16,11 +16,17 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
   const { onlineStudyList, offlineStudyList } = useSelector(
     (state: rootState) => state.studyReducer
   );
+  const { searchStudyList } = useSelector(
+    (state: rootState) => ({
+      searchStudyList: state.searchReducer.searchStudyList,
+    }),
+    shallowEqual
+  );
 
   useEffect(() => {
     setCategory();
     setTarget();
-  }, [onlineStudyList, offlineStudyList]);
+  }, [onlineStudyList, offlineStudyList, searchStudyList]);
 
   // 카테고리 지정(카테고리가 여러개일수도 있으므로)
   const setCategory = () => {
