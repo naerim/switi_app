@@ -5,6 +5,7 @@ import useInput from '../../util/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
+  getStudyDetailRequest,
   offlineStudyListRequest,
   onlineStudyListRequest,
 } from '../../redux/studyReducer';
@@ -24,6 +25,8 @@ import {
   studyEndDate,
   studyTarget,
 } from './DataFunc';
+import AmendModal from './AmendModal';
+import axios from 'axios';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
@@ -66,6 +69,10 @@ const AmendStudy = () => {
     dispatch(onlineStudyListRequest(login.token, order, query));
   const fetchOfflineStudyList = (order: boolean, query: string) =>
     dispatch(offlineStudyListRequest(login.token, order, query));
+  const onGetStudyDetail = useCallback(
+    (token, id) => dispatch(getStudyDetailRequest(token, id)),
+    [dispatch]
+  );
   const onGetMyStudyList = useCallback(
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
@@ -73,7 +80,42 @@ const AmendStudy = () => {
 
   // 최종 수정 버튼
   const AmendButton = () => {
-    console.log('수정하기');
+    setModalVisible(true);
+    axios({
+      method: 'put',
+      url: `http://localhost:4000/study/updateStudy/${studyDetail.id}`,
+      data: {
+        online_flag: onlineFlag,
+        state: target,
+        category: category.map((n) => {
+          n += 1;
+          return n;
+        }),
+        address: 1,
+        recruit_num: recruitNumInput.value,
+        detail_address: detailAddressInput.value,
+        period: periodInput.value,
+        endDate: studyDetail.endDate,
+        contact: contactInput.value,
+        title: titleInput.value,
+        desc: contentInput.value,
+        gu: 1,
+      },
+      headers: { Authorization: login.token },
+    })
+      .then((res) => {
+        onGetMyStudyList(login.token);
+        onGetStudyDetail(login.token, studyDetail.id);
+        fetchOnlineStudyList(true, '');
+        fetchOfflineStudyList(true, '');
+        setTimeout(() => {
+          closeModal();
+          goBack();
+        }, 500);
+      })
+      .catch((err) => {
+        alert('수정 실패');
+      });
   };
 
   return (
@@ -134,6 +176,7 @@ const AmendStudy = () => {
           <BasicButton text="수정하기" onPress={AmendButton} disabled={false} />
         </Content>
       </ScrollView>
+      <AmendModal closeModal={closeModal} modalVisible={modalVisible} />
     </Container>
   );
 };

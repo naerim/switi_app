@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../../redux';
 
 interface Props {
   address: any[];
@@ -11,10 +13,14 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
   const [myCategory, setMyCategory] = useState('');
   const [myTarget, setMyTarget] = useState('');
 
+  const { onlineStudyList, offlineStudyList } = useSelector(
+    (state: rootState) => state.studyReducer
+  );
+
   useEffect(() => {
     setCategory();
     setTarget();
-  }, []);
+  }, [onlineStudyList, offlineStudyList]);
 
   // 카테고리 지정(카테고리가 여러개일수도 있으므로)
   const setCategory = () => {
