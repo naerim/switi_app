@@ -33,6 +33,7 @@ const EvaluationRadio: React.FC<Props> = ({
     <Text>{titleMapper[title]}</Text>
     <Question>@@님은 스터디에 성실히 참여했나요?</Question>
     <RadioContainer>
+      <Line></Line>
       {radios.map(({ id, number, text }) => (
         <RadioItem key={id}>
           <Number>{number}</Number>
@@ -72,6 +73,14 @@ const RadioContainer = styled.View`
   margin: 15px 0;
   flex-direction: row;
   justify-content: space-around;
+`;
+
+const Line = styled.View`
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background-color: #e3e3e3;
+  top: 40%;
 `;
 
 const RadioItem = styled.View`
