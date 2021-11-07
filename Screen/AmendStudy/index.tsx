@@ -16,33 +16,40 @@ import SelectOne from '../AddStudy/components/SelectOne';
 import Target from '../AddStudy/components/Target';
 import RecruitNum from '../AddStudy/components/RecruitNum';
 import Input from '../AddStudy/components/Input';
-import EndDate from '../AddStudy/components/EndDate';
 import BasicButton from '../../Component/BasicButton';
 import LongInput from '../AddStudy/components/LongInput';
+import {
+  checkRecruitNum,
+  studyCategory,
+  studyEndDate,
+  studyTarget,
+} from './DataFunc';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
     studyDetail: studyReducer.studyDetail,
   }));
-  console.log(studyDetail);
+
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
   const goBack = useGoBack();
-  const [target, setTarget] = useState<number[]>([]);
+  // 원래 스터디 정보로 초기화
+  const [target, setTarget] = useState<number[]>(
+    studyTarget(studyDetail.States)
+  );
   const periodInput = useInput(studyDetail.period);
   const recruitNumInput = useInput(studyDetail.recruit_num.toString());
-  const [recruitSelect, setRecruitSelect] = useState(false);
+  const [recruitSelect, setRecruitSelect] = useState(
+    checkRecruitNum(studyDetail.recruit_num)
+  );
   const contactInput = useInput(studyDetail.contact);
   const titleInput = useInput(studyDetail.title);
   const contentInput = useInput(studyDetail.desc);
-  const [EndDateInput, setEndDateInput] = useState<{ [key: string]: string }>({
-    year: '',
-    month: '',
-    day: '',
-  });
-  const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
+  const [onlineFlag, setOnlineFlag] = useState(studyDetail.online_flag ? 1 : 0);
   const [area, setArea] = useState<number[]>([1]);
-  const [category, setCategory] = useState<number[]>([0, 1]);
+  const [category, setCategory] = useState<number[]>(
+    studyCategory(studyDetail.Interests)
+  );
   const detailAddressInput = useInput(studyDetail.detail_address);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -111,7 +118,8 @@ const AmendStudy = () => {
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
-          <EndDate value={{ EndDateInput, setEndDateInput }} />
+          <Title>예정 종료일</Title>
+          <SubTitle>{studyEndDate(studyDetail.endDate)}</SubTitle>
           <Input
             title="문의"
             input={contactInput}
@@ -138,6 +146,19 @@ const Content = styled.ScrollView`
   background-color: white;
   padding: 20px 24px;
   margin-bottom: 25px;
+`;
+
+const Title = styled.Text`
+  color: #b4b4b4;
+  font-size: 12px;
+  margin-bottom: 2%;
+`;
+
+const SubTitle = styled.Text`
+  color: #2b2b2b;
+  font-size: 12px;
+  align-items: flex-end;
+  margin-bottom: 20px;
 `;
 
 export default AmendStudy;
