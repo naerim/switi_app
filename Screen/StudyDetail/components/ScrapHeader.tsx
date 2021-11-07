@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
 import axios from 'axios';
 import { getScrapListRequest } from '../../../redux/userReducer';
+import { searchRequest } from '../../../redux/search/searchReducer';
 
 interface Props {
   onPress: () => void;
@@ -63,6 +64,7 @@ const ScrapHeader: React.FC<Props> = ({
           url: `http://localhost:4000/study/deleteScrap/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
+          dispatch(searchRequest(login.token, ''));
           setPopupText('모집글이 스크랩이 취소되었습니다.');
           setPopupVisible(true);
           setTimeout(() => {
@@ -75,6 +77,7 @@ const ScrapHeader: React.FC<Props> = ({
           url: `http://localhost:4000/study/scrapStudy/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
+          dispatch(searchRequest(login.token, ''));
           setPopupText('모집글이 스크랩되었습니다.');
           setPopupVisible(true);
           setTimeout(() => {
