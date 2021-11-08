@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Calendar } from 'react-native-calendars';
 import ArrowIcon from '../../../../Img/btn_back.png';
+import moment from 'moment';
 
 interface Props {
   closeModal: () => void;
@@ -10,28 +11,19 @@ interface Props {
 }
 
 const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
-  // const getCurrentDate = () => {
-  //   const now = new Date();
-  //   const year = now.getFullYear();
-  //   let month = (now.getMonth() + 1).toString();
-  //   if (month <= '9') month = '0' + month;
-  //
-  //   let todayDate = now.getDate();
-  //   console.log(todayDate);
-  //   if (todayDate <= '9') todayDate = '0' + todayDate;
-  //
-  //   return year + '-' + month + '-' + todayDate;
-  // };
+  const getCurrentDate = () => {
+    const now = new Date();
+    return moment(now).format('YYYY-MM-DD');
+  };
 
   return (
     <Container>
       <Desc>스터디 예정 종료 날짜를 선택 해 주세요.</Desc>
-      {/*{console.log(getCurrentDate())}*/}
       <Calendar
         // Initially visible month. Default = Date()
-        current={'2021-11-8'}
+        current={getCurrentDate()}
         // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        minDate={'2021-11-08'}
+        minDate={getCurrentDate()}
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
         maxDate={'2022-12-31'}
         // Handler which gets executed on day press. Default = undefined
@@ -46,7 +38,7 @@ const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
         // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
         monthFormat={'yyyy MM'}
         // Handler which gets executed when visible month changes in calendar. Default = undefined
-        onMonthChange={(month) => {}}
+        //onMonthChange={(month) => {}}
         // Hide month navigation arrows. Default = false
         hideArrows={false}
         // Replace default arrows with custom ones (direction can be 'left' or 'right')
