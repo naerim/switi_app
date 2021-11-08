@@ -76,6 +76,7 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
   let reportPossible = undefined;
   if (studyMemberList !== []) {
     reportPossible = studyMemberList[0];
+    //  이런 오류는 어떻게 처리할까?
   }
 
   return (
