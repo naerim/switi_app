@@ -16,8 +16,8 @@ export interface IReportState {
 }
 
 const initialState = {
-  studyInProgressList: null,
-  studyMemberList: null,
+  studyInProgressList: [],
+  studyMemberList: [],
 };
 
 const studyInProgress = async (token: string) => {

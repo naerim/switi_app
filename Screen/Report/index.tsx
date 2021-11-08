@@ -85,30 +85,43 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
       >
-        <TitleContainer onPress={onPressStudy} titleText="스터디 선택" />
-        {studyVisible ? (
+        <TitleContainer
+          visible={studyInProgressList[0]}
+          onPress={onPressStudy}
+          titleText="스터디 선택"
+        />
+        {/*{console.log('report/index', studyInProgressList[0])}*/}
+        {studyInProgressList[0] && (
           <StudyRadioButton
             setReportStudyId={setReportStudyId}
             input={{ choice: studyChoice, setChoice: handleStudyOnClick }}
             studyInProgressList={studyInProgressList}
           />
-        ) : (
-          <Nothing />
         )}
         <Line />
-        <TitleContainer onPress={onPressPerson} titleText="신고 대상자 선택" />
-        {personVisible ? (
+        <TitleContainer
+          visible={studyMemberList[0]}
+          onPress={onPressPerson}
+          titleText="신고 대상자 선택"
+        />
+        {console.log('report/index2', studyMemberList[0])}
+        {studyMemberList[0] && (
           <PersonRadioButton
             setReportMemberId={setReportMemberId}
             input={{ reason: person, setReason: setPerson }}
             studyMemberList={studyMemberList}
           />
-        ) : (
-          <Nothing />
         )}
         <Line />
-        <TitleContainer onPress={onPressReason} titleText="신고사유" />
-        {reasonVisible ? <ReasonText input={reasonInput} /> : <Nothing />}
+        <TitleContainer
+          visible={studyMemberList[0]}
+          onPress={onPressReason}
+          titleText="신고사유"
+        />
+        {studyMemberList[0] && <ReasonText input={reasonInput} />}
+        {!studyMemberList[0] && (
+          <AlertText>* 신고할 수 있는 대상이 없습니다.</AlertText>
+        )}
       </StyledModalContainer>
       <ModalButtonContainer>
         <TwoModalButton text="취소" onPress={closeModal} />
@@ -135,11 +148,15 @@ const Line = styled.View`
   background-color: #f3f3f3;
 `;
 
-const Nothing = styled.View``;
-
 const ModalButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const AlertText = styled.Text`
+  margin-top: 20px;
+  color: #ff5c48;
+  font-size: 14px;
 `;
 
 export default MyPageModal;

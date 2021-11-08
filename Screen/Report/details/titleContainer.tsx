@@ -5,13 +5,18 @@ import check from '../../../Img/icon_filter.png';
 interface TitleProps {
   onPress: () => void;
   titleText: string;
+  visible: any;
 }
 
-const TitleContainer: React.FC<TitleProps> = ({ onPress, titleText }) => {
+const TitleContainer: React.FC<TitleProps> = ({
+  onPress,
+  titleText,
+  visible,
+}) => {
   return (
     <Container onPress={onPress} activeOpacity={0.8}>
       <Title>{titleText}</Title>
-      <Check source={check} />
+      {visible && <Check source={check} />}
     </Container>
   );
 };
@@ -31,5 +36,7 @@ const Check = styled.Image`
   height: 13px;
   width: 13px;
 `;
+
+const Nothing = styled.View``;
 
 export default TitleContainer;
