@@ -20,7 +20,7 @@ const RecruitRenderItem: React.FC<ItemType> = ({
   leader,
   proceeding,
 }) => {
-  const goProfileDetail = useGoProfileDetail(item.id);
+  const goProfileDetail = useGoProfileDetail(item.id, idStudy);
   const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
     myStudyList: manageReducer.myStudyList,
   }));

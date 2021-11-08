@@ -17,7 +17,7 @@ export interface ManageType {
 
 export interface ItemType {
   proceeding?: boolean; // 진행중인지 모집글인지
-  idStudy?: number;
+  idStudy: number;
   index: number;
   item: ManageType;
   desc?: boolean;

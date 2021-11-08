@@ -19,6 +19,7 @@ import WithdrawButton from './components/WithdrawButton';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
+  const studyId = route.params.studyId;
   const goBack = useGoBack();
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +45,7 @@ const ProfileDetail = ({ route }: any) => {
 
   if (loading) return <div>로딩중..</div>;
   if (!userProfile) return null;
+  console.log(studyId);
 
   const userAge = userProfile.age;
   const userCharacter = userProfile.Characters;

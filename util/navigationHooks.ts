@@ -163,10 +163,10 @@ export const useGoManageRecruit = (idx: number, title: string) => {
   );
 };
 
-export const useGoProfileDetail = (idx: number) => {
+export const useGoProfileDetail = (idx: number, studyId: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('ProfileDetail', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
+  return useCallback(
+    () => navigation.navigate('ProfileDetail', { idx: idx, studyId: studyId }),
+    [navigation, idx, studyId]
+  );
 };
