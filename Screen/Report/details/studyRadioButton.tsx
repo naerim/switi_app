@@ -36,7 +36,6 @@ const StudyRadioButton: React.FC<Props> = ({
         {radioStudyList?.map((object: any, value: number) => (
           <RadioButton labelHorizontal={false} key={value}>
             <RadioContainer>
-              {/*{console.log('value', value)}*/}
               <RadioButtonInput
                 obj={object}
                 index={value}
@@ -52,7 +51,6 @@ const StudyRadioButton: React.FC<Props> = ({
                   input.setChoice(value, object.id);
                 }}
               />
-              <Imag />
               <RadioButtonLabel
                 obj={object}
                 index={value}

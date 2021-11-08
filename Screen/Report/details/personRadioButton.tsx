@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import { shallowEqual, useSelector } from 'react-redux';
-import { rootState } from '../../../redux';
+import profileImg from '../../../Img/icon_profile.png';
 
 interface InputProps {
   reason: number;
@@ -30,7 +29,6 @@ const PersonRadioButton: React.FC<Props> = ({
     label: item.nickname,
     value: value++,
   }));
-  // console.log('radio 스터디 멤버', radioStudyMemberList);
   return (
     <Container>
       <RadioForm>
@@ -52,7 +50,7 @@ const PersonRadioButton: React.FC<Props> = ({
                   input.setReason(value);
                 }}
               />
-              <Imag />
+              <Img source={profileImg} />
               <RadioButtonLabel
                 obj={object}
                 index={value}
@@ -82,11 +80,9 @@ const RadioContainer = styled.View`
   align-items: center;
 `;
 
-const Imag = styled.View`
-  height: 40px;
-  width: 40px;
-  background-color: #d1d1d1;
-  border-radius: 40px;
+const Img = styled.Image`
+  width: 34px;
+  height: 34px;
   margin-right: 5px;
 `;
 export default PersonRadioButton;
