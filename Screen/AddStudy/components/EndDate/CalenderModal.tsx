@@ -10,16 +10,30 @@ interface Props {
 }
 
 const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
+  // const getCurrentDate = () => {
+  //   const now = new Date();
+  //   const year = now.getFullYear();
+  //   let month = (now.getMonth() + 1).toString();
+  //   if (month <= '9') month = '0' + month;
+  //
+  //   let todayDate = now.getDate();
+  //   console.log(todayDate);
+  //   if (todayDate <= '9') todayDate = '0' + todayDate;
+  //
+  //   return year + '-' + month + '-' + todayDate;
+  // };
+
   return (
     <Container>
       <Desc>스터디 예정 종료 날짜를 선택 해 주세요.</Desc>
+      {/*{console.log(getCurrentDate())}*/}
       <Calendar
         // Initially visible month. Default = Date()
-        current={'2021-04-26'}
+        current={'2021-11-8'}
         // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        minDate={'2021-01-01'}
+        minDate={'2021-11-08'}
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-        maxDate={'2021-12-31'}
+        maxDate={'2022-12-31'}
         // Handler which gets executed on day press. Default = undefined
         onDayPress={(day) => {
           setValue({
