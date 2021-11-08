@@ -76,12 +76,9 @@ function reportReducer(state = initialState, action: any) {
         break;
       case GET_STUDY_MEMBER_SUCCESS:
         draft.studyMemberList = action.payload.member;
-        //study.member이 맞을까?
         break;
       case POST_REPORT_SUCCESS:
-        // console.log('reducer 액션 : 신고하기 성공');
-        // draft.studyMemberList = action.payload;
-        // 어떤 데이터에 변화가 ?
+        // 이런건 리덕스로 처리하면 안된다.
         break;
       default:
         break;
