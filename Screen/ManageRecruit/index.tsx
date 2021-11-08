@@ -29,7 +29,6 @@ const ManageRecruit = ({ route }: any) => {
 
   const dispatch = useDispatch();
   const onGetStudyMember = useCallback(
-    // 사용자 프로필 가져오기
     (token, id) => dispatch(getStudyMemberRequest(token, id)),
     [dispatch]
   );
@@ -77,7 +76,11 @@ const ManageRecruit = ({ route }: any) => {
           ItemSeparatorComponent={FlatListItemSeparator}
           data={studyMember.applyUser}
           renderItem={({ item }) => (
-            <WaitRenderItem index={item.id} item={item} />
+            <WaitRenderItem
+              index={item.id}
+              item={item}
+              idStudy={item.idStudy}
+            />
           )}
           keyExtractor={(item: ManageType) => item.id.toString()}
           extraData={studyMember.applyUser}
