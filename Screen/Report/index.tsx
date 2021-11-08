@@ -73,12 +73,13 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
     else setReasonVisible(true);
   };
 
+  let reportPossible = undefined;
+  if (studyMemberList !== []) {
+    reportPossible = studyMemberList[0];
+  }
+
   return (
-    <BasicModal
-      modalVisible={modalVisible}
-      closeModal={closeModal}
-      // scroll={scroll}
-    >
+    <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
       <StyledModalContainer
         showsVerticalScrollIndicator={false}
         style={{
@@ -90,7 +91,6 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
           onPress={onPressStudy}
           titleText="스터디 선택"
         />
-        {/*{console.log('report/index', studyInProgressList[0])}*/}
         {studyInProgressList[0] && (
           <StudyRadioButton
             setReportStudyId={setReportStudyId}
@@ -100,12 +100,11 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         )}
         <Line />
         <TitleContainer
-          visible={studyMemberList[0]}
+          visible={reportPossible}
           onPress={onPressPerson}
           titleText="신고 대상자 선택"
         />
-        {console.log('report/index2', studyMemberList[0])}
-        {studyMemberList[0] && (
+        {reportPossible && (
           <PersonRadioButton
             setReportMemberId={setReportMemberId}
             input={{ reason: person, setReason: setPerson }}
@@ -114,12 +113,12 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         )}
         <Line />
         <TitleContainer
-          visible={studyMemberList[0]}
+          visible={reportPossible}
           onPress={onPressReason}
           titleText="신고사유"
         />
-        {studyMemberList[0] && <ReasonText input={reasonInput} />}
-        {!studyMemberList[0] && (
+        {reportPossible && <ReasonText input={reasonInput} />}
+        {!reportPossible && (
           <AlertText>* 신고할 수 있는 대상이 없습니다.</AlertText>
         )}
       </StyledModalContainer>

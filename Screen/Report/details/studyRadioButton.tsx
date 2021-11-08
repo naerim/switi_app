@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components/native';
 import RadioForm, {
   RadioButton,
@@ -12,7 +12,7 @@ interface InputProps {
 }
 
 interface Props {
-  setReportStudyId: (StudyId: number) => void;
+  setReportStudyId: Dispatch<SetStateAction<undefined>>;
   input: InputProps;
   studyInProgressList: any;
 }

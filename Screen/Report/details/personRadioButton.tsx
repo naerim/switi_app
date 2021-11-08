@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components/native';
 import RadioForm, {
   RadioButton,
@@ -12,7 +12,7 @@ interface InputProps {
   setReason: (value: number) => void;
 }
 interface Props {
-  setReportMemberId: (memberId: number) => void;
+  setReportMemberId: Dispatch<SetStateAction<undefined>>;
   input: InputProps;
   studyMemberList: any;
 }
