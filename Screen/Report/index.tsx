@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import BasicModal from '../../Component/BasicModal';
@@ -12,8 +12,8 @@ import { rootState } from '../../redux';
 import { InputProps } from './interface';
 import { studyMemberRequest } from '../../redux/report/reportReducer';
 interface MyPageModalProps {
-  setReportStudyId: (studyId: number) => void;
-  setReportMemberId: (memberId: number) => void;
+  setReportStudyId: Dispatch<SetStateAction<undefined>>;
+  setReportMemberId: Dispatch<SetStateAction<undefined>>;
   reportContent: InputProps;
   modalVisible: boolean;
   closeModal: () => void;
