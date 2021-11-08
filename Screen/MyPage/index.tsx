@@ -14,9 +14,8 @@ import {
 } from '../../util/navigationHooks';
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
-import useScroll from '../../util/useScroll';
 
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   getMyPageRequest,
@@ -42,8 +41,8 @@ const MyPage = () => {
   const closeConfirm = () => setConfirmModalVisible(false);
   const [reportModalVisible, setReportModalVisible] = useState<boolean>(false);
   const reportModalClose = () => setReportModalVisible(false);
-  const [reportStudyId, setReportStudyId] = useState(0);
-  const [reportMemberId, setReportMemberId] = useState(0);
+  const [reportStudyId, setReportStudyId] = useState();
+  const [reportMemberId, setReportMemberId] = useState();
   const reportContent = useInput('');
 
   //신고하기 전 현재 진행 중 스터디 목록 조회
@@ -157,12 +156,14 @@ const MyPage = () => {
         closeModal={reportModalClose}
         confirmButton={confirm}
       />
-      <ConfirmReport
-        name="@@@"
-        modalVisible={confirmModalVisible}
-        closeModal={closeConfirm}
-        button={final}
-      />
+      {reportMemberId && (
+        <ConfirmReport
+          name="@@@"
+          modalVisible={confirmModalVisible}
+          closeModal={closeConfirm}
+          button={final}
+        />
+      )}
       <FinalModal modalVisible={finalModalVisible} closeModal={finalClose} />
     </ContainerWithBell>
   );
