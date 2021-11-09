@@ -114,6 +114,8 @@ const Evaluation = ({ route }: any) => {
         <FinalModal
           modalVisible={finalVisible}
           closeModal={() => setFinalVisible(false)}
+          title="평가가 완료되었습니다!"
+          content="상대방 당도에 평가가 반영 됩니다."
         />
       </Content>
     </Container>

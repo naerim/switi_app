@@ -164,7 +164,12 @@ const MyPage = () => {
           button={final}
         />
       )}
-      <FinalModal modalVisible={finalModalVisible} closeModal={finalClose} />
+      <FinalModal
+        modalVisible={finalModalVisible}
+        closeModal={finalClose}
+        title="신고가 접수되었습니다"
+        content="의견을 내주셔서 감사합니다!"
+      />
     </ContainerWithBell>
   );
 };

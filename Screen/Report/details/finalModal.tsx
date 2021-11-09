@@ -7,9 +7,16 @@ import CircleCheck from '../../../Img/icon_circle_check.png';
 interface Props {
   modalVisible: boolean;
   closeModal: () => void;
+  title?: string;
+  content?: string;
 }
 
-const FinalModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
+const FinalModal: React.FC<Props> = ({
+  modalVisible,
+  closeModal,
+  title,
+  content,
+}) => {
   return (
     <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
       <StyledModalContainer
@@ -17,9 +24,9 @@ const FinalModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
       >
-        <Title>신고가 접수되었습니다</Title>
+        <Title>{title}</Title>
         <Nothing />
-        <Content>의견을 내주셔서 감사합니다!</Content>
+        <Content>{content}</Content>
       </StyledModalContainer>
       <Imag source={CircleCheck} />
     </BasicModal>
