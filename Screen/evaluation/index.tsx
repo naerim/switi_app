@@ -5,7 +5,8 @@ import { useGoManageRecruit } from '../../util/navigationHooks';
 import EvaluationRadio from './EvaluationRadio';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { evaluateProfileRequest } from '../../redux/evaluationReducer';
+import { evaluateProfileRequest, evaluateRequest } from '../../redux/evaluationReducer';
+import BasicButton from '../../Component/BasicButton';
 
 const Evaluation = ({ route }: any) => {
   const idx = route.params.idx;
@@ -33,6 +34,20 @@ const Evaluation = ({ route }: any) => {
     appointment: null,
     communication: null,
   });
+
+  const handleEvaluate = () => {
+    dispatch(
+      evaluateRequest(
+        login.token,
+        18,
+        24,
+        checked['participation'],
+        checked['appointment'],
+        checked['communication']
+      )
+    );
+  };
+
   return (
     <Container>
       <BasicHeader
@@ -69,6 +84,15 @@ const Evaluation = ({ route }: any) => {
           setChecked={setChecked}
           name={nickname}
           question="님과의 소통이 원활히 이루어졌나요?"
+        />
+        <BasicButton
+          text="평가 완료하기"
+          onPress={handleEvaluate}
+          disabled={
+            !checked['participation'] ||
+            !checked['appointment'] ||
+            !checked['communication']
+          }
         />
       </Content>
     </Container>

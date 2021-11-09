@@ -54,7 +54,7 @@ const EvaluationRadio: React.FC<Props> = ({
         break;
       }
       case 'communication': {
-        return setChecked((checked: any, title: string) => ({
+        return setChecked((checked: any) => ({
           ...checked,
           communication: id,
         }));
