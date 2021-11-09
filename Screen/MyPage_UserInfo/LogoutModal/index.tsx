@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../Component/BasicModal';
-import TwoModalButton from '../../SignIn/components/EmailAuthModal/twoModalButton';
+import HalfButton from '../../../Component/HalfButton';
 import LogoutDoneModal from './LogoutDoneModal';
 
 interface Props {
@@ -50,8 +50,8 @@ const LogoutModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
           {'스터디와 클래스 신청 및 모집에\n 제한이 생겨요 :('}
         </ModalSmallText>
         <ModalButtonContainer>
-          <TwoModalButton text="취소" onPress={closeModal} />
-          <TwoModalButton
+          <HalfButton text="취소" onPress={closeModal} />
+          <HalfButton
             text="로그아웃"
             onPress={onPressLogout}
             color="#86E3C3"

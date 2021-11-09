@@ -5,7 +5,7 @@ import BasicModal from '../../Component/BasicModal';
 import StudyRadioButton from './details/studyRadioButton';
 import PersonRadioButton from './details/personRadioButton';
 import ReasonText from './details/reportReason';
-import TwoModalButton from '../SignIn/components/EmailAuthModal/twoModalButton';
+import HalfButton from '../../Component/HalfButton';
 import TitleContainer from './details/titleContainer';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
@@ -20,7 +20,7 @@ interface MyPageModalProps {
   confirmButton: () => void;
 }
 
-const MyPageModal: React.FC<MyPageModalProps> = ({
+const Report: React.FC<MyPageModalProps> = ({
   setReportStudyId,
   setReportMemberId,
   reportContent,
@@ -124,8 +124,8 @@ const MyPageModal: React.FC<MyPageModalProps> = ({
         )}
       </StyledModalContainer>
       <ModalButtonContainer>
-        <TwoModalButton text="취소" onPress={closeModal} />
-        <TwoModalButton
+        <HalfButton text="취소" onPress={closeModal} />
+        <HalfButton
           text="신고하기"
           onPress={confirmButton}
           color="#86E3C3"
@@ -159,4 +159,4 @@ const AlertText = styled.Text`
   font-size: 14px;
 `;
 
-export default MyPageModal;
+export default Report;

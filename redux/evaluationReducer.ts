@@ -28,7 +28,7 @@ const getEvaluateProfile = async (
     url: `http://localhost:4000/evaluate/evaluatePage?idMember=${18}&idStudy=${24}`,
     headers: { Authorization: token },
   });
-  console.log(`reducer evaluationProfile :  `, response.data);
+  // console.log(`reducer evaluationProfile :  `, response.data);
   return response;
 };
 

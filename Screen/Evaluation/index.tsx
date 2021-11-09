@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { useGoManageRecruit } from '../../util/navigationHooks';
-import EvaluationRadio from './EvaluationRadio';
+import EvaluationRadio from './component/EvaluationRadio';
+import EvaluationConfirm from './component/EvaluationConfirm';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
@@ -10,6 +11,7 @@ import {
   evaluateRequest,
 } from '../../redux/evaluationReducer';
 import BasicButton from '../../Component/BasicButton';
+import FinalModal from '../Report/details/finalModal';
 
 const Evaluation = ({ route }: any) => {
   const idx = route.params.idx;
@@ -39,6 +41,7 @@ const Evaluation = ({ route }: any) => {
   });
 
   const handleEvaluate = () => {
+    setConfirmVisible(false);
     dispatch(
       evaluateRequest(
         login.token,
@@ -49,7 +52,13 @@ const Evaluation = ({ route }: any) => {
         checked['communication']
       )
     );
+    setTimeout(() => {
+      setFinalVisible(true);
+    }, 500);
   };
+
+  const [confirmVisible, setConfirmVisible] = useState(false);
+  const [finalVisible, setFinalVisible] = useState(false);
 
   return (
     <Container>
@@ -90,12 +99,21 @@ const Evaluation = ({ route }: any) => {
         />
         <BasicButton
           text="평가 완료하기"
-          onPress={handleEvaluate}
+          onPress={() => setConfirmVisible(true)}
           disabled={
             !checked['participation'] ||
             !checked['appointment'] ||
             !checked['communication']
           }
+        />
+        <EvaluationConfirm
+          modalVisible={confirmVisible}
+          closeModal={() => setConfirmVisible(false)}
+          onPressConfirm={handleEvaluate}
+        />
+        <FinalModal
+          modalVisible={finalVisible}
+          closeModal={() => setFinalVisible(false)}
         />
       </Content>
     </Container>

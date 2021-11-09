@@ -6,7 +6,7 @@ interface Props {
   text: string;
   onPress: () => void;
   loading?: boolean;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 interface LoadingProps {

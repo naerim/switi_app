@@ -11,7 +11,7 @@ interface ColorProps {
   color?: string;
 }
 
-const TwoModalButton: React.FC<AuthButtonProps> = ({
+const HalfButton: React.FC<AuthButtonProps> = ({
   text,
   onPress,
   color,
@@ -36,4 +36,4 @@ const Text = styled.Text<ColorProps>`
   font-weight: 600;
 `;
 
-export default TwoModalButton;
+export default HalfButton;
