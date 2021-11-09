@@ -5,7 +5,10 @@ import { useGoManageRecruit } from '../../util/navigationHooks';
 import EvaluationRadio from './EvaluationRadio';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { evaluateProfileRequest, evaluateRequest } from '../../redux/evaluationReducer';
+import {
+  evaluateProfileRequest,
+  evaluateRequest,
+} from '../../redux/evaluationReducer';
 import BasicButton from '../../Component/BasicButton';
 
 const Evaluation = ({ route }: any) => {
