@@ -7,6 +7,7 @@ import dataReducer, { IDataState } from './dataReducer';
 import manageReducer, { IManageState } from './manageReducer';
 import searchReducer, { ISearchState } from './search/searchReducer';
 import reportReducer, { IReportState } from './report/reportReducer';
+import evaluateReducer, { IEvaluationState } from './evaluationReducer';
 
 export interface rootState {
   studyReducer: IStudyState;
@@ -15,6 +16,7 @@ export interface rootState {
   manageReducer: IManageState;
   searchReducer: ISearchState;
   reportReducer: IReportState;
+  evaluateReducer: IEvaluationState;
 }
 
 const persistConfig = {
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
   dataReducer,
   manageReducer,
   reportReducer,
+  evaluateReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

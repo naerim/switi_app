@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
 import { useGoManageRecruit } from '../../util/navigationHooks';
 import EvaluationRadio from './EvaluationRadio';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import { evaluateProfileRequest } from '../../redux/evaluationReducer';
 
 const Evaluation = ({ route }: any) => {
   const idx = route.params.idx;
   const title = route.params.title;
+
+  const dispatch = useDispatch();
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  const { evaluateProfile } = useSelector((state: rootState) => ({
+    evaluateProfile: state.evaluateReducer.evaluateProfile,
+  }));
+
+  let nickname = evaluateProfile?.user.nickname;
+
+  useEffect(() => {
+    dispatch(evaluateProfileRequest(login.token, 18, 24));
+    console.log('evaluate/index', evaluateProfile);
+  }, [dispatch]);
 
   const GoManageRecruit = useGoManageRecruit(idx, title);
   const [checked, setChecked] = useState({ participation: null });
@@ -24,13 +43,13 @@ const Evaluation = ({ route }: any) => {
         </Text>
         <OpponentContainer>
           <OpponentImg></OpponentImg>
-          <OpponentText>상대 닉네임</OpponentText>
+          <OpponentText>{nickname}</OpponentText>
         </OpponentContainer>
         <EvaluationRadio
           title="participation"
           checkedValue={checked['participation']}
           setChecked={setChecked}
-          name={'@@'}
+          name={nickname}
         />
       </Content>
     </Container>

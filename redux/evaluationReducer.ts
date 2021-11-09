@@ -10,24 +10,25 @@ import createRequestThunk from './lib/createRequestThunk';
 
 export interface IEvaluationState {
   evaluateProfile: any;
-  // evaluate: []; // 필요할까?
+  evaluate: []; // 필요할까?
 }
 
 const initialState = {
   evaluateProfile: null,
+  evaluate: null,
 };
 
-const evaluateProfile = async (
+const getEvaluateProfile = async (
   token: string,
   idMember: number,
   idStudy: number
 ) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${idMember}&idStudy=${idStudy}`,
+    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${18}&idStudy=${24}`,
     headers: { Authorization: token },
   });
-  console.log(`reducer evaluationProfile :  `, response.data);
+  // console.log(`reducer evaluationProfile :  `, response.data);
   return response;
 };
 
@@ -51,7 +52,7 @@ const evaluate = async (
 
 export const evaluateProfileRequest = createRequestThunk(
   GET_EVALUATE_PROFILE,
-  evaluateProfile
+  getEvaluateProfile
 );
 
 export const evaluateRequest = createRequestThunk(GET_EVALUATE, evaluate);
