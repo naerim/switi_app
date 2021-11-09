@@ -100,12 +100,6 @@ const RadioButton = styled.TouchableOpacity<{ checked: boolean }>`
   background-color: ${({ checked }) => (checked ? '#86e3c3' : '#fff')};
   border: ${({ checked }) =>
     checked ? '1px solid #86e3c3' : '1px solid #b4b4b4'};
-  &::before {
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    border: 1px solid white;
-  }
 `;
 
 const Check = styled.View`
