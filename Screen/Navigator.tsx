@@ -51,7 +51,7 @@ import {
   getRegionRequest,
   getStateRequest,
 } from '../redux/dataReducer';
-import Evaluation from './evaluation';
+import Evaluation from './Evaluation';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
