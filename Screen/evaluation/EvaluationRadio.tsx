@@ -6,6 +6,7 @@ interface Props {
   checkedValue: null | number;
   setChecked: (func: any) => void;
   name: string;
+  question: string;
 }
 
 const radios = [
@@ -19,10 +20,14 @@ const radios = [
 type ObjType = {
   [index: string]: string;
   participation: string;
+  appointment: string;
+  communication: string;
 };
 
 const titleMapper: ObjType = {
   participation: '참여도',
+  appointment: '지각정도',
+  communication: '소통',
 };
 
 const EvaluationRadio: React.FC<Props> = ({
@@ -30,32 +35,63 @@ const EvaluationRadio: React.FC<Props> = ({
   checkedValue,
   setChecked,
   name,
-}) => (
-  <EvaluationContainer>
-    <Text>{titleMapper[title]}</Text>
-    <Question>{name}님은 스터디에 성실히 참여했나요?</Question>
-    <RadioContainer>
-      <Line></Line>
-      {radios.map(({ id, number, text }) => (
-        <RadioItem key={id}>
-          <Number>{number}</Number>
-          <RadioButton
-            checked={id === checkedValue}
-            onPress={() =>
-              setChecked((checked: any) => ({
-                ...checked,
-                participation: id,
-              }))
-            }
-          >
-            <Check></Check>
-          </RadioButton>
-          <Number>{text}</Number>
-        </RadioItem>
-      ))}
-    </RadioContainer>
-  </EvaluationContainer>
-);
+  question,
+}) => {
+  const checkFunction = (title: string, id: number) => {
+    switch (title) {
+      case 'participation': {
+        return setChecked((checked: any) => ({
+          ...checked,
+          participation: id,
+        }));
+        break;
+      }
+      case 'appointment': {
+        return setChecked((checked: any) => ({
+          ...checked,
+          appointment: id,
+        }));
+        break;
+      }
+      case 'communication': {
+        return setChecked((checked: any, title: string) => ({
+          ...checked,
+          communication: id,
+        }));
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
+  return (
+    <EvaluationContainer>
+      <Text>{titleMapper[title]}</Text>
+      <Question>
+        {name}
+        {question}
+      </Question>
+      <RadioContainer>
+        <Line></Line>
+        {radios.map(({ id, number, text }) => (
+          <RadioItem key={id}>
+            <Number>{number}</Number>
+            <RadioButton
+              checked={id === checkedValue}
+              onPress={() => {
+                checkFunction(title, id);
+              }}
+            >
+              <Check></Check>
+            </RadioButton>
+            <Number>{text}</Number>
+          </RadioItem>
+        ))}
+      </RadioContainer>
+    </EvaluationContainer>
+  );
+};
 
 const Text = styled.Text`
   color: #b4b4b4;

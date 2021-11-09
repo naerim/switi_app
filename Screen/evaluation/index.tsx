@@ -20,15 +20,19 @@ const Evaluation = ({ route }: any) => {
     evaluateProfile: state.evaluateReducer.evaluateProfile,
   }));
 
-  let nickname = evaluateProfile?.user.nickname;
-
   useEffect(() => {
     dispatch(evaluateProfileRequest(login.token, 18, 24));
-    console.log('evaluate/index', evaluateProfile);
   }, [dispatch]);
 
+  let nickname = '스터디원';
+  nickname = evaluateProfile?.user.nickname;
+
   const GoManageRecruit = useGoManageRecruit(idx, title);
-  const [checked, setChecked] = useState({ participation: null });
+  const [checked, setChecked] = useState({
+    participation: null,
+    appointment: null,
+    communication: null,
+  });
   return (
     <Container>
       <BasicHeader
@@ -50,6 +54,21 @@ const Evaluation = ({ route }: any) => {
           checkedValue={checked['participation']}
           setChecked={setChecked}
           name={nickname}
+          question="님은 스터디에 성실히 참여했나요?"
+        />
+        <EvaluationRadio
+          title="appointment"
+          checkedValue={checked['appointment']}
+          setChecked={setChecked}
+          name={nickname}
+          question="님은 시간약속을 잘 지키셨나요?"
+        />
+        <EvaluationRadio
+          title="communication"
+          checkedValue={checked['communication']}
+          setChecked={setChecked}
+          name={nickname}
+          question="님과의 소통이 원활히 이루어졌나요?"
         />
       </Content>
     </Container>
@@ -61,7 +80,7 @@ const Container = styled.SafeAreaView`
   background-color: #fff;
 `;
 
-const Content = styled.View`
+const Content = styled.ScrollView`
   flex: 12;
   padding-left: 24px;
   padding-right: 24px;
