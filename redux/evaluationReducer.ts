@@ -5,7 +5,7 @@ import {
   GET_EVALUATE_PROFILE_FAILURE,
   GET_EVALUATE,
   GET_EVALUATE_SUCCESS,
-  GET_EVALUATE_FAILURE
+  GET_EVALUATE_FAILURE,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -66,6 +66,10 @@ function evaluateReducer(state = initialState, action: any) {
         draft.evaluateProfile = action.payload;
         break;
       case GET_EVALUATE_SUCCESS:
+        break;
+      case GET_EVALUATE_PROFILE_FAILURE:
+        break;
+      case GET_EVALUATE_FAILURE:
         break;
       default:
         break;
