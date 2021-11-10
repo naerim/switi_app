@@ -42,7 +42,7 @@ const evaluate = async (
 ) => {
   const response = await axios({
     method: 'post',
-    url: `http://localhost:4000/evaluate/peerEvaluate?idMember=${18}&idStudy=${24}`,
+    url: `http://localhost:4000/evaluate/peerEvaluate?idMember=${idMember}&idStudy=${idStudy}`,
     headers: { Authorization: token },
     data: { score1: score1, score2: score2, score3: score3 },
   });

@@ -14,7 +14,8 @@ import BasicButton from '../../Component/BasicButton';
 import FinalModal from '../Report/details/finalModal';
 
 const Evaluation = ({ route }: any) => {
-  const idx = route.params.idx;
+  const studyId = route.params.studyId;
+  const memberId = route.params.memberId;
   const title = route.params.title;
 
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const Evaluation = ({ route }: any) => {
   let nickname = '스터디원';
   nickname = evaluateProfile?.user.nickname;
 
-  const GoManageRecruit = useGoManageRecruit(idx, title);
+  const GoManageRecruit = useGoManageRecruit(studyId, title);
   const [checked, setChecked] = useState({
     participation: null,
     appointment: null,
@@ -45,8 +46,8 @@ const Evaluation = ({ route }: any) => {
     dispatch(
       evaluateRequest(
         login.token,
-        18,
-        24,
+        memberId,
+        studyId,
         checked['participation'],
         checked['appointment'],
         checked['communication']

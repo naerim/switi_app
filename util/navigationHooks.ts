@@ -148,11 +148,20 @@ export const useGoManageRecruit = (idx: number, title: string) => {
   );
 };
 
-export const useGoEvaluation = (idx: number | undefined, title: string | undefined) => {
+export const useGoEvaluation = (
+  studyId: number | undefined,
+  memberId: number | undefined,
+  title: string | undefined
+) => {
   const navigation = useNavigation();
   return useCallback(
-    () => navigation.navigate('Evaluation', { idx: idx, title: title }),
-    [navigation, idx, title]
+    () =>
+      navigation.navigate('Evaluation', {
+        studyId: studyId,
+        memberId: memberId,
+        title: title,
+      }),
+    [navigation, studyId, memberId, title]
   );
 };
 
