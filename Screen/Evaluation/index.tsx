@@ -28,7 +28,7 @@ const Evaluation = ({ route }: any) => {
   }));
 
   useEffect(() => {
-    dispatch(evaluateProfileRequest(login.token, 18, 24));
+    dispatch(evaluateProfileRequest(login.token, memberId, studyId));
   }, [dispatch]);
 
   let nickname = '스터디원';

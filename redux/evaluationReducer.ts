@@ -2,8 +2,10 @@ import produce from 'immer';
 import {
   GET_EVALUATE_PROFILE,
   GET_EVALUATE_PROFILE_SUCCESS,
+  GET_EVALUATE_PROFILE_FAILURE,
   GET_EVALUATE,
   GET_EVALUATE_SUCCESS,
+  GET_EVALUATE_FAILURE
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -25,7 +27,7 @@ const getEvaluateProfile = async (
 ) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${18}&idStudy=${24}`,
+    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${idMember}&idStudy=${idStudy}`,
     headers: { Authorization: token },
   });
   // console.log(`reducer evaluationProfile :  `, response.data);
