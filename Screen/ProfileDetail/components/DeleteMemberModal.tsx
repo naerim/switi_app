@@ -12,7 +12,11 @@ interface DeleteProps {
   delete: boolean;
 }
 
-const DeleteMemberModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
+const DeleteMemberModal: React.FC<Props> = ({
+  modalVisible,
+  closeModal,
+  deleteMember,
+}) => {
   return (
     <Container>
       <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
@@ -28,7 +32,7 @@ const DeleteMemberModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
           <ButtonWrap delete={false} onPress={closeModal}>
             <ButtonTitle delete={false}>취소</ButtonTitle>
           </ButtonWrap>
-          <ButtonWrap delete>
+          <ButtonWrap delete onPress={deleteMember}>
             <ButtonTitle delete>탈퇴시키기</ButtonTitle>
           </ButtonWrap>
         </BottomWrap>

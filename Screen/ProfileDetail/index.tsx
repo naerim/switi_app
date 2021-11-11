@@ -18,6 +18,7 @@ import UserName from './components/UserName';
 import WithdrawButton from './components/WithdrawButton';
 import DeleteMemberModal from './components/DeleteMemberModal';
 import axios from 'axios';
+import { getStudyMemberRequest } from '../../redux/manageReducer';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -42,16 +43,22 @@ const ProfileDetail = ({ route }: any) => {
     (token, id) => dispatch(getUserProfileRequest(token, id)),
     [dispatch]
   );
+  const onGetStudyMember = useCallback(
+    // 사용자 프로필 가져오기
+    (token, id) => dispatch(getStudyMemberRequest(token, id)),
+    [dispatch]
+  );
 
   const deleteMember = () => {
     axios({
       method: 'delete',
-      url: `http://localhost:4000/studyManage/deleteMember/${studyId}/${idx}`,
+      url: `http://localhost:4000/manage/deleteMember/${studyId}/${idx}`,
       headers: { Authorization: login.token },
-      data: {},
     })
       .then(() => {
+        onGetStudyMember(login.token, studyId);
         closeModal();
+        setTimeout(() => goBack(), 500);
       })
       .catch((err) => console.log(err));
   };
@@ -64,7 +71,6 @@ const ProfileDetail = ({ route }: any) => {
 
   if (loading) return <div>로딩중..</div>;
   if (!userProfile) return null;
-  console.log('studyId - profileDetail ', studyId);
 
   const userAge = userProfile.age;
   const userCharacter = userProfile.Characters;
