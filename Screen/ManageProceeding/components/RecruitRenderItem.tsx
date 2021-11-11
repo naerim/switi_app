@@ -20,11 +20,11 @@ const RecruitRenderItem: React.FC<ItemType> = ({
   leader,
   proceeding,
 }) => {
-  // 모집글일 경우 prev가 0
+  // 모집글일 경우 prev가 0, leader일 경우 prev 1
   const goProfileDetail = useGoProfileDetail(
     item.id,
     idStudy,
-    proceeding ? 1 : 0
+    proceeding || leader ? 1 : 0
   );
   const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
     myStudyList: manageReducer.myStudyList,

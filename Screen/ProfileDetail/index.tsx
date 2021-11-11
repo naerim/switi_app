@@ -16,6 +16,8 @@ import {
 import ListContent from '../MyPage_Profile/components/ListCotent';
 import UserName from './components/UserName';
 import WithdrawButton from './components/WithdrawButton';
+import DeleteMemberModal from './components/DeleteMemberModal';
+import axios from 'axios';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -23,15 +25,15 @@ const ProfileDetail = ({ route }: any) => {
   const prev = route.params.prev;
   const goBack = useGoBack();
   const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
   const { userProfile } = useSelector(({ userReducer }: rootState) => ({
     userProfile: userReducer.userProfile,
-  }));
-  const { studyMember } = useSelector(({ manageReducer }: rootState) => ({
-    studyMember: manageReducer.studyMember,
   }));
 
   const dispatch = useDispatch();
@@ -40,6 +42,19 @@ const ProfileDetail = ({ route }: any) => {
     (token, id) => dispatch(getUserProfileRequest(token, id)),
     [dispatch]
   );
+
+  const deleteMember = () => {
+    axios({
+      method: 'delete',
+      url: `http://localhost:4000/studyManage/deleteMember/${studyId}/${idx}`,
+      headers: { Authorization: login.token },
+      data: {},
+    })
+      .then(() => {
+        closeModal();
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -105,7 +120,7 @@ const ProfileDetail = ({ route }: any) => {
     <BasicContainer headerTitle="" display={true} onPress={goBack}>
       <TopWrap>
         <UserName name={userProfile.nickname} img={userProfile.profilepath} />
-        <WithdrawButton prev={prev} />
+        <WithdrawButton prev={prev} onPress={showModal} />
       </TopWrap>
       <Sugar num={userProfile.sugar} />
       <Container>
@@ -115,6 +130,11 @@ const ProfileDetail = ({ route }: any) => {
           </ListContent>
         ))}
       </Container>
+      <DeleteMemberModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        deleteMember={deleteMember}
+      />
     </BasicContainer>
   );
 };

@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
+  onPress?: () => void;
   prev: number;
 }
-const WithdrawButton: React.FC<Props> = ({ prev }) => {
+
+const WithdrawButton: React.FC<Props> = ({ prev, onPress }) => {
   return (
-    <Container prev={prev}>
+    <Container prev={prev} onPress={onPress}>
       <Title>탈퇴시키기</Title>
     </Container>
   );
