@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const WithdrawButton = () => {
+interface Props {
+  prev: number;
+}
+const WithdrawButton: React.FC<Props> = ({ prev }) => {
   return (
-    <Container>
+    <Container prev={prev}>
       <Title>탈퇴시키기</Title>
     </Container>
   );
 };
 
-const Container = styled.TouchableOpacity`
-  width: 62px;
+const Container = styled.TouchableOpacity<Props>`
+  width: ${(props) => (props.prev ? 0 : '62px')};
   height: 30px;
   align-items: center;
   justify-content: center;

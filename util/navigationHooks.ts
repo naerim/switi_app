@@ -163,10 +163,20 @@ export const useGoManageRecruit = (idx: number, title: string) => {
   );
 };
 
-export const useGoProfileDetail = (idx: number, studyId: number) => {
+// prev - 0 : 이전페이지가 스터디 관리페이지 모집글일때(스터디원 탈퇴시키기 가능)
+export const useGoProfileDetail = (
+  idx: number,
+  studyId: number,
+  prev: number
+) => {
   const navigation = useNavigation();
   return useCallback(
-    () => navigation.navigate('ProfileDetail', { idx: idx, studyId: studyId }),
-    [navigation, idx, studyId]
+    () =>
+      navigation.navigate('ProfileDetail', {
+        idx: idx,
+        studyId: studyId,
+        prev: prev,
+      }),
+    [navigation, idx, studyId, prev]
   );
 };

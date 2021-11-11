@@ -11,7 +11,7 @@ interface Props {
 }
 
 const WriterInfo: React.FC<Props> = ({ idUser, username, id }) => {
-  const goProfileDetail = useGoProfileDetail(idUser, id);
+  const goProfileDetail = useGoProfileDetail(idUser, id, 1);
   return (
     <Container activeOpacity={0.8} onPress={goProfileDetail}>
       <UserImage source={UserIcon} />

@@ -20,6 +20,7 @@ import WithdrawButton from './components/WithdrawButton';
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
   const studyId = route.params.studyId;
+  const prev = route.params.prev;
   const goBack = useGoBack();
   const [loading, setLoading] = useState(false);
 
@@ -28,6 +29,9 @@ const ProfileDetail = ({ route }: any) => {
   }));
   const { userProfile } = useSelector(({ userReducer }: rootState) => ({
     userProfile: userReducer.userProfile,
+  }));
+  const { studyMember } = useSelector(({ manageReducer }: rootState) => ({
+    studyMember: manageReducer.studyMember,
   }));
 
   const dispatch = useDispatch();
@@ -45,7 +49,7 @@ const ProfileDetail = ({ route }: any) => {
 
   if (loading) return <div>로딩중..</div>;
   if (!userProfile) return null;
-  console.log(studyId);
+  console.log('studyId - profileDetail ', studyId);
 
   const userAge = userProfile.age;
   const userCharacter = userProfile.Characters;
@@ -101,7 +105,7 @@ const ProfileDetail = ({ route }: any) => {
     <BasicContainer headerTitle="" display={true} onPress={goBack}>
       <TopWrap>
         <UserName name={userProfile.nickname} img={userProfile.profilepath} />
-        <WithdrawButton />
+        <WithdrawButton prev={prev} />
       </TopWrap>
       <Sugar num={userProfile.sugar} />
       <Container>
