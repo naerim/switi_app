@@ -9,6 +9,7 @@ import {
   getMyApplyListRequest,
   getMyStudyListRequest,
 } from '../../redux/manageReducer';
+import StudyDoneModal from './components/StudyDoneModal';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -49,10 +50,15 @@ const Home = ({ route }: any) => {
     onGetMyPage(login.token);
   }, [dispatch]);
 
+  const [modalVisible, setModalVisible] = useState(true);
+  const showModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+
   return (
     <Container>
       <TopCategory tagList={tagList} setTagList={setTagList} />
       <StudyFlatList idx={idx} tagList={tagList} />
+      <StudyDoneModal modalVisible={modalVisible} closeModal={closeModal} />
     </Container>
   );
 };
