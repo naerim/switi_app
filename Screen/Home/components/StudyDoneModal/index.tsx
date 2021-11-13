@@ -5,6 +5,8 @@ import BasicModal from '../../../../Component/BasicModal';
 interface Props {
   modalVisible: boolean;
   closeModal: () => void;
+  idStudy: number;
+  title: string;
 }
 
 interface BoldProps {
@@ -15,12 +17,17 @@ interface ButtonProps {
   done: boolean;
 }
 
-const StudyDoneModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
+const StudyDoneModal: React.FC<Props> = ({
+  modalVisible,
+  closeModal,
+  idStudy,
+  title,
+}) => {
   return (
     <BasicModal modalVisible={modalVisible}>
       <Container>
         <Title bold={false}>축하합니다! @@</Title>
-        <Title bold>주 3회 각자 코딩해요</Title>
+        <Title bold>{title}</Title>
         <Title bold={false}>스터디가 종료되었습니다!</Title>
         <Desc>스터디를 완료하시고 팀원들을 평가해주세요!</Desc>
         <BottomWrap>

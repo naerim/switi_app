@@ -43,3 +43,9 @@ export interface TagType {
     ) => { id: number; name: string; category: string }[]
   ) => void;
 }
+
+export interface CheckProps {
+  id: number;
+  endDate: string;
+  title: string;
+}

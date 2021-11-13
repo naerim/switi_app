@@ -10,6 +10,8 @@ import {
   getMyStudyListRequest,
 } from '../../redux/manageReducer';
 import StudyDoneModal from './components/StudyDoneModal';
+import moment from 'moment';
+import { CheckProps } from './interface';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -51,14 +53,38 @@ const Home = ({ route }: any) => {
   }, [dispatch]);
 
   const [modalVisible, setModalVisible] = useState(true);
-  const showModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
+  const [idStudy, setIdStudy] = useState(-1);
+  const [doneTitle, setDoneTitle] = useState('ss');
+  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
+    myStudyList: manageReducer.myStudyList,
+  }));
+
+  // 기간이 종료된 스터디가 있는지 확인하는 함수
+  const checkDoneDate = () => {
+    const now = new Date();
+    const date = moment(now).format('YYYY-MM-DD');
+    myStudyList.forEach(({ id, endDate, title }: CheckProps) => {
+      date == endDate.substring(0, 10) && setIdStudy(id);
+      date == endDate.substring(0, 10) && setDoneTitle(title);
+    });
+    //myStudyList && idStudy < 0 && setModalVisible(false);
+  };
+
+  useEffect(() => {
+    myStudyList && checkDoneDate();
+  }, [myStudyList]);
 
   return (
     <Container>
       <TopCategory tagList={tagList} setTagList={setTagList} />
       <StudyFlatList idx={idx} tagList={tagList} />
-      <StudyDoneModal modalVisible={modalVisible} closeModal={closeModal} />
+      <StudyDoneModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        idStudy={idStudy}
+        title={doneTitle}
+      />
     </Container>
   );
 };
