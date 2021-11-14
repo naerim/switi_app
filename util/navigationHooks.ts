@@ -180,7 +180,6 @@ export const useGoEvaluation = (
   );
 };
 
-export const useGoProfileDetail = (idx: number) => {
 // prev - 0 : 이전페이지가 스터디 관리페이지 모집글일때(스터디원 탈퇴시키기 가능)
 export const useGoProfileDetail = (
   idx: number,
