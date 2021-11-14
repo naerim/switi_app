@@ -79,12 +79,12 @@ const Home = ({ route }: any) => {
     <Container>
       <TopCategory tagList={tagList} setTagList={setTagList} />
       <StudyFlatList idx={idx} tagList={tagList} />
-      <StudyDoneModal
-        modalVisible={modalVisible}
-        closeModal={closeModal}
-        idStudy={idStudy}
-        title={doneTitle}
-      />
+      {/*<StudyDoneModal*/}
+      {/*  modalVisible={modalVisible}*/}
+      {/*  closeModal={closeModal}*/}
+      {/*  idStudy={idStudy}*/}
+      {/*  title={doneTitle}*/}
+      {/*/>*/}
     </Container>
   );
 };
