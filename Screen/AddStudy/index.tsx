@@ -82,7 +82,10 @@ const AddStudy = () => {
           n += 1;
           return n;
         }),
-        address: 1,
+        address: area.map((n) => {
+          n += 1;
+          return n;
+        }),
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
@@ -90,7 +93,6 @@ const AddStudy = () => {
         contact: contactInput.value,
         title: titleInput.value,
         desc: contentInput.value,
-        gu: 1,
       },
     })
       .then(() => {

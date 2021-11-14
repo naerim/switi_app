@@ -23,6 +23,7 @@ import {
   checkRecruitNum,
   studyCategory,
   studyEndDate,
+  studyRegion,
   studyTarget,
 } from './DataFunc';
 import AmendModal from './AmendModal';
@@ -50,7 +51,7 @@ const AmendStudy = () => {
   const titleInput = useInput(studyDetail.title);
   const contentInput = useInput(studyDetail.desc);
   const [onlineFlag, setOnlineFlag] = useState(studyDetail.online_flag ? 1 : 0);
-  const [area, setArea] = useState<number[]>([1]);
+  const [area, setArea] = useState<number[]>(studyRegion(studyDetail.Regions));
   const [category, setCategory] = useState<number[]>(
     studyCategory(studyDetail.Interests)
   );
@@ -92,7 +93,10 @@ const AmendStudy = () => {
           n += 1;
           return n;
         }),
-        address: 1,
+        address: area.map((n) => {
+          n += 1;
+          return n;
+        }),
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
@@ -100,7 +104,6 @@ const AmendStudy = () => {
         contact: contactInput.value,
         title: titleInput.value,
         desc: contentInput.value,
-        gu: 1,
       },
       headers: { Authorization: login.token },
     })

@@ -14,6 +14,14 @@ export const studyTarget = (target: []) => {
   return targetList;
 };
 
+// 활동지역
+export const studyRegion = (region: []) => {
+  const regionList = region.map(({ studyRegion }: any) => {
+    return studyRegion.RegionId - 1;
+  });
+  return regionList;
+};
+
 // 모집마감 날짜
 export const studyEndDate = (endDate: string) => {
   const date = endDate.substring(0, 10).split('-');
