@@ -21,8 +21,9 @@ const RenderItem: React.FC<ItemType> = ({ index, item }) => {
         <TitleFlag title={limitTitle(item.title)} done={item.flag} />
         <Desc>{limitDesc(item.desc)}</Desc>
         <Bottom>
+          {console.log(item)}
           <Category
-            address={item.Gus}
+            address={item.Regions}
             category={item.Interests}
             target={item.States}
           />

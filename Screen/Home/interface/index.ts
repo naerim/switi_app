@@ -1,4 +1,5 @@
 export interface DataType {
+  Regions: any;
   Applies: any;
   User: { nickname: string };
   idUser: number;

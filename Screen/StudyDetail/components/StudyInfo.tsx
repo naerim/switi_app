@@ -16,9 +16,7 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '지역',
-      value: item?.Gus.map(
-        (guObj: any) => `${guObj.Region.city} ${guObj.gu}`
-      ).join(', '),
+      value: item?.Regions.map((guObj: any) => `${guObj.city}`).join(', '),
     },
     {
       name: '모집대상',

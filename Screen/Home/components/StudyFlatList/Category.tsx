@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ address, category, target }) => {
+  const [myRegion, setMyRegion] = useState('');
   const [myCategory, setMyCategory] = useState('');
   const [myTarget, setMyTarget] = useState('');
 
@@ -24,9 +25,26 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
   );
 
   useEffect(() => {
+    setRegion();
     setCategory();
     setTarget();
   }, [onlineStudyList, offlineStudyList, searchStudyList]);
+
+  // 지역 지정
+  const setRegion = () => {
+    const num = address.length;
+    // 모집대상이 2개 이상일때 ,로 구분
+    if (num > 1) {
+      let i = 0;
+      let wholeRegion = '';
+      address.forEach(({ city }) => {
+        wholeRegion += city;
+        if (num - 1 !== i) wholeRegion += ',';
+        i++;
+      });
+      setMyRegion(wholeRegion);
+    } else setMyRegion(address[0]?.city);
+  };
 
   // 카테고리 지정(카테고리가 여러개일수도 있으므로)
   const setCategory = () => {
@@ -61,7 +79,7 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
 
   return (
     <Container>
-      <Item>{address[0]?.Region.city}</Item>
+      <Item>{myRegion}</Item>
       <Item>{myCategory}</Item>
       <Item>{myTarget}</Item>
     </Container>
