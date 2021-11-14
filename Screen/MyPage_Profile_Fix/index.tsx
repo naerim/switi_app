@@ -58,7 +58,10 @@ const MyPage_Profile_Fix = () => {
       data: {
         age: ageInput.value,
         aboutme: introduceInput.value,
-        myRegion: 1, // 지역 수정(gu 오류남)
+        myRegion: selectArea.map((n) => {
+          n += 1;
+          return n;
+        }),
         myInterest: selectInterest.map((n) => {
           n += 1;
           return n;

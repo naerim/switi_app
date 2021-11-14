@@ -16,6 +16,6 @@ export interface myStateType {
 }
 
 export interface myRegionType {
-  Region: { city: string };
-  myRegion: { GuId: number };
+  myRegion: { RegionId: number };
+  city: string;
 }

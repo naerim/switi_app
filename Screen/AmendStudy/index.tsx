@@ -110,7 +110,7 @@ const AmendStudy = () => {
       .then((res) => {
         onGetMyStudyList(login.token);
         onGetStudyDetail(login.token, studyDetail.id);
-        dispatch(searchRequest(login.token, studyDetail.title));
+        //dispatch(searchRequest(login.token, studyDetail.title));
         fetchOnlineStudyList(true, '');
         fetchOfflineStudyList(true, '');
         setTimeout(() => {

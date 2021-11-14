@@ -22,11 +22,12 @@ const MyPage_Profile = () => {
   const { myProfile } = useSelector(({ userReducer }: rootState) => ({
     myProfile: userReducer.myProfile,
   }));
+  console.log(myProfile);
 
   //const [isLoading, setIsLoading] = useState(false);
 
   const myCharacter = myProfile.myProfile.Characters;
-  const myRegion = myProfile.myProfile.Gus;
+  const myRegion = myProfile.myProfile.Regions;
   const myInterest = myProfile.myProfile.Interests;
   const myState = myProfile.myProfile.States;
 
@@ -40,8 +41,8 @@ const MyPage_Profile = () => {
     {
       title: '관심지역',
       content: myRegion.map((list: myRegionType) => (
-        <Tag key={list.myRegion.GuId}>
-          <Text>{list.Region.city}</Text>
+        <Tag key={list.myRegion.RegionId}>
+          <Text>{list.city}</Text>
         </Tag>
       )),
     },
