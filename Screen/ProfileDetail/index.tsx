@@ -74,7 +74,7 @@ const ProfileDetail = ({ route }: any) => {
 
   const userAge = userProfile.age;
   const userCharacter = userProfile.Characters;
-  const userRegion = userProfile.Gus;
+  const userRegion = userProfile.Regions;
   const userInterest = userProfile.Interests;
   const userState = userProfile.States;
 
@@ -86,8 +86,8 @@ const ProfileDetail = ({ route }: any) => {
     {
       title: '관심지역',
       content: userRegion.map((list: myRegionType) => (
-        <Tag key={list.myRegion.GuId}>
-          <Text>{list.Region.city}</Text>
+        <Tag key={list.myRegion.RegionId}>
+          <Text>{list.city}</Text>
         </Tag>
       )),
     },
