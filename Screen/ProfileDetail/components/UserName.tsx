@@ -7,17 +7,13 @@ interface Props {
 }
 
 const UserName: React.FC<Props> = ({ name, img }) => {
-  const loadImg = (url: string) => {
-    return 'http://localhost:4000/images/' + url;
-  };
+  // const loadImg = (url: string) => {
+  //   return 'http://localhost:4000/images/' + url;
+  // };
   return (
     <Container>
       <LeftWrap>
-        <Icon
-          source={
-            img != null && img != '' ? { uri: loadImg(img) } : ProfileIcon
-          }
-        />
+        <Icon source={ProfileIcon} />
         <Title>{name}</Title>
       </LeftWrap>
     </Container>

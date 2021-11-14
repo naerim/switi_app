@@ -75,6 +75,13 @@ export const UseGoNotice = () => {
   return useCallback(() => navigation.navigate('MyPage_Notice'), [navigation]);
 };
 
+export const UseGoNoticeDetail = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('NoticeDetail', { idx: idx }), [
+    navigation,
+  ]);
+};
+
 export const UseGoScrap = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('MyPage_Scrap'), [navigation]);
@@ -112,6 +119,14 @@ export const useGoRenewPassword = () => {
 export const useGoStudyDetail = (idx: number) => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('StudyDetail', { idx: idx }), [
+    navigation,
+    idx,
+  ]);
+};
+
+export const useGoAmendStudy = (idx: number) => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('AmendStudy', { idx: idx }), [
     navigation,
     idx,
   ]);
@@ -166,9 +181,20 @@ export const useGoEvaluation = (
 };
 
 export const useGoProfileDetail = (idx: number) => {
+// prev - 0 : 이전페이지가 스터디 관리페이지 모집글일때(스터디원 탈퇴시키기 가능)
+export const useGoProfileDetail = (
+  idx: number,
+  studyId: number,
+  prev: number
+) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('ProfileDetail', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
+  return useCallback(
+    () =>
+      navigation.navigate('ProfileDetail', {
+        idx: idx,
+        studyId: studyId,
+        prev: prev,
+      }),
+    [navigation, idx, studyId, prev]
+  );
 };

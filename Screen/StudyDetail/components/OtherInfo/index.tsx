@@ -20,7 +20,7 @@ const OtherInfo: React.FC<Props> = ({
 }) => {
   return (
     <Container>
-      <WriterInfo username={username} idUser={idUser} />
+      <WriterInfo username={username} idUser={idUser} id={id} />
       <Content>
         <StartDate>{createAt}</StartDate>
         <Scrap scrap={scrap} id={id} />

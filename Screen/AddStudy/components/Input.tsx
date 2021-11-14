@@ -3,6 +3,10 @@ import styled from 'styled-components/native';
 import AddStudyContainer from './Layout/AddStudyContainer';
 import { InputProps } from '../interface';
 
+interface TextProps {
+  onlineFlag?: number;
+}
+
 const Input: React.FC<InputProps> = ({
   title,
   input,
@@ -10,17 +14,23 @@ const Input: React.FC<InputProps> = ({
   onlineFlag,
 }) => {
   const setValue = () => {
-    onlineFlag === 0 ? input.onChange('온라인') : input.onChange('');
+    if (onlineFlag) return onlineFlag == 0 ? '온라인' : input.value;
+    return input.value;
+  };
+
+  const checkValue = () => {
+    onlineFlag === 0 ? input.onChange('온라인') : input.onChange(input.value);
   };
 
   useEffect(() => {
-    setValue();
+    checkValue();
   }, [onlineFlag]);
 
   return (
     <AddStudyContainer title={title}>
       <MyInput
-        value={onlineFlag == 0 ? '온라인' : input.value}
+        onlineFlag={onlineFlag}
+        value={setValue()}
         onChangeText={input.onChange}
         placeholder={placeholder}
         keyboardType="email-address"
@@ -32,10 +42,10 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-const MyInput = styled.TextInput`
+const MyInput = styled.TextInput<TextProps>`
   font-size: 12px;
   border-width: 1px;
-  color: #2b2b2b;
+  color: ${(props) => (props.onlineFlag === 0 ? '#b4b4b4' : '#2b2b2b')}
   border-radius: 4px;
   padding: 10px;
   border-color: #e3e3e3;

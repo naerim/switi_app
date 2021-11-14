@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Calendar } from 'react-native-calendars';
 import ArrowIcon from '../../../../Img/btn_back.png';
+import moment from 'moment';
 
 interface Props {
   closeModal: () => void;
@@ -10,16 +11,21 @@ interface Props {
 }
 
 const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
+  const getCurrentDate = () => {
+    const now = new Date();
+    return moment(now).format('YYYY-MM-DD');
+  };
+
   return (
     <Container>
       <Desc>스터디 예정 종료 날짜를 선택 해 주세요.</Desc>
       <Calendar
         // Initially visible month. Default = Date()
-        current={'2021-04-26'}
+        current={getCurrentDate()}
         // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        minDate={'2021-01-01'}
+        minDate={getCurrentDate()}
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-        maxDate={'2021-12-31'}
+        maxDate={'2022-12-31'}
         // Handler which gets executed on day press. Default = undefined
         onDayPress={(day) => {
           setValue({
@@ -32,7 +38,7 @@ const CalenderModal: React.FC<Props> = ({ closeModal, value, setValue }) => {
         // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
         monthFormat={'yyyy MM'}
         // Handler which gets executed when visible month changes in calendar. Default = undefined
-        onMonthChange={(month) => {}}
+        //onMonthChange={(month) => {}}
         // Hide month navigation arrows. Default = false
         hideArrows={false}
         // Replace default arrows with custom ones (direction can be 'left' or 'right')

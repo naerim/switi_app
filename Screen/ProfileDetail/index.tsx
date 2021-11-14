@@ -15,11 +15,20 @@ import {
 } from '../MyPage_Profile/interface';
 import ListContent from '../MyPage_Profile/components/ListCotent';
 import UserName from './components/UserName';
+import WithdrawButton from './components/WithdrawButton';
+import DeleteMemberModal from './components/DeleteMemberModal';
+import axios from 'axios';
+import { getStudyMemberRequest } from '../../redux/manageReducer';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
+  const studyId = route.params.studyId;
+  const prev = route.params.prev;
   const goBack = useGoBack();
   const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -34,6 +43,25 @@ const ProfileDetail = ({ route }: any) => {
     (token, id) => dispatch(getUserProfileRequest(token, id)),
     [dispatch]
   );
+  const onGetStudyMember = useCallback(
+    // 사용자 프로필 가져오기
+    (token, id) => dispatch(getStudyMemberRequest(token, id)),
+    [dispatch]
+  );
+
+  const deleteMember = () => {
+    axios({
+      method: 'delete',
+      url: `http://localhost:4000/manage/deleteMember/${studyId}/${idx}`,
+      headers: { Authorization: login.token },
+    })
+      .then(() => {
+        onGetStudyMember(login.token, studyId);
+        closeModal();
+        setTimeout(() => goBack(), 500);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -46,7 +74,7 @@ const ProfileDetail = ({ route }: any) => {
 
   const userAge = userProfile.age;
   const userCharacter = userProfile.Characters;
-  const userRegion = userProfile.Gus;
+  const userRegion = userProfile.Regions;
   const userInterest = userProfile.Interests;
   const userState = userProfile.States;
 
@@ -58,8 +86,8 @@ const ProfileDetail = ({ route }: any) => {
     {
       title: '관심지역',
       content: userRegion.map((list: myRegionType) => (
-        <Tag key={list.myRegion.GuId}>
-          <Text>{list.Region.city}</Text>
+        <Tag key={list.myRegion.RegionId}>
+          <Text>{list.city}</Text>
         </Tag>
       )),
     },
@@ -96,7 +124,10 @@ const ProfileDetail = ({ route }: any) => {
 
   return (
     <BasicContainer headerTitle="" display={true} onPress={goBack}>
-      <UserName name={userProfile.nickname} img={userProfile.profilepath} />
+      <TopWrap>
+        <UserName name={userProfile.nickname} img={userProfile.profilepath} />
+        <WithdrawButton prev={prev} onPress={showModal} />
+      </TopWrap>
       <Sugar num={userProfile.sugar} />
       <Container>
         {profileData.map(({ title, content, flexDirection }) => (
@@ -105,6 +136,11 @@ const ProfileDetail = ({ route }: any) => {
           </ListContent>
         ))}
       </Container>
+      <DeleteMemberModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        deleteMember={deleteMember}
+      />
     </BasicContainer>
   );
 };
@@ -126,6 +162,12 @@ const Text = styled.Text`
 const ContentText = styled.Text`
   font-size: 12px;
   margin-top: 7px;
+`;
+
+const TopWrap = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default ProfileDetail;

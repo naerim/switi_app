@@ -1,4 +1,5 @@
 export interface DataType {
+  Regions: any;
   Applies: any;
   User: { nickname: string };
   idUser: number;
@@ -42,4 +43,10 @@ export interface TagType {
       prev: { id: number; name: string; category: string }[]
     ) => { id: number; name: string; category: string }[]
   ) => void;
+}
+
+export interface CheckProps {
+  id: number;
+  endDate: string;
+  title: string;
 }

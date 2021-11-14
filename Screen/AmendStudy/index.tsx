@@ -1,51 +1,61 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
-import { useGoHome } from '../../util/navigationHooks';
-import Header from './components/Header';
-import { Platform, ScrollView } from 'react-native';
-import SelectOne from './components/SelectOne';
-import Target from './components/Target';
+import { useGoBack } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
-import Input from './components/Input';
-import LongInput from './components/LongInput';
-import EndDate from './components/EndDate';
-import RecruitNum from './components/RecruitNum';
-import BasicButton from '../../Component/BasicButton';
-import EnrollModal from './components/EnrollModal';
-import FlagRadioButton from './components/FlagRadioButton';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
+  getStudyDetailRequest,
   offlineStudyListRequest,
   onlineStudyListRequest,
 } from '../../redux/studyReducer';
-import EnrollDoneModal from './components/EnrollDoneModal';
 import { getMyStudyListRequest } from '../../redux/manageReducer';
+import { Platform, ScrollView } from 'react-native';
+import Header from '../AddStudy/components/Header';
+import FlagRadioButton from '../AddStudy/components/FlagRadioButton';
+import SelectOne from '../AddStudy/components/SelectOne';
+import Target from '../AddStudy/components/Target';
+import RecruitNum from '../AddStudy/components/RecruitNum';
+import Input from '../AddStudy/components/Input';
+import BasicButton from '../../Component/BasicButton';
+import LongInput from '../AddStudy/components/LongInput';
+import {
+  checkRecruitNum,
+  studyCategory,
+  studyEndDate,
+  studyRegion,
+  studyTarget,
+} from './DataFunc';
+import AmendModal from './AmendModal';
+import axios from 'axios';
+import { searchRequest } from '../../redux/search/searchReducer';
 
-const AddStudy = () => {
+const AmendStudy = () => {
+  const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
+    studyDetail: studyReducer.studyDetail,
+  }));
+
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
-  const [target, setTarget] = useState<number[]>([]);
-  const periodInput = useInput('');
-  const recruitNumInput = useInput('');
-  const [recruitSelect, setRecruitSelect] = useState(false);
-  const contactInput = useInput('');
-  const titleInput = useInput('');
-  const contentInput = useInput('');
-  const goHome = useGoHome();
-  const [EndDateInput, setEndDateInput] = useState<{ [key: string]: string }>({
-    year: '',
-    month: '',
-    day: '',
-  });
-  const [onlineFlag, setOnlineFlag] = useState(0); //0: 온라인, 1: 오프라인
-  const [area, setArea] = useState<number[]>([]);
-  const [category, setCategory] = useState<number[]>([]);
-  const detailAddressInput = useInput('');
-  const [DoneModalVisible, setDoneModalVisible] = useState(false);
-  const showDoneModal = () => setDoneModalVisible(true);
-  const closeDoneModal = () => setDoneModalVisible(false);
+  const goBack = useGoBack();
+  // 원래 스터디 정보로 초기화
+  const [target, setTarget] = useState<number[]>(
+    studyTarget(studyDetail.States)
+  );
+  const periodInput = useInput(studyDetail.period);
+  const recruitNumInput = useInput(studyDetail.recruit_num.toString());
+  const [recruitSelect, setRecruitSelect] = useState(
+    checkRecruitNum(studyDetail.recruit_num)
+  );
+  const contactInput = useInput(studyDetail.contact);
+  const titleInput = useInput(studyDetail.title);
+  const contentInput = useInput(studyDetail.desc);
+  const [onlineFlag, setOnlineFlag] = useState(studyDetail.online_flag ? 1 : 0);
+  const [area, setArea] = useState<number[]>(studyRegion(studyDetail.Regions));
+  const [category, setCategory] = useState<number[]>(
+    studyCategory(studyDetail.Interests)
+  );
+  const detailAddressInput = useInput(studyDetail.detail_address);
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
@@ -61,20 +71,21 @@ const AddStudy = () => {
     dispatch(onlineStudyListRequest(login.token, order, query));
   const fetchOfflineStudyList = (order: boolean, query: string) =>
     dispatch(offlineStudyListRequest(login.token, order, query));
+  const onGetStudyDetail = useCallback(
+    (token, id) => dispatch(getStudyDetailRequest(token, id)),
+    [dispatch]
+  );
   const onGetMyStudyList = useCallback(
     (token) => dispatch(getMyStudyListRequest(token)),
     [dispatch]
   );
 
-  // 최종 등록 버튼
-  const EnrollButton = () => {
-    // endDate
-    const date =
-      EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
+  // 최종 수정 버튼
+  const AmendButton = () => {
+    setModalVisible(true);
     axios({
-      method: 'post',
-      url: 'http://localhost:4000/study/addStudy',
-      headers: { Authorization: login.token },
+      method: 'put',
+      url: `http://localhost:4000/study/updateStudy/${studyDetail.id}`,
       data: {
         online_flag: onlineFlag,
         state: target,
@@ -89,35 +100,32 @@ const AddStudy = () => {
         recruit_num: recruitNumInput.value,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
-        endDate: date,
+        endDate: studyDetail.endDate,
         contact: contactInput.value,
         title: titleInput.value,
         desc: contentInput.value,
       },
+      headers: { Authorization: login.token },
     })
-      .then(() => {
-        closeModal();
+      .then((res) => {
+        onGetMyStudyList(login.token);
+        onGetStudyDetail(login.token, studyDetail.id);
+        //dispatch(searchRequest(login.token, studyDetail.title));
         fetchOnlineStudyList(true, '');
         fetchOfflineStudyList(true, '');
-        onGetMyStudyList(login.token);
         setTimeout(() => {
-          showDoneModal();
+          closeModal();
+          goBack();
         }, 500);
-        setTimeout(() => {
-          closeDoneModal();
-          goHome();
-        }, 2000);
       })
-      .catch((err) => console.log(err));
-  };
-
-  const onClick = () => {
-    setModalVisible(true);
+      .catch((err) => {
+        alert('수정 실패');
+      });
   };
 
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
-      <Header title="모집글 작성" onPress={goHome} />
+      <Header title="모집글 수정" onPress={goBack} />
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
@@ -157,7 +165,8 @@ const AddStudy = () => {
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
-          <EndDate value={{ EndDateInput, setEndDateInput }} />
+          <Title>예정 종료일</Title>
+          <SubTitle>{studyEndDate(studyDetail.endDate)}</SubTitle>
           <Input
             title="문의"
             input={contactInput}
@@ -169,18 +178,10 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={onClick} disabled={false} />
+          <BasicButton text="수정하기" onPress={AmendButton} disabled={false} />
         </Content>
       </ScrollView>
-      <EnrollModal
-        modalVisible={modalVisible}
-        closeModal={closeModal}
-        onPress={EnrollButton}
-      />
-      <EnrollDoneModal
-        closeModal={closeDoneModal}
-        modalVisible={DoneModalVisible}
-      />
+      <AmendModal closeModal={closeModal} modalVisible={modalVisible} />
     </Container>
   );
 };
@@ -195,4 +196,17 @@ const Content = styled.ScrollView`
   margin-bottom: 25px;
 `;
 
-export default AddStudy;
+const Title = styled.Text`
+  color: #b4b4b4;
+  font-size: 12px;
+  margin-bottom: 2%;
+`;
+
+const SubTitle = styled.Text`
+  color: #2b2b2b;
+  font-size: 12px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+`;
+
+export default AmendStudy;

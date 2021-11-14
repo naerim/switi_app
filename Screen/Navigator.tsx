@@ -52,6 +52,8 @@ import {
   getStateRequest,
 } from '../redux/dataReducer';
 import Evaluation from './Evaluation';
+import AmendStudy from './AmendStudy';
+import NoticeDetail from './MyPage_Notice/NoticeDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -207,6 +209,7 @@ const MainNavigation = () => (
     <Stack.Screen name="Switi" component={TabNavigation} />
     <Stack.Screen name="AddStudy" component={AddStudy} />
     <Stack.Screen name="Alarm" component={Alarm} />
+    <Stack.Screen name="AmendStudy" component={AmendStudy} />
     <Stack.Screen name="ProfileDetail" component={ProfileDetail} />
     <Stack.Screen name="StudyDetail" component={StudyDetail} />
     <Stack.Screen name="ManageProceeding" component={ManageProceeding} />
@@ -216,6 +219,7 @@ const MainNavigation = () => (
     <Stack.Screen name="MyPage_Profile_Fix" component={MyPage_Profile_Fix} />
     <Stack.Screen name="MyPage_UserInfo" component={MyPage_UserInfo} />
     <Stack.Screen name="MyPage_Notice" component={MyPage_Notice} />
+    <Stack.Screen name="NoticeDetail" component={NoticeDetail} />
     <Stack.Screen name="MyPage_Withdrawal" component={MyPage_Withdrawal} />
     <Stack.Screen name="MyPage_FixUserInfo" component={MyPage_FixUserInfo} />
     <Stack.Screen name="MyPage_Scrap" component={MyPage_Scrap} />

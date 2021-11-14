@@ -6,6 +6,10 @@ interface Props {
   select: boolean;
 }
 
+interface TextProps {
+  select: boolean;
+}
+
 const NumInput: React.FC<Props> = ({ input, select }) => {
   const setValue = () => {
     // 무관일때 input value 0으로 변경
@@ -19,6 +23,7 @@ const NumInput: React.FC<Props> = ({ input, select }) => {
   return (
     <Container>
       <Input
+        select={select}
         value={select ? '0' : input.value}
         onChangeText={input.onChange}
         keyboardType="numeric"
@@ -36,12 +41,12 @@ const Container = styled.View`
   flex-direction: row;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput<TextProps>`
   width: 53px;
   height: 40px;
   font-size: 12px;
   border-width: 1px;
-  color: #2b2b2b;
+  color: ${(props) => (props.select ? '#b4b4b4' : '#2b2b2b')};
   border-radius: 4px;
   padding: 10px;
   border-color: #e3e3e3;

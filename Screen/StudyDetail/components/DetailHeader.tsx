@@ -12,7 +12,7 @@ import {
   offlineStudyListRequest,
   onlineStudyListRequest,
 } from '../../../redux/studyReducer';
-import { useGoBack } from '../../../util/navigationHooks';
+import { useGoAmendStudy, useGoBack } from '../../../util/navigationHooks';
 import DeleteDoneModal from './MenuModal/DeleteDoneModal';
 import { getMyStudyListRequest } from '../../../redux/manageReducer';
 
@@ -23,6 +23,7 @@ interface Props {
 
 const DetailHeader: React.FC<Props> = ({ id, onPress }) => {
   const goBack = useGoBack();
+  const goAmendStudy = useGoAmendStudy(id);
   const [modalVisible, setModalVisible] = useState(false);
   const showModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
@@ -81,7 +82,7 @@ const DetailHeader: React.FC<Props> = ({ id, onPress }) => {
 
   const onPressAmendMenu = () => {
     closeModal();
-    console.log('수정');
+    goAmendStudy();
   };
 
   return (
