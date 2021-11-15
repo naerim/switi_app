@@ -8,7 +8,7 @@ import manageReducer, { IManageState } from './manageReducer';
 import searchReducer, { ISearchState } from './search/searchReducer';
 import reportReducer, { IReportState } from './report/reportReducer';
 import evaluateReducer, { IEvaluationState } from './evaluationReducer';
-import { IWithdrawalState } from './withdrawlReducer';
+import { IWithdrawalState } from './authReducer';
 
 export interface rootState {
   studyReducer: IStudyState;
