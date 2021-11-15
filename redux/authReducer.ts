@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
 
-export interface IWithdrawalState {
+export interface IAuthState {
   withdrawalSuccess: boolean;
   findPwdSuccess: boolean;
 }
@@ -52,7 +52,7 @@ export const deleteUserThunk = (token: string) => async (dispatch: any) => {
 
 export const findPwdThunk = createRequestThunk(POST_FIND_PWD, findPwd);
 
-function withdrawalReducer(state = initialState, action: any) {
+function authReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
       case DELETE_USER:
@@ -81,4 +81,4 @@ function withdrawalReducer(state = initialState, action: any) {
   });
 }
 
-export default withdrawalReducer;
+export default authReducer;

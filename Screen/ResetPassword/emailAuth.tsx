@@ -11,7 +11,7 @@ import { findPwdThunk } from '../../redux/authReducer';
 const EmailAuth = () => {
   const dispatch = useDispatch();
   const { findPwdSuccess } = useSelector((state: rootState) => ({
-    findPwdSuccess: state.withdrawalReducer.findPwdSuccess,
+    findPwdSuccess: state.authReducer.findPwdSuccess,
   }));
   const goLogin = useGoSignIn();
   const goCertification = useGoCertification();

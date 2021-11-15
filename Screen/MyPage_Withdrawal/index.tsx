@@ -10,7 +10,6 @@ import BasicModal from '../../Component/BasicModal';
 import { deleteUserThunk } from '../../redux/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import { searchAllDeleteThunk } from '../../redux/search/searchReducer';
 
 const MyPage_Withdrawal = () => {
   const dispatch = useDispatch();
