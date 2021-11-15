@@ -4,17 +4,28 @@ import ResetPwdContainer from './components/Layout/ResetPwdContainer';
 import { useGoCertification, useGoSignIn } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
 import AuthInput from './components/AuthInput';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import withdrawalReducer, { findPwdThunk } from '../../redux/authReducer';
+import { searchHistoryRequest } from '../../redux/search/searchReducer';
 
 const EmailAuth = () => {
+  const dispatch = useDispatch();
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  // const { findPwdSuccess } = useSelector((state: rootState) => ({
+  //   findPwdSuccess: state.withdrawalReducer.findPwdSuccess,
+  // }));
   const goLogin = useGoSignIn();
-  const goCertification = useGoCertification();
   const desc =
     '입력하신 이메일 주소로 인증번호가 전송됩니다.\n인증이 완료된 후 비밀번호를 재설정해주세요.';
   const email = useInput('');
 
   const onPress = () => {
     if (email.value !== '') {
-      goCertification();
+      dispatch(findPwdThunk(email.value));
+      // useGoCertification();
     }
     // 인증번호 보내기
   };
