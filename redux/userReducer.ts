@@ -17,6 +17,7 @@ import {
   GET_STUDY_HISTORY_SUCCESS,
   GET_USER_PROFILE,
   GET_USER_PROFILE_SUCCESS,
+  GET_USER_PROFILE_FAILURE,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -112,6 +113,7 @@ const initialState = {
   myProfile: null,
   myProfileError: null,
   userProfile: null,
+  userProfileError: null,
 };
 
 export interface IUserState {
@@ -126,6 +128,7 @@ export interface IUserState {
   myProfile: any;
   myProfileError: any;
   userProfile: any;
+  userProfileError: any;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -139,11 +142,19 @@ function userReducer(state = initialState, action: any) {
       case AUTH_LOGIN_FAILURE:
         draft.loginError = action.payload;
         break;
+
+      case GET_MY_PAGE:
+        draft.myPageError = initialState.myPageError;
+        break;
       case GET_MY_PAGE_SUCCESS:
         draft.myPage = action.payload;
         break;
       case GET_MY_PAGE_FAILURE:
         draft.myPageError = action.payload;
+        break;
+
+      case GET_SCRAP_LIST:
+        draft.scrapListError = initialState.scrapListError;
         break;
       case GET_SCRAP_LIST_SUCCESS:
         draft.scrapList = action.payload;
@@ -151,11 +162,19 @@ function userReducer(state = initialState, action: any) {
       case GET_SCRAP_LIST_FAILURE:
         draft.scrapListError = action.payload;
         break;
+
+      case GET_STUDY_HISTORY:
+        draft.studyHistoryError = initialState.studyHistoryError;
+        break;
       case GET_STUDY_HISTORY_SUCCESS:
         draft.studyHistory = action.payload;
         break;
       case GET_STUDY_HISTORY_FAILURE:
         draft.studyHistoryError = action.payload;
+        break;
+
+      case GET_MY_PROFILE:
+        draft.myProfileError = initialState.myProfileError;
         break;
       case GET_MY_PROFILE_SUCCESS:
         draft.myProfile = action.payload;
@@ -163,8 +182,15 @@ function userReducer(state = initialState, action: any) {
       case GET_MY_PROFILE_FAILURE:
         draft.myProfileError = action.payload;
         break;
+
+      case GET_USER_PROFILE:
+        draft.userProfile = initialState.userProfile;
+        break;
       case GET_USER_PROFILE_SUCCESS:
         draft.userProfile = action.payload.userProfile;
+        break;
+      case GET_USER_PROFILE_FAILURE:
+        draft.userProfileError = action.payload.userProfileError;
         break;
       default:
         break;
