@@ -69,7 +69,7 @@ const RenewPassword = () => {
   return (
     <ResetPwdContainer
       buttonText="재설정 완료"
-      onClick={onClick}
+      getNumber={onClick}
       onPress={goCertification}
     >
       {passwordData.map(({ title, input, error }) => (

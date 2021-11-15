@@ -5,20 +5,20 @@ import ConfirmButton from '../ConfirmButton';
 
 interface Props {
   buttonText: string;
-  onClick: () => void;
+  getNumber: any;
   onPress: () => void;
 }
 
 const ResetPwdContainer: React.FC<Props> = ({
   children,
   buttonText,
-  onClick,
+  getNumber,
   onPress,
 }) => {
   return (
     <BasicContainer headerTitle="프로필 설정" display onPress={onPress}>
       <Container>{children}</Container>
-      <ConfirmButton buttonText={buttonText} onClick={onClick} />
+      <ConfirmButton buttonText={buttonText} onClick={getNumber} />
     </BasicContainer>
   );
 };

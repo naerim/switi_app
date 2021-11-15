@@ -4,28 +4,27 @@ import ResetPwdContainer from './components/Layout/ResetPwdContainer';
 import { useGoCertification, useGoSignIn } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
 import AuthInput from './components/AuthInput';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import withdrawalReducer, { findPwdThunk } from '../../redux/authReducer';
-import { searchHistoryRequest } from '../../redux/search/searchReducer';
+import { findPwdThunk } from '../../redux/authReducer';
 
 const EmailAuth = () => {
   const dispatch = useDispatch();
-  const { login } = useSelector(({ userReducer }: rootState) => ({
-    login: userReducer.login,
+  const { findPwdSuccess } = useSelector((state: rootState) => ({
+    findPwdSuccess: state.withdrawalReducer.findPwdSuccess,
   }));
-  // const { findPwdSuccess } = useSelector((state: rootState) => ({
-  //   findPwdSuccess: state.withdrawalReducer.findPwdSuccess,
-  // }));
   const goLogin = useGoSignIn();
+  const goCertification = useGoCertification();
   const desc =
     '입력하신 이메일 주소로 인증번호가 전송됩니다.\n인증이 완료된 후 비밀번호를 재설정해주세요.';
   const email = useInput('');
 
-  const onPress = () => {
+  const getNumber = async () => {
     if (email.value !== '') {
-      dispatch(findPwdThunk(email.value));
-      // useGoCertification();
+      await dispatch(findPwdThunk(email.value));
+      if (findPwdSuccess) {
+        await goCertification;
+      }
     }
     // 인증번호 보내기
   };
@@ -33,7 +32,7 @@ const EmailAuth = () => {
   return (
     <ResetPwdContainer
       buttonText="인증번호 받기"
-      onClick={onPress}
+      getNumber={getNumber}
       onPress={goLogin}
     >
       <Container>

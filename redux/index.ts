@@ -8,7 +8,7 @@ import manageReducer, { IManageState } from './manageReducer';
 import searchReducer, { ISearchState } from './search/searchReducer';
 import reportReducer, { IReportState } from './report/reportReducer';
 import evaluateReducer, { IEvaluationState } from './evaluationReducer';
-import { IWithdrawalState } from './authReducer';
+import withdrawalReducer, { IWithdrawalState } from './authReducer';
 
 export interface rootState {
   studyReducer: IStudyState;
@@ -34,6 +34,7 @@ const rootReducer = combineReducers({
   manageReducer,
   reportReducer,
   evaluateReducer,
+  withdrawalReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

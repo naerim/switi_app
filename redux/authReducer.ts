@@ -3,13 +3,9 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
-  DELETE_SEARCH_HISTORY_SUCCESS,
-  DELETE_ALL_SEARCH_HISTORY_SUCCESS,
   POST_FIND_PWD,
   POST_FIND_PWD_SUCCESS,
   POST_FIND_PWD_FAILURE,
-  POST_STUDY_LIST,
-  GET_SEARCH_HISTORY_LIST,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -59,17 +55,25 @@ export const findPwdThunk = createRequestThunk(POST_FIND_PWD, findPwd);
 function withdrawalReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case DELETE_USER:
+        draft.withdrawalSuccess = initialState.withdrawalSuccess;
+        break;
       case DELETE_USER_SUCCESS:
         draft.withdrawalSuccess = true;
         break;
       case DELETE_USER_FAILURE:
         draft.withdrawalSuccess = false;
         break;
+      case POST_FIND_PWD:
+        draft.findPwdSuccess = initialState.findPwdSuccess;
+        break;
       case POST_FIND_PWD_SUCCESS:
         draft.findPwdSuccess = true;
+        console.log('findPwdSuccess', draft.findPwdSuccess);
         break;
       case POST_FIND_PWD_FAILURE:
         draft.findPwdSuccess = false;
+        console.log('findPwdSuccess', draft.findPwdSuccess);
         break;
       default:
         break;

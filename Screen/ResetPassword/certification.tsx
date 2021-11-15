@@ -13,7 +13,7 @@ const Certification = () => {
   return (
     <ResetPwdContainer
       buttonText="확인"
-      onClick={goRenewPassword}
+      getNumber={goRenewPassword}
       onPress={goEmailAuth}
     >
       <Container>
