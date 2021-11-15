@@ -17,7 +17,6 @@ import mainIcon from '../../Img/signIn_logo.png';
 const SignIn: React.FC = () => {
   // const emailInput = useInput('naerim1119@gmail.com');
   // const passwordInput = useInput('qwer1234!');
-  const [confirmOnPress, setConfirmOnPress] = useState(false);
   const emailInput = useInput('mn0316@naver.com');
   const passwordInput = useInput('lee000316^^');
   const [checked, setChecked] = useState(false);
@@ -43,7 +42,7 @@ const SignIn: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     const email = emailInput;
     const password = passwordInput;
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -60,13 +59,9 @@ const SignIn: React.FC = () => {
     } else if (password.value.length < 8 || password.value.length > 16) {
       Alert.alert('비밀번호가 잘못 입력되었습니다. ');
     } else {
-      await dispatch(loginRequest(email.value, password.value));
-      if (!login) {
-        await setConfirmOnPress(!confirmOnPress);
-      }
+      dispatch(loginRequest(email.value, password.value));
     }
   };
-
   useEffect(() => {
     if (loginError == 'Request failed with status code 500')
       Alert.alert('네트워크 오류가 발생했습니다.');
@@ -76,7 +71,7 @@ const SignIn: React.FC = () => {
       myEmail.onChange(emailInput.value);
       setModalVisible(true);
     }
-  }, [confirmOnPress]);
+  }, [loginError]);
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>

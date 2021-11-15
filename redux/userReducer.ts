@@ -131,13 +131,13 @@ export interface IUserState {
 function userReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case AUTH_LOGIN:
+        draft.loginError = initialState.loginError;
       case AUTH_LOGIN_SUCCESS:
         draft.login = action.payload;
-        // console.log('draft.login', draft.login);
         break;
       case AUTH_LOGIN_FAILURE:
         draft.loginError = action.payload;
-        // console.log('draft.loginError', draft.loginError);
         break;
       case GET_MY_PAGE_SUCCESS:
         draft.myPage = action.payload;
