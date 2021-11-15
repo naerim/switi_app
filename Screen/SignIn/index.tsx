@@ -42,10 +42,10 @@ const SignIn: React.FC = () => {
   );
 
   const dispatch = useDispatch();
-  const handleLogin = () => {
+
+  const handleLogin = async () => {
     const email = emailInput;
     const password = passwordInput;
-    setConfirmOnPress(!confirmOnPress);
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(false);
 
@@ -60,25 +60,23 @@ const SignIn: React.FC = () => {
     } else if (password.value.length < 8 || password.value.length > 16) {
       Alert.alert('비밀번호가 잘못 입력되었습니다. ');
     } else {
-      dispatch(loginRequest(email.value, password.value));
+      await dispatch(loginRequest(email.value, password.value));
+      if (!login) {
+        await setConfirmOnPress(!confirmOnPress);
+      }
     }
   };
 
-  // 로그인에 실패하면 실행
-  // 문제점: 같은 문제로 로그인에 실패하면 실행이 안됨
-
   useEffect(() => {
-    if (!login) {
-      if (loginError == 'Request failed with status code 500')
-        Alert.alert('네트워크 오류가 발생했습니다.');
-      else if (loginError == 'Request failed with status code 404')
-        Alert.alert('잘못된 로그인 정보입니다. ');
-      else if (loginError == 'Request failed with status code 400') {
-        myEmail.onChange(emailInput.value);
-        setModalVisible(true);
-      }
+    if (loginError == 'Request failed with status code 500')
+      Alert.alert('네트워크 오류가 발생했습니다.');
+    else if (loginError == 'Request failed with status code 404')
+      Alert.alert('잘못된 로그인 정보입니다. ');
+    else if (loginError == 'Request failed with status code 400') {
+      myEmail.onChange(emailInput.value);
+      setModalVisible(true);
     }
-  }, [loginError, confirmOnPress]);
+  }, [confirmOnPress]);
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>
