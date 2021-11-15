@@ -12,7 +12,7 @@ const Splash = () => {
 
 const Container = styled.View`
   flex: 1;
-  background-color: blue;
+  background-color: white;
 `;
 
 const Background = styled.ImageBackground`

@@ -4,8 +4,6 @@ import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import useInput from './util/useInput';
 import BasicButton from '../../Component/BasicButton';
-import SocialLogin from './components/SocialLogin';
-import Division from './components/Division';
 import SignInForm from './components/SignInForm';
 import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
@@ -14,6 +12,7 @@ import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
 import { rootState } from '../../redux';
+import mainIcon from '../../Img/signIn_logo.png';
 
 const SignIn: React.FC = () => {
   const emailInput = useInput('naerim1119@gmail.com');
@@ -81,12 +80,9 @@ const SignIn: React.FC = () => {
   return (
     <BasicContainer headerTitle="로그인" display={false}>
       <Container>
-        <SocialLoginContainer>
-          <SocialLogin />
-        </SocialLoginContainer>
-        <DivisionContainer>
-          <Division />
-        </DivisionContainer>
+        <IconContainer>
+          <Icon source={mainIcon}></Icon>
+        </IconContainer>
         <SignInFormContainer>
           <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
         </SignInFormContainer>
@@ -130,12 +126,15 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const SocialLoginContainer = styled.View`
-  flex: 4;
+const IconContainer = styled.View`
+  flex: 2;
+  justify-content: center;
+  align-items: center;
 `;
 
-const DivisionContainer = styled.View`
-  flex: 1;
+const Icon = styled.Image`
+  width: 43px;
+  height: 73px;
 `;
 
 const SignInFormContainer = styled.View`
