@@ -50,15 +50,15 @@ const SignIn: React.FC = () => {
     setIsLoading(false);
 
     if (email.value === '') {
-      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+      Alert.alert('이메일 주소를 입력해주세요');
     } else if (!email.value.includes('@') || !email.value.includes('.')) {
-      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+      Alert.alert('이메일 주소가 잘못되었습니다.');
     } else if (!emailRegex.test(email.value)) {
-      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+      Alert.alert('이메일 주소가 잘못되었습니다. ');
     } else if (password.value === '') {
-      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
-    } else if (password.value.length < 8) {
-      Alert.alert('이메일 주소가 잘못되거나 비밀번호가 틀렸습니다.');
+      Alert.alert('비밀번호를 입력해 주세요. ');
+    } else if (password.value.length < 8 || password.value.length > 16) {
+      Alert.alert('비밀번호가 잘못 입력되었습니다. ');
     } else {
       onLogin(email.value, password.value);
     }
@@ -68,9 +68,9 @@ const SignIn: React.FC = () => {
   // 문제점: 같은 문제로 로그인에 실패하면 실행이 안됨
   useEffect(() => {
     if (loginError == 'Request failed with status code 500')
-      Alert.alert('가입된 이메일 계정이 없습니다.');
+      Alert.alert('네트워크 오류가 발생했습니다.');
     else if (loginError == 'Request failed with status code 404')
-      Alert.alert('비밀번호가 일치하지 않습니다.');
+      Alert.alert('잘못된 로그인 정보입니다. ');
     else if (loginError == 'Request failed with status code 400') {
       myEmail.onChange(emailInput.value);
       setModalVisible(true);
