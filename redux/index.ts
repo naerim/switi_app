@@ -8,6 +8,7 @@ import manageReducer, { IManageState } from './manageReducer';
 import searchReducer, { ISearchState } from './search/searchReducer';
 import reportReducer, { IReportState } from './report/reportReducer';
 import evaluateReducer, { IEvaluationState } from './evaluationReducer';
+import { IWithdrawalState } from './withdrawlReducer';
 
 export interface rootState {
   studyReducer: IStudyState;
@@ -17,6 +18,7 @@ export interface rootState {
   searchReducer: ISearchState;
   reportReducer: IReportState;
   evaluateReducer: IEvaluationState;
+  withdrawalReducer: IWithdrawalState;
 }
 
 const persistConfig = {

@@ -7,8 +7,16 @@ import RadioButtonContainer from './radioButtonContainer';
 import ReasonText from './reasonText';
 import useInput from '../../util/useInput';
 import BasicModal from '../../Component/BasicModal';
+import { deleteUserThunk } from '../../redux/withdrawlReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import { searchAllDeleteThunk } from '../../redux/search/searchReducer';
 
 const MyPage_Withdrawal = () => {
+  const dispatch = useDispatch();
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
   const goMyPage = useGoMyPageUserInfo();
   const [reason, setReason] = useState(0);
 
@@ -17,7 +25,10 @@ const MyPage_Withdrawal = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
-  const onPressWithdrawal = () => setModalVisible(true);
+  const onPressWithdrawal = () => {
+    setModalVisible(true);
+    dispatch(deleteUserThunk(login.token));
+  };
   const [isLoading, setIsLoading] = useState(false);
 
   return (
