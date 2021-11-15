@@ -4,7 +4,6 @@ import ProfileContainer from './components/Layout/ProfileContainer';
 import Age from './components/Age';
 import useInput from '../../util/useInput';
 import FlatListModal from './components/FlatListModal';
-import { Area, InterestList } from '../../Data';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 
@@ -12,14 +11,19 @@ const FirstProfile = () => {
   const ageInput = useInput('');
   const desc =
     '관심지역과 분야를 설정하면,\n내가 원하는 스터디 모집 알림을 받을 수 있어요!';
-  const goSecondProfile = useGoSecondProfile();
   const goSignIn = useGoSignIn();
 
   const [selectArea, setSelectArea] = useState<number[]>([]);
   const [selectInterest, setSelectInterest] = useState<number[]>([]);
+  // params로 데이터 넘김
+  const goSecondProfile = useGoSecondProfile(
+    ageInput.value,
+    selectArea,
+    selectInterest
+  );
 
   // 다음 버튼
-  const clickNextButton = () => {
+  const clickNextButton = async () => {
     goSecondProfile();
   };
 

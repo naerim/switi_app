@@ -22,9 +22,21 @@ export const useGoFirstProfile = () => {
   return useCallback(() => navigation.navigate('firstProfile'), [navigation]);
 };
 
-export const useGoSecondProfile = () => {
+export const useGoSecondProfile = (
+  age: string,
+  area: number[],
+  interest: number[]
+) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('secondProfile'), [navigation]);
+  return useCallback(
+    () =>
+      navigation.navigate('secondProfile', {
+        age: age,
+        area: area,
+        interest: interest,
+      }),
+    [age, area, interest, navigation]
+  );
 };
 
 export const useGoMyPageProfile = () => {
