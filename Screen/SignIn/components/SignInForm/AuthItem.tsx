@@ -32,7 +32,6 @@ const AuthItem: React.FC<AuthItemProps> = ({
 
 const Container = styled.View`
   flex: 1;
-  padding: 0 10px;
 `;
 
 const Title = styled.Text`

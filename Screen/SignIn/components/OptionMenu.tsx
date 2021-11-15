@@ -23,7 +23,6 @@ const OptionMenu = () => {
 const Container = styled.View`
   flex-direction: column;
   width: 100%;
-  padding: 0 10px;
 `;
 
 const ItemContainer = styled.View`

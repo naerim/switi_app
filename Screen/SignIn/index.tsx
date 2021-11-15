@@ -85,8 +85,6 @@ const SignIn: React.FC = () => {
         </IconContainer>
         <SignInFormContainer>
           <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
-        </SignInFormContainer>
-        <CheckBoxContainer>
           <CheckBox
             rightText="로그인 기억하기"
             rightTextStyle={{ fontSize: 12 }}
@@ -94,7 +92,7 @@ const SignIn: React.FC = () => {
             isChecked={checked}
             onClick={toggleChecked}
           />
-        </CheckBoxContainer>
+        </SignInFormContainer>
         <AuthButtonContainer>
           <BasicButton
             onPress={handleLogin}
@@ -124,10 +122,11 @@ const SignIn: React.FC = () => {
 
 const Container = styled.View`
   flex: 1;
+  padding-bottom: 20px;
 `;
 
 const IconContainer = styled.View`
-  flex: 2;
+  flex: 2.5;
   justify-content: center;
   align-items: center;
 `;
@@ -138,16 +137,12 @@ const Icon = styled.Image`
 `;
 
 const SignInFormContainer = styled.View`
-  flex: 3;
-`;
-
-const CheckBoxContainer = styled.View`
-  flex: 1;
-  padding: 0 10px;
+  flex: 2;
+  margin-bottom: 20px;
 `;
 
 const AuthButtonContainer = styled.View`
-  flex: 1.5;
+  margin: 15px 0;
 `;
 
 const OptionContainer = styled.View`
