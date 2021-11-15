@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
@@ -9,16 +9,17 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
 import { rootState } from '../../redux';
 import mainIcon from '../../Img/signIn_logo.png';
 
 const SignIn: React.FC = () => {
-  const emailInput = useInput('naerim1119@gmail.com');
-  const passwordInput = useInput('qwer1234!');
-  // const emailInput = useInput('mn0316@naver.com');
-  // const passwordInput = useInput('lee000316^^');
+  // const emailInput = useInput('naerim1119@gmail.com');
+  // const passwordInput = useInput('qwer1234!');
+  const [confirmOnPress, setConfirmOnPress] = useState(false);
+  const emailInput = useInput('mn0316@naver.com');
+  const passwordInput = useInput('lee000316^^');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // 이메일 인증 모달창
@@ -32,20 +33,19 @@ const SignIn: React.FC = () => {
   // 로그인된 이메일
   const myEmail = useInput('');
 
-  const { login, loginError } = useSelector(({ userReducer }: rootState) => ({
-    login: userReducer.login,
-    loginError: userReducer.loginError,
-  }));
-
-  const dispatch = useDispatch();
-  const onLogin = useCallback(
-    (email, password) => dispatch(loginRequest(email, password)),
-    [dispatch]
+  const { login, loginError } = useSelector(
+    ({ userReducer }: rootState) => ({
+      login: userReducer.login,
+      loginError: userReducer.loginError,
+    }),
+    shallowEqual
   );
 
+  const dispatch = useDispatch();
   const handleLogin = () => {
     const email = emailInput;
     const password = passwordInput;
+    setConfirmOnPress(!confirmOnPress);
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(false);
 
@@ -60,22 +60,25 @@ const SignIn: React.FC = () => {
     } else if (password.value.length < 8 || password.value.length > 16) {
       Alert.alert('비밀번호가 잘못 입력되었습니다. ');
     } else {
-      onLogin(email.value, password.value);
+      dispatch(loginRequest(email.value, password.value));
     }
   };
 
   // 로그인에 실패하면 실행
   // 문제점: 같은 문제로 로그인에 실패하면 실행이 안됨
+
   useEffect(() => {
-    if (loginError == 'Request failed with status code 500')
-      Alert.alert('네트워크 오류가 발생했습니다.');
-    else if (loginError == 'Request failed with status code 404')
-      Alert.alert('잘못된 로그인 정보입니다. ');
-    else if (loginError == 'Request failed with status code 400') {
-      myEmail.onChange(emailInput.value);
-      setModalVisible(true);
+    if (!login) {
+      if (loginError == 'Request failed with status code 500')
+        Alert.alert('네트워크 오류가 발생했습니다.');
+      else if (loginError == 'Request failed with status code 404')
+        Alert.alert('잘못된 로그인 정보입니다. ');
+      else if (loginError == 'Request failed with status code 400') {
+        myEmail.onChange(emailInput.value);
+        setModalVisible(true);
+      }
     }
-  }, [login, loginError]);
+  }, [loginError, confirmOnPress]);
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>

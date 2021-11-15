@@ -23,13 +23,12 @@ import createRequestThunk from './lib/createRequestThunk';
 
 // 로그인
 const login = async (email: string, password: string) => {
-  console.log(email, password);
   const response = await axios({
     method: 'post',
     url: 'http://localhost:4000/auth/login',
     data: { email: email, password: password },
   });
-
+  console.log('아이디, 비번', email, password);
   return response;
 };
 export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
@@ -41,7 +40,6 @@ const getMyPage = async (token: string) => {
     url: `http://localhost:4000/user/myPage`,
     headers: { Authorization: token },
   });
-
   return response;
 };
 export const getMyPageRequest = createRequestThunk(GET_MY_PAGE, getMyPage);
@@ -135,9 +133,11 @@ function userReducer(state = initialState, action: any) {
     switch (action.type) {
       case AUTH_LOGIN_SUCCESS:
         draft.login = action.payload;
+        // console.log('draft.login', draft.login);
         break;
       case AUTH_LOGIN_FAILURE:
         draft.loginError = action.payload;
+        // console.log('draft.loginError', draft.loginError);
         break;
       case GET_MY_PAGE_SUCCESS:
         draft.myPage = action.payload;
