@@ -7,10 +7,6 @@ import {
   DELETE_ALL_SEARCH_HISTORY_SUCCESS,
 } from './action';
 import axios from 'axios';
-import createRequestThunk from '../lib/createRequestThunk';
-import { brown50 } from 'react-native-paper/lib/typescript/styles/colors';
-import { searchAllDelete, searchDelete } from './search/search.api';
-import searchReducer from './search/searchReducer';
 
 export interface IWithdrawalState {
   withdrawalSuccess: boolean;
