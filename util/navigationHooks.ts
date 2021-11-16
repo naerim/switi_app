@@ -106,9 +106,12 @@ export const useGoEmailAuth = () => {
   return useCallback(() => navigation.navigate('emailAuth'), [navigation]);
 };
 
-export const useGoCertification = () => {
+export const useGoCertification = (email: string) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('certification'), [navigation]);
+  return useCallback(
+    () => navigation.navigate('certification', { email: email }),
+    [navigation, email]
+  );
 };
 
 export const useGoRenewPassword = () => {

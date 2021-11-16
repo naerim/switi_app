@@ -4,16 +4,38 @@ import { useGoEmailAuth, useGoRenewPassword } from '../../util/navigationHooks';
 import ResetPwdContainer from './components/Layout/ResetPwdContainer';
 import useInput from '../../util/useInput';
 import AuthInput from './components/AuthInput';
+import axios from 'axios';
+import { Alert } from 'react-native';
 
-const Certification = () => {
+const Certification = ({ route }: any) => {
+  const email = route.params.email ? route.params.email : '';
   const goEmailAuth = useGoEmailAuth();
   const goRenewPassword = useGoRenewPassword();
   const authNum = useInput('');
 
+  const handleCertification = () => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/checkCode',
+      data: { email: email, inputCode: authNum.value },
+    })
+      .then((res) => {
+        goRenewPassword();
+        setTimeout(() => {
+          goRenewPassword();
+        }, 500);
+      })
+      .catch((err) => {
+        if (err.toString() == 'Error: Request failed with status code 404')
+          Alert.alert('인증번호가 일치하지 않습니다.');
+        else Alert.alert('이메일 인증 오류 :(');
+      });
+  };
+
   return (
     <ResetPwdContainer
       buttonText="확인"
-      getNumber={goRenewPassword}
+      getNumber={handleCertification}
       onPress={goEmailAuth}
     >
       <Container>
