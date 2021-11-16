@@ -10,7 +10,7 @@ import { Alert } from 'react-native';
 const Certification = ({ route }: any) => {
   const email = route.params.email ? route.params.email : '';
   const goEmailAuth = useGoEmailAuth();
-  const goRenewPassword = useGoRenewPassword();
+  const goRenewPassword = useGoRenewPassword(email);
   const authNum = useInput('');
 
   const handleCertification = () => {

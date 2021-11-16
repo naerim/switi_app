@@ -6,20 +6,45 @@ import PasswordInput from '../SignUp/components/PasswordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import CompleteModal from './components/CompleteModal';
+import axios from 'axios';
+import { Alert } from 'react-native';
 
-const RenewPassword = () => {
+const RenewPassword = ({ route }: any) => {
+  const email = route.params.email ? route.params.email : '';
   const goLogin = useGoSignIn();
-  const goCertification = useGoCertification();
+  const goCertification = useGoCertification(email);
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
-  const onClick = () => {
+  const successChange = () => {
     setModalVisible(true);
     setTimeout(() => {
       goLogin();
     }, 2000);
+  };
+
+  const changePassword = () => {
+    // console.log('clickChangePassword');
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/setNewPwd',
+      data: { email: email, password: passwordInput.value },
+    })
+      .then((res) => {
+        console.log(email, 'email, renewPasswordSuccess');
+        successChange();
+      })
+      .catch((err) => {
+        if (err.toString() == 'Error: Request failed with status code 404') {
+          Alert.alert('존재하지 않는 이메일 입니다. ');
+          console.log(email, 'email, renewPassword404');
+        } else {
+          Alert.alert('이메일 인증 오류 :(');
+          console.log(email, 'email, renewPassword');
+        }
+      });
   };
 
   const isPassword = (pwd: string) => {
@@ -69,7 +94,7 @@ const RenewPassword = () => {
   return (
     <ResetPwdContainer
       buttonText="재설정 완료"
-      getNumber={onClick}
+      getNumber={changePassword}
       onPress={goCertification}
     >
       {passwordData.map(({ title, input, error }) => (

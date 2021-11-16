@@ -114,9 +114,12 @@ export const useGoCertification = (email: string) => {
   );
 };
 
-export const useGoRenewPassword = () => {
+export const useGoRenewPassword = (email: string) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('renewPassword'), [navigation]);
+  return useCallback(
+    () => navigation.navigate('renewPassword', { email: email }),
+    [navigation, email]
+  );
 };
 
 export const useGoStudyDetail = (idx: number) => {
