@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Alarm from '../Img/icon_alarm.png';
 import { Platform } from 'react-native';
-import useScroll from '../util/useScroll';
 
 interface Props {
   onPressTitle?: () => void;
@@ -13,7 +11,6 @@ interface Props {
 const ContainerWithBell: React.FC<Props> = ({
   title,
   children,
-  onPressBell,
   onPressTitle,
 }) => {
   // const { scroll, scrollOn } = useScroll();
@@ -27,9 +24,6 @@ const ContainerWithBell: React.FC<Props> = ({
         <TitleTouch onPress={onPressTitle}>
           <Title>{title}</Title>
         </TitleTouch>
-        <AlarmButton activeOpacity={0.8} onPress={onPressBell}>
-          <AlarmIcon source={Alarm} />
-        </AlarmButton>
       </HeaderContainer>
       {/*<ChildrenContainer onScroll={scrollOn}>*/}
       <ChildrenContainer>
@@ -70,17 +64,18 @@ const Title = styled.Text`
   margin-bottom: 10px;
 `;
 
-const AlarmIcon = styled.Image`
-  height: 18px;
-  width: 18px;
-`;
-
-const AlarmButton = styled.TouchableOpacity``;
-
-const Line = styled.View`
-  height: 1px;
-  background-color: #d8d8d8;
-`;
-const Nothing = styled.View``;
+// 알람 기능
+// const AlarmIcon = styled.Image`
+//   height: 18px;
+//   width: 18px;
+// `;
+//
+// const AlarmButton = styled.TouchableOpacity``;
+//
+// const Line = styled.View`
+//   height: 1px;
+//   background-color: #d8d8d8;
+// `;
+// const Nothing = styled.View``;
 
 export default ContainerWithBell;
