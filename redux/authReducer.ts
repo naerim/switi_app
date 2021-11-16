@@ -3,12 +3,8 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
-  POST_FIND_PWD,
-  POST_FIND_PWD_SUCCESS,
-  POST_FIND_PWD_FAILURE,
 } from './action';
 import axios from 'axios';
-import createRequestThunk from './lib/createRequestThunk';
 
 export interface IAuthState {
   withdrawalSuccess: boolean;
@@ -32,46 +28,26 @@ const deleteUser = async (token: string) => {
   return response;
 };
 
-const findPwd = async (email: string) => {
-  const response = await axios({
-    method: 'post',
-    url: 'http://localhost:4000/auth/findPwd',
-    data: { keyword: email },
-  });
-  console.log(`비밀번호 찾기 ${JSON.stringify(response.data)}`);
-  return response;
-};
-
 export const deleteUserThunk = (token: string) => async (dispatch: any) => {
   const response = await deleteUser(token);
   if (response.data.result) dispatch({ type: DELETE_USER_SUCCESS });
   return response.data.result;
 };
 
-export const findPwdThunk = createRequestThunk(POST_FIND_PWD, findPwd);
-
 function authReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
       case DELETE_USER:
         draft.withdrawalError = initialState.withdrawalError;
+        console.log('DELETE_USER', draft.withdrawalError);
         break;
       case DELETE_USER_SUCCESS:
         draft.withdrawalSuccess = true;
+        console.log('DELETE_USER_SUCCESS', draft.withdrawalSuccess);
         break;
       case DELETE_USER_FAILURE:
         draft.withdrawalError = action.payload;
-        break;
-      case POST_FIND_PWD:
-        draft.findPwdSuccess = initialState.findPwdSuccess;
-        break;
-      case POST_FIND_PWD_SUCCESS:
-        draft.findPwdSuccess = true;
-        console.log('findPwdSuccess', draft.findPwdSuccess);
-        break;
-      case POST_FIND_PWD_FAILURE:
-        draft.findPwdSuccess = false;
-        console.log('findPwdSuccess', draft.findPwdSuccess);
+        console.log('DELETE_USER_FAILURE', draft.withdrawalError);
         break;
       default:
         break;

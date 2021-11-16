@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import BasicContainer from '../../Component/ContainerWithBack';
 import { useGoMyPageUserInfo } from '../../util/navigationHooks';
@@ -7,53 +7,39 @@ import RadioButtonContainer from './radioButtonContainer';
 import ReasonText from './reasonText';
 import useInput from '../../util/useInput';
 import BasicModal from '../../Component/BasicModal';
-import authReducer, {
-  deleteUserThunk,
-  IAuthState,
-} from '../../redux/authReducer';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { Alert } from 'react-native';
-import store from '../../redux/store';
+
+import axios from 'axios';
 
 const MyPage_Withdrawal = () => {
-  const dispatch = useDispatch();
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { withdrawalSuccess, withdrawalError } = useSelector(
-    (state: rootState) => ({
-      withdrawalSuccess: state.authReducer.withdrawalSuccess,
-      withdrawalError: state.authReducer.withdrawalError,
-    }),
-    shallowEqual
-  );
   const goMyPage = useGoMyPageUserInfo();
   const [reason, setReason] = useState(0);
-
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const reasonInput = useInput('');
   const closeModal = () => {
     setModalVisible(false);
   };
-  const onPressWithdrawal = async () => {
-    dispatch(deleteUserThunk(login.token));
-    //withdrawalSuccess가 참일때만 아래 실행.
-    await console.log(withdrawalSuccess, 'withdrawalSuccess1');
-    await modalOpen();
-    //로그아웃 추가 필요
-  };
-  const modalOpen = () => {
-    console.log(withdrawalSuccess, 'withdrawalSuccess2');
-    if (withdrawalSuccess) {
-      setModalVisible(true);
-    }
-  };
 
-  useEffect(() => {
-    if (withdrawalError == 'Request failed with status code 500')
-      Alert.alert('네트워크 오류가 발생했습니다.');
-  }, [withdrawalError]);
+  const handleUserDelete = async (token: string) => {
+    axios({
+      method: 'delete',
+      url: 'http://localhost:4000/auth/deleteUser',
+      headers: { Authorization: token },
+    })
+      .then((res) => {
+        setModalVisible(true);
+      })
+      .catch((err) => {
+        if (err.toString() == 'Error: Request failed with status code 500')
+          Alert.alert('네트워크 오류가 발생했습니다');
+        else Alert.alert('탈퇴 요청에 문제가 있습니다');
+      });
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -81,7 +67,7 @@ const MyPage_Withdrawal = () => {
             />
             <TwoButton
               text="네, 탈퇴할래요"
-              onPress={onPressWithdrawal}
+              onPress={() => handleUserDelete(login.token)}
               loading={isLoading}
               color="#86E3C3"
               textColor="white"
