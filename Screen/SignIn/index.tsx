@@ -9,10 +9,14 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
 import { rootState } from '../../redux';
 import mainIcon from '../../Img/signIn_logo.png';
+import {
+  emailCheck,
+  passwordCheck,
+} from '../../Component/authFunction';
 
 const SignIn: React.FC = () => {
   // const emailInput = useInput('naerim1119@gmail.com');
@@ -32,34 +36,20 @@ const SignIn: React.FC = () => {
   // 로그인된 이메일
   const myEmail = useInput('');
 
-  const { login, loginError } = useSelector(
-    ({ userReducer }: rootState) => ({
-      login: userReducer.login,
-      loginError: userReducer.loginError,
-    }),
-    shallowEqual
-  );
+  const { loginError } = useSelector(({ userReducer }: rootState) => ({
+    loginError: userReducer.loginError,
+  }));
 
   const dispatch = useDispatch();
 
   const handleLogin = () => {
     const email = emailInput;
     const password = passwordInput;
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setIsLoading(false);
-
-    if (email.value === '') {
-      Alert.alert('이메일 주소를 입력해주세요');
-    } else if (!email.value.includes('@') || !email.value.includes('.')) {
-      Alert.alert('이메일 주소가 잘못되었습니다.');
-    } else if (!emailRegex.test(email.value)) {
-      Alert.alert('이메일 주소가 잘못되었습니다. ');
-    } else if (password.value === '') {
-      Alert.alert('비밀번호를 입력해 주세요. ');
-    } else if (password.value.length < 8 || password.value.length > 16) {
-      Alert.alert('비밀번호가 잘못 입력되었습니다. ');
-    } else {
-      dispatch(loginRequest(email.value, password.value));
+    if (emailCheck(email.value)) {
+      if (passwordCheck(password.value)) {
+        dispatch(loginRequest(email.value, password.value));
+      }
     }
   };
   useEffect(() => {

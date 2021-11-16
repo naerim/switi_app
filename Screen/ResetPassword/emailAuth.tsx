@@ -7,6 +7,7 @@ import AuthInput from './components/AuthInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { findPwdThunk } from '../../redux/authReducer';
+import { Alert } from 'react-native';
 
 const EmailAuth = () => {
   const dispatch = useDispatch();
@@ -20,13 +21,19 @@ const EmailAuth = () => {
   const email = useInput('');
 
   const getNumber = async () => {
-    if (email.value !== '') {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (email.value === '') {
+      Alert.alert('이메일 주소를 입력해주세요');
+    } else if (!email.value.includes('@') || !email.value.includes('.')) {
+      Alert.alert('이메일 주소가 잘못되었습니다.');
+    } else if (!emailRegex.test(email.value)) {
+      Alert.alert('이메일 주소가 잘못되었습니다. ');
+    } else {
       await dispatch(findPwdThunk(email.value));
       if (findPwdSuccess) {
         await goCertification;
       }
     }
-    // 인증번호 보내기
   };
 
   return (

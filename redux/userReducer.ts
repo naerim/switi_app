@@ -136,6 +136,7 @@ function userReducer(state = initialState, action: any) {
     switch (action.type) {
       case AUTH_LOGIN:
         draft.loginError = initialState.loginError;
+        break;
       case AUTH_LOGIN_SUCCESS:
         draft.login = action.payload;
         break;
