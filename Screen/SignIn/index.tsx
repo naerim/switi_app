@@ -13,10 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
 import { rootState } from '../../redux';
 import mainIcon from '../../Img/signIn_logo.png';
-import {
-  emailCheck,
-  passwordCheck,
-} from '../../Component/authFunction';
+import { emailCheck, passwordCheck } from '../../Component/authFunction';
 
 const SignIn: React.FC = () => {
   // const emailInput = useInput('naerim1119@gmail.com');

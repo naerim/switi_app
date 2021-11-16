@@ -12,11 +12,13 @@ import createRequestThunk from './lib/createRequestThunk';
 
 export interface IAuthState {
   withdrawalSuccess: boolean;
+  withdrawalError: any;
   findPwdSuccess: boolean;
 }
 
 const initialState = {
   withdrawalSuccess: false,
+  withdrawalError: null,
   findPwdSuccess: false,
 };
 
@@ -43,12 +45,8 @@ const findPwd = async (email: string) => {
 export const deleteUserThunk = (token: string) => async (dispatch: any) => {
   const response = await deleteUser(token);
   if (response.data.result) dispatch({ type: DELETE_USER_SUCCESS });
+  return response.data.result;
 };
-
-// export const findPwdThunk = (email: string) => async (dispatch: any) => {
-//   const response = await findPwd(email);
-//   if (response.data.result) dispatch({ type: POST_FIND_PWD_SUCCESS });
-// };
 
 export const findPwdThunk = createRequestThunk(POST_FIND_PWD, findPwd);
 
@@ -56,13 +54,13 @@ function authReducer(state = initialState, action: any) {
   return produce(state, (draft) => {
     switch (action.type) {
       case DELETE_USER:
-        draft.withdrawalSuccess = initialState.withdrawalSuccess;
+        draft.withdrawalError = initialState.withdrawalError;
         break;
       case DELETE_USER_SUCCESS:
         draft.withdrawalSuccess = true;
         break;
       case DELETE_USER_FAILURE:
-        draft.withdrawalSuccess = false;
+        draft.withdrawalError = action.payload;
         break;
       case POST_FIND_PWD:
         draft.findPwdSuccess = initialState.findPwdSuccess;
