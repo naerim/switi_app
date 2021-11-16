@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import UserIcon from '../../../../Img/icon_user_default.png';
+import UserIcon from '../../../../Img/icon_profile.png';
 import ClickIcon from '../../../../Img/btn_back.png';
 import { useGoProfileDetail } from '../../../../util/navigationHooks';
 

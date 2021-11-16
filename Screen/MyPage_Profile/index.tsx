@@ -22,7 +22,6 @@ const MyPage_Profile = () => {
   const { myProfile } = useSelector(({ userReducer }: rootState) => ({
     myProfile: userReducer.myProfile,
   }));
-  console.log(myProfile);
 
   //const [isLoading, setIsLoading] = useState(false);
 
