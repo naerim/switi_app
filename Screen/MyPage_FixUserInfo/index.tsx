@@ -10,13 +10,13 @@ import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import AllInputContainer from './input/InputContent';
 import FixButton from './fixButton';
-import ImagePickerContainer from './imagePicker';
 import IsNickname from './input/inputConfirm/isNickname';
 import IsEmail from './input/inputConfirm/isEmail';
 import IsPassword from './input/inputConfirm/isPassword';
 import IsSamePassword from './input/inputConfirm/isSamePassword';
 import IsBeforePassword from './input/inputConfirm/isBeforePassword';
 import useScroll from '../../util/useScroll';
+import MyImage from './MyImage';
 
 const MyPage_FixUserInfo = () => {
   const goMyPageUserInfo = useGoMyPageUserInfo();
@@ -92,7 +92,7 @@ const MyPage_FixUserInfo = () => {
     >
       <MarginContainer onScroll={scrollOn}>
         <PictureContainer>
-          <ImagePickerContainer />
+          <MyImage />
         </PictureContainer>
         <InputContainer>
           {fixUserInfoData.map(
