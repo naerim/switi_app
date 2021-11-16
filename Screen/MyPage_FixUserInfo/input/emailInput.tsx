@@ -26,7 +26,7 @@ const EmailInput: React.FC<InputProps> = ({ input, error }) => {
       <Input
         value={input.value}
         onChangeText={input.onChange}
-        placeholder={myProfile.email}
+        placeholder={myProfile.myProfile.email}
         placeholderTextColor="black"
         editable={false}
         keyboardType="email-address"
