@@ -6,6 +6,7 @@ import useInput from '../../util/useInput';
 import AuthInput from './components/AuthInput';
 import axios from 'axios';
 import { Alert } from 'react-native';
+import { emailCheck } from '../../Component/authFunction';
 
 const EmailAuth = () => {
   const email = useInput('');
@@ -22,22 +23,24 @@ const EmailAuth = () => {
     '입력하신 이메일 주소로 인증번호가 전송됩니다.\n인증이 완료된 후 비밀번호를 재설정해주세요.';
 
   const getNumber = async () => {
-    axios({
-      method: 'post',
-      url: 'http://localhost:4000/auth/findPwd',
-      data: { email: email.value },
-    })
-      .then((res) => {
-        goCertification();
-        setTimeout(() => {
-          goCertification();
-        }, 500);
+    if (emailCheck(email.value)) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/findPwd',
+        data: { email: email.value },
       })
-      .catch((err) => {
-        if (err.toString() == 'Error: Request failed with status code 404')
-          Alert.alert('존재하지 않는 이메일 입니다. ');
-        else Alert.alert('이메일 인증 오류 :(');
-      });
+        .then((res) => {
+          goCertification();
+          setTimeout(() => {
+            goCertification();
+          }, 500);
+        })
+        .catch((err) => {
+          if (err.toString() == 'Error: Request failed with status code 404')
+            Alert.alert('존재하지 않는 이메일 입니다');
+          else Alert.alert('이메일 인증 오류 :(');
+        });
+    }
   };
 
   return (

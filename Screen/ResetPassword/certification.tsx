@@ -28,7 +28,10 @@ const Certification = ({ route }: any) => {
       .catch((err) => {
         if (err.toString() == 'Error: Request failed with status code 404')
           Alert.alert('인증번호가 일치하지 않습니다.');
-        else Alert.alert('이메일 인증 오류 :(');
+        else
+          Alert.alert(
+            '이메일 인증 오류 발생 이메일주소를 확인해보세요'
+          );
       });
   };
 
