@@ -28,7 +28,7 @@ import {
 } from './DataFunc';
 import AmendModal from './AmendModal';
 import axios from 'axios';
-import { searchRequest } from '../../redux/search/searchReducer';
+import { searchKeywordRequest } from '../../redux/search/searchReducer';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
@@ -110,12 +110,14 @@ const AmendStudy = () => {
       .then((res) => {
         onGetMyStudyList(login.token);
         onGetStudyDetail(login.token, studyDetail.id);
-        //dispatch(searchRequest(login.token, studyDetail.title));
         fetchOnlineStudyList(true, '');
         fetchOfflineStudyList(true, '');
         setTimeout(() => {
           closeModal();
           goBack();
+        }, 300);
+        setTimeout(() => {
+          dispatch(searchKeywordRequest(login.token, studyDetail.title));
         }, 500);
       })
       .catch((err) => {
