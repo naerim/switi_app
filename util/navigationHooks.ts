@@ -17,12 +17,16 @@ export const useGoSignUp = () => {
   return useCallback(() => navigation.navigate('SignUp'), [navigation]);
 };
 
-export const useGoFirstProfile = () => {
+export const useGoFirstProfile = (nickname: string) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('firstProfile'), [navigation]);
+  return useCallback(
+    () => navigation.navigate('firstProfile', { nickname: nickname }),
+    [nickname, navigation]
+  );
 };
 
 export const useGoSecondProfile = (
+  nickname: string,
   age: string,
   area: number[],
   interest: number[]
@@ -31,11 +35,12 @@ export const useGoSecondProfile = (
   return useCallback(
     () =>
       navigation.navigate('secondProfile', {
+        nickname: nickname,
         age: age,
         area: area,
         interest: interest,
       }),
-    [age, area, interest, navigation]
+    [nickname, age, area, interest, navigation]
   );
 };
 

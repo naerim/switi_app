@@ -10,6 +10,7 @@ import { rootState } from '../../redux';
 import axios from 'axios';
 
 const SecondProfile = ({ route }: any) => {
+  const nickname = route.params.nickname;
   const age = route.params.age;
   const area = route.params.area;
   const interest = route.params.interest;
@@ -17,7 +18,7 @@ const SecondProfile = ({ route }: any) => {
   const desc =
     '나와 더 잘 맞는 스터디원과의 만남을 위해\n프로필을 작성해주세요!';
   const goLogin = useGoSignIn();
-  const goFirstProfile = useGoFirstProfile();
+  const goFirstProfile = useGoFirstProfile(nickname);
   // 나의 상황
   const [state, setState] = useState<number[]>([]);
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
@@ -31,31 +32,32 @@ const SecondProfile = ({ route }: any) => {
   }));
 
   const setProfile = () => {
-    // axios({
-    //   method: 'put',
-    //   url: 'http://localhost:4000/user/updateProfile',
-    //   data: {
-    //     age: age,
-    //     aboutme: introduceInput.value,
-    //     myRegion: area.map((n: number) => {
-    //       n += 1;
-    //       return n;
-    //     }),
-    //     myInterest: interest.map((n: number) => {
-    //       n += 1;
-    //       return n;
-    //     }),
-    //     myCharacter: selectCharacter.map((n) => {
-    //       n += 1;
-    //       return n;
-    //     }),
-    //     myState: state,
-    //   },
-    // })
-    //   .then(() => {
-    //     goLogin();
-    //   })
-    //   .catch((err) => console.log(err));
+    axios({
+      method: 'put',
+      url: 'http://localhost:4000/user/setProfile',
+      data: {
+        nickname: nickname,
+        age: age,
+        aboutme: introduceInput.value,
+        myRegion: area.map((n: number) => {
+          n += 1;
+          return n;
+        }),
+        myInterest: interest.map((n: number) => {
+          n += 1;
+          return n;
+        }),
+        myCharacter: selectCharacter.map((n) => {
+          n += 1;
+          return n;
+        }),
+        myState: state,
+      },
+    })
+      .then(() => {
+        goLogin();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

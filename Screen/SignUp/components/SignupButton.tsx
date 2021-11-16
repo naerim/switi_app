@@ -9,7 +9,7 @@ interface Props {
 }
 
 const SignupButton: React.FC<Props> = ({ success, input }) => {
-  const goFirstProfile = useGoFirstProfile();
+  const goFirstProfile = useGoFirstProfile(input.nickname);
 
   // 회원가입
   const onPress = () => {
@@ -25,6 +25,7 @@ const SignupButton: React.FC<Props> = ({ success, input }) => {
     })
       .then((res) => {
         console.log('회원가입 성공');
+        console.log(input.nickname);
         goFirstProfile();
       })
       .catch((err) => {

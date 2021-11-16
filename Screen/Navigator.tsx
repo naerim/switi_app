@@ -68,19 +68,9 @@ const LoginNavigation = () => (
     <Stack.Screen name="SignIn" component={SignIn} />
     <Stack.Screen name="SignUp" component={SignUp} />
     <Stack.Screen name="Terms" component={Terms} />
-    <Stack.Screen name="firstProfile" component={ProfileNavigation} />
-    <Stack.Screen name="emailAuth" component={ResetPasswordNavigation} />
-  </Stack.Navigator>
-);
-
-const ProfileNavigation = () => (
-  <Stack.Navigator
-    mode="modal"
-    headerMode="none"
-    screenOptions={{ animationEnabled: false }}
-  >
     <Stack.Screen name="firstProfile" component={FirstProfile} />
     <Stack.Screen name="secondProfile" component={SecondProfile} />
+    <Stack.Screen name="emailAuth" component={ResetPasswordNavigation} />
   </Stack.Navigator>
 );
 

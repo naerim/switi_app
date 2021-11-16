@@ -7,7 +7,8 @@ import FlatListModal from './components/FlatListModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 
-const FirstProfile = () => {
+const FirstProfile = ({ route }: any) => {
+  const nickname = route.params.nickname;
   const ageInput = useInput('');
   const desc =
     '관심지역과 분야를 설정하면,\n내가 원하는 스터디 모집 알림을 받을 수 있어요!';
@@ -17,6 +18,7 @@ const FirstProfile = () => {
   const [selectInterest, setSelectInterest] = useState<number[]>([]);
   // params로 데이터 넘김
   const goSecondProfile = useGoSecondProfile(
+    nickname,
     ageInput.value,
     selectArea,
     selectInterest
