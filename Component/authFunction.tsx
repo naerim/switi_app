@@ -36,7 +36,6 @@ export const getNumber = async (email: string) => {
         Alert.alert('이메일 전송 완료');
       })
       .catch((err) => {
-        console.log(err);
         if (err.toString() == 'Error: Request failed with status code 404')
           Alert.alert('존재하지 않는 이메일 입니다');
         else Alert.alert('인증번호 전송 오류 :(');
