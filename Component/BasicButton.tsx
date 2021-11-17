@@ -13,13 +13,8 @@ interface LoadingProps {
   loading?: boolean;
 }
 
-const BasicButton: React.FC<Props> = ({
-  text,
-  onPress,
-  loading = false,
-  disabled,
-}) => (
-  <Container disabled={disabled} loading={loading} onPress={onPress}>
+const BasicButton: React.FC<Props> = ({ text, onPress, loading, disabled }) => (
+  <Container disabled={disabled || loading} loading={loading} onPress={onPress}>
     {loading ? <ActivityIndicator color="white" /> : <Text>{text}</Text>}
   </Container>
 );

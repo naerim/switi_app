@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Alert } from 'react-native';
 import CheckBox from 'react-native-check-box';
@@ -9,9 +9,8 @@ import OptionMenu from './components/OptionMenu';
 import BasicContainer from '../../Component/BasicContainer';
 import EmailAuthModal from './components/EmailAuthModal';
 import EmailAuthDoneModal from './components/EmailAuthModal/EmailAuthDoneModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginRequest } from '../../redux/userReducer';
-import { rootState } from '../../redux';
 import mainIcon from '../../Img/signIn_logo.png';
 import { emailCheck, passwordCheck } from '../../Component/authFunction';
 
@@ -32,39 +31,45 @@ const SignIn: React.FC = () => {
 
   // 로그인된 이메일
   const myEmail = useInput('');
-
-  const { loginError } = useSelector(({ userReducer }: rootState) => ({
-    loginError: userReducer.loginError,
-  }));
-
   const dispatch = useDispatch();
 
-  const handleLogin = () => {
-    const email = emailInput;
-    const password = passwordInput;
-    setIsLoading(false);
-    if (emailCheck(email.value)) {
-      if (passwordCheck(password.value)) {
-        dispatch(loginRequest(email.value, password.value));
-      }
-    }
-  };
-  useEffect(() => {
-    if (loginError == 'Request failed with status code 500')
+  const checkError = (login: any) => {
+    const err = login.payload;
+    if (err == 'Request failed with status code 500')
       Alert.alert('네트워크 오류가 발생했습니다.');
-    else if (loginError == 'Request failed with status code 404')
+    else if (err == 'Request failed with status code 404')
       Alert.alert('잘못된 로그인 정보입니다. ');
-    else if (loginError == 'Request failed with status code 400') {
+    else if (err == 'Request failed with status code 400') {
       myEmail.onChange(emailInput.value);
       setModalVisible(true);
     }
-  }, [loginError]);
+  };
+
+  const handleLogin = async () => {
+    setIsLoading(true);
+    const email = emailInput;
+    const password = passwordInput;
+
+    if (emailCheck(email.value)) {
+      if (passwordCheck(password.value)) {
+        try {
+          const login = await dispatch(
+            loginRequest(email.value, password.value)
+          );
+          checkError(login);
+        } catch (error) {
+          Alert.alert('잘못된 접근입니다.');
+        }
+        setIsLoading(false);
+      }
+    }
+  };
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>
       <Container>
         <IconContainer>
-          <Icon source={mainIcon}></Icon>
+          <Icon source={mainIcon} />
         </IconContainer>
         <SignInFormContainer>
           <SignInForm emailInput={emailInput} passwordInput={passwordInput} />
