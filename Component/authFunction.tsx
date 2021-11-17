@@ -1,4 +1,5 @@
 import { Alert } from 'react-native';
+import axios from 'axios';
 
 export const emailCheck = (email: string) => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -22,4 +23,23 @@ export const passwordCheck = (password: string) => {
     Alert.alert('비밀번호가 잘못 입력되었습니다. ');
     return false;
   } else return true;
+};
+
+export const getNumber = async (email: string) => {
+  if (emailCheck(email)) {
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/findPwd',
+      data: { email: email },
+    })
+      .then((res) => {
+        Alert.alert('이메일 전송 완료');
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.toString() == 'Error: Request failed with status code 404')
+          Alert.alert('존재하지 않는 이메일 입니다');
+        else Alert.alert('인증번호 전송 오류 :(');
+      });
+  }
 };
