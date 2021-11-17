@@ -15,22 +15,26 @@ const Certification = ({ route }: any) => {
   const authNum = useInput('');
 
   const handleCertification = () => {
-    axios({
-      method: 'post',
-      url: 'http://localhost:4000/auth/checkCode',
-      data: { email: email, inputCode: authNum.value },
-    })
-      .then((res) => {
-        goRenewPassword();
-        setTimeout(() => {
-          goRenewPassword();
-        }, 500);
+    if (authNum.value === '') {
+      Alert.alert('인증번호를 입력해주세요');
+    } else {
+      axios({
+        method: 'post',
+        url: 'http://localhost:4000/auth/checkCode',
+        data: { email: email, inputCode: authNum.value },
       })
-      .catch((err) => {
-        if (err.toString() == 'Error: Request failed with status code 404')
-          Alert.alert('인증번호가 일치하지 않습니다.');
-        else Alert.alert('이메일 인증 오류 발생 이메일주소를 확인해보세요');
-      });
+        .then((res) => {
+          goRenewPassword();
+          setTimeout(() => {
+            goRenewPassword();
+          }, 500);
+        })
+        .catch((err) => {
+          if (err.toString() == 'Error: Request failed with status code 404')
+            Alert.alert('인증번호가 일치하지 않습니다.');
+          else Alert.alert('이메일 인증 오류 발생 이메일주소를 확인해보세요');
+        });
+    }
   };
 
   return (
