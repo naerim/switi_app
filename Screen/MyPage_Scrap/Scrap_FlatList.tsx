@@ -6,6 +6,7 @@ import useScroll from '../../util/useScroll';
 import { DataType } from '../Home/interface';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import EmptyScreen from '../../Component/EmptyScreen';
 
 const Scrap_FlatList = () => {
   const { scroll, scrollOn } = useScroll();
@@ -27,6 +28,9 @@ const Scrap_FlatList = () => {
           extraData={scrapList && scrapList.scrapList}
           contentContainerStyle={{ paddingBottom: 80 }}
           onScroll={scrollOn}
+          ListEmptyComponent={
+            <EmptyScreen desc="스크랩한 스터디가 없습니다." />
+          }
         />
       </MarginContainer>
     </Wrap>

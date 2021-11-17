@@ -5,6 +5,7 @@ import useScroll from '../../util/useScroll';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import RenderItem from '../Home/components/StudyFlatList/RenderItem';
+import EmptyScreen from '../../Component/EmptyScreen';
 
 const Participation_FlatList = () => {
   const { scroll, scrollOn } = useScroll();
@@ -32,6 +33,7 @@ const Participation_FlatList = () => {
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0}
           onScroll={scrollOn}
+          ListEmptyComponent={<EmptyScreen desc="완료된 스터디가 없습니다." />}
         />
       </MarginContainer>
     </Wrap>

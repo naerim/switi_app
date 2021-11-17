@@ -64,13 +64,12 @@ const ScrapHeader: React.FC<Props> = ({
           url: `http://localhost:4000/study/deleteScrap/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
-          dispatch(searchRequest(login.token, ''));
           setPopupText('모집글이 스크랩이 취소되었습니다.');
           setPopupVisible(true);
+          setIcon(NotScrapIcon);
           setTimeout(() => {
             setPopupVisible(false);
           }, 2000);
-          setIcon(NotScrapIcon);
         })
       : axios({
           method: 'post',
@@ -80,10 +79,10 @@ const ScrapHeader: React.FC<Props> = ({
           dispatch(searchRequest(login.token, ''));
           setPopupText('모집글이 스크랩되었습니다.');
           setPopupVisible(true);
+          setIcon(ScrapIcon);
           setTimeout(() => {
             setPopupVisible(false);
           }, 2000);
-          setIcon(ScrapIcon);
         });
   };
 

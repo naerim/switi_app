@@ -5,6 +5,7 @@ import Proceeding from './RenderItem/Proceeding';
 import Recruitment from './RenderItem/Recruitment';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
+import EmptyScreen from '../../../Component/EmptyScreen';
 
 interface Props {
   idx: number;
@@ -36,6 +37,15 @@ const ContentList: React.FC<Props> = ({ idx }) => {
           )
         }
         keyExtractor={(item: any) => item.id.toString()}
+        ListEmptyComponent={
+          <EmptyScreen
+            desc={
+              idx === 0
+                ? '참여하고 있는 스터디가 없습니다.'
+                : '모집글이 없습니다.'
+            }
+          />
+        }
       />
     </Container>
   );

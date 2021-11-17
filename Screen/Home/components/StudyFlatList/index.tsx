@@ -10,6 +10,7 @@ import {
 } from '../../../../redux/studyReducer';
 import { rootState } from '../../../../redux';
 import { DataType } from '../../interface';
+import EmptyScreen from '../../../../Component/EmptyScreen';
 
 interface Props {
   idx: number;
@@ -110,11 +111,7 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-          <EmptyContainer>
-            <EmptyFont>데이터 없음</EmptyFont>
-          </EmptyContainer>
-        )}
+        ListEmptyComponent={<EmptyScreen desc="진행중인 스터디가 없습니다." />}
       />
     </Container>
   );
@@ -127,14 +124,6 @@ const Container = styled.View`
 const SeparatorLine = styled.View`
   height: 1px;
   background-color: #f3f3f3;
-`;
-
-const EmptyContainer = styled.View`
-  margin-top: 10px;
-`;
-
-const EmptyFont = styled.Text`
-  font-size: 12px;
 `;
 
 export default StudyFlatList;
