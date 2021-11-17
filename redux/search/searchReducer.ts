@@ -2,18 +2,13 @@ import produce from 'immer';
 import {
   POST_STUDY_LIST,
   POST_STUDY_LIST_SUCCESS,
-  POST_STUDY_LIST_FAILURE, //에러는 나중에 추가..
   GET_SEARCH_HISTORY_LIST,
   GET_SEARCH_HISTORY_LIST_SUCCESS,
-  GET_SEARCH_HISTORY_LIST_FAILURE,
-  DELETE_ALL_SEARCH_HISTORY,
   DELETE_ALL_SEARCH_HISTORY_SUCCESS,
-  DELETE_ALL_SEARCH_HISTORY_FAILURE,
-  DELETE_SEARCH_HISTORY,
   DELETE_SEARCH_HISTORY_SUCCESS,
-  DELETE_SEARCH_HISTORY_FAILURE,
   REFRESH_STUDY_LIST_SUCCESS,
-  REFRESH_STUDY_LIST,
+  POST_SEARCH_KEYWORD,
+  POST_SEARCH_KEYWORD_SUCCESS,
 } from '../action';
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
@@ -52,10 +47,24 @@ const searchHistory = async (token: string) => {
   return response;
 };
 
+const searchKeyword = async (token: string, keyword: string) => {
+  const response = await axios({
+    method: 'post',
+    url: 'http://localhost:4000/search/searchKeyword',
+    headers: { Authorization: token },
+    data: { keyword: keyword },
+  });
+  return response;
+};
+
 export const searchRequest = createRequestThunk(POST_STUDY_LIST, search);
 export const searchHistoryRequest = createRequestThunk(
   GET_SEARCH_HISTORY_LIST,
   searchHistory
+);
+export const searchKeywordRequest = createRequestThunk(
+  POST_SEARCH_KEYWORD,
+  searchKeyword
 );
 
 export const searchDeleteThunk = (token: string, historyId: number) => async (
@@ -93,6 +102,9 @@ function searchReducer(state = initialState, action: any) {
         draft.searchHistoryList = state.searchHistoryList.filter(
           (history: any) => history.id !== action.meta.historyId
         );
+        break;
+      case POST_SEARCH_KEYWORD_SUCCESS:
+        draft.searchStudyList = action.payload.study;
         break;
       default:
         break;

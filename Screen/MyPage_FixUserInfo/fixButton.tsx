@@ -3,13 +3,12 @@ import styled from 'styled-components/native';
 
 interface Props {
   success: boolean;
-  input: { nickname: string; email: string; password: string };
   onPress: () => void;
 }
 
-const FixButton: React.FC<Props> = ({ success, input, onPress }) => {
+const FixButton: React.FC<Props> = ({ success, onPress }) => {
   return (
-    <Container disabled={success} onPress={onPress}>
+    <Container disabled={!success} onPress={onPress}>
       <TextStyle>저장하기</TextStyle>
     </Container>
   );

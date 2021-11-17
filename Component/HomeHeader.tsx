@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Logo from '../Img/logo_switi.png';
-import Alarm from '../Img/icon_alarm.png';
 import { Platform } from 'react-native';
 
 interface Props {
@@ -12,12 +11,14 @@ const HomeHeader: React.FC<Props> = ({ onPress }) => {
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 3 : 23 }}>
       <Icon source={Logo} />
-      <AlarmButton activeOpacity={0.8} onPress={onPress}>
-        <AlarmIcon source={Alarm} />
-      </AlarmButton>
     </Wrap>
   );
 };
+
+// 알람 기능
+// <AlarmButton activeOpacity={0.8} onPress={onPress}>
+//     <AlarmIcon source={Alarm} />
+// </AlarmButton>
 
 const Wrap = styled.View`
   flex: 1;
@@ -33,11 +34,12 @@ const Icon = styled.Image`
   width: 54px;
 `;
 
-const AlarmIcon = styled.Image`
-  height: 18px;
-  width: 18px;
-`;
-
-const AlarmButton = styled.TouchableOpacity``;
+// 알람 기능
+// const AlarmIcon = styled.Image`
+//   height: 18px;
+//   width: 18px;
+// `;
+//
+// const AlarmButton = styled.TouchableOpacity``;
 
 export default HomeHeader;

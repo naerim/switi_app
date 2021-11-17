@@ -4,14 +4,14 @@ import Notice_1 from './notice/notice_1';
 export const NoticeData = [
   {
     key: 0,
-    title: '[공지] 첫 번째 공지사항',
-    createAt: '2021. 11. 14',
+    title: '[알림] 스위티 소개',
+    createAt: '2021. 11. 17',
     Component: Notice_0,
   },
   {
     key: 1,
-    title: '[공지] 두 번째 공지사항',
-    createAt: '2021. 11. 15',
+    title: '[공지] 부적절한 콘텐츠를 발견한 경우',
+    createAt: '2021. 11. 18',
     Component: Notice_1,
   },
 ];

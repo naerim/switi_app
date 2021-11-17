@@ -35,23 +35,23 @@ const MoveScreen: React.FC<Props> = ({
         <SubTitleContainer onPress={goUserInfo}>
           <SubTitle>회원정보</SubTitle>
         </SubTitleContainer>
-        <SubTitleContainer onPress={goAlarm}>
-          <SubTitle>설정</SubTitle>
-        </SubTitleContainer>
-      </Container>
-      <Line />
-      <Container>
-        <Title>고객센터</Title>
         <SubTitleContainer onPress={goNotice}>
           <SubTitle>공지사항</SubTitle>
         </SubTitleContainer>
         <SubTitleContainer onPress={goReport}>
           <SubTitle>신고하기</SubTitle>
         </SubTitleContainer>
+        <SubTitleContainer onPress={goReport}>
+          <SubTitle>문의</SubTitle>
+        </SubTitleContainer>
       </Container>
     </Wrap>
   );
 };
+
+// <SubTitleContainer onPress={goAlarm}>
+//   <SubTitle>설정</SubTitle>
+// </SubTitleContainer>
 
 const Wrap = styled.View`
   flex: 5;
@@ -72,12 +72,13 @@ const SubTitleContainer = styled.TouchableOpacity``;
 
 const SubTitle = styled.Text`
   font-size: 12px;
-  padding: 10px 0;
+  padding-bottom: 15px;
 `;
 
 const Line = styled.Text`
   height: 1px;
   background-color: #f3f3f3;
+  margin-top: 10px;
 `;
 
 export default MoveScreen;

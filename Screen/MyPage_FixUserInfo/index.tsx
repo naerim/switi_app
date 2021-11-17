@@ -10,31 +10,55 @@ import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import AllInputContainer from './input/InputContent';
 import FixButton from './fixButton';
-import ImagePickerContainer from './imagePicker';
 import IsNickname from './input/inputConfirm/isNickname';
-import IsEmail from './input/inputConfirm/isEmail';
 import IsPassword from './input/inputConfirm/isPassword';
 import IsSamePassword from './input/inputConfirm/isSamePassword';
-import IsBeforePassword from './input/inputConfirm/isBeforePassword';
 import useScroll from '../../util/useScroll';
+import MyImage from './MyImage';
+import { useDispatch, useSelector } from 'react-redux';
+import { rootState } from '../../redux';
+import axios from 'axios';
+import { getMyPageRequest } from '../../redux/userReducer';
 
 const MyPage_FixUserInfo = () => {
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  const { myProfile } = useSelector(({ userReducer }: rootState) => ({
+    myProfile: userReducer.myProfile,
+  }));
   const goMyPageUserInfo = useGoMyPageUserInfo();
   const nicknameInput = useInput('');
-  const emailInput = useInput('');
+  const emailInput = useInput(myProfile.myProfile.email);
   const passwordInput = useInput('');
   const passwordCheckInput = useInput('');
   const BeforePasswordInput = useInput('');
   const [confirm, setConfirm] = useState(false);
   const { scroll, scrollOn } = useScroll();
+  const dispatch = useDispatch();
 
   const FixButtonOnPress = () => {
-    if (success) {
-      Alert.alert('수정완료');
-    } else {
-      Alert.alert('이메일이나 비밀번호의 입력값에 오류가 있습니다. ');
-    }
+    axios({
+      method: 'put',
+      url: 'http://localhost:4000/user/updateUserInfo',
+      headers: { Authorization: login.token },
+      data: {
+        nickname: input.nickname,
+        email: input.email,
+        newPassword: input.newPassword,
+        password: input.password,
+      },
+    })
+      .then(() => {
+        dispatch(getMyPageRequest(login.token));
+        Alert.alert('수정 되었습니다.');
+      })
+      .catch((err) => {
+        Alert.alert('비밀번호가 일치하지 않습니다.');
+        BeforePasswordInput.onChange('');
+      });
   };
+
   const fixUserInfoData = [
     {
       title: '닉네임',
@@ -47,13 +71,13 @@ const MyPage_FixUserInfo = () => {
       title: '이메일',
       Component: EmailInput,
       input: emailInput,
-      error: IsEmail(emailInput.value),
+      error: { status: Status.NORMARL, text: ' ' },
     },
     {
       title: '기존 비밀번호',
       Component: PasswordInput,
       input: BeforePasswordInput,
-      error: IsBeforePassword(BeforePasswordInput.value, 'abcd1234*'),
+      error: IsPassword(BeforePasswordInput.value),
     },
     {
       title: '새 비밀번호',
@@ -69,18 +93,18 @@ const MyPage_FixUserInfo = () => {
     },
   ];
 
-  // 회원정 성공 여부
+  // 프로필 수정 성공 여부
   const success =
     confirm &&
-    IsEmail(emailInput.value).status === Status.SUCCESS &&
     IsPassword(passwordInput.value).status === Status.SUCCESS &&
     IsSamePassword(passwordInput.value, passwordCheckInput.value).status ===
       Status.SUCCESS;
-  // 회원정보 넘길 input 값
+  // 프로필 수정시 넘길 input 값
   const input = {
     nickname: nicknameInput.value,
     email: emailInput.value,
-    password: passwordInput.value,
+    password: BeforePasswordInput.value,
+    newPassword: passwordInput.value,
   };
 
   return (
@@ -92,7 +116,7 @@ const MyPage_FixUserInfo = () => {
     >
       <MarginContainer onScroll={scrollOn}>
         <PictureContainer>
-          <ImagePickerContainer />
+          <MyImage />
         </PictureContainer>
         <InputContainer>
           {fixUserInfoData.map(
@@ -105,7 +129,7 @@ const MyPage_FixUserInfo = () => {
         </InputContainer>
       </MarginContainer>
       <ButtonContainer>
-        <FixButton success={success} input={input} onPress={FixButtonOnPress} />
+        <FixButton success={success} onPress={FixButtonOnPress} />
       </ButtonContainer>
     </BasicContainer>
   );

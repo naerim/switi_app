@@ -1,4 +1,3 @@
-import React from 'react';
 import { Status } from '../../../SignUp/inteface';
 
 const IsSamePassword = (pwd: string, checkPwd: string) => {
