@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const ModalOption = () => {
+interface Props {
+  resendMail: () => void;
+}
+const ModalOption: React.FC<Props> = ({ resendMail }) => {
   return (
     <Container>
       <Question>인증번호를 받지 못했나요?</Question>
-      <Answer>인증번호 재전송</Answer>
+      <Answer onPress={resendMail}>인증번호 재전송</Answer>
     </Container>
   );
 };

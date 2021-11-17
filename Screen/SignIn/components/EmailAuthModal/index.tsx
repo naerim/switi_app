@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../../Component/BasicModal';
 import useInput from '../../util/useInput';
@@ -7,6 +7,7 @@ import ModalForm from './ModalForm';
 import BasicButton from '../../../../Component/BasicButton';
 import ModalOption from './ModalOption';
 import axios from 'axios';
+import { loginRequest } from '../../../../redux/userReducer';
 
 interface Props {
   modalVisible: boolean;
@@ -24,27 +25,38 @@ const EmailAuthModal: React.FC<Props> = ({
 }) => {
   const certificationNumber = useInput('');
 
+  // 메일 인증
   const handleNum = () => {
-    if (!certificationNumber.value) {
-      Alert.alert('인증번호를 입력해주세요.');
-    } else {
-      axios({
-        method: 'post',
-        url: 'http://localhost:4000/auth/compareCode',
-        data: { email: email, inputCode: certificationNumber.value },
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/compareCode',
+      data: { email: email, inputCode: certificationNumber.value },
+    })
+      .then((res) => {
+        setModalVisible(false);
+        setTimeout(() => {
+          setDoneModalVisible(true);
+        }, 500);
       })
-        .then((res) => {
-          setModalVisible(false);
-          setTimeout(() => {
-            setDoneModalVisible(true);
-          }, 500);
-        })
-        .catch((err) => {
-          if (err.toString() == 'Error: Request failed with status code 404')
-            Alert.alert('인증번호가 일치하지 않습니다.');
-          else Alert.alert('이메일 인증 오류 :(');
-        });
-    }
+      .catch((err) => {
+        if (err.toString() == 'Error: Request failed with status code 404')
+          Alert.alert('인증번호가 일치하지 않습니다.');
+        else Alert.alert('이메일 인증 오류 :(');
+      });
+  };
+
+  // 메일 재전송
+  const resendMail = () => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/auth/resendMail',
+      data: { email: email },
+    }).catch((err) => {
+      if (err.toString() == 'Error: Request failed with status code 400')
+        Alert.alert('인증번호가 재전송되었습니다.');
+      else Alert.alert('이메일 재전송 오류 :(');
+      //console.log(err);
+    });
   };
 
   return (
@@ -58,8 +70,12 @@ const EmailAuthModal: React.FC<Props> = ({
         </SmallText>
         <SmallText>{email}</SmallText>
         <ModalForm emailInput={certificationNumber} />
-        <ModalOption />
-        <BasicButton text="이메일 인증하기" onPress={handleNum} />
+        <ModalOption resendMail={resendMail} />
+        <BasicButton
+          text="이메일 인증하기"
+          onPress={handleNum}
+          disabled={!certificationNumber.value}
+        />
       </Container>
     </BasicModal>
   );

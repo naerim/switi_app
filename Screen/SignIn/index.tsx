@@ -45,24 +45,18 @@ const SignIn: React.FC = () => {
     }
   };
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     setIsLoading(true);
     const email = emailInput;
     const password = passwordInput;
 
     if (emailCheck(email.value)) {
       if (passwordCheck(password.value)) {
-        try {
-          const login = await dispatch(
-            loginRequest(email.value, password.value)
-          );
-          checkError(login);
-        } catch (error) {
-          Alert.alert('잘못된 접근입니다.');
-        }
-        setIsLoading(false);
+        const login = dispatch(loginRequest(email.value, password.value));
+        checkError(login);
       }
     }
+    setIsLoading(false);
   };
 
   return (
