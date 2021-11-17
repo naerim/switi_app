@@ -7,7 +7,6 @@ import ModalForm from './ModalForm';
 import BasicButton from '../../../../Component/BasicButton';
 import ModalOption from './ModalOption';
 import axios from 'axios';
-import { loginRequest } from '../../../../redux/userReducer';
 
 interface Props {
   modalVisible: boolean;

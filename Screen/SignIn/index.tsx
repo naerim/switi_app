@@ -15,10 +15,10 @@ import mainIcon from '../../Img/signIn_logo.png';
 import { emailCheck, passwordCheck } from '../../Component/authFunction';
 
 const SignIn: React.FC = () => {
-  // const emailInput = useInput('naerim1119@gmail.com');
-  // const passwordInput = useInput('qwer1234!');
-  const emailInput = useInput('mn0316@naver.com');
-  const passwordInput = useInput('lee000316^^');
+  const emailInput = useInput('naerim1119@naver.com');
+  const passwordInput = useInput('qwer1234!');
+  // const emailInput = useInput('mn0316@naver.com');
+  // const passwordInput = useInput('lee000316^^');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // 이메일 인증 모달창
@@ -46,17 +46,21 @@ const SignIn: React.FC = () => {
   };
 
   const handleLogin = () => {
-    setIsLoading(true);
     const email = emailInput;
     const password = passwordInput;
-
-    if (emailCheck(email.value)) {
-      if (passwordCheck(password.value)) {
-        const login = dispatch(loginRequest(email.value, password.value));
-        checkError(login);
+    try {
+      setIsLoading(true);
+      if (emailCheck(email.value)) {
+        if (passwordCheck(password.value)) {
+          const login = dispatch(loginRequest(email.value, password.value));
+          setIsLoading(false);
+          checkError(login);
+        }
       }
+    } catch (err) {
+      Alert.alert('잘못된 로그인 접근입니다. ');
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

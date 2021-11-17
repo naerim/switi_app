@@ -236,18 +236,17 @@ const RootNavigator = () => {
   ]);
   const onGetState = useCallback(() => dispatch(getStateRequest()), [dispatch]);
 
-  // const [user, setUser] = useState(false);
-  //위 코드 없애기 login상태 이미 가져오니까
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     onGetInterest();
     onGetCharacter();
     onGetRegion();
     onGetState();
     setTimeout(() => setLoading(false), 3000);
   }, []);
+
   return (
     <NavigationContainer>
       {loading ? <Splash /> : login ? <MainNavigation /> : <LoginNavigation />}
