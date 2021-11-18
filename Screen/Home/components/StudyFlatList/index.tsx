@@ -80,35 +80,29 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     setIsRefreshing(false);
   };
 
-  const handleLoadMore = () => {
-    console.log('reached');
-  };
+  const studyLen =
+    idx === 0
+      ? onlineStudyList && onlineStudyList.length
+      : offlineStudyList && offlineStudyList.length;
+  const data = idx === 0 ? onlineStudyList : offlineStudyList;
+  const renderItem = useCallback(
+    ({ item }) => <RenderItem index={item.id} item={item} />,
+    []
+  );
+  const keyExtractor = useCallback((item: DataType) => item.id.toString(), []);
 
   return (
     <Container>
-      <ListHeader
-        num={
-          idx === 0
-            ? onlineStudyList && onlineStudyList.length
-            : offlineStudyList && offlineStudyList.length
-        }
-        check={{ checked, setChecked }}
-      />
+      <ListHeader num={studyLen} check={{ checked, setChecked }} />
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         onRefresh={fetchItem}
         refreshing={isRefreshing}
-        data={idx === 0 ? onlineStudyList : offlineStudyList}
-        renderItem={useCallback(
-          ({ item }) => (
-            <RenderItem index={item.id} item={item} />
-          ),
-          []
-        )}
-        keyExtractor={(item: DataType) => item.id.toString()}
-        extraData={idx === 0 ? onlineStudyList : offlineStudyList}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        extraData={data}
         contentContainerStyle={{ paddingBottom: 80 }}
-        onEndReached={handleLoadMore}
         onEndReachedThreshold={0}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={<EmptyScreen desc="진행중인 스터디가 없습니다." />}
