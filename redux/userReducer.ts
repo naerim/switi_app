@@ -34,6 +34,8 @@ const login = async (email: string, password: string) => {
 };
 export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
 
+// 로그아웃
+
 // 마이페이지 정보 불러오기 ( 당도, 스크랩수, 닉네임, 프로필사진)
 const getMyPage = async (token: string) => {
   const response = axios({

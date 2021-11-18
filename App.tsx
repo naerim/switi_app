@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
-// import { store, persistor } from './redux/store';
-// import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import { useFonts } from 'expo-font';
 import RootNavigator from './Screen/Navigator';
 
@@ -21,9 +20,9 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      {/*<PersistGate persistor={persistor}>*/}
-      <RootNavigator />
-      {/*</PersistGate>*/}
+      <PersistGate persistor={persistor}>
+        <RootNavigator />
+      </PersistGate>
     </Provider>
   );
 };

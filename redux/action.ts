@@ -7,6 +7,11 @@ export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE';
 
+// logout
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_LOGOUT_SUCCESS = 'AUTH_LOGOUT_SUCCESS';
+export const AUTH_LOGOUT_FAILURE = 'AUTH_LOGOUT_FAILURE';
+
 // myPage (당도, 스크랩수, 닉네임, 프로필사진)
 export const GET_MY_PAGE = 'GET_MY_PAGE';
 export const GET_MY_PAGE_SUCCESS = 'GET_MY_PAGE_SUCCESS';
