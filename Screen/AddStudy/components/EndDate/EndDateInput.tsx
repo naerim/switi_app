@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import CalenderModal from './CalenderModal';
-import BasicModal from '../../../../Component/BasicModal';
 
 interface Props {
   value: { [key: string]: string };
@@ -46,13 +45,12 @@ const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
         />
         <Text>일</Text>
       </TouchArea>
-      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
-        <CalenderModal
-          closeModal={closeModal}
-          value={value}
-          setValue={setValue}
-        />
-      </BasicModal>
+      <CalenderModal
+        modalVisible={modalVisible}
+        closeModal={closeModal}
+        setValue={setValue}
+        desc="스터디 예정 종료 날짜를 선택 해 주세요."
+      />
     </Container>
   );
 };

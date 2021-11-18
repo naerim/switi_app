@@ -12,6 +12,14 @@ import {
 import StudyDoneModal from './components/StudyDoneModal';
 import moment from 'moment';
 import { CheckProps } from './interface';
+import CalenderModal from '../AddStudy/components/EndDate/CalenderModal';
+import UpdateDoneModal from './components/StudyDoneModal/UpdateDoneModal';
+import axios from 'axios';
+import { Alert } from 'react-native';
+import {
+  offlineStudyListRequest,
+  onlineStudyListRequest,
+} from '../../redux/studyReducer';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -52,13 +60,54 @@ const Home = ({ route }: any) => {
     onGetMyPage(login.token);
   }, [dispatch]);
 
+  // 스터디 종료 모달창
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
   const [idStudy, setIdStudy] = useState(-1);
   const [doneTitle, setDoneTitle] = useState(' ');
+  // 스터디 종료 날짜 선택하는 모달창
+  const [endDateModalVisible, setEndDateModalVisible] = useState(false);
+  const closeEndDateModal = () => setEndDateModalVisible(false);
+  const [updateDoneModalVisible, setUpdateDoneModalVisible] = useState(false);
+  const closeUpdateDoneModal = () => setUpdateDoneModalVisible(false);
+  const fetchOnlineStudyList = (order: boolean, query: string) =>
+    dispatch(onlineStudyListRequest(login.token, order, query));
+  const fetchOfflineStudyList = (order: boolean, query: string) =>
+    dispatch(offlineStudyListRequest(login.token, order, query));
+
   const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
     myStudyList: manageReducer.myStudyList,
   }));
+
+  // 스터디 연장 버튼 클릭했을 때 실행
+  const onPressUpdateEndDate = () => {
+    closeModal();
+    setTimeout(() => {
+      setEndDateModalVisible(true);
+    }, 500);
+  };
+
+  // 스터디 연장
+  const updateEndDate = (date: string) => {
+    axios({
+      method: 'put',
+      url: `http://localhost:4000/manage/updateEndDate/${idStudy}`,
+      headers: { Authorization: login.token },
+      data: { endDate: date },
+    })
+      .then((res) => {
+        fetchOnlineStudyList(true, '');
+        fetchOfflineStudyList(true, '');
+        onGetMyStudyList(login.token);
+        setTimeout(() => {
+          setUpdateDoneModalVisible(true);
+          setIdStudy(-1);
+        }, 500);
+      })
+      .catch((err) => {
+        Alert.alert('날짜 선택 실패');
+      });
+  };
 
   // 기간이 종료된 스터디가 있는지 확인하는 함수
   const checkDoneDate = async () => {
@@ -81,14 +130,26 @@ const Home = ({ route }: any) => {
 
   return (
     <Container>
-      <TopCategory tagList={tagList} setTagList={setTagList} />
-      <StudyFlatList idx={idx} tagList={tagList} />
       <StudyDoneModal
         modalVisible={modalVisible}
         closeModal={closeModal}
         idStudy={idStudy}
+        setIdStudy={setIdStudy}
         title={doneTitle}
+        updateEndDate={onPressUpdateEndDate}
       />
+      <CalenderModal
+        modalVisible={endDateModalVisible}
+        closeModal={closeEndDateModal}
+        updateEndDate={updateEndDate}
+        desc="예정 종료 날짜를 선택 해 주세요."
+      />
+      <UpdateDoneModal
+        modalVisible={updateDoneModalVisible}
+        closeModal={closeUpdateDoneModal}
+      />
+      <TopCategory tagList={tagList} setTagList={setTagList} />
+      <StudyFlatList idx={idx} tagList={tagList} />
     </Container>
   );
 };

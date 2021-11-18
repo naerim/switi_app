@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../../Component/BasicModal';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../../redux';
+import { getMyStudyListRequest } from '../../../../redux/manageReducer';
 
 interface Props {
   modalVisible: boolean;
   closeModal: () => void;
   idStudy: number;
+  setIdStudy: any;
   title: string;
+  updateEndDate: () => void;
 }
 
 interface BoldProps {
@@ -25,11 +28,19 @@ const StudyDoneModal: React.FC<Props> = ({
   closeModal,
   idStudy,
   title,
+  setIdStudy,
+  updateEndDate,
 }) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
+  const dispatch = useDispatch();
+  const onGetMyStudyList = useCallback(
+    (token) => dispatch(getMyStudyListRequest(token)),
+    [dispatch]
+  );
 
+  // 스터디 종료
   const setEndStudy = () => {
     axios({
       method: 'put',
@@ -37,8 +48,10 @@ const StudyDoneModal: React.FC<Props> = ({
       headers: { Authorization: login.token },
     })
       .then((res) => {
+        onGetMyStudyList(login.token);
         setTimeout(() => {
           closeModal();
+          setIdStudy(-1);
         }, 300);
       })
       .catch((err) => {
@@ -54,7 +67,7 @@ const StudyDoneModal: React.FC<Props> = ({
         <Title bold={false}>스터디가 종료되었습니다!</Title>
         <Desc>스터디를 완료하시고 팀원들을 평가해주세요!</Desc>
         <BottomWrap>
-          <ButtonWrap done={false} onPress={closeModal}>
+          <ButtonWrap done={false} onPress={updateEndDate}>
             <ButtonTitle done={false}>스터디 연장</ButtonTitle>
           </ButtonWrap>
           <ButtonWrap done onPress={setEndStudy}>
