@@ -49,4 +49,5 @@ export interface CheckProps {
   id: number;
   endDate: string;
   title: string;
+  end_flag: boolean;
 }

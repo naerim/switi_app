@@ -15,7 +15,7 @@ import mainIcon from '../../Img/signIn_logo.png';
 import { emailCheck, passwordCheck } from '../../Component/authFunction';
 
 const SignIn: React.FC = () => {
-  const emailInput = useInput('naerim1119@naver.com');
+  const emailInput = useInput('naerim1119@gmail.com');
   const passwordInput = useInput('qwer1234!');
   // const emailInput = useInput('mn0316@naver.com');
   // const passwordInput = useInput('lee000316^^');

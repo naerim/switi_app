@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import BasicModal from '../../../../Component/BasicModal';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../../../redux';
 
 interface Props {
   modalVisible: boolean;
@@ -23,6 +26,26 @@ const StudyDoneModal: React.FC<Props> = ({
   idStudy,
   title,
 }) => {
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+
+  const setEndStudy = () => {
+    axios({
+      method: 'put',
+      url: `http://localhost:4000/manage/endStudy/${idStudy}`,
+      headers: { Authorization: login.token },
+    })
+      .then((res) => {
+        setTimeout(() => {
+          closeModal();
+        }, 300);
+      })
+      .catch((err) => {
+        alert('스터디 종료 실패');
+      });
+  };
+
   return (
     <BasicModal modalVisible={modalVisible}>
       <Container>
@@ -34,7 +57,7 @@ const StudyDoneModal: React.FC<Props> = ({
           <ButtonWrap done={false} onPress={closeModal}>
             <ButtonTitle done={false}>스터디 연장</ButtonTitle>
           </ButtonWrap>
-          <ButtonWrap done onPress={() => console.log('delete')}>
+          <ButtonWrap done onPress={setEndStudy}>
             <ButtonTitle done>스터디 완료</ButtonTitle>
           </ButtonWrap>
         </BottomWrap>
