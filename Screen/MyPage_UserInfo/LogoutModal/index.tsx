@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import BasicModal from '../../../Component/BasicModal';
 import HalfButton from '../../../Component/HalfButton';
 import LogoutDoneModal from './LogoutDoneModal';
+import { logoutRequest } from '../../../redux/userReducer';
+import { useDispatch } from 'react-redux';
 
 interface Props {
   modalVisible: boolean;
@@ -13,33 +15,15 @@ const LogoutModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
   const [DoneModalVisible, setDoneModalVisible] = useState(false);
   const showDoneModal = () => setDoneModalVisible(true);
   const closeDoneModal = () => setDoneModalVisible(false);
-
+  const dispatch = useDispatch();
   const onPressLogout = () => {
     closeModal();
     setTimeout(() => {
       showDoneModal();
     }, 500);
-
-    // axios({
-    //     method: 'post',
-    //     url: `http://localhost:4000/study/applyStudy/${idStudy}`,
-    //     data: {
-    //         contact: Contact.value,
-    //         apply_detail: Reason.value,
-    //         idStudy: idStudy,
-    //     },
-    //     headers: { Authorization: token },
-    // })
-    //     .then((res) => {
-    //         onGetMyApplyList(token);
-    //         closeModal();
-    //         setTimeout(() => {
-    //             showDoneModal();
-    //         }, 500);
-    //     })
-    //     .catch((err) => {
-    //         alert('신청 실패');
-    //     });
+    setTimeout(() => {
+      dispatch(logoutRequest());
+    }, 2000);
   };
 
   return (
@@ -51,11 +35,7 @@ const LogoutModal: React.FC<Props> = ({ modalVisible, closeModal }) => {
         </ModalSmallText>
         <ModalButtonContainer>
           <HalfButton text="취소" onPress={closeModal} />
-          <HalfButton
-            text="로그아웃"
-            onPress={onPressLogout}
-            color="#86E3C3"
-          />
+          <HalfButton text="로그아웃" onPress={onPressLogout} color="#86E3C3" />
         </ModalButtonContainer>
       </BasicModal>
       <LogoutDoneModal

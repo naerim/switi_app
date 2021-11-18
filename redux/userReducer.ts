@@ -18,6 +18,9 @@ import {
   GET_USER_PROFILE,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_FAILURE,
+  AUTH_LOGOUT,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAILURE,
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
@@ -35,6 +38,10 @@ const login = async (email: string, password: string) => {
 export const loginRequest = createRequestThunk(AUTH_LOGIN, login);
 
 // 로그아웃
+export const logout = () => ({
+  type: AUTH_LOGOUT,
+});
+export const logoutRequest = createRequestThunk(AUTH_LOGOUT, logout);
 
 // 마이페이지 정보 불러오기 ( 당도, 스크랩수, 닉네임, 프로필사진)
 const getMyPage = async (token: string) => {
@@ -116,6 +123,8 @@ const initialState = {
   myProfileError: null,
   userProfile: null,
   userProfileError: null,
+  logoutError: false,
+  logoutDone: false,
 };
 
 export interface IUserState {
@@ -131,6 +140,8 @@ export interface IUserState {
   myProfileError: any;
   userProfile: any;
   userProfileError: any;
+  logoutError: boolean;
+  logoutDone: boolean;
 }
 
 function userReducer(state = initialState, action: any) {
@@ -145,7 +156,14 @@ function userReducer(state = initialState, action: any) {
       case AUTH_LOGIN_FAILURE:
         draft.loginError = action.payload;
         break;
-
+      case AUTH_LOGOUT_SUCCESS:
+        draft.logoutDone = true;
+        draft.login = null;
+        break;
+      case AUTH_LOGOUT_FAILURE:
+        draft.logoutDone = false;
+        draft.logoutError = true;
+        break;
       case GET_MY_PAGE:
         draft.myPageError = initialState.myPageError;
         break;
