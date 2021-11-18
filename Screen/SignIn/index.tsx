@@ -43,20 +43,24 @@ const SignIn: React.FC = () => {
       myEmail.onChange(emailInput.value);
       setModalVisible(true);
     }
+    setIsLoading(false);
   };
 
+  // 로그인 성공여부 확인
+  const checkType = (login: any) => login.type == 'AUTH_LOGIN_FAILURE';
+
   const handleLogin = async () => {
+    setIsLoading(true);
     const email = emailInput;
     const password = passwordInput;
     try {
-      setIsLoading(true);
       if (emailCheck(email.value)) {
         if (passwordCheck(password.value)) {
           const login = await dispatch(
             loginRequest(email.value, password.value)
           );
-          checkError(login);
-          setIsLoading(false);
+          // 로그인 실패하면 에러 확인
+          checkType(login) && checkError(login);
         }
       }
     } catch (err) {
