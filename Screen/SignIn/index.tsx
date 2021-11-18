@@ -45,16 +45,18 @@ const SignIn: React.FC = () => {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const email = emailInput;
     const password = passwordInput;
     try {
       setIsLoading(true);
       if (emailCheck(email.value)) {
         if (passwordCheck(password.value)) {
-          const login = dispatch(loginRequest(email.value, password.value));
-          setIsLoading(false);
+          const login = await dispatch(
+            loginRequest(email.value, password.value)
+          );
           checkError(login);
+          setIsLoading(false);
         }
       }
     } catch (err) {
