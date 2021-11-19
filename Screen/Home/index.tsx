@@ -30,7 +30,6 @@ const Home = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const onGetScrapList = useCallback(
@@ -54,14 +53,12 @@ const Home = ({ route }: any) => {
   );
 
   useEffect(() => {
-    setLoading(true);
     onGetScrapList(login.token);
     onGetMyStudyList(login.token);
     onGetMyApplyList(login.token);
     onGetMyPage(login.token);
     fetchOnlineStudyList(true, '');
     fetchOfflineStudyList(true, '');
-    setLoading(false);
   }, [dispatch]);
 
   // 스터디 종료 모달창
@@ -132,7 +129,6 @@ const Home = ({ route }: any) => {
     myStudyList && checkDoneDate();
   }, [myStudyList]);
 
-  if (loading) return;
   return (
     <Container>
       <StudyDoneModal
