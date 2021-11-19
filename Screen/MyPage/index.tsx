@@ -11,6 +11,7 @@ import {
   UseGoNotice,
   UseGoScrap,
   UseGoParticipation,
+  useGoQuestion,
 } from '../../util/navigationHooks';
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
@@ -87,6 +88,7 @@ const MyPage = () => {
   const goScrap = UseGoScrap();
   const goReport = () => setReportModalVisible(true);
   const GoParticipation = UseGoParticipation();
+  const goQuestion = useGoQuestion();
 
   const confirm = () => {
     setReportModalVisible(false);
@@ -132,18 +134,18 @@ const MyPage = () => {
   }, []);
 
   return (
-    <ContainerWithBell title="마이페이지" onPressBell={goAlarm}>
+    <ContainerWithBell title="마이페이지">
       <Container>
         <UserInfo title={myPage ? myPage.myPage.nickname : ' '} />
         <SugarContainer />
         <Line />
         <MoveScreen
-          goAlarm={goAlarm}
           goUserInfo={goUserInfo}
           goNotice={goNotice}
           goReport={goReport}
           goScrap={goScrap}
           goParticipation={GoParticipation}
+          goQuestion={goQuestion}
         />
       </Container>
       <MyPageModal modalVisible={modalVisible} closeModal={closeModal} />

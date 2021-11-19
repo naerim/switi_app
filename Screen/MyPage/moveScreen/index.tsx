@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  goAlarm: () => void;
   goNotice: () => void;
   goUserInfo: () => void;
   goReport: () => void;
   goScrap: () => void;
   goParticipation: () => void;
+  goQuestion: () => void;
 }
 
 const MoveScreen: React.FC<Props> = ({
-  goAlarm,
+  goQuestion,
   goNotice,
   goUserInfo,
   goReport,
@@ -41,7 +41,7 @@ const MoveScreen: React.FC<Props> = ({
         <SubTitleContainer onPress={goReport}>
           <SubTitle>신고하기</SubTitle>
         </SubTitleContainer>
-        <SubTitleContainer onPress={goReport}>
+        <SubTitleContainer onPress={goQuestion}>
           <SubTitle>문의</SubTitle>
         </SubTitleContainer>
       </Container>

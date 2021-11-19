@@ -30,6 +30,7 @@ const login = async (email: string, password: string) => {
   const response = await axios({
     method: 'post',
     url: 'http://localhost:4000/auth/login',
+    // url: 'http://10.0.2.2:4000/auth/login',
     data: { email: email, password: password },
   });
   console.log('아이디, 비번', email, password);
