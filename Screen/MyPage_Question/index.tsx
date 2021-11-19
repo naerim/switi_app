@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import UserInfoContainer from '../MyPage_UserInfo/userInfoContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
 import useInput from '../SignIn/util/useInput';
 import SubmitButton from '../MyPage_FixUserInfo/submitButton';
+import axios from 'axios';
+import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+import { rootState } from '../../redux';
 
 const MyPage_Question = () => {
   const titleInput = useInput('');
   const contentInput = useInput('');
-  const success = () => {
+  const checkSuccess = () => {
     if (titleInput.value !== '' && contentInput.value !== '') {
       return true;
     } else return false;
+  };
+  const { login } = useSelector(({ userReducer }: rootState) => ({
+    login: userReducer.login,
+  }));
+  const success = checkSuccess();
+  const handleSend = () => {
+    console.log('onPress Question');
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/question/sendMail',
+      headers: { Authorization: login.token },
+      data: {
+        title: titleInput.value,
+        contents: contentInput.value,
+      },
+    })
+      .then((response) => {
+        console.log('response Question', response);
+        Alert.alert('문의가 전송되었습니다. ');
+      })
+      .catch((err) => {
+        console.log('err Question', err);
+        Alert.alert('네트워크 오류 :(');
+      });
   };
 
   return (
@@ -43,7 +71,7 @@ const MyPage_Question = () => {
         </ShortSection>
       </Content>
       <ButtonContainer>
-        <SubmitButton success={success} title="저장하기" />
+        <SubmitButton success={success} title="저장하기" onPress={handleSend} />
       </ButtonContainer>
     </UserInfoContainer>
   );
