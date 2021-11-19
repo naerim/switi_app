@@ -54,6 +54,7 @@ import {
 import Evaluation from './Evaluation';
 import AmendStudy from './AmendStudy';
 import NoticeDetail from './MyPage_Notice/NoticeDetail';
+import MyPage_Question from './MyPage_Question';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -217,6 +218,7 @@ const MainNavigation = () => (
       name="MyPage_Participation"
       component={MyPage_Participation}
     />
+    <Stack.Screen name="MyPage_Question" component={MyPage_Question} />
   </Stack.Navigator>
 );
 

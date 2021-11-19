@@ -160,6 +160,13 @@ export const useGoHome = () => {
   return useCallback(() => navigation.navigate('Switi'), [navigation]);
 };
 
+export const useGoQuestion = () => {
+  const navigation = useNavigation();
+  return useCallback(() => navigation.navigate('MyPage_Question'), [
+    navigation,
+  ]);
+};
+
 export const useGoAddStudy = () => {
   const navigation = useNavigation();
   return useCallback(() => navigation.navigate('AddStudy'), [navigation]);

@@ -9,7 +9,7 @@ import PasswordInput from './input/passwordInput';
 import useInput from '../../util/useInput';
 import { Status } from '../SignUp/inteface';
 import AllInputContainer from './input/InputContent';
-import FixButton from './fixButton';
+import SubmitButton from './submitButton';
 import IsNickname from './input/inputConfirm/isNickname';
 import IsPassword from './input/inputConfirm/isPassword';
 import IsSamePassword from './input/inputConfirm/isSamePassword';
@@ -129,16 +129,18 @@ const MyPage_FixUserInfo = () => {
         </InputContainer>
       </MarginContainer>
       <ButtonContainer>
-        <FixButton success={success} onPress={FixButtonOnPress} />
+        <SubmitButton
+          success={success}
+          onPress={FixButtonOnPress}
+          title="저장하기"
+        />
       </ButtonContainer>
     </BasicContainer>
   );
 };
 
 const MarginContainer = styled.ScrollView`
-  margin-left: 24px;
-  margin-right: 24px;
-  flex: 12;
+  margin: 0 24px;
 `;
 
 const PictureContainer = styled.View`

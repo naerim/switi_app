@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface Props {
-  success: boolean;
-  onPress: () => void;
+  success: any;
+  onPress?: () => void;
+  title?: string;
 }
 
-const FixButton: React.FC<Props> = ({ success, onPress }) => {
+const SubmitButton: React.FC<Props> = ({ success, onPress, title }) => {
   return (
     <Container disabled={!success} onPress={onPress}>
-      <TextStyle>저장하기</TextStyle>
+      <TextStyle>{title}</TextStyle>
     </Container>
   );
 };
@@ -27,4 +28,4 @@ const TextStyle = styled.Text`
   color: white;
 `;
 
-export default FixButton;
+export default SubmitButton;
