@@ -23,7 +23,7 @@ const MyPage_Question = () => {
   const success = checkSuccess();
   const [isLoading, setIsLoading] = useState(false);
   const handleSend = () => {
-    console.log('onPress Question');
+    // console.log('onPress Question');
     setIsLoading(true);
     axios({
       method: 'post',
@@ -36,12 +36,12 @@ const MyPage_Question = () => {
     })
       .then((response) => {
         setIsLoading(false);
-        console.log('response Question', response.status);
+        // console.log('response Question', response.status);
         Alert.alert('문의가 전송되었습니다. ');
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log('err Question', err);
+        // console.log('err Question', err);
         Alert.alert('네트워크 오류 :(');
       });
   };
