@@ -22,7 +22,7 @@ import {
   getMyPageRequest,
   getMyProfileRequest,
   getScrapListRequest,
-  getStudyHistoryRequest, logoutRequest,
+  getStudyHistoryRequest,
 } from '../../redux/userReducer';
 import SugarContainer from './profile/sugarContainer';
 import {
@@ -83,7 +83,6 @@ const MyPage = () => {
   const finalClose = () => {
     setFinalModalVisible(false);
   };
-  const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
   const goScrap = UseGoScrap();
