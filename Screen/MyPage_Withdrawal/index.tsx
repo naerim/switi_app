@@ -7,11 +7,12 @@ import RadioButtonContainer from './radioButtonContainer';
 import ReasonText from './reasonText';
 import useInput from '../../util/useInput';
 import BasicModal from '../../Component/BasicModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { Alert } from 'react-native';
 
 import axios from 'axios';
+import { logoutRequest } from '../../redux/userReducer';
 
 const MyPage_Withdrawal = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -24,6 +25,7 @@ const MyPage_Withdrawal = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+  const dispatch = useDispatch();
 
   const handleUserDelete = async (token: string) => {
     axios({
@@ -32,7 +34,13 @@ const MyPage_Withdrawal = () => {
       headers: { Authorization: token },
     })
       .then((res) => {
-        setModalVisible(true);
+        closeModal();
+        setTimeout(() => {
+          setModalVisible(true);
+        }, 500);
+        setTimeout(() => {
+          dispatch(logoutRequest());
+        }, 2000);
       })
       .catch((err) => {
         if (err.toString() == 'Error: Request failed with status code 500')
