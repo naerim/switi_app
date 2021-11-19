@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import UserInfoContainer from '../MyPage_UserInfo/userInfoContainer';
 import { useGoMyPage } from '../../util/navigationHooks';
@@ -21,8 +21,10 @@ const MyPage_Question = () => {
     login: userReducer.login,
   }));
   const success = checkSuccess();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSend = () => {
     console.log('onPress Question');
+    setIsLoading(true);
     axios({
       method: 'post',
       url: 'http://localhost:4000/question/sendMail',
@@ -33,10 +35,12 @@ const MyPage_Question = () => {
       },
     })
       .then((response) => {
-        console.log('response Question', response);
+        setIsLoading(false);
+        console.log('response Question', response.status);
         Alert.alert('문의가 전송되었습니다. ');
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log('err Question', err);
         Alert.alert('네트워크 오류 :(');
       });
@@ -71,7 +75,12 @@ const MyPage_Question = () => {
         </ShortSection>
       </Content>
       <ButtonContainer>
-        <SubmitButton success={success} title="저장하기" onPress={handleSend} />
+        <SubmitButton
+          success={success}
+          title="저장하기"
+          onPress={handleSend}
+          loading={isLoading}
+        />
       </ButtonContainer>
     </UserInfoContainer>
   );
