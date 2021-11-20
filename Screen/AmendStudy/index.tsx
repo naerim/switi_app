@@ -28,7 +28,7 @@ import {
 } from './DataFunc';
 import AmendModal from './AmendModal';
 import axios from 'axios';
-import { searchKeywordRequest } from '../../redux/search/searchReducer';
+import { searchHistoryRequest } from '../../redux/search/searchReducer';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
@@ -117,7 +117,7 @@ const AmendStudy = () => {
           goBack();
         }, 300);
         setTimeout(() => {
-          dispatch(searchKeywordRequest(login.token, studyDetail.title));
+          dispatch(searchHistoryRequest(login.token));
         }, 500);
       })
       .catch((err) => {
