@@ -21,7 +21,7 @@ const ContainerWithBell: React.FC<Props> = ({
       }}
     >
       <HeaderContainer>
-        <TitleTouch onPress={onPressTitle}>
+        <TitleTouch onPress={onPressTitle} activeOpacity={0.8}>
           <Title>{title}</Title>
         </TitleTouch>
       </HeaderContainer>

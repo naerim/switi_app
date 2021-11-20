@@ -31,7 +31,7 @@ const SelectOne: React.FC<Props> = ({ title, data, input, setInput }) => {
         data={data}
         column={false}
       />
-      <BasicModal modalVisible={modalVisible}>
+      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <SelectFlatList
           data={data}
           select={input}

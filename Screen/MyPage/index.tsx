@@ -6,7 +6,6 @@ import MyPageModal from './myPageModal';
 import ContainerWithBell from '../../Component/ContainerWithBell';
 import ReportModal from '../Report';
 import {
-  UseGoAlarm,
   useGoMyPageUserInfo,
   UseGoNotice,
   UseGoScrap,
@@ -82,7 +81,6 @@ const MyPage = () => {
   const finalClose = () => {
     setFinalModalVisible(false);
   };
-  const goAlarm = UseGoAlarm();
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
   const goScrap = UseGoScrap();
