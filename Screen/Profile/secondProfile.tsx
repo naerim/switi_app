@@ -60,12 +60,18 @@ const SecondProfile = ({ route }: any) => {
       .catch((err) => console.log(err));
   };
 
+  const disabled =
+    introduceInput.value === '' ||
+    state.length === 0 ||
+    selectCharacter.length === 0;
+
   return (
     <ProfileContainer
       buttonText="프로필 설정 완료"
       desc={desc}
       onClick={setProfile}
       onPress={goFirstProfile}
+      disabled={disabled}
       display={true}
     >
       <MyState

@@ -34,12 +34,18 @@ const FirstProfile = ({ route }: any) => {
     region: dataReducer.region,
   }));
 
+  const disabled =
+    ageInput.value === '' ||
+    selectArea.length === 0 ||
+    selectInterest.length === 0;
+
   return (
     <ProfileContainer
       buttonText="다음"
       desc={desc}
       onClick={clickNextButton}
       onPress={goSignIn}
+      disabled={disabled}
       display={false}
     >
       <Age input={ageInput} />
