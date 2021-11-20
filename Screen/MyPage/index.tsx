@@ -32,6 +32,7 @@ import {
 import useInput from '../../util/useInput';
 
 const MyPage = () => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState<boolean>(true);
   const [confirmModalVisible, setConfirmModalVisible] = useState<boolean>(
     false
@@ -102,7 +103,6 @@ const MyPage = () => {
     myPage: userReducer.myPage,
   }));
 
-  const dispatch = useDispatch();
   const onGetMyPage = useCallback(
     // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
     (token) => dispatch(getMyPageRequest(token)),
