@@ -95,7 +95,6 @@ const MyPage_FixUserInfo = () => {
 
   // 프로필 수정 성공 여부
   const success =
-    confirm &&
     IsPassword(passwordInput.value).status === Status.SUCCESS &&
     IsSamePassword(passwordInput.value, passwordCheckInput.value).status ===
       Status.SUCCESS;

@@ -61,8 +61,8 @@ const SignIn: React.FC = () => {
           );
           // 로그인 실패하면 에러 확인
           checkType(login) && checkError(login);
-        }
-      }
+        } else setIsLoading(false);
+      } else setIsLoading(false);
     } catch (err) {
       Alert.alert('잘못된 로그인 접근입니다. ');
       setIsLoading(false);
