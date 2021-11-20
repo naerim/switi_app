@@ -88,7 +88,7 @@ const TopCategory: React.FC<Props> = ({ tagList, setTagList }) => {
         setSelectArea={setSelectArea}
         setSelectTarget={setSelectTarget}
       />
-      <BasicModal modalVisible={modalVisible}>
+      <BasicModal modalVisible={modalVisible} closeModal={closeModal}>
         <SelectFlatList
           tagList={tagList}
           setTagList={setTagList}
