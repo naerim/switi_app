@@ -115,6 +115,18 @@ const AddStudy = () => {
     setModalVisible(true);
   };
 
+  const disabled =
+    target.length === 0 ||
+    category.length === 0 ||
+    (onlineFlag === 1 && area.length === 0) ||
+    recruitNumInput.value === '' ||
+    (onlineFlag === 1 && detailAddressInput.value === '') ||
+    periodInput.value === '' ||
+    EndDateInput.year === '' ||
+    contactInput.value === '' ||
+    titleInput.value === '' ||
+    contentInput.value === '';
+
   return (
     <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <Header title="모집글 작성" onPress={goHome} />
@@ -169,7 +181,7 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={onClick} disabled={false} />
+          <BasicButton text="등록하기" onPress={onClick} disabled={disabled} />
         </Content>
       </ScrollView>
       <EnrollModal
