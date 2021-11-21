@@ -81,6 +81,7 @@ const StudyDetail = ({ route }: any) => {
   }, [myApplyList]);
 
   if (!studyDetail) return null;
+  if (studyDetail.User == null) return null;
 
   return (
     <>

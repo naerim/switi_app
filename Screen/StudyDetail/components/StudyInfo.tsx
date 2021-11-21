@@ -6,7 +6,11 @@ interface Props {
   item?: DataType;
 }
 const StudyInfo: React.FC<Props> = ({ item }) => {
-  // console.log(item);
+  const setRegion = () => {
+    return item?.Regions.length == 0
+      ? '온라인'
+      : item?.Regions.map((guObj: any) => `${guObj.city}`).join(', ');
+  };
   const studyInfoList = [
     {
       name: '카테고리',
@@ -16,7 +20,7 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '지역',
-      value: item?.Regions.map((guObj: any) => `${guObj.city}`).join(', '),
+      value: setRegion(),
     },
     {
       name: '모집대상',

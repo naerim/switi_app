@@ -12,6 +12,7 @@ import {
 } from '../../redux/evaluationReducer';
 import BasicButton from '../../Component/BasicButton';
 import FinalModal from '../Report/details/finalModal';
+import ProfileImg from '../../Img/icon_profile.png';
 
 const Evaluation = ({ route }: any) => {
   const studyId = route.params.studyId;
@@ -74,7 +75,7 @@ const Evaluation = ({ route }: any) => {
           반영됩니다.
         </Text>
         <OpponentContainer>
-          <OpponentImg></OpponentImg>
+          <OpponentImg source={ProfileImg} />
           <OpponentText>{nickname}</OpponentText>
         </OpponentContainer>
         <EvaluationRadio
@@ -146,8 +147,7 @@ const OpponentContainer = styled.View`
   margin: 30px 0;
 `;
 
-const OpponentImg = styled.View`
-  background-color: #d1d1d1;
+const OpponentImg = styled.Image`
   width: 46px;
   height: 46px;
   border-radius: 50px;
