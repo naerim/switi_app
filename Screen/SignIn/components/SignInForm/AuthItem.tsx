@@ -38,6 +38,7 @@ const Title = styled.Text`
   font-size: 12px;
   color: #b4b4b4;
   flex: 0.5px;
+  padding-bottom: 2px;
 `;
 
 const AuthInputContainer = styled.View`

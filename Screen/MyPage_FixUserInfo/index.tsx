@@ -111,35 +111,32 @@ const MyPage_FixUserInfo = () => {
       display
       onPress={goMyPageUserInfo}
     >
-      <Container>
-        <MarginContainer>
-          <PictureContainer>
-            <MyImage />
-          </PictureContainer>
-          <InputContainer>
-            {fixUserInfoData.map(
-              ({ title, Component, input, error, confirm }) => (
-                <AllInputContainer key={title} title={title}>
-                  <Component input={input} error={error} confirm={confirm} />
-                </AllInputContainer>
-              )
-            )}
-          </InputContainer>
-        </MarginContainer>
-        <ButtonContainer>
-          <SubmitButton
-            success={success}
-            onPress={FixButtonOnPress}
-            title="저장하기"
-          />
-        </ButtonContainer>
-      </Container>
+      <MarginContainer>
+        <PictureContainer>
+          <MyImage />
+        </PictureContainer>
+        <InputContainer>
+          {fixUserInfoData.map(
+            ({ title, Component, input, error, confirm }) => (
+              <AllInputContainer key={title} title={title}>
+                <Component input={input} error={error} confirm={confirm} />
+              </AllInputContainer>
+            )
+          )}
+        </InputContainer>
+      </MarginContainer>
+      <ButtonContainer>
+        <SubmitButton
+          success={success}
+          onPress={FixButtonOnPress}
+          title="저장하기"
+        />
+      </ButtonContainer>
     </BasicContainer>
   );
 };
 
-const Container = styled.ScrollView``;
-const MarginContainer = styled.View`
+const MarginContainer = styled.ScrollView`
   margin: 0 24px;
 `;
 
@@ -154,8 +151,8 @@ const InputContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
-  flex: 1;
-  justify-content: flex-end;
+  flex: 3;
+  justify-content: center;
   margin-left: 24px;
   margin-right: 24px;
 `;

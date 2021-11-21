@@ -59,6 +59,7 @@ const TextInput = styled.TextInput`
   border-color: #e3e3e3;
   border-radius: 4px;
   padding: 10px;
+  height: 40px;
 `;
 
 export default AuthInput;
