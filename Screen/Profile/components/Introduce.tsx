@@ -11,7 +11,7 @@ const Introduce: React.FC<InputProps> = ({ input }) => {
         onChangeText={input.onChange}
         placeholder="취미, 희망직무 등 나에 대해 간단히 소개해 주세요 (10자 이상)"
         keyboardType="email-address"
-        returnKeyType="next"
+        returnKeyType="done"
         secureTextEntry={false}
         multiline
         numberOfLines={4}
