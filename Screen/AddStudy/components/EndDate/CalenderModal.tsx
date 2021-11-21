@@ -22,7 +22,7 @@ const CalenderModal: React.FC<Props> = ({
 }) => {
   const getCurrentDate = () => {
     const now = new Date();
-    return moment(now).format('YYYY-MM-DD');
+    return moment(now).add(2, 'days').format('YYYY-MM-DD');
   };
 
   return (

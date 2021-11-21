@@ -43,7 +43,7 @@ const ManageProceeding = ({ route }: any) => {
       <BasicHeader title={title} onPress={goStudyManagement} display={true} />
       <Content>
         <Title>
-          스티디원 (
+          스터디원 (
           {studyMember.member && studyMember.member.studyMembers.length}명)
         </Title>
         <FlatList

@@ -68,8 +68,10 @@ const ContentList: React.FC<Props> = ({ idx }) => {
       <FlatList
         data={data}
         ItemSeparatorComponent={FlatListItemSeparator}
+        style={{ paddingBottom: 100 }}
         onRefresh={fetchItem}
         refreshing={isRefreshing}
+        showsVerticalScrollIndicator={false}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         ListEmptyComponent={<EmptyScreen desc={setDesc} />}
