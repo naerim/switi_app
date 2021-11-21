@@ -71,7 +71,7 @@ const SignIn: React.FC = () => {
 
   return (
     <BasicContainer headerTitle="로그인" display={false}>
-      <Container>
+      <Container showsVerticalScrollIndicator={false}>
         <IconContainer>
           <Icon source={mainIcon} />
         </IconContainer>
@@ -112,7 +112,7 @@ const SignIn: React.FC = () => {
   );
 };
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   padding-bottom: 20px;
 `;

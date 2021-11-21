@@ -128,23 +128,29 @@ const SignUp = () => {
 
   return (
     <BasicContainer headerTitle="회원가입" display={false}>
-      <GenderRadioButton title="성별" input={{ gender, setGender }} />
-      {signupData.map(({ title, Component, input, error, confirm }) => (
-        <SignupContent key={title} title={title}>
-          <Component input={input} error={error} confirm={confirm} />
-        </SignupContent>
-      ))}
-      <Content>
-        <AgreeCheckBox check={{ checked, setChecked }} />
-      </Content>
+      <Container showsVerticalScrollIndicator={false}>
+        <GenderRadioButton title="성별" input={{ gender, setGender }} />
+        {signupData.map(({ title, Component, input, error, confirm }) => (
+          <SignupContent key={title} title={title}>
+            <Component input={input} error={error} confirm={confirm} />
+          </SignupContent>
+        ))}
+        <Content>
+          <AgreeCheckBox check={{ checked, setChecked }} />
+        </Content>
 
-      <Content>
-        <SignupButton success={success} input={input} />
-        <OptionMenu />
-      </Content>
+        <Content>
+          <SignupButton success={success} input={input} />
+          <OptionMenu />
+        </Content>
+      </Container>
     </BasicContainer>
   );
 };
+
+const Container = styled.ScrollView`
+  flex: 1;
+`;
 
 const Content = styled.View`
   flex: 2;
