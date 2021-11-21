@@ -113,14 +113,15 @@ const SignIn: React.FC = () => {
 };
 
 const Container = styled.ScrollView`
+  padding-top: 20%;
   flex: 1;
-  padding-bottom: 20px;
 `;
 
 const IconContainer = styled.View`
   flex: 2.5;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20%;
 `;
 
 const Icon = styled.Image`

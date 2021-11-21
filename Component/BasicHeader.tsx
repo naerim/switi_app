@@ -16,9 +16,9 @@ interface Props {
 
 const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}>
       <BackButton
-        style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}
+        style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}
         activeOpacity={0.8}
         onPress={onPress}
         display={display}

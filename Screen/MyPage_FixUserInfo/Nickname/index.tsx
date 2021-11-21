@@ -63,7 +63,11 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
         />
         <NicknameButton
           check={() => onChange(true)}
-          disabled={message === '멋진 닉네임이네요!'}
+          disabled={
+            message === '멋진 닉네임이네요!' ||
+            input.value == '' ||
+            input.value == ' '
+          }
         />
       </InputContainer>
     </Container>

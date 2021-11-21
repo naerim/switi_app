@@ -61,7 +61,9 @@ const AgreeCheckBox: React.FC<Props> = ({ check }) => {
   );
 };
 
-const Container = styled.View``;
+const Container = styled.View`
+  padding-top: 20px;
+`;
 
 const Line = styled.Text`
   height: 1px;

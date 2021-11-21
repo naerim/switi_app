@@ -15,6 +15,7 @@ const ReasonText: React.FC<InputProps> = ({ input }) => {
         multiline
         numberOfLines={4}
         maxLength={400}
+        blurOnSubmit={true}
         textAlignVertical="top"
       />
     </InputContainer>

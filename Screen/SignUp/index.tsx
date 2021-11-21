@@ -129,21 +129,22 @@ const SignUp = () => {
   return (
     <BasicContainer headerTitle="회원가입" display={false}>
       <Container showsVerticalScrollIndicator={false}>
-        <GenderRadioButton title="성별" input={{ gender, setGender }} />
-        {signupData.map(({ title, Component, input, error, confirm }) => (
-          <SignupContent key={title} title={title}>
-            <Component input={input} error={error} confirm={confirm} />
-          </SignupContent>
-        ))}
-        <Content>
+        <Wrap>
+          <GenderRadioButton title="성별" input={{ gender, setGender }} />
+          {signupData.map(({ title, Component, input, error, confirm }) => (
+            <SignupContent key={title} title={title}>
+              <Component input={input} error={error} confirm={confirm} />
+            </SignupContent>
+          ))}
+        </Wrap>
+        <Wrap>
           <AgreeCheckBox check={{ checked, setChecked }} />
-        </Content>
-
-        <Content>
-          <SignupButton success={success} input={input} />
-          <OptionMenu />
-        </Content>
+        </Wrap>
       </Container>
+      <Content>
+        <SignupButton success={success} input={input} />
+        <OptionMenu />
+      </Content>
     </BasicContainer>
   );
 };
@@ -152,9 +153,13 @@ const Container = styled.ScrollView`
   flex: 1;
 `;
 
+const Wrap = styled.View`
+  flex: 1;
+`;
+
 const Content = styled.View`
-  flex: 2;
   justify-content: center;
+  padding-bottom: 20px;
 `;
 
 export default SignUp;
