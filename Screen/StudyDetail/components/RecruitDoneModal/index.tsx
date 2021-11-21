@@ -5,6 +5,7 @@ import BasicButton from '../../../../Component/BasicButton';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getStudyDetailRequest } from '../../../../redux/studyReducer';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -29,7 +30,7 @@ const RecruitDoneModal: React.FC<Props> = ({
   const onPress = () => {
     axios({
       method: 'put',
-      url: `http://localhost:4000/study/updateFlag/${idStudy}`,
+      url: `${HostURL}/study/updateFlag/${idStudy}`,
       headers: { Authorization: token },
     })
       .then((res) => {

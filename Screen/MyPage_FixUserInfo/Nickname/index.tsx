@@ -6,6 +6,7 @@ import { Alert } from 'react-native';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
+import { HostURL } from '../../../redux/url';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -29,7 +30,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
     error.status == 'SUCCESS' &&
       axios({
         method: 'post',
-        url: 'http://localhost:4000/auth/checkNickname',
+        url: `${HostURL}/auth/checkNickname`,
         data: { nickname: input.value },
       })
         .then(() => {

@@ -8,6 +8,7 @@ import FlatListModal from './components/FlatListModal';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import axios from 'axios';
+import { HostURL } from '../../redux/url';
 
 const SecondProfile = ({ route }: any) => {
   const nickname = route.params.nickname;
@@ -34,7 +35,7 @@ const SecondProfile = ({ route }: any) => {
   const setProfile = () => {
     axios({
       method: 'put',
-      url: 'http://localhost:4000/user/setProfile',
+      url: `${HostURL}/user/setProfile`,
       data: {
         nickname: nickname,
         age: age,

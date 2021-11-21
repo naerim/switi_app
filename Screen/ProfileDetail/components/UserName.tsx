@@ -8,7 +8,7 @@ interface Props {
 
 const UserName: React.FC<Props> = ({ name, img }) => {
   // const loadImg = (url: string) => {
-  //   return 'http://localhost:4000/images/' + url;
+  //   return '${HostURL}/images/' + url;
   // };
   return (
     <Container>

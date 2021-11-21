@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import NicknameButton from './NicknameButton';
 import { InputProps, Status, WarningProps } from '../../inteface';
 import axios from 'axios';
+import { HostURL } from '../../../../redux/url';
 
 const getColor = ({ status }: { status: Status }) => {
   switch (status) {
@@ -23,7 +24,7 @@ const NicknameContainer: React.FC<InputProps> = ({ input, error, confirm }) => {
     error.status == 'SUCCESS' &&
       axios({
         method: 'post',
-        url: 'http://localhost:4000/auth/checkNickname',
+        url: `${HostURL}/auth/checkNickname`,
         data: { nickname: input.value },
       })
         .then(() => {

@@ -9,6 +9,7 @@ import ApplyDoneModal from './ApplyDoneModal';
 import axios from 'axios';
 import { getMyApplyListRequest } from '../../../../redux/manageReducer';
 import { useDispatch } from 'react-redux';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -39,7 +40,7 @@ const ApplyModal: React.FC<Props> = ({
   const onPress = () => {
     axios({
       method: 'post',
-      url: `http://localhost:4000/study/applyStudy/${idStudy}`,
+      url: `${HostURL}/study/applyStudy/${idStudy}`,
       data: {
         contact: Contact.value,
         apply_detail: Reason.value,

@@ -19,6 +19,7 @@ import WithdrawButton from './components/WithdrawButton';
 import DeleteMemberModal from './components/DeleteMemberModal';
 import axios from 'axios';
 import { getStudyMemberRequest } from '../../redux/manageReducer';
+import { HostURL } from '../../redux/url';
 
 const ProfileDetail = ({ route }: any) => {
   const idx = route.params.idx;
@@ -52,7 +53,7 @@ const ProfileDetail = ({ route }: any) => {
   const deleteMember = () => {
     axios({
       method: 'delete',
-      url: `http://localhost:4000/manage/deleteMember/${studyId}/${idx}`,
+      url: `${HostURL}/manage/deleteMember/${studyId}/${idx}`,
       headers: { Authorization: login.token },
     })
       .then(() => {

@@ -75,7 +75,7 @@ const MyPage_Question = () => {
       <ButtonContainer>
         <SubmitButton
           success={success}
-          title="저장하기"
+          title="전송하기"
           onPress={handleSend}
           loading={isLoading}
         />

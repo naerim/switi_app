@@ -8,6 +8,7 @@ import { Status } from '../SignUp/inteface';
 import CompleteModal from './components/CompleteModal';
 import axios from 'axios';
 import { Alert } from 'react-native';
+import { HostURL } from '../../redux/url';
 
 const RenewPassword = ({ route }: any) => {
   const email = route.params.email ? route.params.email : '';
@@ -29,7 +30,7 @@ const RenewPassword = ({ route }: any) => {
     // console.log('clickChangePassword');
     axios({
       method: 'post',
-      url: 'http://localhost:4000/auth/setNewPwd',
+      url: `${HostURL}/auth/setNewPwd`,
       data: { email: email, password: passwordInput.value },
     })
       .then((res) => {

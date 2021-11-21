@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getStudyDetailRequest } from '../../../../redux/studyReducer';
 import { getMyApplyListRequest } from '../../../../redux/manageReducer';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -35,7 +36,7 @@ const LeaveModal: React.FC<Props> = ({
   const onPress = () => {
     axios({
       method: 'delete',
-      url: `http://localhost:4000/study/quitStudy/${idStudy}`,
+      url: `${HostURL}/study/quitStudy/${idStudy}`,
       headers: { Authorization: token },
     })
       .then((res) => {

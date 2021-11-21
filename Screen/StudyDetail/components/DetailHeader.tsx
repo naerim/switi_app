@@ -15,6 +15,7 @@ import {
 import { useGoAmendStudy, useGoBack } from '../../../util/navigationHooks';
 import DeleteDoneModal from './MenuModal/DeleteDoneModal';
 import { getMyStudyListRequest } from '../../../redux/manageReducer';
+import { HostURL } from '../../../redux/url';
 
 interface Props {
   id: number;
@@ -57,7 +58,7 @@ const DetailHeader: React.FC<Props> = ({ id, onPress }) => {
   const deleteStudy = () => {
     axios({
       method: 'delete',
-      url: `http://localhost:4000/study/deleteStudy/${id}`,
+      url: `${HostURL}/study/deleteStudy/${id}`,
       headers: { Authorization: login.token },
     })
       .then((res) => {
