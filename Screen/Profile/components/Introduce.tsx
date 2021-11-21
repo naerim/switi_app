@@ -17,6 +17,7 @@ const Introduce: React.FC<InputProps> = ({ input }) => {
         numberOfLines={4}
         maxLength={250}
         textAlignVertical="top"
+        blurOnSubmit={true}
       />
     </ProfileContent>
   );
