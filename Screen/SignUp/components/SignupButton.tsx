@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { useGoFirstProfile } from '../../../util/navigationHooks';
 import axios from 'axios';
+import { HostURL } from '../../../redux/url';
 
 interface Props {
   success: boolean;
@@ -15,7 +16,7 @@ const SignupButton: React.FC<Props> = ({ success, input }) => {
   const onPress = () => {
     axios({
       method: 'post',
-      url: 'http://localhost:4000/auth/signup',
+      url: `${HostURL}/auth/signup`,
       data: {
         gender: input.gender,
         nickname: input.nickname,

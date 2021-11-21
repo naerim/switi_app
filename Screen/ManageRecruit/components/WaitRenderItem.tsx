@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
 import { getStudyMemberRequest } from '../../../redux/manageReducer';
+import { HostURL } from '../../../redux/url';
 
 const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const goProfileDetail = useGoProfileDetail(item.idUser, item.idStudy, 1);
@@ -34,7 +35,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
     const abortController = new AbortController();
     axios({
       method: 'put',
-      url: `http://localhost:4000/manage/acceptApply/${item.id}`,
+      url: `${HostURL}/manage/acceptApply/${item.id}`,
       headers: { Authorization: login.token },
     })
       .then(() => {
@@ -51,7 +52,7 @@ const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const rejectApply = () => {
     axios({
       method: 'put',
-      url: `http://localhost:4000/manage/rejectApply/${item.id}`,
+      url: `${HostURL}/manage/rejectApply/${item.id}`,
       headers: { Authorization: login.token },
     })
       .then(() => {

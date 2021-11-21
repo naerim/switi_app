@@ -7,6 +7,7 @@ import ModalForm from './ModalForm';
 import BasicButton from '../../../../Component/BasicButton';
 import ModalOption from './ModalOption';
 import axios from 'axios';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -28,7 +29,7 @@ const EmailAuthModal: React.FC<Props> = ({
   const handleNum = () => {
     axios({
       method: 'post',
-      url: 'http://localhost:4000/auth/compareCode',
+      url: `${HostURL}/auth/compareCode`,
       data: { email: email, inputCode: certificationNumber.value },
     })
       .then((res) => {
@@ -48,7 +49,7 @@ const EmailAuthModal: React.FC<Props> = ({
   const resendMail = () => {
     axios({
       method: 'post',
-      url: 'http://localhost:4000/auth/resendMail',
+      url: `${HostURL}/auth/resendMail`,
       data: { email: email },
     }).catch((err) => {
       if (err.toString() == 'Error: Request failed with status code 400')

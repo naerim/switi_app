@@ -20,6 +20,7 @@ import {
   offlineStudyListRequest,
   onlineStudyListRequest,
 } from '../../redux/studyReducer';
+import { HostURL } from '../../redux/url';
 
 const Home = ({ route }: any) => {
   const [tagList, setTagList] = useState<
@@ -92,7 +93,7 @@ const Home = ({ route }: any) => {
   const updateEndDate = (date: string) => {
     axios({
       method: 'put',
-      url: `http://localhost:4000/manage/updateEndDate/${idStudy}`,
+      url: `${HostURL}/manage/updateEndDate/${idStudy}`,
       headers: { Authorization: login.token },
       data: { endDate: date },
     })

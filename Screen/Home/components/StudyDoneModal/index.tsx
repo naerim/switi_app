@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../../redux';
 import { getMyStudyListRequest } from '../../../../redux/manageReducer';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -44,7 +45,7 @@ const StudyDoneModal: React.FC<Props> = ({
   const setEndStudy = () => {
     axios({
       method: 'put',
-      url: `http://localhost:4000/manage/endStudy/${idStudy}`,
+      url: `${HostURL}/manage/endStudy/${idStudy}`,
       headers: { Authorization: login.token },
     })
       .then((res) => {

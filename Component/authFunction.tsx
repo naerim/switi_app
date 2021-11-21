@@ -1,5 +1,6 @@
 import { Alert } from 'react-native';
 import axios from 'axios';
+import { HostURL } from '../redux/url';
 
 export const emailCheck = (email: string) => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -29,7 +30,7 @@ export const getNumber = async (email: string) => {
   if (emailCheck(email)) {
     axios({
       method: 'post',
-      url: 'http://localhost:4000/auth/findPwd',
+      url: `${HostURL}/auth/findPwd`,
       data: { email: email },
     })
       .then((res) => {

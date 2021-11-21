@@ -5,6 +5,7 @@ import BasicButton from '../../../../Component/BasicButton';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getMyApplyListRequest } from '../../../../redux/manageReducer';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   modalVisible: boolean;
@@ -31,7 +32,7 @@ const CancelModal: React.FC<Props> = ({
   const onPress = () => {
     axios({
       method: 'delete',
-      url: `http://localhost:4000/study/deleteApply/${idStudy}`,
+      url: `${HostURL}/study/deleteApply/${idStudy}`,
       headers: { Authorization: token },
     })
       .then((res) => {

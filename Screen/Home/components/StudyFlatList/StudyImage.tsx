@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import RecruitIcon from '../../../../Component/Icon/RecruitIcon';
+import { HostURL } from '../../../../redux/url';
 
 interface Props {
   img: any;
@@ -10,7 +11,7 @@ interface Props {
 const StudyImage: React.FC<Props> = ({ img, done }) => {
   // 이미지 불러오기
   const loadImg = (url: string) => {
-    return 'http://localhost:4000/images/' + url;
+    return `${HostURL}/images/` + url;
   };
 
   return (

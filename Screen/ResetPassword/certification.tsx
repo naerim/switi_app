@@ -7,6 +7,7 @@ import AuthInput from './components/AuthInput';
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { getNumber } from '../../Component/authFunction';
+import { HostURL } from '../../redux/url';
 
 const Certification = ({ route }: any) => {
   const email = route.params.email ? route.params.email : '';
@@ -20,7 +21,7 @@ const Certification = ({ route }: any) => {
     } else {
       axios({
         method: 'post',
-        url: 'http://localhost:4000/auth/checkCode',
+        url: `${HostURL}/auth/checkCode`,
         data: { email: email, inputCode: authNum.value },
       })
         .then((res) => {

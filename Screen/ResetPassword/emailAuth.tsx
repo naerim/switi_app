@@ -7,6 +7,7 @@ import AuthInput from './components/AuthInput';
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { emailCheck } from '../../Component/authFunction';
+import { HostURL } from '../../redux/url';
 
 const EmailAuth = () => {
   const email = useInput('');
@@ -26,7 +27,7 @@ const EmailAuth = () => {
     if (emailCheck(email.value)) {
       axios({
         method: 'post',
-        url: 'http://localhost:4000/auth/findPwd',
+        url: `${HostURL}/auth/findPwd`,
         data: { email: email.value },
       })
         .then((res) => {
