@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import axios from 'axios';
 import { getMyProfileRequest } from '../../redux/userReducer';
+import { HostURL } from '../../redux/url';
 
 const MyPage_Profile_Fix = () => {
   const { scroll, scrollOn } = useScroll();
@@ -53,7 +54,7 @@ const MyPage_Profile_Fix = () => {
     // myInterest, myCharacter 인덱스 1씩 더해줌
     axios({
       method: 'put',
-      url: 'http://localhost:4000/user/updateProfile',
+      url: `${HostURL}/user/updateProfile`,
       headers: { Authorization: login.token },
       data: {
         age: ageInput.value,

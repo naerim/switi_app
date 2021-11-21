@@ -13,6 +13,7 @@ import { Alert } from 'react-native';
 
 import axios from 'axios';
 import { logoutRequest } from '../../redux/userReducer';
+import { HostURL } from '../../redux/url';
 
 const MyPage_Withdrawal = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -26,17 +27,20 @@ const MyPage_Withdrawal = () => {
     setModalVisible(false);
   };
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUserDelete = async (token: string) => {
+    setIsLoading(true);
     axios({
       method: 'delete',
-      url: 'http://localhost:4000/auth/deleteUser',
+      url: `${HostURL}/auth/deleteUser`,
       headers: { Authorization: token },
     })
       .then((res) => {
         closeModal();
         setTimeout(() => {
           setModalVisible(true);
+          setIsLoading(false);
         }, 500);
         setTimeout(() => {
           dispatch(logoutRequest());
@@ -46,10 +50,9 @@ const MyPage_Withdrawal = () => {
         if (err.toString() == 'Error: Request failed with status code 500')
           Alert.alert('네트워크 오류가 발생했습니다');
         else Alert.alert('탈퇴 요청에 문제가 있습니다');
+        setIsLoading(false);
       });
   };
-
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <BasicContainer headerTitle="회원탈퇴" display onPress={goMyPage}>

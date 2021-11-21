@@ -133,7 +133,7 @@ const MyPage = () => {
 
   return (
     <ContainerWithBell title="마이페이지">
-      <Container>
+      <Container showsVerticalScrollIndicator={false}>
         <UserInfo title={myPage ? myPage.myPage.nickname : ' '} />
         <SugarContainer />
         <Line />

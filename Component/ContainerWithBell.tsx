@@ -13,7 +13,6 @@ const ContainerWithBell: React.FC<Props> = ({
   children,
   onPressTitle,
 }) => {
-  // const { scroll, scrollOn } = useScroll();
   return (
     <Container
       style={{
@@ -25,11 +24,7 @@ const ContainerWithBell: React.FC<Props> = ({
           <Title>{title}</Title>
         </TitleTouch>
       </HeaderContainer>
-      {/*<ChildrenContainer onScroll={scrollOn}>*/}
-      <ChildrenContainer>
-        {/*{scroll ? <Line /> : <Nothing />}*/}
-        {children}
-      </ChildrenContainer>
+      <ChildrenContainer>{children}</ChildrenContainer>
     </Container>
   );
 };
@@ -46,10 +41,6 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
-
-// const ChildrenContainer = styled.ScrollView`
-//   flex: 16;
-// `;
 
 const ChildrenContainer = styled.View`
   flex: 16;

@@ -19,7 +19,7 @@ const ScrapContainer: React.FC<Props> = ({
   scroll,
 }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 20 : 70 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <ScrapHeader
         title={headerTitle}
         onPress={onPress}

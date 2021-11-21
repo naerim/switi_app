@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 const imagePath = require('../../Img/btn_back.png');
 
@@ -17,7 +16,7 @@ interface Props {
 
 const ScrapHeader: React.FC<Props> = ({ title, onPress, display, count }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Wrap>
       <BackButton
         activeOpacity={0.8}
         onPress={onPress}
