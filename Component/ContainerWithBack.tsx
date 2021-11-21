@@ -18,7 +18,7 @@ const ContainerWithBack: React.FC<Props> = ({
   scroll,
 }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}>
       <BasicHeader title={headerTitle} onPress={onPress} display={display} />
       {scroll ? <Line /> : <Nothing />}
       <Container>{children}</Container>

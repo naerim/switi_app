@@ -68,6 +68,7 @@ const MyPage_Question = () => {
             value={contentInput.value}
             onChangeText={contentInput.onChange}
             multiline={true}
+            blurOnSubmit={true}
             textAlignVertical="top"
           />
         </ShortSection>
