@@ -34,7 +34,8 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
   const setRegion = () => {
     const num = address.length;
     // 모집대상이 2개 이상일때 ,로 구분
-    if (num > 1) {
+    if (num == 1) setMyRegion(address[0]?.city);
+    else if (num > 1) {
       let i = 0;
       let wholeRegion = '';
       address.forEach(({ city }) => {
@@ -43,7 +44,7 @@ const Category: React.FC<Props> = ({ address, category, target }) => {
         i++;
       });
       setMyRegion(wholeRegion);
-    } else setMyRegion(address[0]?.city);
+    } else setMyRegion('온라인');
   };
 
   // 카테고리 지정(카테고리가 여러개일수도 있으므로)

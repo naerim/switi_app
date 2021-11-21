@@ -19,7 +19,7 @@ const Container = styled.View<Props>`
   align-items: center;
   justify-content: center;
   padding: 2px 4px;
-  width: ${(props) => (props.done ? '46px' : '38px')};
+  width: ${(props) => (props.done ? '50px' : '38px')};
   height: 20px;
 `;
 
