@@ -51,7 +51,7 @@ const MyPage_Question = () => {
       <Content>
         <ShortSection>
           <Title>받는 사람</Title>
-          <SwitiMail>Example@gmail.com</SwitiMail>
+          <SwitiMail>switiswitihoney@gmail.com</SwitiMail>
         </ShortSection>
         <Line />
         <ShortSection>
