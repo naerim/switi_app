@@ -4,7 +4,7 @@ import Notice_1 from './notice/notice_1';
 export const NoticeData = [
   {
     key: 0,
-    title: '[알림] 스위티 소개',
+    title: '[공지] Switi 후원(고양시청소년드림, 이루어DRERAM)',
     createAt: '2021. 11. 17',
     Component: Notice_0,
   },
