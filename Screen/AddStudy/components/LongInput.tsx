@@ -16,6 +16,7 @@ const LongInput: React.FC<LongInputProps> = ({ input }) => {
         multiline
         numberOfLines={4}
         maxLength={250}
+        blurOnSubmit={true}
         textAlignVertical="top"
       />
     </AddStudyContainer>
