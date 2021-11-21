@@ -15,7 +15,7 @@ import {
 import ConfirmReport from '../Report/details/confirmReport';
 import FinalModal from '../Report/details/finalModal';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   getMyPageRequest,
@@ -30,6 +30,7 @@ import {
   studyMemberRequest,
 } from '../../redux/report/reportReducer';
 import useInput from '../../util/useInput';
+import { Alert } from 'react-native';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -44,22 +45,28 @@ const MyPage = () => {
   const reportModalClose = () => setReportModalVisible(false);
   const [reportStudyId, setReportStudyId] = useState();
   const [reportMemberId, setReportMemberId] = useState();
+  const [reportMemberName, setReportMemberName] = useState();
   const reportContent = useInput('');
 
   //신고하기 전 현재 진행 중 스터디 목록 조회
   const handleStudyInProgress = () => {
     dispatch(studyInProgressRequest(login.token));
   };
+
   useEffect(() => {
     handleStudyInProgress();
   }, []);
 
-  const { studyInProgressList } = useSelector((state: rootState) => ({
-    studyInProgressList: state.reportReducer.studyInProgressList,
-  }));
+  const { studyInProgressList, studyMemberList } = useSelector(
+    (state: rootState) => ({
+      studyInProgressList: state.reportReducer.studyInProgressList,
+      studyMemberList: state.reportReducer.studyMemberList,
+    }),
+    shallowEqual
+  );
   //하나일 때
 
-  //신고하기 스터디 멤머 조회
+  //신고하기 스터디 멤버 조회
   const handleStudyMember = (studyId: any) => {
     dispatch(studyMemberRequest(login.token, studyId));
   };
@@ -77,7 +84,7 @@ const MyPage = () => {
     handleReport(reportStudyId, reportMemberId, reportContent.value);
     setTimeout(() => {
       setFinalModalVisible(true);
-    }, 500);
+    }, 1000);
   };
   const finalClose = () => {
     setFinalModalVisible(false);
@@ -90,10 +97,19 @@ const MyPage = () => {
   const goQuestion = useGoQuestion();
 
   const confirm = () => {
-    setReportModalVisible(false);
-    setTimeout(() => {
-      setConfirmModalVisible(true);
-    }, 500);
+    console.log('confirm', reportStudyId, reportMemberId, reportContent.value);
+    if(studyInProgressList && studyMemberList){
+      studyInProgressList[0] && setReportStudyId(studyInProgressList[0].id);
+      studyMemberList[0] && setReportMemberId(studyMemberList[0].id);
+    }
+    else Alert.alert('모든 항목을 입력해 주세요!');
+    if(reportContent.value !== ''){
+        setReportModalVisible(false);
+        setTimeout(() => {
+          setConfirmModalVisible(true);
+        }, 1000);
+      }
+    else Alert.alert('모든 항목을 입력해 주세요!');
   };
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -151,6 +167,7 @@ const MyPage = () => {
       <ReportModal
         setReportStudyId={setReportStudyId}
         setReportMemberId={setReportMemberId}
+        setReportMemberName={setReportMemberName}
         modalVisible={reportModalVisible}
         reportContent={reportContent}
         closeModal={reportModalClose}
