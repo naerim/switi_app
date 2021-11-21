@@ -13,6 +13,7 @@ import {
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
 import { searchAllDelete, searchDelete } from './search.api';
+import { HostURL } from '../url';
 
 export interface ISearchState {
   searchStudyList: [];
@@ -29,7 +30,7 @@ const initialState = {
 const search = async (token: string, keyword: string) => {
   const response = await axios({
     method: 'post',
-    url: 'http://localhost:4000/search/searchStudy',
+    url: `${HostURL}/search/searchStudy`,
     headers: { Authorization: token },
     data: { keyword: keyword },
   });
@@ -40,7 +41,7 @@ const search = async (token: string, keyword: string) => {
 const searchHistory = async (token: string) => {
   const response = await axios({
     method: 'get',
-    url: 'http://localhost:4000/search/getSearch',
+    url: `${HostURL}/search/getSearch`,
     headers: { Authorization: token },
   });
   // console.log('리듀서 검색 변경', response.data);
@@ -50,7 +51,7 @@ const searchHistory = async (token: string) => {
 const searchKeyword = async (token: string, keyword: string) => {
   const response = await axios({
     method: 'post',
-    url: 'http://localhost:4000/search/searchKeyword',
+    url: `${HostURL}/search/searchKeyword`,
     headers: { Authorization: token },
     data: { keyword: keyword },
   });

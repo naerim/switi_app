@@ -22,6 +22,7 @@ import {
 } from '../../redux/studyReducer';
 import EnrollDoneModal from './components/EnrollDoneModal';
 import { getMyStudyListRequest } from '../../redux/manageReducer';
+import { HostURL } from '../../redux/url';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,7 +74,7 @@ const AddStudy = () => {
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
     axios({
       method: 'post',
-      url: 'http://localhost:4000/study/addStudy',
+      url: `${HostURL}/study/addStudy`,
       headers: { Authorization: login.token },
       data: {
         online_flag: onlineFlag,

@@ -1,5 +1,6 @@
 import produce from 'immer';
 import axios from 'axios';
+import { HostURL } from './url';
 
 export const GET_INTEREST = 'GET_INTEREST';
 export const GET_CHARACTER = 'GET_CHARACTER';
@@ -9,9 +10,7 @@ export const GET_STATE = 'GET_STATE';
 // 성격
 export const getCharacterRequest = () => {
   return async (dispatch: any) => {
-    const response = await axios.get(
-      `http://localhost:4000/category/character`
-    );
+    const response = await axios.get(`${HostURL}/category/character`);
     if (response.data) {
       dispatch({
         type: GET_CHARACTER,
@@ -25,7 +24,7 @@ export const getCharacterRequest = () => {
 
 export const getStateRequest = () => {
   return async (dispatch: any) => {
-    const response = await axios.get(`http://localhost:4000/category/state`);
+    const response = await axios.get(`${HostURL}/category/state`);
     if (response.data) {
       dispatch({
         type: GET_STATE,
@@ -40,7 +39,7 @@ export const getStateRequest = () => {
 // 관심분야
 export const getInterestRequest = () => {
   return async (dispatch: any) => {
-    const response = await axios.get(`http://localhost:4000/category/interest`);
+    const response = await axios.get(`${HostURL}/category/interest`);
     if (response.data) {
       dispatch({
         type: GET_INTEREST,
@@ -55,7 +54,7 @@ export const getInterestRequest = () => {
 // 지역
 export const getRegionRequest = () => {
   return async (dispatch: any) => {
-    const response = await axios.get(`http://localhost:4000/category/region`);
+    const response = await axios.get(`${HostURL}/category/region`);
     if (response.data) {
       dispatch({
         type: GET_REGION,

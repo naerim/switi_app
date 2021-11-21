@@ -9,6 +9,7 @@ import {
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
+import { HostURL } from './url';
 
 export interface IEvaluationState {
   evaluateProfile: any;
@@ -27,7 +28,7 @@ const getEvaluateProfile = async (
 ) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/evaluate/evaluatePage?idMember=${idMember}&idStudy=${idStudy}`,
+    url: `${HostURL}/evaluate/evaluatePage?idMember=${idMember}&idStudy=${idStudy}`,
     headers: { Authorization: token },
   });
   // console.log(`reducer evaluationProfile :  `, response.data);
@@ -44,7 +45,7 @@ const evaluate = async (
 ) => {
   const response = await axios({
     method: 'post',
-    url: `http://localhost:4000/evaluate/peerEvaluate?idMember=${idMember}&idStudy=${idStudy}`,
+    url: `${HostURL}/evaluate/peerEvaluate?idMember=${idMember}&idStudy=${idStudy}`,
     headers: { Authorization: token },
     data: { score1: score1, score2: score2, score3: score3 },
   });

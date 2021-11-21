@@ -29,6 +29,7 @@ import {
 import AmendModal from './AmendModal';
 import axios from 'axios';
 import { searchHistoryRequest } from '../../redux/search/searchReducer';
+import { HostURL } from '../../redux/url';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
@@ -85,7 +86,7 @@ const AmendStudy = () => {
     setModalVisible(true);
     axios({
       method: 'put',
-      url: `http://localhost:4000/study/updateStudy/${studyDetail.id}`,
+      url: `${HostURL}/study/updateStudy/${studyDetail.id}`,
       data: {
         online_flag: onlineFlag,
         state: target,

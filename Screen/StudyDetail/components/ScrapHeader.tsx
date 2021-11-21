@@ -9,6 +9,7 @@ import { rootState } from '../../../redux';
 import axios from 'axios';
 import { getScrapListRequest } from '../../../redux/userReducer';
 import { searchHistoryRequest } from '../../../redux/search/searchReducer';
+import { HostURL } from '../../../redux/url';
 
 interface Props {
   onPress: () => void;
@@ -61,7 +62,7 @@ const ScrapHeader: React.FC<Props> = ({
     scrap
       ? axios({
           method: 'delete',
-          url: `http://localhost:4000/study/deleteScrap/${id}`,
+          url: `${HostURL}/study/deleteScrap/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
           setPopupText('모집글이 스크랩이 취소되었습니다.');
@@ -73,7 +74,7 @@ const ScrapHeader: React.FC<Props> = ({
         })
       : axios({
           method: 'post',
-          url: `http://localhost:4000/study/scrapStudy/${id}`,
+          url: `${HostURL}/study/scrapStudy/${id}`,
           headers: { Authorization: login.token },
         }).then(() => {
           dispatch(searchHistoryRequest(login.token));

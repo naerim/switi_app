@@ -48,7 +48,7 @@ export const logoutRequest = createRequestThunk(AUTH_LOGOUT, logout);
 const getMyPage = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/user/myPage`,
+    url: `${HostURL}/user/myPage`,
     headers: { Authorization: token },
   });
   return response;
@@ -59,7 +59,7 @@ export const getMyPageRequest = createRequestThunk(GET_MY_PAGE, getMyPage);
 const getScrapList = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/user/scrapList`,
+    url: `${HostURL}/user/scrapList`,
     headers: { Authorization: token },
   });
   return response;
@@ -73,7 +73,7 @@ export const getScrapListRequest = createRequestThunk(
 const getStudyHistory = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/user/studyHistory`,
+    url: `${HostURL}/user/studyHistory`,
     headers: { Authorization: token },
   });
   return response;
@@ -87,7 +87,7 @@ export const getStudyHistoryRequest = createRequestThunk(
 const getMyProfile = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/user/myProfile`,
+    url: `${HostURL}/user/myProfile`,
     headers: { Authorization: token },
   });
   return response;
@@ -101,7 +101,7 @@ export const getMyProfileRequest = createRequestThunk(
 const getUserProfile = async (token: string, id: number) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/user/userProfile/${id}`,
+    url: `${HostURL}/user/userProfile/${id}`,
     headers: { Authorization: token },
   });
   return response;

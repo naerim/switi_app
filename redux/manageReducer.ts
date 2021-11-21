@@ -9,12 +9,13 @@ import {
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
+import { HostURL } from './url';
 
 // 내 모집글
 const getMyStudyList = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: 'http://localhost:4000/manage/myStudyList',
+    url: `${HostURL}/manage/myStudyList`,
     headers: { Authorization: token },
   });
   return response;
@@ -28,7 +29,7 @@ export const getMyStudyListRequest = createRequestThunk(
 const getMyApplyList = async (token: string) => {
   const response = axios({
     method: 'get',
-    url: 'http://localhost:4000/manage/myApplyList',
+    url: `${HostURL}/manage/myApplyList`,
     headers: { Authorization: token },
   });
   return response;
@@ -42,7 +43,7 @@ export const getMyApplyListRequest = createRequestThunk(
 const getStudyMember = async (token: string, id: number) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/manage/studyMemList/${id}`,
+    url: `${HostURL}/manage/studyMemList/${id}`,
     headers: { Authorization: token },
   });
   return response;

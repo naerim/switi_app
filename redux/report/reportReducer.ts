@@ -9,6 +9,7 @@ import {
 } from '../action';
 import axios from 'axios';
 import createRequestThunk from '../lib/createRequestThunk';
+import { HostURL } from '../url';
 
 export interface IReportState {
   studyInProgressList: any;
@@ -23,7 +24,7 @@ const initialState = {
 const studyInProgress = async (token: string) => {
   const response = await axios({
     method: 'get',
-    url: 'http://localhost:4000/report/getReportList',
+    url: `${HostURL}/report/getReportList`,
     headers: { Authorization: token },
   });
   // console.log(`reducer 스터디 :  `, token);
@@ -33,7 +34,7 @@ const studyInProgress = async (token: string) => {
 const studyMember = async (token: string, studyId: number) => {
   const response = await axios({
     method: 'get',
-    url: `http://localhost:4000/report/getReportInfo/${studyId}/`,
+    url: `${HostURL}/report/getReportInfo/${studyId}/`,
     headers: { Authorization: token },
   });
   // console.log('reducer 스터디 멤버', response.data.member);
@@ -48,7 +49,7 @@ const report = async (
 ) => {
   const response = await axios({
     method: 'post',
-    url: `http://localhost:4000/report/reportUser/${studyId}/${memberId}`,
+    url: `${HostURL}/report/reportUser/${studyId}/${memberId}`,
     headers: { Authorization: token },
     data: { content: content },
   });
