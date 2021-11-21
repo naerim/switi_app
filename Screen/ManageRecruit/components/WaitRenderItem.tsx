@@ -13,7 +13,7 @@ import { getStudyMemberRequest } from '../../../redux/manageReducer';
 const WaitRenderItem: React.FC<ItemType> = ({ item }) => {
   const goProfileDetail = useGoProfileDetail(item.idUser, item.idStudy, 1);
   const limitTitle = (title: string) =>
-    title.length > 17 ? title.substr(0, 17) + '...' : title;
+    title.length > 25 ? title.substr(0, 25) + '...' : title;
   const [RecruitModalVisible, setRecruitModalVisible] = useState(false);
   const closeRecruitModal = () => setRecruitModalVisible(false);
 

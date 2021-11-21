@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
+import { HostURL } from '../../redux/url';
 
 const MyPage_Question = () => {
   const titleInput = useInput('');
@@ -23,11 +24,10 @@ const MyPage_Question = () => {
   const success = checkSuccess();
   const [isLoading, setIsLoading] = useState(false);
   const handleSend = () => {
-    // console.log('onPress Question');
     setIsLoading(true);
     axios({
       method: 'post',
-      url: 'http://localhost:4000/question/sendMail',
+      url: `${HostURL}/question/sendMail`,
       headers: { Authorization: login.token },
       data: {
         title: titleInput.value,
@@ -36,12 +36,10 @@ const MyPage_Question = () => {
     })
       .then((response) => {
         setIsLoading(false);
-        // console.log('response Question', response.status);
         Alert.alert('문의가 전송되었습니다. ');
       })
       .catch((err) => {
         setIsLoading(false);
-        // console.log('err Question', err);
         Alert.alert('네트워크 오류 :(');
       });
   };
@@ -119,9 +117,10 @@ const Input = styled.TextInput`
 
 const ButtonContainer = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 24px;
   margin-right: 24px;
+  padding-bottom: 40px;
 `;
 
 export default MyPage_Question;

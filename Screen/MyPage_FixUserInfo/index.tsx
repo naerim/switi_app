@@ -13,12 +13,12 @@ import SubmitButton from './submitButton';
 import IsNickname from './input/inputConfirm/isNickname';
 import IsPassword from './input/inputConfirm/isPassword';
 import IsSamePassword from './input/inputConfirm/isSamePassword';
-import useScroll from '../../util/useScroll';
 import MyImage from './MyImage';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import axios from 'axios';
 import { getMyPageRequest } from '../../redux/userReducer';
+import { HostURL } from '../../redux/url';
 
 const MyPage_FixUserInfo = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -34,13 +34,12 @@ const MyPage_FixUserInfo = () => {
   const passwordCheckInput = useInput('');
   const BeforePasswordInput = useInput('');
   const [confirm, setConfirm] = useState(false);
-  const { scroll, scrollOn } = useScroll();
   const dispatch = useDispatch();
 
   const FixButtonOnPress = () => {
     axios({
       method: 'put',
-      url: 'http://localhost:4000/user/updateUserInfo',
+      url: `${HostURL}/user/updateUserInfo`,
       headers: { Authorization: login.token },
       data: {
         nickname: input.nickname,
@@ -111,34 +110,36 @@ const MyPage_FixUserInfo = () => {
       headerTitle="회원정보 수정"
       display
       onPress={goMyPageUserInfo}
-      scroll={scroll}
     >
-      <MarginContainer onScroll={scrollOn}>
-        <PictureContainer>
-          <MyImage />
-        </PictureContainer>
-        <InputContainer>
-          {fixUserInfoData.map(
-            ({ title, Component, input, error, confirm }) => (
-              <AllInputContainer key={title} title={title}>
-                <Component input={input} error={error} confirm={confirm} />
-              </AllInputContainer>
-            )
-          )}
-        </InputContainer>
-      </MarginContainer>
-      <ButtonContainer>
-        <SubmitButton
-          success={success}
-          onPress={FixButtonOnPress}
-          title="저장하기"
-        />
-      </ButtonContainer>
+      <Container>
+        <MarginContainer>
+          <PictureContainer>
+            <MyImage />
+          </PictureContainer>
+          <InputContainer>
+            {fixUserInfoData.map(
+              ({ title, Component, input, error, confirm }) => (
+                <AllInputContainer key={title} title={title}>
+                  <Component input={input} error={error} confirm={confirm} />
+                </AllInputContainer>
+              )
+            )}
+          </InputContainer>
+        </MarginContainer>
+        <ButtonContainer>
+          <SubmitButton
+            success={success}
+            onPress={FixButtonOnPress}
+            title="저장하기"
+          />
+        </ButtonContainer>
+      </Container>
     </BasicContainer>
   );
 };
 
-const MarginContainer = styled.ScrollView`
+const Container = styled.ScrollView``;
+const MarginContainer = styled.View`
   margin: 0 24px;
 `;
 
@@ -154,7 +155,7 @@ const InputContainer = styled.View`
 
 const ButtonContainer = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 24px;
   margin-right: 24px;
 `;

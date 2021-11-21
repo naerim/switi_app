@@ -1,10 +1,11 @@
 //검색 기록 모두 삭제
 import axios from 'axios';
+import { HostURL } from '../url';
 
 export const searchAllDelete = async (token: string) => {
   const response = await axios({
     method: 'delete',
-    url: 'http://localhost:4000/search/deleteAll',
+    url: `${HostURL}/search/deleteAll`,
     headers: { Authorization: token },
   });
   return response;
@@ -14,7 +15,7 @@ export const searchAllDelete = async (token: string) => {
 export const searchDelete = async (token: string, id: number) => {
   const response = await axios({
     method: 'delete',
-    url: `http://localhost:4000/search//deleteOne/${id}`,
+    url: `${HostURL}/search//deleteOne/${id}`,
     headers: { Authorization: token },
   });
   // console.log(`검색 하나 삭제:`, response.data);

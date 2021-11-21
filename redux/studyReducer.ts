@@ -7,6 +7,7 @@ import {
 } from './action';
 import axios from 'axios';
 import createRequestThunk from './lib/createRequestThunk';
+import { HostURL } from './url';
 
 // 온라인 스터디
 export const onlineStudyListRequest = (
@@ -17,7 +18,7 @@ export const onlineStudyListRequest = (
   const orderValue = order ? 'count' : 'update';
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/0?order=${orderValue}${query}`,
+      `${HostURL}/study/studyList/0?order=${orderValue}${query}`,
       { headers: { Authorization: `${token}` } }
     );
     if (response.data) {
@@ -40,7 +41,7 @@ export const offlineStudyListRequest = (
   const orderValue = order ? 'count' : 'update';
   return async (dispatch: any) => {
     const response = await axios.get(
-      `http://localhost:4000/study/studyList/1?order=${orderValue}${query}`,
+      `${HostURL}/study/studyList/1?order=${orderValue}${query}`,
       { headers: { Authorization: `${token}` } }
     );
     if (response.data) {
@@ -58,7 +59,7 @@ export const offlineStudyListRequest = (
 const getStudyDetail = async (token: string, id: number) => {
   const response = axios({
     method: 'get',
-    url: `http://localhost:4000/study/studyDetail/${id}`,
+    url: `${HostURL}/study/studyDetail/${id}`,
     headers: { Authorization: token },
   });
   return response;

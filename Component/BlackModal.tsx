@@ -13,6 +13,7 @@ const BlackModal: React.FC<Props> = ({ text, visible, done }) => (
   </Container>
 );
 
+//bottom: ${(props) => (props.done ? '54px' : '100px')}
 const Container = styled.View<Props>`
   width: ${(props) => (props.visible ? '87%' : '0px')};
   background-color: #2b2b2b;

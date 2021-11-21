@@ -72,7 +72,7 @@ const SubTitleContainer = styled.TouchableOpacity``;
 
 const SubTitle = styled.Text`
   font-size: 12px;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 `;
 
 const Line = styled.Text`

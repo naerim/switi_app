@@ -24,7 +24,7 @@ const Container = styled.TouchableOpacity<ButtonProps>`
   background-color: #86e3c3;
   border-radius: 20px;
   align-items: center;
-  width: ${(props) => (props.display ? '62px' : '0px')};
+  width: ${(props) => (props.display ? '65px' : '0px')};
   padding: ${(props) => (props.display ? '10px' : '0px')};
 `;
 
