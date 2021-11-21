@@ -17,7 +17,7 @@ const ContainerWithBell: React.FC<Props> = ({
   return (
     <Container
       style={{
-        paddingTop: Platform.OS === 'ios' ? 20 : 70,
+        paddingTop: Platform.OS === 'ios' ? 20 : 50,
       }}
     >
       <HeaderContainer>

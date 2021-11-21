@@ -18,6 +18,7 @@ const BasicHeader: React.FC<Props> = ({ title, onPress, display }) => {
   return (
     <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
       <BackButton
+        style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}
         activeOpacity={0.8}
         onPress={onPress}
         display={display}
