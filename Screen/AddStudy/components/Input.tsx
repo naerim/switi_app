@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({
   };
 
   const checkValue = () => {
-    onlineFlag === 0 ? input.onChange('온라인') : input.onChange(input.value);
+    onlineFlag === 0 ? input.onChange('온라인') : input.onChange('');
   };
 
   useEffect(() => {
