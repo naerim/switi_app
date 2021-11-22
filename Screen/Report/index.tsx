@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 import BasicModal from '../../Component/BasicModal';
@@ -24,7 +24,7 @@ interface MyPageModalProps {
 const Report: React.FC<MyPageModalProps> = ({
   setReportStudyId,
   setReportMemberId,
-                                              setReportMemberName,
+  setReportMemberName,
   reportContent,
   modalVisible,
   closeModal,
@@ -42,6 +42,12 @@ const Report: React.FC<MyPageModalProps> = ({
     }),
     shallowEqual
   );
+  useEffect(() => {
+    if (studyInProgressList && studyMemberList) {
+      studyInProgressList[0] && setReportStudyId(studyInProgressList[0].id);
+      studyMemberList[0] && setReportMemberId(studyMemberList[0]?.id);
+    }
+  }, []);
 
   const handleStudyMember = (studyId: any) => {
     dispatch(studyMemberRequest(login.token, studyId));
@@ -128,11 +134,7 @@ const Report: React.FC<MyPageModalProps> = ({
       </StyledModalContainer>
       <ModalButtonContainer>
         <HalfButton text="취소" onPress={closeModal} />
-        <HalfButton
-          text="신고하기"
-          onPress={confirmButton}
-          color="#86E3C3"
-        />
+        <HalfButton text="신고하기" onPress={confirmButton} color="#86E3C3" />
       </ModalButtonContainer>
     </BasicModal>
   );

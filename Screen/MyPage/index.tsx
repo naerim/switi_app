@@ -97,19 +97,18 @@ const MyPage = () => {
   const goQuestion = useGoQuestion();
 
   const confirm = () => {
-    console.log('confirm', reportStudyId, reportMemberId, reportContent.value);
-    if(studyInProgressList && studyMemberList){
-      studyInProgressList[0] && setReportStudyId(studyInProgressList[0].id);
-      studyMemberList[0] && setReportMemberId(studyMemberList[0].id);
-    }
-    else Alert.alert('모든 항목을 입력해 주세요!');
-    if(reportContent.value !== ''){
-        setReportModalVisible(false);
-        setTimeout(() => {
-          setConfirmModalVisible(true);
-        }, 1000);
-      }
-    else Alert.alert('모든 항목을 입력해 주세요!');
+    console.log(
+      'confirm(MyPage/index)',
+      reportStudyId,
+      reportMemberId,
+      reportContent.value
+    );
+    if (reportContent.value !== '') {
+      setReportModalVisible(false);
+      setTimeout(() => {
+        setConfirmModalVisible(true);
+      }, 1000);
+    } else Alert.alert('모든 항목을 입력해 주세요!');
   };
 
   const { login } = useSelector(({ userReducer }: rootState) => ({

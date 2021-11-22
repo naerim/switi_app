@@ -13,7 +13,7 @@ import { HostURL } from '../url';
 
 export interface IReportState {
   studyInProgressList: any;
-  studyMemberList: [];
+  studyMemberList: any;
 }
 
 const initialState = {
@@ -27,7 +27,6 @@ const studyInProgress = async (token: string) => {
     url: `${HostURL}/report/getReportList`,
     headers: { Authorization: token },
   });
-  console.log(`reducer 스터디 :  `, response.data.study);
   return response;
 };
 
@@ -37,7 +36,6 @@ const studyMember = async (token: string, studyId: number) => {
     url: `${HostURL}/report/getReportInfo/${studyId}/`,
     headers: { Authorization: token },
   });
-  console.log('reducer 스터디 멤버', response.data.member);
   return response;
 };
 
