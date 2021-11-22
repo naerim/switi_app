@@ -17,11 +17,11 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.switi.purplenrshshyn",
+      "bundleIdentifier": "com.switi.purpleconrshshyn",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.switi.purplenrshshyn",
+      "package": "com.switi.purpleconrshshyn",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
