@@ -5,14 +5,12 @@ import BasicModal from '../../../Component/BasicModal';
 import BasicButton from '../../../Component/BasicButton';
 
 interface Props {
-  name: string;
   modalVisible: boolean;
   closeModal: () => void;
   button: any;
 }
 
 const ConfirmReport: React.FC<Props> = ({
-  name,
   modalVisible,
   closeModal,
   button,
@@ -24,7 +22,7 @@ const ConfirmReport: React.FC<Props> = ({
           paddingBottom: Platform.OS === 'ios' ? 0 : 24,
         }}
       >
-        <Title>{name}님을 신고하시겠습니까?</Title>
+        <Title>정말 신고하시겠습니까?</Title>
         <Nothing />
         <Content>신고철회는 불가능하며,</Content>
         <Content>신고자의 익명이 보장됩니다.</Content>

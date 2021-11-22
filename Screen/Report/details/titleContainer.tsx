@@ -37,6 +37,4 @@ const Check = styled.Image`
   width: 13px;
 `;
 
-const Nothing = styled.View``;
-
 export default TitleContainer;

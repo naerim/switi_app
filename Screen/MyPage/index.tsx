@@ -177,7 +177,6 @@ const MyPage = () => {
       />
       {reportMemberId && (
         <ConfirmReport
-          name="@@@"
           modalVisible={confirmModalVisible}
           closeModal={closeConfirm}
           button={final}

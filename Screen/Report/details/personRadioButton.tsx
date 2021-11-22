@@ -22,7 +22,7 @@ const PersonRadioButton: React.FC<Props> = ({
   setReportMemberId,
   input,
   studyMemberList,
-                                              setReportMemberName,
+  setReportMemberName,
 }) => {
   let value = 0;
   let radioStudyMemberList = studyMemberList[0]?.studyMembers;
