@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import Proceeding from './RenderItem/Proceeding';
 import Recruitment from './RenderItem/Recruitment';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../../redux';
 import EmptyScreen from '../../../Component/EmptyScreen';
 import {
@@ -21,12 +21,18 @@ const ContentList: React.FC<Props> = ({ idx }) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
-    myStudyList: manageReducer.myStudyList,
-  }));
-  const { myApplyList } = useSelector(({ manageReducer }: rootState) => ({
-    myApplyList: manageReducer.myApplyList,
-  }));
+  const { myStudyList } = useSelector(
+    ({ manageReducer }: rootState) => ({
+      myStudyList: manageReducer.myStudyList,
+    }),
+    shallowEqual
+  );
+  const { myApplyList } = useSelector(
+    ({ manageReducer }: rootState) => ({
+      myApplyList: manageReducer.myApplyList,
+    }),
+    shallowEqual
+  );
   const dispatch = useDispatch();
   const onGetMyStudyList = useCallback(
     // 내가 만든 스터디 목록 가져오기

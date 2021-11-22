@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import BasicContainer from '../../Component/BasicContainer';
 import { useGoBack } from '../../util/navigationHooks';
 import Sugar from '../MyPage/Sugar';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getUserProfileRequest } from '../../redux/userReducer';
 import {
@@ -34,9 +34,12 @@ const ProfileDetail = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { userProfile } = useSelector(({ userReducer }: rootState) => ({
-    userProfile: userReducer.userProfile,
-  }));
+  const { userProfile } = useSelector(
+    ({ userReducer }: rootState) => ({
+      userProfile: userReducer.userProfile,
+    }),
+    shallowEqual
+  );
 
   const dispatch = useDispatch();
   const onGetUserProfile = useCallback(

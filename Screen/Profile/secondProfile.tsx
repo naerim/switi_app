@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import axios from 'axios';
 import { HostURL } from '../../redux/url';
+import styled from 'styled-components/native';
 
 const SecondProfile = ({ route }: any) => {
   const nickname = route.params.nickname;
@@ -75,21 +76,27 @@ const SecondProfile = ({ route }: any) => {
       disabled={disabled}
       display={true}
     >
-      <MyState
-        check={{ checked, setChecked }}
-        state={state}
-        setState={setState}
-      />
-      <FlatListModal
-        title="나의 성격 (3개 이하 선택)"
-        data={character}
-        select={selectCharacter}
-        setSelect={setSelectCharacter}
-        column
-      />
-      <Introduce input={introduceInput} />
+      <Container showsVerticalScrollIndicator={false}>
+        <MyState
+          check={{ checked, setChecked }}
+          state={state}
+          setState={setState}
+        />
+        <FlatListModal
+          title="나의 성격 (3개 이하 선택)"
+          data={character}
+          select={selectCharacter}
+          setSelect={setSelectCharacter}
+          column
+        />
+        <Introduce input={introduceInput} />
+      </Container>
     </ProfileContainer>
   );
 };
+
+const Container = styled.ScrollView`
+  flex: 1;
+`;
 
 export default SecondProfile;

@@ -1,5 +1,5 @@
 // ios
-import { Platform } from 'react-native';
+//import { Platform } from 'react-native';
 
 //export const HostURL = `${HostURL}`;
 //android

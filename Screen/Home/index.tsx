@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import StudyFlatList from './components/StudyFlatList';
 import TopCategory from './components/TopCategory';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getMyPageRequest, getScrapListRequest } from '../../redux/userReducer';
 import {
@@ -77,9 +77,12 @@ const Home = ({ route }: any) => {
   const fetchOfflineStudyList = (order: boolean, query: string) =>
     dispatch(offlineStudyListRequest(login.token, order, query));
 
-  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
-    myStudyList: manageReducer.myStudyList,
-  }));
+  const { myStudyList } = useSelector(
+    ({ manageReducer }: rootState) => ({
+      myStudyList: manageReducer.myStudyList,
+    }),
+    shallowEqual
+  );
 
   // 스터디 연장 버튼 클릭했을 때 실행
   const onPressUpdateEndDate = () => {
@@ -117,7 +120,7 @@ const Home = ({ route }: any) => {
     const date = moment(now).format('YYYY-MM-DD');
     await myStudyList.forEach(
       ({ id, endDate, title, end_flag }: CheckProps) => {
-        if (!end_flag && date == endDate.substring(0, 10)) {
+        if (!end_flag && date >= endDate.substring(0, 10)) {
           setIdStudy(id);
           setDoneTitle(title);
         }

@@ -114,9 +114,12 @@ const MyPage = () => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { myPage } = useSelector(({ userReducer }: rootState) => ({
-    myPage: userReducer.myPage,
-  }));
+  const { myPage } = useSelector(
+    ({ userReducer }: rootState) => ({
+      myPage: userReducer.myPage,
+    }),
+    shallowEqual
+  );
 
   const onGetMyPage = useCallback(
     // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
