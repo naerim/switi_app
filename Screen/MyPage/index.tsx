@@ -56,9 +56,13 @@ const MyPage = () => {
     handleStudyInProgress();
   }, []);
 
-  const { studyInProgressList } = useSelector((state: rootState) => ({
-    studyInProgressList: state.reportReducer.studyInProgressList,
-  }));
+  const { studyInProgressList, studyMemberList } = useSelector(
+    (state: rootState) => ({
+      studyInProgressList: state.reportReducer.studyInProgressList,
+      studyMemberList: state.reportReducer.studyMemberList,
+    }),
+    shallowEqual
+  );
   //하나일 때
 
   //신고하기 스터디 멤버 조회
@@ -77,6 +81,7 @@ const MyPage = () => {
   const final = () => {
     setConfirmModalVisible(false);
     console.log(reportMemberId);
+    studyMemberList[0] && setReportMemberId(studyMemberList[0]?.id);
     handleReport(reportStudyId, reportMemberId, reportContent.value);
     setTimeout(() => {
       setFinalModalVisible(true);
