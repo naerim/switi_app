@@ -4,7 +4,7 @@ import StudyInfo from './components/StudyInfo';
 import BottomButton from './components/BottomButton';
 import OtherInfo from './components/OtherInfo';
 import { useGoHome } from '../../util/navigationHooks';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import { getStudyDetailRequest } from '../../redux/studyReducer';
 import TitleFlag from '../Home/components/StudyFlatList/TitleFlag';
@@ -22,18 +22,30 @@ const StudyDetail = ({ route }: any) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
-    studyDetail: studyReducer.studyDetail,
-  }));
-  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
-    scrapList: userReducer.scrapList,
-  }));
-  const { myStudyList } = useSelector(({ manageReducer }: rootState) => ({
-    myStudyList: manageReducer.myStudyList,
-  }));
-  const { myApplyList } = useSelector(({ manageReducer }: rootState) => ({
-    myApplyList: manageReducer.myApplyList,
-  }));
+  const { studyDetail } = useSelector(
+    ({ studyReducer }: rootState) => ({
+      studyDetail: studyReducer.studyDetail,
+    }),
+    shallowEqual
+  );
+  const { scrapList } = useSelector(
+    ({ userReducer }: rootState) => ({
+      scrapList: userReducer.scrapList,
+    }),
+    shallowEqual
+  );
+  const { myStudyList } = useSelector(
+    ({ manageReducer }: rootState) => ({
+      myStudyList: manageReducer.myStudyList,
+    }),
+    shallowEqual
+  );
+  const { myApplyList } = useSelector(
+    ({ manageReducer }: rootState) => ({
+      myApplyList: manageReducer.myApplyList,
+    }),
+    shallowEqual
+  );
 
   const dispatch = useDispatch();
   const onGetStudyDetail = useCallback(

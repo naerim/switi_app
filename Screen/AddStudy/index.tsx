@@ -26,6 +26,7 @@ import { HostURL } from '../../redux/url';
 import { removeDot } from '../../Component/authFunction';
 
 const AddStudy = () => {
+  const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
   const [target, setTarget] = useState<number[]>([]);
@@ -75,6 +76,7 @@ const AddStudy = () => {
     // endDate
     const date =
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
+    setLoading(true);
     axios({
       method: 'post',
       url: `${HostURL}/study/addStudy`,
@@ -105,6 +107,7 @@ const AddStudy = () => {
         fetchOfflineStudyList(true, '');
         onGetMyStudyList(login.token);
         setTimeout(() => {
+          setLoading(false);
           showDoneModal();
         }, 500);
         setTimeout(() => {
@@ -112,7 +115,10 @@ const AddStudy = () => {
           goHome();
         }, 2000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   const onClick = () => {
@@ -185,7 +191,12 @@ const AddStudy = () => {
             placeholder="스터디 제목을 입력해주세요"
           />
           <LongInput input={contentInput} />
-          <BasicButton text="등록하기" onPress={onClick} disabled={disabled} />
+          <BasicButton
+            text="등록하기"
+            onPress={onClick}
+            disabled={disabled}
+            loading={loading}
+          />
         </Content>
       </ScrollView>
       <EnrollModal

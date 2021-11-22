@@ -30,7 +30,7 @@ const StudyInfo: React.FC<Props> = ({ item }) => {
     },
     {
       name: '모집인원',
-      value: item?.recruit_num,
+      value: item?.recruit_num + '명',
     },
     {
       name: '모임장소',

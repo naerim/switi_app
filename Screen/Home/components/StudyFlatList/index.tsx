@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import RenderItem from './RenderItem';
 import ListHeader from '../ListHeader';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   onlineStudyListRequest,
   offlineStudyListRequest,
@@ -28,9 +28,12 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
-    scrapList: userReducer.scrapList,
-  }));
+  const { scrapList } = useSelector(
+    ({ userReducer }: rootState) => ({
+      scrapList: userReducer.scrapList,
+    }),
+    shallowEqual
+  );
 
   const fetchOnlineStudyList = (order: boolean, query: string) =>
     dispatch(onlineStudyListRequest(login.token, order, query));
@@ -38,7 +41,8 @@ const StudyFlatList: React.FC<Props> = ({ idx, tagList }) => {
     dispatch(offlineStudyListRequest(login.token, order, query));
 
   const { onlineStudyList, offlineStudyList } = useSelector(
-    (state: rootState) => state.studyReducer
+    (state: rootState) => state.studyReducer,
+    shallowEqual
   );
 
   useEffect(() => {

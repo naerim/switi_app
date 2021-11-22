@@ -98,26 +98,27 @@ const MyPage = () => {
 
   const confirm = () => {
     console.log('confirm', reportStudyId, reportMemberId, reportContent.value);
-    if(studyInProgressList && studyMemberList){
+    if (studyInProgressList && studyMemberList) {
       studyInProgressList[0] && setReportStudyId(studyInProgressList[0].id);
       studyMemberList[0] && setReportMemberId(studyMemberList[0].id);
-    }
-    else Alert.alert('모든 항목을 입력해 주세요!');
-    if(reportContent.value !== ''){
-        setReportModalVisible(false);
-        setTimeout(() => {
-          setConfirmModalVisible(true);
-        }, 1000);
-      }
-    else Alert.alert('모든 항목을 입력해 주세요!');
+    } else Alert.alert('모든 항목을 입력해 주세요!');
+    if (reportContent.value !== '') {
+      setReportModalVisible(false);
+      setTimeout(() => {
+        setConfirmModalVisible(true);
+      }, 1000);
+    } else Alert.alert('모든 항목을 입력해 주세요!');
   };
 
   const { login } = useSelector(({ userReducer }: rootState) => ({
     login: userReducer.login,
   }));
-  const { myPage } = useSelector(({ userReducer }: rootState) => ({
-    myPage: userReducer.myPage,
-  }));
+  const { myPage } = useSelector(
+    ({ userReducer }: rootState) => ({
+      myPage: userReducer.myPage,
+    }),
+    shallowEqual
+  );
 
   const onGetMyPage = useCallback(
     // 사용자 닉네임, 당도, 프로필사진, 스크랩 수 불러오기
