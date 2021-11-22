@@ -49,7 +49,7 @@ const Content = styled.TouchableOpacity<ColorProps>`
   align-items: center;
   justify-content: center;
   height: 40px;
-  width: 24%;
+  width: 30%;
   border-color: ${(props) => (props.color ? '#FFD57A' : '#e3e3e3')};
   background-color: ${(props) => (props.color ? '#FFD57A' : 'white')};
 `;

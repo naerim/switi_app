@@ -4,7 +4,7 @@ import RenderItem from '../Home/components/StudyFlatList/RenderItem';
 import { FlatList } from 'react-native';
 import useScroll from '../../util/useScroll';
 import { DataType } from '../Home/interface';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import EmptyScreen from '../../Component/EmptyScreen';
 
@@ -12,9 +12,12 @@ const Scrap_FlatList = () => {
   const { scroll, scrollOn } = useScroll();
   const FlatListItemSeparator = () => <SeparatorLine />;
 
-  const { scrapList } = useSelector(({ userReducer }: rootState) => ({
-    scrapList: userReducer.scrapList,
-  }));
+  const { scrapList } = useSelector(
+    ({ userReducer }: rootState) => ({
+      scrapList: userReducer.scrapList,
+    }),
+    shallowEqual
+  );
 
   return (
     <Wrap>

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/native';
 import { useGoBack } from '../../util/navigationHooks';
 import useInput from '../../util/useInput';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
 import {
   getStudyDetailRequest,
@@ -16,7 +16,6 @@ import FlagRadioButton from '../AddStudy/components/FlagRadioButton';
 import SelectOne from '../AddStudy/components/SelectOne';
 import Target from '../AddStudy/components/Target';
 import RecruitNum from '../AddStudy/components/RecruitNum';
-import Input from '../AddStudy/components/Input';
 import BasicButton from '../../Component/BasicButton';
 import LongInput from '../AddStudy/components/LongInput';
 import {
@@ -30,6 +29,7 @@ import AmendModal from './AmendModal';
 import axios from 'axios';
 import { searchHistoryRequest } from '../../redux/search/searchReducer';
 import { HostURL } from '../../redux/url';
+import AmendInput from './AmendInput';
 
 const AmendStudy = () => {
   const { studyDetail } = useSelector(({ studyReducer }: rootState) => ({
@@ -62,10 +62,13 @@ const AmendStudy = () => {
     login: userReducer.login,
   }));
 
-  const { interest, region } = useSelector(({ dataReducer }: rootState) => ({
-    interest: dataReducer.interest,
-    region: dataReducer.region,
-  }));
+  const { interest, region } = useSelector(
+    ({ dataReducer }: rootState) => ({
+      interest: dataReducer.interest,
+      region: dataReducer.region,
+    }),
+    shallowEqual
+  );
 
   const dispatch = useDispatch();
   const fetchOnlineStudyList = (order: boolean, query: string) =>
@@ -157,25 +160,25 @@ const AmendStudy = () => {
             input={recruitNumInput}
             select={{ recruitSelect, setRecruitSelect }}
           />
-          <Input
+          <AmendInput
             title="모임장소"
             input={detailAddressInput}
             placeholder="모입장소를 입력해주세요"
             onlineFlag={onlineFlag}
           />
-          <Input
+          <AmendInput
             title="활동기간"
             input={periodInput}
             placeholder="활동기간을 입력해주세요"
           />
           <Title>예정 종료일</Title>
           <SubTitle>{studyEndDate(studyDetail.endDate)}</SubTitle>
-          <Input
+          <AmendInput
             title="문의"
             input={contactInput}
             placeholder="오픈채팅 링크, 전화번호 등 문의처를 입력해주세요"
           />
-          <Input
+          <AmendInput
             title="제목"
             input={titleInput}
             placeholder="스터디 제목을 입력해주세요"

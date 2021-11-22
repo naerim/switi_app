@@ -9,7 +9,7 @@ import ManageIcon from '../../../../Img/icon_memberManage.png';
 
 //스터디 관리, 모집글
 const Recruitment: React.FC<ItemType> = ({ item }) => {
-  const goStudyDetail = useGoStudyDetail(item.id);
+  const goStudyDetail = useGoStudyDetail(item.id, item);
   const goManageRecruit = useGoManageRecruit(item.id, item.title);
 
   // 글자수 제한
