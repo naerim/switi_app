@@ -76,6 +76,7 @@ const MyPage = () => {
 
   const final = () => {
     setConfirmModalVisible(false);
+    console.log(reportMemberId);
     handleReport(reportStudyId, reportMemberId, reportContent.value);
     setTimeout(() => {
       setFinalModalVisible(true);
