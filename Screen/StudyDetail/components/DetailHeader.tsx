@@ -87,7 +87,7 @@ const DetailHeader: React.FC<Props> = ({ id, onPress }) => {
   };
 
   return (
-    <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}>
       <Wrap
         onPress={onPress}
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}

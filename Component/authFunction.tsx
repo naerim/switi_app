@@ -43,3 +43,8 @@ export const getNumber = async (email: string) => {
       });
   }
 };
+
+// .이 포함되어 있으면 없애주는 함수
+export const removeDot = (num: string) => {
+  return num.replace(/[.]/g, '');
+};

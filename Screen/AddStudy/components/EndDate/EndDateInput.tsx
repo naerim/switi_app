@@ -20,6 +20,7 @@ const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
           onChangeText={setValue}
           keyboardType="numeric"
           secureTextEntry={false}
+          editable={false}
           maxLength={4}
           textAlign="right"
         />
@@ -28,6 +29,7 @@ const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
           pointerEvents="none"
           value={value.month}
           onChangeText={setValue}
+          editable={false}
           keyboardType="numeric"
           secureTextEntry={false}
           maxLength={2}
@@ -38,6 +40,7 @@ const EndDateInput: React.FC<Props> = ({ value, setValue }) => {
           pointerEvents="none"
           value={value.day}
           onChangeText={setValue}
+          editable={false}
           keyboardType="numeric"
           secureTextEntry={false}
           maxLength={2}
@@ -62,6 +65,7 @@ const Container = styled.View`
 `;
 
 const TouchArea = styled.TouchableOpacity`
+  z-index: 1;
   flex-direction: row;
   align-items: center;
 `;

@@ -23,6 +23,7 @@ import {
 import EnrollDoneModal from './components/EnrollDoneModal';
 import { getMyStudyListRequest } from '../../redux/manageReducer';
 import { HostURL } from '../../redux/url';
+import { removeDot } from '../../Component/authFunction';
 
 const AddStudy = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -69,6 +70,8 @@ const AddStudy = () => {
 
   // 최종 등록 버튼
   const EnrollButton = () => {
+    // 모집인원에 .이 있는지 확인 후 삭제
+    const num = removeDot(recruitNumInput.value);
     // endDate
     const date =
       EndDateInput.year + '-' + EndDateInput.month + '-' + EndDateInput.day;
@@ -87,7 +90,7 @@ const AddStudy = () => {
           n += 1;
           return n;
         }),
-        recruit_num: recruitNumInput.value,
+        recruit_num: num,
         detail_address: detailAddressInput.value,
         period: periodInput.value,
         endDate: date,
@@ -129,7 +132,7 @@ const AddStudy = () => {
     contentInput.value === '';
 
   return (
-    <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Container style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}>
       <Header title="모집글 작성" onPress={goHome} />
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}

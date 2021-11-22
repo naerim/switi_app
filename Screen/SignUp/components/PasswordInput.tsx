@@ -37,7 +37,7 @@ const PasswordInput: React.FC<InputProps> = ({ input, error }) => {
         value={input.value}
         onChangeText={input.onChange}
         placeholder="8자리 이상 영문, 숫자, 특수문자"
-        keyboardType="email-address"
+        keyboardType="default"
         returnKeyType="next"
         secureTextEntry={true}
         status={error.status}
@@ -66,7 +66,7 @@ const Input = styled.TextInput`
 const VisibilityIcon = styled.View`
   position: absolute;
   right: 10px;
-  top: 8px;
+  top: 18%;
 `;
 
 const Icon = styled.Image`
