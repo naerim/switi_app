@@ -45,7 +45,6 @@ const MyPage = () => {
   const reportModalClose = () => setReportModalVisible(false);
   const [reportStudyId, setReportStudyId] = useState();
   const [reportMemberId, setReportMemberId] = useState();
-  const [reportMemberName, setReportMemberName] = useState();
   const reportContent = useInput('');
 
   //신고하기 전 현재 진행 중 스터디 목록 조회
@@ -57,13 +56,9 @@ const MyPage = () => {
     handleStudyInProgress();
   }, []);
 
-  const { studyInProgressList, studyMemberList } = useSelector(
-    (state: rootState) => ({
-      studyInProgressList: state.reportReducer.studyInProgressList,
-      studyMemberList: state.reportReducer.studyMemberList,
-    }),
-    shallowEqual
-  );
+  const { studyInProgressList } = useSelector((state: rootState) => ({
+    studyInProgressList: state.reportReducer.studyInProgressList,
+  }));
   //하나일 때
 
   //신고하기 스터디 멤버 조회
@@ -169,7 +164,6 @@ const MyPage = () => {
       <ReportModal
         setReportStudyId={setReportStudyId}
         setReportMemberId={setReportMemberId}
-        setReportMemberName={setReportMemberName}
         modalVisible={reportModalVisible}
         reportContent={reportContent}
         closeModal={reportModalClose}

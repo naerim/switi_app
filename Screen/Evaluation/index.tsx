@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
-import { useGoBack, useGoManageRecruit } from '../../util/navigationHooks';
+import { useGoBack } from '../../util/navigationHooks';
 import EvaluationRadio from './component/EvaluationRadio';
 import EvaluationConfirm from './component/EvaluationConfirm';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../redux';
-import {
-  evaluateProfileRequest,
-  evaluateRequest,
-} from '../../redux/evaluationReducer';
+import { evaluateProfileRequest } from '../../redux/evaluationReducer';
 import BasicButton from '../../Component/BasicButton';
 import FinalModal from '../Report/details/finalModal';
 import ProfileImg from '../../Img/icon_profile.png';
+import axios from 'axios';
+import { HostURL } from '../../redux/url';
+import { Alert } from 'react-native';
 
 const Evaluation = ({ route }: any) => {
   const studyId = route.params.studyId;
   const memberId = route.params.memberId;
-  const title = route.params.title;
+  //const title = route.params.title;
   const goBack = useGoBack();
 
   const dispatch = useDispatch();
@@ -36,7 +36,6 @@ const Evaluation = ({ route }: any) => {
   let nickname = '스터디원';
   nickname = evaluateProfile?.user.nickname;
 
-  const GoManageRecruit = useGoManageRecruit(studyId, title);
   const [checked, setChecked] = useState({
     participation: null,
     appointment: null,
@@ -45,22 +44,38 @@ const Evaluation = ({ route }: any) => {
 
   const handleEvaluate = () => {
     setConfirmVisible(false);
-    dispatch(
-      evaluateRequest(
-        login.token,
-        memberId,
-        studyId,
-        checked['participation'],
-        checked['appointment'],
-        checked['communication']
-      )
-    );
-    setTimeout(() => {
-      setFinalVisible(true);
-    }, 500);
-    setTimeout(() => {
-      goBack();
-    }, 1000);
+    axios({
+      method: 'post',
+      url: `${HostURL}/evaluate/peerEvaluate?idMember=${memberId}&idStudy=${studyId}`,
+      headers: { Authorization: login.token },
+      data: {
+        score1: checked['participation'],
+        score2: checked['appointment'],
+        score3: checked['communication'],
+      },
+    })
+      .then(() => {
+        setTimeout(() => {
+          setFinalVisible(true);
+        }, 500);
+        setTimeout(() => {
+          goBack();
+        }, 1000);
+      })
+      .catch((err) => {
+        if (err.response.data.error == 403)
+          Alert.alert('이미 평가가 완료된 스터디원입니다!');
+      });
+    // dispatch(
+    //   evaluateRequest(
+    //     login.token,
+    //     memberId,
+    //     studyId,
+    //     checked['participation'],
+    //     checked['appointment'],
+    //     checked['communication']
+    //   )
+    // );
   };
 
   const [confirmVisible, setConfirmVisible] = useState(false);
@@ -68,11 +83,7 @@ const Evaluation = ({ route }: any) => {
 
   return (
     <Container>
-      <BasicHeader
-        title={'상호평가'}
-        onPress={GoManageRecruit}
-        display={true}
-      />
+      <BasicHeader title={'상호평가'} onPress={goBack} display={true} />
       <Content>
         <Text>
           평가결과는 모든 스터디원 평가 점수를 평균으로 환산하여 상대방의 당도에

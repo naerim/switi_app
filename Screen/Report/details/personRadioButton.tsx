@@ -13,7 +13,6 @@ interface InputProps {
 }
 interface Props {
   setReportMemberId: Dispatch<SetStateAction<undefined>>;
-  setReportMemberName: Dispatch<SetStateAction<undefined>>;
   input: InputProps;
   studyMemberList: any;
 }
@@ -22,7 +21,6 @@ const PersonRadioButton: React.FC<Props> = ({
   setReportMemberId,
   input,
   studyMemberList,
-  setReportMemberName,
 }) => {
   let value = 0;
   let radioStudyMemberList = studyMemberList[0]?.studyMembers;
@@ -50,7 +48,6 @@ const PersonRadioButton: React.FC<Props> = ({
                 onPress={(value) => {
                   console.log(object.label, 'object.label');
                   setReportMemberId(object.id);
-                  setReportMemberName(object.label);
                   input.setReason(value);
                 }}
               />

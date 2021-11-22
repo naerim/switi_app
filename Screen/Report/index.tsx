@@ -14,7 +14,6 @@ import { studyMemberRequest } from '../../redux/report/reportReducer';
 interface MyPageModalProps {
   setReportStudyId: Dispatch<SetStateAction<undefined>>;
   setReportMemberId: Dispatch<SetStateAction<undefined>>;
-  setReportMemberName: Dispatch<SetStateAction<undefined>>;
   reportContent: InputProps;
   modalVisible: boolean;
   closeModal: () => void;
@@ -24,7 +23,6 @@ interface MyPageModalProps {
 const Report: React.FC<MyPageModalProps> = ({
   setReportStudyId,
   setReportMemberId,
-  setReportMemberName,
   reportContent,
   modalVisible,
   closeModal,
@@ -118,7 +116,6 @@ const Report: React.FC<MyPageModalProps> = ({
             setReportMemberId={setReportMemberId}
             input={{ reason: person, setReason: setPerson }}
             studyMemberList={studyMemberList}
-            setReportMemberName={setReportMemberName}
           />
         )}
         <Line />

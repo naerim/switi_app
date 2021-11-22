@@ -16,7 +16,6 @@ export default function createRequestThunk(type: string, request: any) {
         payload: response.data,
       });
     } catch (e) {
-     // console.log('test error', e.message);
       return dispatch({
         type: FAILURE, // 실패
         payload: e.message,

@@ -5,6 +5,7 @@ import {
   GET_STUDY_MEMBER,
   GET_STUDY_MEMBER_SUCCESS,
   POST_REPORT,
+  POST_REPORT_FAILURE,
   POST_REPORT_SUCCESS,
 } from '../action';
 import axios from 'axios';
@@ -79,6 +80,9 @@ function reportReducer(state = initialState, action: any) {
         break;
       case POST_REPORT_SUCCESS:
         // 이런건 리덕스로 처리하면 안된다.
+        break;
+      case POST_REPORT_FAILURE:
+        console.log(action);
         break;
       default:
         break;

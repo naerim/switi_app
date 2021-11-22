@@ -49,7 +49,7 @@ const evaluate = async (
     headers: { Authorization: token },
     data: { score1: score1, score2: score2, score3: score3 },
   });
-  console.log(`reducer evaluation :  `, response.data);
+  // console.log(`reducer evaluation :  `, response.data);
   return response;
 };
 
