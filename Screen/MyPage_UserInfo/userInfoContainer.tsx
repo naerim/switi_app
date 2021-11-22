@@ -16,7 +16,7 @@ const UserInfoContainer: React.FC<Props> = ({
   display,
 }) => {
   return (
-    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 20 }}>
+    <Wrap style={{ paddingTop: Platform.OS === 'ios' ? 0 : 40 }}>
       <BasicHeader title={headerTitle} onPress={onPress} display={display} />
       <Container>{children}</Container>
     </Wrap>

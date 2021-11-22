@@ -27,7 +27,7 @@ const studyInProgress = async (token: string) => {
     url: `${HostURL}/report/getReportList`,
     headers: { Authorization: token },
   });
-  // console.log(`reducer 스터디 :  `, token);
+  console.log(`reducer 스터디 :  `, response.data.study);
   return response;
 };
 
@@ -37,7 +37,7 @@ const studyMember = async (token: string, studyId: number) => {
     url: `${HostURL}/report/getReportInfo/${studyId}/`,
     headers: { Authorization: token },
   });
-  // console.log('reducer 스터디 멤버', response.data.member);
+  console.log('reducer 스터디 멤버', response.data.member);
   return response;
 };
 
@@ -53,7 +53,8 @@ const report = async (
     headers: { Authorization: token },
     data: { content: content },
   });
-  // console.log('reducer 신고하기', response.data);
+  console.log('reducer 신고하기', studyId, memberId, content);
+  console.log('reducer 신고하기', response.data);
   return response;
 };
 

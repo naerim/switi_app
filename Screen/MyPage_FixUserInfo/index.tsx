@@ -111,7 +111,7 @@ const MyPage_FixUserInfo = () => {
       display
       onPress={goMyPageUserInfo}
     >
-      <MarginContainer>
+      <Container>
         <PictureContainer>
           <MyImage />
         </PictureContainer>
@@ -124,7 +124,7 @@ const MyPage_FixUserInfo = () => {
             )
           )}
         </InputContainer>
-      </MarginContainer>
+      </Container>
       <ButtonContainer>
         <SubmitButton
           success={success}
@@ -136,25 +136,25 @@ const MyPage_FixUserInfo = () => {
   );
 };
 
-const MarginContainer = styled.ScrollView`
-  margin: 0 24px;
+const Container = styled.ScrollView`
+  margin-top: 20px;
+  flex-direction: column;
 `;
 
 const PictureContainer = styled.View`
+  margin: 0 24px;
   flex: 2;
   align-items: center;
   justify-content: center;
 `;
 const InputContainer = styled.View`
+  margin: 0 24px;
   flex: 8;
   padding-top: 10px;
 `;
 
 const ButtonContainer = styled.View`
-  flex: 3;
-  justify-content: center;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin: 0 24px 0 24px;
 `;
 
 export default MyPage_FixUserInfo;
