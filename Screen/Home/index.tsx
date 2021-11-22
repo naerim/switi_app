@@ -120,7 +120,7 @@ const Home = ({ route }: any) => {
     const date = moment(now).format('YYYY-MM-DD');
     await myStudyList.forEach(
       ({ id, endDate, title, end_flag }: CheckProps) => {
-        if (!end_flag && date == endDate.substring(0, 10)) {
+        if (!end_flag && date >= endDate.substring(0, 10)) {
           setIdStudy(id);
           setDoneTitle(title);
         }

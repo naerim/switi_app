@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import BasicHeader from '../../Component/BasicHeader';
-import { useGoManageRecruit } from '../../util/navigationHooks';
+import { useGoBack, useGoManageRecruit } from '../../util/navigationHooks';
 import EvaluationRadio from './component/EvaluationRadio';
 import EvaluationConfirm from './component/EvaluationConfirm';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ const Evaluation = ({ route }: any) => {
   const studyId = route.params.studyId;
   const memberId = route.params.memberId;
   const title = route.params.title;
+  const goBack = useGoBack();
 
   const dispatch = useDispatch();
   const { login } = useSelector(({ userReducer }: rootState) => ({
@@ -57,6 +58,9 @@ const Evaluation = ({ route }: any) => {
     setTimeout(() => {
       setFinalVisible(true);
     }, 500);
+    setTimeout(() => {
+      goBack();
+    }, 1000);
   };
 
   const [confirmVisible, setConfirmVisible] = useState(false);
