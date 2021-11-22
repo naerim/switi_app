@@ -79,11 +79,4 @@ const RadioContainer = styled.View`
   align-items: center;
 `;
 
-const Imag = styled.View`
-  height: 40px;
-  width: 40px;
-  background-color: #e3e3e3;
-  border-radius: 10px;
-  margin-right: 5px;
-`;
 export default StudyRadioButton;

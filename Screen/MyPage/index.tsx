@@ -93,7 +93,6 @@ const MyPage = () => {
   const goUserInfo = useGoMyPageUserInfo();
   const goNotice = UseGoNotice();
   const goScrap = UseGoScrap();
-  const goReport = () => setReportModalVisible(true);
   const GoParticipation = UseGoParticipation();
   const goQuestion = useGoQuestion();
 
@@ -159,7 +158,6 @@ const MyPage = () => {
         <MoveScreen
           goUserInfo={goUserInfo}
           goNotice={goNotice}
-          goReport={goReport}
           goScrap={goScrap}
           goParticipation={GoParticipation}
           goQuestion={goQuestion}
