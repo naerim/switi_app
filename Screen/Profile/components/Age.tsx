@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import ProfileContent from './Layout/ProfileContent';
-import { InputProps } from '../interface';
+import { AgeType } from '../interface';
 
-const Age: React.FC<InputProps> = ({ input }) => {
+const Age: React.FC<AgeType> = ({ input, ageFlag, setAgeFlag }) => {
   return (
     <ProfileContent title="연령">
       <Container>
