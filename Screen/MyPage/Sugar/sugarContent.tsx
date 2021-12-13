@@ -71,7 +71,7 @@ const SugarContent: React.FC<Props> = ({ num }) => {
       <ProgressContainer>
         <Progress.Bar
           progress={sugar / 100}
-          width={270}
+          width={250}
           height={10}
           color="#86E3C3"
           unfilledColor="#F3F3F3"
@@ -93,7 +93,7 @@ const Container = styled.View`
 `;
 
 const ProgressContainer = styled.View`
-  padding-left: 20px;
+  padding-left: 10px;
   justify-content: center;
 `;
 
