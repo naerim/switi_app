@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 2,
       "package": "com.switi.purpleconrshshyn",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
