@@ -10,6 +10,7 @@ import { rootState } from '../../redux';
 const FirstProfile = ({ route }: any) => {
   const nickname = route.params.nickname;
   const ageInput = useInput('');
+  const [ageFlag, setAgeFlag] = useState(false);
   const desc =
     '관심지역과 분야를 설정하면,\n내가 원하는 스터디 모집 알림을 받을 수 있어요!';
   const goSignIn = useGoSignIn();
@@ -48,7 +49,7 @@ const FirstProfile = ({ route }: any) => {
       disabled={disabled}
       display={false}
     >
-      <Age input={ageInput} />
+      <Age input={ageInput} ageFlag={ageFlag} setAgeFlag={setAgeFlag} />
       <FlatListModal
         title="관심지역 (3개 이하 선택)"
         data={region}

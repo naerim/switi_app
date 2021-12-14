@@ -20,6 +20,7 @@ const GenderRadioButton: React.FC<Props> = ({ title, input }) => {
   const radio_props = [
     { label: '남', value: 0 },
     { label: '여', value: 1 },
+    { label: '선택 안함', value: 2 },
   ];
   return (
     <Container>

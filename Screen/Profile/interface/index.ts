@@ -1,3 +1,9 @@
+export interface AgeType {
+  input: { value: string; onChange: (value: string) => void };
+  ageFlag: boolean;
+  setAgeFlag: (v: boolean) => void;
+}
+
 export interface InputProps {
   input: { value: string; onChange: (value: string) => void };
 }
