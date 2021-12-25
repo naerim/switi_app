@@ -29,12 +29,15 @@ const MyPage_Profile = () => {
   const myRegion = myProfile.myProfile.Regions;
   const myInterest = myProfile.myProfile.Interests;
   const myState = myProfile.myProfile.States;
+  const ageFlag = myProfile.myProfile.age_flag;
 
   const myProfileData = [
     {
       title: '연령',
       content: (
-        <ContentText>{'만 ' + myProfile.myProfile.age + '세'}</ContentText>
+        <ContentText>
+          {ageFlag ? '비공개' : '만 ' + myProfile.myProfile.age + '세'}
+        </ContentText>
       ),
     },
     {

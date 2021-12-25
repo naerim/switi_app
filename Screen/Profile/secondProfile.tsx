@@ -40,7 +40,7 @@ const SecondProfile = ({ route }: any) => {
       url: `${HostURL}/user/setProfile`,
       data: {
         nickname: nickname,
-        age: ageFlag ? 2 : age,
+        age: ageFlag ? 0 : age,
         age_flag: ageFlag,
         aboutme: introduceInput.value,
         myRegion: area.map((n: number) => {
