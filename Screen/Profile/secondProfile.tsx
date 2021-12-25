@@ -14,6 +14,7 @@ import styled from 'styled-components/native';
 const SecondProfile = ({ route }: any) => {
   const nickname = route.params.nickname;
   const age = route.params.age;
+  const ageFlag = route.params.ageFlag;
   const area = route.params.area;
   const interest = route.params.interest;
   const introduceInput = useInput('');
@@ -39,7 +40,8 @@ const SecondProfile = ({ route }: any) => {
       url: `${HostURL}/user/setProfile`,
       data: {
         nickname: nickname,
-        age: age,
+        age: ageFlag ? 2 : age,
+        age_flag: ageFlag,
         aboutme: introduceInput.value,
         myRegion: area.map((n: number) => {
           n += 1;

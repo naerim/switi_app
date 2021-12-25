@@ -20,6 +20,7 @@ const FirstProfile = ({ route }: any) => {
   // params로 데이터 넘김
   const goSecondProfile = useGoSecondProfile(
     nickname,
+    ageFlag,
     ageInput.value,
     selectArea,
     selectInterest
@@ -36,7 +37,7 @@ const FirstProfile = ({ route }: any) => {
   }));
 
   const disabled =
-    ageInput.value === '' ||
+    (!ageFlag && ageInput.value === '') ||
     selectArea.length === 0 ||
     selectInterest.length === 0;
 

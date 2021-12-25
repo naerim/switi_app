@@ -27,6 +27,7 @@ export const useGoFirstProfile = (nickname: string) => {
 
 export const useGoSecondProfile = (
   nickname: string,
+  ageFlag: boolean,
   age: string,
   area: number[],
   interest: number[]
@@ -36,11 +37,12 @@ export const useGoSecondProfile = (
     () =>
       navigation.navigate('secondProfile', {
         nickname: nickname,
+        ageFlag: ageFlag,
         age: age,
         area: area,
         interest: interest,
       }),
-    [nickname, age, area, interest, navigation]
+    [nickname, ageFlag, age, area, interest, navigation]
   );
 };
 
@@ -51,16 +53,18 @@ export const useGoMyPageProfile = () => {
 
 export const useGoMypageProfileFix = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_Profile_Fix'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_Profile_Fix'),
+    [navigation]
+  );
 };
 
 export const useGoMyPageUserInfo = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_UserInfo'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_UserInfo'),
+    [navigation]
+  );
 };
 
 export const useGoMyPage = () => {
@@ -70,16 +74,18 @@ export const useGoMyPage = () => {
 
 export const UseGoWithdrawal = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_Withdrawal'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_Withdrawal'),
+    [navigation]
+  );
 };
 
 export const UseGoFixUserInfo = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_FixUserInfo'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_FixUserInfo'),
+    [navigation]
+  );
 };
 
 export const UseGoAlarm = () => {
@@ -94,9 +100,10 @@ export const UseGoNotice = () => {
 
 export const UseGoNoticeDetail = (idx: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('NoticeDetail', { idx: idx }), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('NoticeDetail', { idx: idx }),
+    [navigation]
+  );
 };
 
 export const UseGoScrap = () => {
@@ -106,16 +113,18 @@ export const UseGoScrap = () => {
 
 export const UseGoParticipation = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_Participation'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_Participation'),
+    [navigation]
+  );
 };
 
 export const useGoTerms = (idx: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('Terms', { idx: idx }), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('Terms', { idx: idx }),
+    [navigation]
+  );
 };
 
 export const useGoEmailAuth = () => {
@@ -141,18 +150,18 @@ export const useGoRenewPassword = (email: string) => {
 
 export const useGoStudyDetail = (idx: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('StudyDetail', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
+  return useCallback(
+    () => navigation.navigate('StudyDetail', { idx: idx }),
+    [navigation, idx]
+  );
 };
 
 export const useGoAmendStudy = (idx: number) => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('AmendStudy', { idx: idx }), [
-    navigation,
-    idx,
-  ]);
+  return useCallback(
+    () => navigation.navigate('AmendStudy', { idx: idx }),
+    [navigation, idx]
+  );
 };
 
 export const useGoHome = () => {
@@ -162,9 +171,10 @@ export const useGoHome = () => {
 
 export const useGoQuestion = () => {
   const navigation = useNavigation();
-  return useCallback(() => navigation.navigate('MyPage_Question'), [
-    navigation,
-  ]);
+  return useCallback(
+    () => navigation.navigate('MyPage_Question'),
+    [navigation]
+  );
 };
 
 export const useGoAddStudy = () => {
